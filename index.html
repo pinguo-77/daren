@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>达人佣金管理系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", Arial, sans-serif;
+        }
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #faf9f7;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(200, 180, 220, 0.1);
+            margin-bottom: 20px;
+            border: 1px solid #f0e9f5;
+        }
+        h1 {
+            text-align: center;
+            color: #722ed1;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #6b5ca5;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0d4f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background-color: #fcfbff;
+        }
+        input:focus {
+            outline: none;
+            border-color: #b899f0;
+            box-shadow: 0 0 0 3px rgba(179, 145, 240, 0.1);
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .btn-submit {
+            background-color: #9f7aea;
+            color: white;
+        }
+        .btn-submit:hover {
+            background-color: #8762d6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(159, 122, 234, 0.2);
+        }
+        .btn-export {
+            background-color: #82ba9e;
+            color: white;
+        }
+        .btn-export:hover {
+            background-color: #6da88b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(130, 186, 158, 0.2);
+        }
+        .btn-clear {
+            background-color: #ffb3ba;
+            color: #883e4a;
+        }
+        .btn-clear:hover {
+            background-color: #ff9aa2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 179, 186, 0.2);
+        }
+        .btn-search {
+            background-color: #8ecae6;
+            color: white;
+        }
+        .btn-search:hover {
+            background-color: #6baed6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(142, 202, 230, 0.2);
+        }
+        .btn-reset-search {
+            background-color: #ffd6ba;
+            color: #9e5e37;
+        }
+        .btn-reset-search:hover {
+            background-color: #ffc299;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 214, 186, 0.2);
+        }
+        .btn-delete-selected {
+            background-color: #ffbaaf;
+            color: #9e4333;
+        }
+        .btn-delete-selected:hover {
+            background-color: #ff9f91;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 186, 175, 0.2);
+        }
+        .btn-import {
+            background-color: #f7cac9;
+            color: #8a5a5a;
+        }
+        .btn-import:hover {
+            background-color: #f5b5b4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(247, 202, 201, 0.2);
+        }
+        .btn-sync {
+            background-color: #b5b9d0;
+            color: #4a4e69;
+        }
+        .btn-sync:hover {
+            background-color: #a5a9c4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(181, 185, 208, 0.2);
+        }
+        .import-file {
+            padding: 8px;
+            border: 1px dashed #e0d4f0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .table-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(200, 180, 220, 0.1);
+            margin-top: 20px;
+            border: 1px solid #f0e9f5;
+        }
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #f0e9f5;
+        }
+        th {
+            background-color: #f5f0fa;
+            font-weight: 500;
+            color: #6b5ca5;
+        }
+        tr:hover {
+            background-color: #fcf8ff;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .alert-warning {
+            background-color: #fff8e6;
+            color: #b58900;
+            border: 1px solid #ffe8a3;
+            display: block;
+        }
+        .alert-success {
+            background-color: #f0fff4;
+            color: #2b7a4b;
+            border: 1px solid #b7eb8f;
+            display: block;
+        }
+        .alert-danger {
+            background-color: #fff1f0;
+            color: #c53030;
+            border: 1px solid #ffccc7;
+            display: block;
+        }
+        .required {
+            color: #e53e3e;
+        }
+        .checkbox-cell {
+            text-align: center;
+        }
+        .select-all-checkbox {
+            cursor: pointer;
+            accent-color: #9f7aea;
+        }
+        .row-checkbox {
+            accent-color: #9f7aea;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #9f7aea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .sync-time {
+            color: #888;
+            font-size: 14px;
+            margin-left: 15px;
+        }
+    </style>
+    <!-- 引入 Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>达人佣金管理系统</h1>
+        <div id="alertBox" class="alert"></div>
+        
+        <div class="form-group">
+            <label for="talentName">达人名称 <span class="required">*</span></label>
+            <input type="text" id="talentName" placeholder="请输入达人名称，如：二姐">
+        </div>
+        
+        <div class="form-group">
+            <label for="productSpec">商品规格（当前售卖规格） <span class="required">*</span></label>
+            <input type="text" id="productSpec" placeholder="请输入商品规格，如：孢子粉250g*2瓶">
+        </div>
+
+        <div class="form-group">
+            <label for="originalSpec">初始商品规格（选填）</label>
+            <input type="text" id="originalSpec" placeholder="选填，如：当前售卖的是缅缅小胎胎10粒，该项可以填入九转菩提10粒">
+        </div>
+        
+        <div class="form-group">
+            <label for="productPrice">商品价格 <span class="required">*</span></label>
+            <input type="number" id="productPrice" step="0.01" placeholder="请输入商品价格，如：128">
+        </div>
+        
+        <div class="form-group">
+            <label for="commission">佣金比例<span class="required">*</span></label>
+            <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.74">
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn-submit" onclick="submitData()">提交数据</button>
+            <button class="btn-export" onclick="exportData()">导出最新数据</button>
+            <button class="btn-clear" onclick="clearAllData()">清空所有数据</button>
+            <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
+            <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
+            <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
+        </div>
+        <div id="syncStatus" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
+    </div>
+
+    <div class="table-container">
+        <h2>所有数据记录 <span id="syncTime" class="sync-time"></span></h2>
+        
+        <div class="search-container">
+            <div class="search-item">
+                <label for="searchTalent">查找达人名称</label>
+                <input type="text" id="searchTalent" placeholder="输入达人名称关键词" onkeydown="handleEnterKey(event)">
+            </div>
+            <div class="search-item">
+                <label for="searchSpec">查找商品规格</label>
+                <input type="text" id="searchSpec" placeholder="输入规格关键词" onkeydown="handleEnterKey(event)">
+            </div>
+            <div class="search-item" style="display: flex; align-items: flex-end; gap: 10px;">
+                <button class="btn-search" onclick="searchData()">搜索</button>
+                <button class="btn-reset-search" onclick="resetSearch()">重置</button>
+                <button class="btn-delete-selected" onclick="deleteSelectedRows()">删除选中记录</button>
+            </div>
+        </div>
+        
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th class="checkbox-cell"><input type="checkbox" id="selectAll" class="select-all-checkbox" onclick="toggleSelectAll()"></th>
+                    <th>序号</th>
+                    <th>达人名称</th>
+                    <th>商品规格</th>
+                    <th>原始商品规格</th>
+                    <th>商品价格</th>
+                    <th>佣金</th>
+                    <th>录入时间</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 底部文字 -->
+    <div class="footer">
+        <div>微信小程序待开发，敬请期待🤪</div>
+        <div>系统有待完善，多多包涵。。。</div>
+    </div>
+
+    <script>
+        // ========== Supabase 配置 ==========
+        const SUPABASE_URL = 'https://pnvyinskupjqoddeqltf.supabase.co'
+        const SUPABASE_KEY = 'sb_publishable_SoyJYHhMCi3RHO4QcIUqrw_-Xmd1FWx'
+        
+        // 表名
+        const TABLE_NAME = '达人佣金表'
+        
+        // 初始化 Supabase 客户端
+        const { createClient } = supabase
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY)
+
+        // 数据存储
+        let originalDataList = []
+        let lastSyncTime = null
+
+        // ========== 工具函数 ==========
+        function formatDate(date) {
+            const y = date.getFullYear()
+            const m = String(date.getMonth() + 1).padStart(2, '0')
+            const d = String(date.getDate()).padStart(2, '0')
+            return `${y}-${m}-${d}`
+        }
+
+        // 获取当前本地时间（正确处理时区）
+        function getCurrentLocalTime() {
+            const now = new Date()
+            // 转换为数据库需要的ISO格式，但确保是本地时间
+            return new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
+        }
+
+        // 格式化时间为本地字符串
+        function formatTime(timeString) {
+            if (!timeString) return '-'
+            const date = new Date(timeString)
+            // 使用本地时间格式化，确保显示正确
+            return date.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).replace(/\//g, '-')
+        }
+
+        function showAlert(message, type) {
+            const box = document.getElementById('alertBox')
+            box.textContent = message
+            box.className = `alert alert-${type}`
+            setTimeout(() => box.className = 'alert', 3000)
+        }
+
+        function resetForm() {
+            document.getElementById('talentName').value = ''
+            document.getElementById('productSpec').value = ''
+            document.getElementById('originalSpec').value = ''
+            document.getElementById('productPrice').value = ''
+            document.getElementById('commission').value = ''
+        }
+
+        // ========== 同步数据 ==========
+        async function syncData() {
+            const syncBtn = document.querySelector('.btn-sync')
+            const originalText = syncBtn.innerHTML
+            syncBtn.innerHTML = '<span class="loading"></span>同步中...'
+            syncBtn.disabled = true
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from(TABLE_NAME)
+                    .select('*')
+                    .order('序号', { ascending: false })
+
+                if (error) throw error
+
+                originalDataList = data || []
+                renderTableData(originalDataList)
+                
+                lastSyncTime = new Date()
+                document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
+                
+                showAlert(`同步成功！共 ${originalDataList.length} 条数据`, 'success')
+            } catch (error) {
+                console.error('同步失败:', error)
+                showAlert('同步失败：' + error.message, 'danger')
+            } finally {
+                syncBtn.innerHTML = originalText
+                syncBtn.disabled = false
+            }
+        }
+
+        // ========== 渲染表格 ==========
+        function renderTableData(dataList) {
+            const tableBody = document.getElementById('tableBody')
+            tableBody.innerHTML = ''
+            
+            if (!dataList || dataList.length === 0) {
+                const tr = document.createElement('tr')
+                tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据</td>'
+                tableBody.appendChild(tr)
+                return
+            }
+            
+            // 按序号倒序排序，确保最大的序号在顶部
+            const sortedList = [...dataList].sort((a, b) => b.序号 - a.序号)
+            
+            sortedList.forEach(item => {
+                const tr = document.createElement('tr')
+                tr.setAttribute('data-serial', item.序号)
+                tr.innerHTML = `
+                    <td class="checkbox-cell"><input type="checkbox" class="row-checkbox" value="${item.序号}"></td>
+                    <td>${item.序号}</td>
+                    <td>${item.达人名称}</td>
+                    <td>${item.商品规格}</td>
+                    <td>${item.原始商品规格 || '-'}</td>
+                    <td>${Number(item.商品价格).toFixed(2)}</td>
+                    <td>${Number(item.佣金).toFixed(2)}</td>
+                    <td>${formatTime(item.录入时间)}</td>
+                `
+                tableBody.appendChild(tr)
+            })
+        }
+
+        // ========== 加载数据 ==========
+        async function loadDataToTable(filterData = null) {
+            try {
+                if (filterData) {
+                    renderTableData(filterData)
+                    return
+                }
+
+                const { data, error } = await supabaseClient
+                    .from(TABLE_NAME)
+                    .select('*')
+                    .order('序号', { ascending: false })
+
+                if (error) throw error
+
+                originalDataList = data || []
+                renderTableData(originalDataList)
+                
+                if (!lastSyncTime) {
+                    lastSyncTime = new Date()
+                    document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
+                }
+            } catch (error) {
+                console.error('加载数据失败:', error)
+                showAlert('加载数据失败：' + error.message, 'danger')
+            }
+        }
+
+        // ========== 提交数据 ==========
+        async function submitData() {
+            const talentName = document.getElementById('talentName').value.trim()
+            const productSpec = document.getElementById('productSpec').value.trim()
+            const originalSpec = document.getElementById('originalSpec').value.trim()
+            const productPriceStr = document.getElementById('productPrice').value.trim()
+            const commissionStr = document.getElementById('commission').value.trim()
+            
+            if (!talentName || !productSpec || !productPriceStr || !commissionStr) {
+                showAlert('请填写所有必填字段！', 'warning')
+                return
+            }
+            
+            const productPrice = parseFloat(productPriceStr)
+            const commission = parseFloat(commissionStr)
+            
+            if (isNaN(productPrice) || productPrice < 0) {
+                showAlert('商品价格必须是大于等于0的数字！', 'warning')
+                return
+            }
+            if (isNaN(commission) || commission < 0) {
+                showAlert('佣金必须是大于等于0的数字！', 'warning')
+                return
+            }
+            
+            try {
+                // 检查是否已存在相同记录
+                const { data: existingData, error: queryError } = await supabaseClient
+                    .from(TABLE_NAME)
+                    .select('*')
+                    .eq('达人名称', talentName)
+                    .eq('商品规格', productSpec)
+                    .eq('商品价格', productPrice)
+                
+                if (queryError) throw queryError
+
+                // 获取当前本地时间
+                const currentTime = getCurrentLocalTime()
+
+                if (existingData && existingData.length > 0) {
+                    // 更新现有记录，同时更新录入时间为当前时间
+                    const existing = existingData[0]
+                    const { error: updateError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .update({
+                            原始商品规格: originalSpec,
+                            佣金: commission,
+                            录入时间: currentTime
+                        })
+                        .eq('id', existing.id)
+                    
+                    if (updateError) throw updateError
+                    showAlert(`检测到重复数据，已更新（录入时间已刷新为当前时间）！`, 'warning')
+                } else {
+                    // 插入新记录
+                    const { error: insertError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .insert([
+                            {
+                                达人名称: talentName,
+                                商品规格: productSpec,
+                                原始商品规格: originalSpec,
+                                商品价格: productPrice,
+                                佣金: commission,
+                                录入时间: currentTime
+                            }
+                        ])
+                    
+                    if (insertError) throw insertError
+                    showAlert(`数据提交成功！`, 'success')
+                }
+                
+                // 提交后立即重新加载数据
+                await loadDataToTable()
+                resetForm()
+            } catch (error) {
+                console.error('提交失败:', error)
+                showAlert('提交失败：' + error.message, 'danger')
+            }
+        }
+
+        // ========== 删除选中 ==========
+        async function deleteSelectedRows() {
+            const selected = document.querySelectorAll('.row-checkbox:checked')
+            if (selected.length === 0) {
+                showAlert('请先选择要删除的记录！', 'warning')
+                return
+            }
+            if (!confirm(`确定删除 ${selected.length} 条记录？`)) return
+            
+            const serials = Array.from(selected).map(cb => parseInt(cb.value))
+            
+            try {
+                const { error } = await supabaseClient
+                    .from(TABLE_NAME)
+                    .delete()
+                    .in('序号', serials)
+                
+                if (error) throw error
+                
+                await loadDataToTable()
+                document.getElementById('selectAll').checked = false
+                showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
+            } catch (error) {
+                console.error('删除失败:', error)
+                showAlert('删除失败：' + error.message, 'danger')
+            }
+        }
+
+        // ========== 清空数据 ==========
+        async function clearAllData() {
+            if (confirm('确定清空所有数据？不可恢复！')) {
+                try {
+                    const { error } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .delete()
+                        .neq('id', 0)
+                    
+                    if (error) throw error
+                    
+                    await loadDataToTable()
+                    document.getElementById('selectAll').checked = false
+                    showAlert('所有数据已清空！', 'success')
+                } catch (error) {
+                    console.error('清空失败:', error)
+                    showAlert('清空失败：' + error.message, 'danger')
+                }
+            }
+        }
+
+        // ========== 搜索数据 ==========
+        function searchData() {
+            const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
+            const searchSpec = document.getElementById('searchSpec').value.trim().toLowerCase()
+            
+            if (!searchTalent && !searchSpec) {
+                showAlert('请输入查找关键词！', 'warning')
+                return
+            }
+            
+            const filteredData = originalDataList.filter(item => {
+                const talentMatch = item.达人名称.toLowerCase().includes(searchTalent)
+                const specMatch = item.商品规格.toLowerCase().includes(searchSpec)
+                return (talentMatch && !searchSpec) || (specMatch && !searchTalent) || (talentMatch && specMatch)
+            })
+            
+            if (filteredData.length === 0) {
+                showAlert('未找到匹配的数据！', 'warning')
+                renderTableData([])
+                return
+            }
+            
+            showAlert(`找到 ${filteredData.length} 条匹配数据！`, 'success')
+            renderTableData(filteredData)
+        }
+
+        // ========== 重置搜索 ==========
+        function resetSearch() {
+            document.getElementById('searchTalent').value = ''
+            document.getElementById('searchSpec').value = ''
+            renderTableData(originalDataList)
+            showAlert('查找条件已重置！', 'success')
+            document.getElementById('selectAll').checked = false
+        }
+
+        // ========== 导出数据 ==========
+        async function exportData() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from(TABLE_NAME)
+                    .select('*')
+                    .order('序号')
+                
+                if (error) throw error
+                
+                if (!data || data.length === 0) {
+                    showAlert('暂无数据可导出！', 'warning')
+                    return
+                }
+                
+                // 使用正确的编码方式
+                let csvContent = '序号,达人名称,商品规格,原始商品规格,商品价格,佣金,录入时间\n'
+                
+                data.forEach(item => {
+                    // 处理字段中的逗号和特殊字符
+                    const row = [
+                        item.序号,
+                        `"${item.达人名称}"`,
+                        `"${item.商品规格}"`,
+                        `"${item.原始商品规格 || ''}"`,
+                        item.商品价格,
+                        item.佣金,
+                        `"${formatTime(item.录入时间)}"`
+                    ].join(',')
+                    csvContent += row + '\n'
+                })
+                
+                // 使用 UTF-8 BOM 确保 Excel 打开不乱码
+                const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' })
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = `达人佣金数据_${formatDate(new Date())}.csv`
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                URL.revokeObjectURL(url)
+                showAlert('导出成功！', 'success')
+            } catch (error) {
+                console.error('导出失败:', error)
+                showAlert('导出失败：' + error.message, 'danger')
+            }
+        }
+    
+     // ========== 导入CSV（支持多种编码） ==========
+    async function importCSVFile(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    if (!file.name.endsWith('.csv')) {
+        showAlert('请导入 CSV 格式的表格文件！', 'danger')
+        return
+    }
+
+    showAlert('正在导入数据，请稍候...', 'warning')
+    
+    // 尝试用多种编码读取文件
+    const reader = new FileReader()
+    
+    // 先尝试用 GBK/GB2312 编码读取
+    reader.onload = async function(event) {
+        try {
+            let csv = event.target.result
+            console.log('用GBK编码读取的前100字符:', csv.substring(0, 100))
+            
+            // 检查是否还是乱码（包含65533）
+            if (csv.charCodeAt(0) === 65533) {
+                console.log('GBK编码读取仍然是乱码，尝试其他方式...')
+                // 如果还是乱码，尝试用 TextDecoder 指定编码
+                try {
+                    const arrayBuffer = await file.arrayBuffer()
+                    // 尝试常见的简体中文编码
+                    const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
+                    
+                    for (const encoding of encodings) {
+                        try {
+                            const decoder = new TextDecoder(encoding)
+                            csv = decoder.decode(arrayBuffer)
+                            console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
+                            
+                            // 检查是否包含中文字符（不包含65533）
+                            if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
+                                console.log(`成功用${encoding}编码解码`)
+                                break
+                            }
+                        } catch (e) {
+                            console.log(`${encoding}编码解码失败:`, e)
+                        }
+                    }
+                } catch (e) {
+                    console.error('ArrayBuffer读取失败:', e)
+                }
+            }
+            
+            // 移除BOM头
+            if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
+                csv = csv.substr(1)
+            }
+            
+            // 按行分割
+            const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
+            console.log('总行数:', lines.length)
+            console.log('第一行:', lines[0])
+            
+            if (lines.length < 2) {
+                showAlert('表格中无有效数据！', 'warning')
+                document.getElementById('importFile').value = ''
+                return
+            }
+
+            // 解析表头
+            let headers = []
+            const firstLine = lines[0].trim()
+            
+            // 尝试用逗号分隔
+            if (firstLine.includes(',')) {
+                headers = firstLine.split(',').map(h => {
+                    return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
+                })
+            }
+            
+            console.log('解析后的表头:', headers)
+
+            // 检查表头是否包含中文字符
+            const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
+            if (!hasChinese) {
+                showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
+                document.getElementById('importFile').value = ''
+                return
+            }
+
+            // 获取字段索引
+            const getFieldIndex = (keyword) => {
+                return headers.findIndex(h => h.includes(keyword))
+            }
+
+            const talentNameIndex = getFieldIndex('达人名称')
+            const productSpecIndex = getFieldIndex('商品规格')
+            const originalSpecIndex = getFieldIndex('原始商品规格')
+            const productPriceIndex = getFieldIndex('商品价格')
+            const commissionIndex = getFieldIndex('佣金')
+            
+            if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
+                showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
+                document.getElementById('importFile').value = ''
+                return
+            }
+
+            // 获取现有数据
+            const { data: allExistingData, error: fetchError } = await supabaseClient
+                .from(TABLE_NAME)
+                .select('*')
+                .order('序号', { ascending: false })
+            
+            if (fetchError) throw fetchError
+
+            // 创建查重Map
+            const existingMap = new Map()
+            let maxSerial = 0
+            
+            allExistingData.forEach(item => {
+                const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
+                existingMap.set(key, item)
+                if (item.序号 > maxSerial) maxSerial = item.序号
+            })
+
+            // 处理数据行
+            const rows = lines.slice(1)
+            let successCount = 0
+            let updateCount = 0
+            let nextSerial = maxSerial + 1
+            const currentTime = getCurrentLocalTime()
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i].trim()
+                if (!row) continue
+                
+                // 解析行数据
+                const cells = []
+                let current = ''
+                let inQuotes = false
+                
+                for (let j = 0; j < row.length; j++) {
+                    const char = row[j]
+                    if (char === '"') {
+                        inQuotes = !inQuotes
+                    } else if (char === ',' && !inQuotes) {
+                        cells.push(current)
+                        current = ''
+                    } else {
+                        current += char
+                    }
+                }
+                cells.push(current)
+                
+                const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+
+                const talentName = talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
+                const productSpec = productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
+                const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
+                const productPrice = parseFloat(productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
+                const commission = parseFloat(commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
+
+                if (!talentName || !productSpec || productPrice <= 0) continue
+
+                const key = `${talentName}|${productSpec}|${productPrice}`
+                const existingItem = existingMap.get(key)
+
+                if (existingItem) {
+                    const { error: updateError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .update({
+                            原始商品规格: originalSpec,
+                            佣金: commission,
+                            录入时间: currentTime
+                        })
+                        .eq('id', existingItem.id)
+                    
+                    if (!updateError) updateCount++
+                } else {
+                    const { error: insertError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .insert([{
+                            序号: nextSerial,
+                            达人名称: talentName,
+                            商品规格: productSpec,
+                            原始商品规格: originalSpec,
+                            商品价格: productPrice,
+                            佣金: commission,
+                            录入时间: currentTime
+                        }])
+                    
+                    if (!insertError) {
+                        successCount++
+                        existingMap.set(key, { 序号: nextSerial })
+                        nextSerial++
+                    }
+                }
+            }
+
+            await loadDataToTable()
+            document.getElementById('importFile').value = ''
+            
+            if (successCount > 0 || updateCount > 0) {
+                showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
+            } else {
+                showAlert('没有新数据被导入！', 'warning')
+            }
+            
+        } catch (err) {
+            console.error('导入错误:', err)
+            showAlert('导入失败：' + err.message, 'danger')
+            document.getElementById('importFile').value = ''
+        }
+    }
+    
+    // 尝试用GBK编码读取
+    reader.readAsText(file, 'GBK')
+ }
+        // ========== 辅助函数 ==========
+        function handleEnterKey(event) {
+            if (event.keyCode === 13 || event.key === 'Enter') {
+                event.preventDefault()
+                searchData()
+            }
+        }
+
+        function toggleSelectAll() {
+            const isChecked = document.getElementById('selectAll').checked
+            document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = isChecked)
+        }
+
+        // ========== 初始化 ==========
+        window.onload = function() {
+            loadDataToTable()
+            document.getElementById('importFile').addEventListener('change', importCSVFile)
+        }
+    </script>
+</body>
+</html>
