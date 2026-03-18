@@ -27,7 +27,7 @@
         }
         h1 {
             text-align: center;
-            color: #d12e77;
+            color: #aa33a6;
             margin-bottom: 30px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -368,7 +368,7 @@
         <div class="btn-group">
             <button class="btn-submit" onclick="submitData()">提交数据</button>
             <button class="btn-export" onclick="exportData()">导出最新数据</button>
-            <button class="btn-clear" onclick="clearAllData()">清空所有数据</button>
+            <!--button class="btn-clear" onclick="clearAllData()">清空所有数据</button-->
             <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
             <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
             <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
@@ -788,6 +788,7 @@
         }
 
         // ========== 清空数据 ==========
+        /*
         async function clearAllData() {
             if (confirm('确定清空所有数据？不可恢复！')) {
                 try {
@@ -806,8 +807,9 @@
                     showAlert('清空失败：' + error.message, 'danger')
                 }
             }
+                
         }
-
+        */
         // ========== 搜索数据（修改版，支持分页） ==========
         function searchData() {
             const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
