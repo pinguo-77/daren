@@ -251,6 +251,86 @@
             font-size: 14px;
             margin-left: 15px;
         }
+        
+        /* ===== 分页样式 ===== */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px 0;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination button {
+            padding: 8px 16px;
+            border: 1px solid #e0d4f0;
+            background-color: white;
+            color: #6b5ca5;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background-color: #9f7aea;
+            color: white;
+            border-color: #9f7aea;
+            transform: translateY(-1px);
+        }
+        
+        .pagination button:disabled {
+            background-color: #f5f5f5;
+            color: #ccc;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+        
+        .pagination .page-info {
+            font-size: 14px;
+            color: #666;
+            margin: 0 10px;
+        }
+        
+        .pagination .page-input {
+            width: 60px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #e0d4f0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .items-per-page {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .items-per-page select {
+            padding: 6px;
+            border: 1px solid #e0d4f0;
+            border-radius: 4px;
+            background-color: white;
+            color: #6b5ca5;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .items-per-page span {
+            font-size: 14px;
+            color: #666;
+        }
     </style>
     <!-- 引入 Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
@@ -322,7 +402,7 @@
                     <th>序号</th>
                     <th>达人名称</th>
                     <th>商品规格</th>
-                    <th>原始商品规格</th>
+                    <th>初始商品规格</th>
                     <th>商品价格</th>
                     <th>佣金</th>
                     <th>录入时间</th>
@@ -331,6 +411,36 @@
             <tbody id="tableBody">
             </tbody>
         </table>
+        
+        <!-- 分页控件 -->
+        <div class="pagination-container">
+            <div class="items-per-page">
+                <span>每页显示：</span>
+                <select id="pageSize" onchange="changePageSize(this.value)">
+                    <option value="10">10 条</option>
+                    <option value="20" selected>20 条</option>
+                    <option value="50">50 条</option>
+                    <option value="100">100 条</option>
+                </select>
+            </div>
+            
+            <div class="pagination">
+                <button onclick="goToPage(1)" id="firstPage" disabled>首页</button>
+                <button onclick="goToPage(currentPage - 1)" id="prevPage" disabled>上一页</button>
+                
+                <span class="page-info">
+                    第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 
+                    共 <span id="totalPages">1</span> 页
+                </span>
+                
+                <button onclick="goToPage(currentPage + 1)" id="nextPage">下一页</button>
+                <button onclick="goToPage(totalPages)" id="lastPage">末页</button>
+            </div>
+            
+            <div class="items-per-page">
+                <span>总记录数：<span id="totalRecords">0</span> 条</span>
+            </div>
+        </div>
     </div>
 
     <!-- 底部文字 -->
@@ -354,6 +464,12 @@
         // 数据存储
         let originalDataList = []
         let lastSyncTime = null
+
+        // ========== 分页配置 ==========
+        let currentPage = 1          // 当前页码
+        let pageSize = 20            // 每页显示条数
+        let totalPages = 1           // 总页数
+        let allDataForPagination = [] // 分页用的完整数据
 
         // ========== 工具函数 ==========
         function formatDate(date) {
@@ -417,6 +533,7 @@
                 if (error) throw error
 
                 originalDataList = data || []
+                currentPage = 1  // 同步后重置到第一页
                 renderTableData(originalDataList)
                 
                 lastSyncTime = new Date()
@@ -432,7 +549,7 @@
             }
         }
 
-        // ========== 渲染表格 ==========
+        // ========== 渲染表格（带分页） ==========
         function renderTableData(dataList) {
             const tableBody = document.getElementById('tableBody')
             tableBody.innerHTML = ''
@@ -441,13 +558,31 @@
                 const tr = document.createElement('tr')
                 tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据</td>'
                 tableBody.appendChild(tr)
+                
+                // 更新分页信息
+                document.getElementById('totalRecords').textContent = '0'
+                document.getElementById('totalPages').textContent = '1'
+                document.getElementById('pageInput').value = '1'
+                document.getElementById('pageInput').max = '1'
+                updatePaginationButtons()
                 return
             }
             
-            // 按序号倒序排序，确保最大的序号在顶部
-            const sortedList = [...dataList].sort((a, b) => b.序号 - a.序号)
+            // 保存完整数据用于分页
+            allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
             
-            sortedList.forEach(item => {
+            // 计算分页
+            totalPages = Math.ceil(allDataForPagination.length / pageSize)
+            if (currentPage > totalPages) currentPage = totalPages
+            if (currentPage < 1) currentPage = 1
+            
+            // 获取当前页的数据
+            const start = (currentPage - 1) * pageSize
+            const end = Math.min(start + pageSize, allDataForPagination.length)
+            const pageData = allDataForPagination.slice(start, end)
+            
+            // 渲染当前页
+            pageData.forEach(item => {
                 const tr = document.createElement('tr')
                 tr.setAttribute('data-serial', item.序号)
                 tr.innerHTML = `
@@ -462,6 +597,15 @@
                 `
                 tableBody.appendChild(tr)
             })
+            
+            // 更新分页信息
+            document.getElementById('totalRecords').textContent = allDataForPagination.length
+            document.getElementById('totalPages').textContent = totalPages
+            document.getElementById('pageInput').value = currentPage
+            document.getElementById('pageInput').max = totalPages
+            
+            // 更新按钮状态
+            updatePaginationButtons()
         }
 
         // ========== 加载数据 ==========
@@ -480,6 +624,7 @@
                 if (error) throw error
 
                 originalDataList = data || []
+                currentPage = 1  // 加载数据时重置到第一页
                 renderTableData(originalDataList)
                 
                 if (!lastSyncTime) {
@@ -489,6 +634,47 @@
             } catch (error) {
                 console.error('加载数据失败:', error)
                 showAlert('加载数据失败：' + error.message, 'danger')
+            }
+        }
+
+        // ========== 分页功能函数 ==========
+        function goToPage(page) {
+            page = parseInt(page)
+            if (isNaN(page) || page < 1) page = 1
+            if (page > totalPages) page = totalPages
+            
+            if (page !== currentPage) {
+                currentPage = page
+                renderTableData(allDataForPagination)
+            }
+        }
+
+        function changePageSize(newSize) {
+            pageSize = parseInt(newSize)
+            currentPage = 1  // 重置到第一页
+            renderTableData(allDataForPagination)
+        }
+
+        function updatePaginationButtons() {
+            // 获取按钮元素
+            const firstBtn = document.getElementById('firstPage')
+            const prevBtn = document.getElementById('prevPage')
+            const nextBtn = document.getElementById('nextPage')
+            const lastBtn = document.getElementById('lastPage')
+            const pageInput = document.getElementById('pageInput')
+            
+            if (firstBtn && prevBtn && nextBtn && lastBtn) {
+                // 第一页时禁用首页和上一页
+                firstBtn.disabled = currentPage === 1
+                prevBtn.disabled = currentPage === 1
+                
+                // 最后一页时禁用末页和下一页
+                nextBtn.disabled = currentPage === totalPages
+                lastBtn.disabled = currentPage === totalPages
+            }
+            
+            if (pageInput) {
+                pageInput.value = currentPage
             }
         }
 
@@ -622,7 +808,7 @@
             }
         }
 
-        // ========== 搜索数据 ==========
+        // ========== 搜索数据（修改版，支持分页） ==========
         function searchData() {
             const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
             const searchSpec = document.getElementById('searchSpec').value.trim().toLowerCase()
@@ -645,13 +831,15 @@
             }
             
             showAlert(`找到 ${filteredData.length} 条匹配数据！`, 'success')
+            currentPage = 1  // 搜索时重置到第一页
             renderTableData(filteredData)
         }
 
-        // ========== 重置搜索 ==========
+        // ========== 重置搜索（修改版） ==========
         function resetSearch() {
             document.getElementById('searchTalent').value = ''
             document.getElementById('searchSpec').value = ''
+            currentPage = 1  // 重置到第一页
             renderTableData(originalDataList)
             showAlert('查找条件已重置！', 'success')
             document.getElementById('selectAll').checked = false
@@ -706,220 +894,221 @@
             }
         }
     
-     // ========== 导入CSV（支持多种编码） ==========
-    async function importCSVFile(e) {
-    const file = e.target.files[0]
-    if (!file) return
-    if (!file.name.endsWith('.csv')) {
-        showAlert('请导入 CSV 格式的表格文件！', 'danger')
-        return
-    }
+        // ========== 导入CSV（支持多种编码） ==========
+        async function importCSVFile(e) {
+            const file = e.target.files[0]
+            if (!file) return
+            if (!file.name.endsWith('.csv')) {
+                showAlert('请导入 CSV 格式的表格文件！', 'danger')
+                return
+            }
 
-    showAlert('正在导入数据，请稍候...', 'warning')
-    
-    // 尝试用多种编码读取文件
-    const reader = new FileReader()
-    
-    // 先尝试用 GBK/GB2312 编码读取
-    reader.onload = async function(event) {
-        try {
-            let csv = event.target.result
-            console.log('用GBK编码读取的前100字符:', csv.substring(0, 100))
+            showAlert('正在导入数据，请稍候...', 'warning')
             
-            // 检查是否还是乱码（包含65533）
-            if (csv.charCodeAt(0) === 65533) {
-                console.log('GBK编码读取仍然是乱码，尝试其他方式...')
-                // 如果还是乱码，尝试用 TextDecoder 指定编码
+            // 尝试用多种编码读取文件
+            const reader = new FileReader()
+            
+            // 先尝试用 GBK/GB2312 编码读取
+            reader.onload = async function(event) {
                 try {
-                    const arrayBuffer = await file.arrayBuffer()
-                    // 尝试常见的简体中文编码
-                    const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
+                    let csv = event.target.result
+                    console.log('用GBK编码读取的前100字符:', csv.substring(0, 100))
                     
-                    for (const encoding of encodings) {
+                    // 检查是否还是乱码（包含65533）
+                    if (csv.charCodeAt(0) === 65533) {
+                        console.log('GBK编码读取仍然是乱码，尝试其他方式...')
+                        // 如果还是乱码，尝试用 TextDecoder 指定编码
                         try {
-                            const decoder = new TextDecoder(encoding)
-                            csv = decoder.decode(arrayBuffer)
-                            console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
+                            const arrayBuffer = await file.arrayBuffer()
+                            // 尝试常见的简体中文编码
+                            const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
                             
-                            // 检查是否包含中文字符（不包含65533）
-                            if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
-                                console.log(`成功用${encoding}编码解码`)
-                                break
+                            for (const encoding of encodings) {
+                                try {
+                                    const decoder = new TextDecoder(encoding)
+                                    csv = decoder.decode(arrayBuffer)
+                                    console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
+                                    
+                                    // 检查是否包含中文字符（不包含65533）
+                                    if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
+                                        console.log(`成功用${encoding}编码解码`)
+                                        break
+                                    }
+                                } catch (e) {
+                                    console.log(`${encoding}编码解码失败:`, e)
+                                }
                             }
                         } catch (e) {
-                            console.log(`${encoding}编码解码失败:`, e)
+                            console.error('ArrayBuffer读取失败:', e)
                         }
                     }
-                } catch (e) {
-                    console.error('ArrayBuffer读取失败:', e)
-                }
-            }
-            
-            // 移除BOM头
-            if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
-                csv = csv.substr(1)
-            }
-            
-            // 按行分割
-            const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
-            console.log('总行数:', lines.length)
-            console.log('第一行:', lines[0])
-            
-            if (lines.length < 2) {
-                showAlert('表格中无有效数据！', 'warning')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 解析表头
-            let headers = []
-            const firstLine = lines[0].trim()
-            
-            // 尝试用逗号分隔
-            if (firstLine.includes(',')) {
-                headers = firstLine.split(',').map(h => {
-                    return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
-                })
-            }
-            
-            console.log('解析后的表头:', headers)
-
-            // 检查表头是否包含中文字符
-            const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
-            if (!hasChinese) {
-                showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 获取字段索引
-            const getFieldIndex = (keyword) => {
-                return headers.findIndex(h => h.includes(keyword))
-            }
-
-            const talentNameIndex = getFieldIndex('达人名称')
-            const productSpecIndex = getFieldIndex('商品规格')
-            const originalSpecIndex = getFieldIndex('原始商品规格')
-            const productPriceIndex = getFieldIndex('商品价格')
-            const commissionIndex = getFieldIndex('佣金')
-            
-            if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
-                showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 获取现有数据
-            const { data: allExistingData, error: fetchError } = await supabaseClient
-                .from(TABLE_NAME)
-                .select('*')
-                .order('序号', { ascending: false })
-            
-            if (fetchError) throw fetchError
-
-            // 创建查重Map
-            const existingMap = new Map()
-            let maxSerial = 0
-            
-            allExistingData.forEach(item => {
-                const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
-                existingMap.set(key, item)
-                if (item.序号 > maxSerial) maxSerial = item.序号
-            })
-
-            // 处理数据行
-            const rows = lines.slice(1)
-            let successCount = 0
-            let updateCount = 0
-            let nextSerial = maxSerial + 1
-            const currentTime = getCurrentLocalTime()
-
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i].trim()
-                if (!row) continue
-                
-                // 解析行数据
-                const cells = []
-                let current = ''
-                let inQuotes = false
-                
-                for (let j = 0; j < row.length; j++) {
-                    const char = row[j]
-                    if (char === '"') {
-                        inQuotes = !inQuotes
-                    } else if (char === ',' && !inQuotes) {
-                        cells.push(current)
-                        current = ''
-                    } else {
-                        current += char
+                    
+                    // 移除BOM头
+                    if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
+                        csv = csv.substr(1)
                     }
-                }
-                cells.push(current)
-                
-                const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+                    
+                    // 按行分割
+                    const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
+                    console.log('总行数:', lines.length)
+                    console.log('第一行:', lines[0])
+                    
+                    if (lines.length < 2) {
+                        showAlert('表格中无有效数据！', 'warning')
+                        document.getElementById('importFile').value = ''
+                        return
+                    }
 
-                const talentName = talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
-                const productSpec = productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
-                const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
-                const productPrice = parseFloat(productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
-                const commission = parseFloat(commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
-
-                if (!talentName || !productSpec || productPrice <= 0) continue
-
-                const key = `${talentName}|${productSpec}|${productPrice}`
-                const existingItem = existingMap.get(key)
-
-                if (existingItem) {
-                    const { error: updateError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .update({
-                            原始商品规格: originalSpec,
-                            佣金: commission,
-                            录入时间: currentTime
+                    // 解析表头
+                    let headers = []
+                    const firstLine = lines[0].trim()
+                    
+                    // 尝试用逗号分隔
+                    if (firstLine.includes(',')) {
+                        headers = firstLine.split(',').map(h => {
+                            return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
                         })
-                        .eq('id', existingItem.id)
-                    
-                    if (!updateError) updateCount++
-                } else {
-                    const { error: insertError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .insert([{
-                            序号: nextSerial,
-                            达人名称: talentName,
-                            商品规格: productSpec,
-                            原始商品规格: originalSpec,
-                            商品价格: productPrice,
-                            佣金: commission,
-                            录入时间: currentTime
-                        }])
-                    
-                    if (!insertError) {
-                        successCount++
-                        existingMap.set(key, { 序号: nextSerial })
-                        nextSerial++
                     }
+                    
+                    console.log('解析后的表头:', headers)
+
+                    // 检查表头是否包含中文字符
+                    const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
+                    if (!hasChinese) {
+                        showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
+                        document.getElementById('importFile').value = ''
+                        return
+                    }
+
+                    // 获取字段索引
+                    const getFieldIndex = (keyword) => {
+                        return headers.findIndex(h => h.includes(keyword))
+                    }
+
+                    const talentNameIndex = getFieldIndex('达人名称')
+                    const productSpecIndex = getFieldIndex('商品规格')
+                    const originalSpecIndex = getFieldIndex('原始商品规格')
+                    const productPriceIndex = getFieldIndex('商品价格')
+                    const commissionIndex = getFieldIndex('佣金')
+                    
+                    if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
+                        showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
+                        document.getElementById('importFile').value = ''
+                        return
+                    }
+
+                    // 获取现有数据
+                    const { data: allExistingData, error: fetchError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .select('*')
+                        .order('序号', { ascending: false })
+                    
+                    if (fetchError) throw fetchError
+
+                    // 创建查重Map
+                    const existingMap = new Map()
+                    let maxSerial = 0
+                    
+                    allExistingData.forEach(item => {
+                        const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
+                        existingMap.set(key, item)
+                        if (item.序号 > maxSerial) maxSerial = item.序号
+                    })
+
+                    // 处理数据行
+                    const rows = lines.slice(1)
+                    let successCount = 0
+                    let updateCount = 0
+                    let nextSerial = maxSerial + 1
+                    const currentTime = getCurrentLocalTime()
+
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i].trim()
+                        if (!row) continue
+                        
+                        // 解析行数据
+                        const cells = []
+                        let current = ''
+                        let inQuotes = false
+                        
+                        for (let j = 0; j < row.length; j++) {
+                            const char = row[j]
+                            if (char === '"') {
+                                inQuotes = !inQuotes
+                            } else if (char === ',' && !inQuotes) {
+                                cells.push(current)
+                                current = ''
+                            } else {
+                                current += char
+                            }
+                        }
+                        cells.push(current)
+                        
+                        const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+
+                        const talentName = talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
+                        const productSpec = productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
+                        const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
+                        const productPrice = parseFloat(productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
+                        const commission = parseFloat(commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
+
+                        if (!talentName || !productSpec || productPrice <= 0) continue
+
+                        const key = `${talentName}|${productSpec}|${productPrice}`
+                        const existingItem = existingMap.get(key)
+
+                        if (existingItem) {
+                            const { error: updateError } = await supabaseClient
+                                .from(TABLE_NAME)
+                                .update({
+                                    原始商品规格: originalSpec,
+                                    佣金: commission,
+                                    录入时间: currentTime
+                                })
+                                .eq('id', existingItem.id)
+                            
+                            if (!updateError) updateCount++
+                        } else {
+                            const { error: insertError } = await supabaseClient
+                                .from(TABLE_NAME)
+                                .insert([{
+                                    序号: nextSerial,
+                                    达人名称: talentName,
+                                    商品规格: productSpec,
+                                    原始商品规格: originalSpec,
+                                    商品价格: productPrice,
+                                    佣金: commission,
+                                    录入时间: currentTime
+                                }])
+                            
+                            if (!insertError) {
+                                successCount++
+                                existingMap.set(key, { 序号: nextSerial })
+                                nextSerial++
+                            }
+                        }
+                    }
+
+                    await loadDataToTable()
+                    document.getElementById('importFile').value = ''
+                    
+                    if (successCount > 0 || updateCount > 0) {
+                        showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
+                    } else {
+                        showAlert('没有新数据被导入！', 'warning')
+                    }
+                    
+                } catch (err) {
+                    console.error('导入错误:', err)
+                    showAlert('导入失败：' + err.message, 'danger')
+                    document.getElementById('importFile').value = ''
                 }
             }
-
-            await loadDataToTable()
-            document.getElementById('importFile').value = ''
             
-            if (successCount > 0 || updateCount > 0) {
-                showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
-            } else {
-                showAlert('没有新数据被导入！', 'warning')
-            }
-            
-        } catch (err) {
-            console.error('导入错误:', err)
-            showAlert('导入失败：' + err.message, 'danger')
-            document.getElementById('importFile').value = ''
+            // 尝试用GBK编码读取
+            reader.readAsText(file, 'GBK')
         }
-    }
-    
-    // 尝试用GBK编码读取
-    reader.readAsText(file, 'GBK')
- }
+
         // ========== 辅助函数 ==========
         function handleEnterKey(event) {
             if (event.keyCode === 13 || event.key === 'Enter') {
