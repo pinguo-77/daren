@@ -32,6 +32,18 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
+        h2 {
+            text-align: center;
+            color: #aa33a6;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 28px;
+        }
+       /* 新增：佣金管理界面的标题左对齐 */
+      .table-container h2 {
+            text-align: left;
+	}
         .form-group {
             margin-bottom: 20px;
         }
@@ -41,7 +53,7 @@
             font-weight: 500;
             color: #6b5ca5;
         }
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             border: 1px solid #e0d4f0;
@@ -50,7 +62,7 @@
             transition: border-color 0.3s;
             background-color: #fcfbff;
         }
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #b899f0;
             box-shadow: 0 0 0 3px rgba(179, 145, 240, 0.1);
@@ -141,6 +153,22 @@
             background-color: #a5a9c4;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(181, 185, 208, 0.2);
+        }
+        .btn-calculate {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .btn-calculate:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
         }
         .import-file {
             padding: 8px;
@@ -331,114 +359,465 @@
             font-size: 14px;
             color: #666;
         }
+        
+        /* ===== 标签页样式 ===== */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0e9f5;
+            padding-bottom: 10px;
+        }
+        .tab-btn {
+            padding: 10px 30px;
+            border: none;
+            background-color: #f0e9f5;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #6b5ca5;
+            transition: all 0.3s;
+        }
+        .tab-btn:hover {
+            background-color: #e0d4f0;
+        }
+        .tab-btn.active {
+            background-color: #9f7aea;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ===== 测算界面样式 ===== */
+        .calculate-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(200, 180, 220, 0.1);
+            margin-top: 20px;
+        }
+        .calculate-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .range-selector {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .range-selector input {
+            width: 100px;
+        }
+        .range-selector span {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* 测算结果框 - 简洁双列布局 */
+        .result-simple {
+            max-width: 600px;
+            margin: 30px auto 0;
+            padding: 20px 25px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e0d4f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-info {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .commission-result {
+            font-size: 28px;
+            font-weight: 700;
+            color: #722ed1;
+        }
+        
+        /* ===== 成本构成网格布局（4x2） ===== */
+        .cost-grid-8 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0d4f0;
+        }
+        
+        .cost-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .cost-label {
+            font-size: 13px;
+            color: #999;
+            font-weight: normal;
+        }
+        
+        .cost-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .cost-value strong {
+            color: #722ed1;
+            font-weight: 600;
+        }
+        
+        /* ===== 修改货款按钮样式 ===== */
+        .btn-edit-cost {
+            background-color: #ffb347;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .btn-edit-cost:hover {
+            background-color: #ffa01e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 179, 71, 0.2);
+        }
+        
+        /* ===== 当前利润率显示 ===== */
+        .current-profit {
+            color: #722ed1;
+            font-weight: 500;
+        }
+        
+        /* ===== 模态框样式 ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* ===== 目标利润率范围右侧显示样式 ===== */
+        .profit-display {
+            margin-left: 15px;
+            color: #722ed1;
+            font-weight: 500;
+        }
+        
+        /* ===== 按钮组布局 ===== */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* 测算佣金比例按钮 - 马卡龙紫色 (与系统主色调一致) */
+.button-group .btn-calculate {
+    flex: 2;
+    background-color: #9f7aea;  /* 马卡龙紫色 */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.button-group .btn-calculate:hover {
+    background-color: #8762d6;  /* 深一点的紫色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(159, 122, 234, 0.2);
+}
+
+/* 修改货款按钮 - 马卡龙薄荷绿 */
+.button-group .btn-edit-cost {
+    flex: 1;
+    background-color: #a1ddc9;  /* 马卡龙薄荷绿 */
+    color: #2c5a4a;              /* 深绿色文字 */
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.button-group .btn-edit-cost:hover {
+    background-color: #8ecab6;  /* 深一点的薄荷绿 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(161, 221, 201, 0.3);
+}
+
+/* 重置按钮 - 马卡龙浅灰 */
+.button-group .btn-reset {
+    flex: 1;
+    background-color: #e9e9e9;  /* 马卡龙浅灰 */
+    color: #666666;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.button-group .btn-reset:hover {
+    background-color: #d9d9d9;  /* 稍深的灰色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
     </style>
     <!-- 引入 Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>达人佣金管理系统</h1>
-        <div id="alertBox" class="alert"></div>
-        
-        <div class="form-group">
-            <label for="talentName">达人名称 <span class="required">*</span></label>
-            <input type="text" id="talentName" placeholder="请输入达人名称，如：二姐">
-        </div>
-        
-        <div class="form-group">
-            <label for="productSpec">商品规格（当前售卖规格） <span class="required">*</span></label>
-            <input type="text" id="productSpec" placeholder="请输入商品规格，如：孢子粉250g*2瓶">
-        </div>
-
-        <div class="form-group">
-            <label for="originalSpec">初始商品规格（选填）</label>
-            <input type="text" id="originalSpec" placeholder="选填，如：当前售卖的是缅缅小胎胎10粒，该项可以填入九转菩提10粒">
-        </div>
-        
-        <div class="form-group">
-            <label for="productPrice">商品价格 <span class="required">*</span></label>
-            <input type="number" id="productPrice" step="0.01" placeholder="请输入商品价格，如：128">
-        </div>
-        
-        <div class="form-group">
-            <label for="commission">佣金比例<span class="required">*</span></label>
-            <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.74">
-        </div>
-        
-        <div class="btn-group">
-            <button class="btn-submit" onclick="submitData()">提交数据</button>
-            <button class="btn-export" onclick="exportData()">导出最新数据</button>
-            <!--button class="btn-clear" onclick="clearAllData()">清空所有数据</button-->
-            <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
-            <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
-            <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
-        </div>
-        <div id="syncStatus" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
+    <!-- 标签页切换 -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('manage')">佣金管理</button>
+        <button class="tab-btn" onclick="switchTab('calculate')">佣金测算</button>
     </div>
 
-    <div class="table-container">
-        <h2>所有数据记录 <span id="syncTime" class="sync-time"></span></h2>
-        
-        <div class="search-container">
-            <div class="search-item">
-                <label for="searchTalent">查找达人名称</label>
-                <input type="text" id="searchTalent" placeholder="输入达人名称关键词" onkeydown="handleEnterKey(event)">
+    <!-- ===== 佣金管理界面 ===== -->
+    <div id="manageTab" class="tab-content active">
+        <div class="container">
+            <h1>达人佣金管理系统</h1>
+            <div id="alertBox" class="alert"></div>
+            
+            <div class="form-group">
+                <label for="talentName">达人名称 <span class="required">*</span></label>
+                <input type="text" id="talentName" placeholder="请输入达人名称，如：二姐">
             </div>
-            <div class="search-item">
-                <label for="searchSpec">查找商品规格</label>
-                <input type="text" id="searchSpec" placeholder="输入规格关键词" onkeydown="handleEnterKey(event)">
+            
+            <div class="form-group">
+                <label for="productSpec">商品规格（当前售卖规格） <span class="required">*</span></label>
+                <input type="text" id="productSpec" placeholder="请输入商品规格，如：孢子粉250g*2瓶">
             </div>
-            <div class="search-item" style="display: flex; align-items: flex-end; gap: 10px;">
-                <button class="btn-search" onclick="searchData()">搜索</button>
-                <button class="btn-reset-search" onclick="resetSearch()">重置</button>
-                <button class="btn-delete-selected" onclick="deleteSelectedRows()">删除选中记录</button>
+
+            <div class="form-group">
+                <label for="originalSpec">初始商品规格（选填）</label>
+                <input type="text" id="originalSpec" placeholder="选填，如：当前售卖的是缅缅小胎胎10粒，该项可以填入九转菩提10粒">
+            </div>
+            
+            <div class="form-group">
+                <label for="productPrice">商品价格 <span class="required">*</span></label>
+                <input type="number" id="productPrice" step="0.01" placeholder="请输入商品价格，如：128">
+            </div>
+            
+            <div class="form-group">
+                <label for="commission">佣金比例<span class="required">*</span></label>
+                <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.74">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn-submit" onclick="submitData()">提交数据</button>
+                <button class="btn-export" onclick="exportData()">导出最新数据</button>
+                <!--button class="btn-clear" onclick="clearAllData()">清空所有数据</button-->
+                <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
+                <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
+                <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
+            </div>
+            <div id="syncStatus" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
+        </div>
+
+        <div class="table-container">
+            <h2>所有数据记录 <span id="syncTime" class="sync-time"></span></h2>
+            
+            <div class="search-container">
+                <div class="search-item">
+                    <label for="searchTalent">查找达人名称</label>
+                    <input type="text" id="searchTalent" placeholder="输入达人名称关键词" onkeydown="handleEnterKey(event)">
+                </div>
+                <div class="search-item">
+                    <label for="searchSpec">查找商品规格</label>
+                    <input type="text" id="searchSpec" placeholder="输入规格关键词" onkeydown="handleEnterKey(event)">
+                </div>
+                <div class="search-item" style="display: flex; align-items: flex-end; gap: 10px;">
+                    <button class="btn-search" onclick="searchData()">搜索</button>
+                    <button class="btn-reset-search" onclick="resetSearch()">重置</button>
+                    <button class="btn-delete-selected" onclick="deleteSelectedRows()">删除选中记录</button>
+                </div>
+            </div>
+            
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th class="checkbox-cell"><input type="checkbox" id="selectAll" class="select-all-checkbox" onclick="toggleSelectAll()"></th>
+                        <th>序号</th>
+                        <th>达人名称</th>
+                        <th>商品规格</th>
+                        <th>初始商品规格</th>
+                        <th>商品价格</th>
+                        <th>佣金</th>
+                        <th>录入时间</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+            
+            <!-- 分页控件 -->
+            <div class="pagination-container">
+                <div class="items-per-page">
+                    <span>每页显示：</span>
+                    <select id="pageSize" onchange="changePageSize(this.value)">
+                        <option value="10">10 条</option>
+                        <option value="20" selected>20 条</option>
+                        <option value="50">50 条</option>
+                        <option value="100">100 条</option>
+                    </select>
+                </div>
+                
+                <div class="pagination">
+                    <button onclick="goToPage(1)" id="firstPage" disabled>首页</button>
+                    <button onclick="goToPage(currentPage - 1)" id="prevPage" disabled>上一页</button>
+                    
+                    <span class="page-info">
+                        第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 
+                        共 <span id="totalPages">1</span> 页
+                    </span>
+                    
+                    <button onclick="goToPage(currentPage + 1)" id="nextPage">下一页</button>
+                    <button onclick="goToPage(totalPages)" id="lastPage">末页</button>
+                </div>
+                
+                <div class="items-per-page">
+                    <span>总记录数：<span id="totalRecords">0</span> 条</span>
+                </div>
             </div>
         </div>
-        
-        <table id="dataTable">
-            <thead>
-                <tr>
-                    <th class="checkbox-cell"><input type="checkbox" id="selectAll" class="select-all-checkbox" onclick="toggleSelectAll()"></th>
-                    <th>序号</th>
-                    <th>达人名称</th>
-                    <th>商品规格</th>
-                    <th>初始商品规格</th>
-                    <th>商品价格</th>
-                    <th>佣金</th>
-                    <th>录入时间</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-            </tbody>
-        </table>
-        
-        <!-- 分页控件 -->
-        <div class="pagination-container">
-            <div class="items-per-page">
-                <span>每页显示：</span>
-                <select id="pageSize" onchange="changePageSize(this.value)">
-                    <option value="10">10 条</option>
-                    <option value="20" selected>20 条</option>
-                    <option value="50">50 条</option>
-                    <option value="100">100 条</option>
-                </select>
-            </div>
+    </div>
+
+    <!-- ===== 佣金测算界面 ===== -->
+    <div id="calculateTab" class="tab-content">
+        <div class="calculate-container">
+            <h2>佣金测算工具</h2>
             
-            <div class="pagination">
-                <button onclick="goToPage(1)" id="firstPage" disabled>首页</button>
-                <button onclick="goToPage(currentPage - 1)" id="prevPage" disabled>上一页</button>
-                
-                <span class="page-info">
-                    第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 
-                    共 <span id="totalPages">1</span> 页
-                </span>
-                
-                <button onclick="goToPage(currentPage + 1)" id="nextPage">下一页</button>
-                <button onclick="goToPage(totalPages)" id="lastPage">末页</button>
+            <div class="calculate-form">
+                <!-- 输入表单 -->
+                <div class="form-group">
+                    <label>品名 <span class="required">*</span></label>
+                    <input type="text" id="calcProductName" placeholder="如：鹿茸片" list="productNameList" autocomplete="off">
+                    <datalist id="productNameList"></datalist>
+                </div>
+
+                <div class="form-group">
+                    <label>规格 <span class="required">*</span></label>
+                    <input type="text" id="calcSpec" placeholder="请选择规格，如：250g" list="specList" autocomplete="off">
+                    <datalist id="specList"></datalist>
+                </div>
+
+                <div class="form-group">
+                    <label>单价（元） <span class="required">*</span></label>
+                    <input type="number" id="calcPrice" step="0.01" placeholder="请输入单价" oninput="autoCalculate()">
+                </div>
+
+                <!-- 目标利润率范围选择 -->
+                <div class="form-group">
+                    <label>目标线上利润率范围</label>
+                    <div class="range-selector">
+                        <input type="number" id="minProfit" step="0.1" value="9" min="0" max="100"> %
+                        <span>至</span>
+                        <input type="number" id="maxProfit" step="0.1" value="10" min="0" max="100"> %
+                        <span class="profit-display">当前: <span id="currentProfitDisplay">-</span></span>
+                    </div>
+                    <small style="color: #666;">线上利润率 = (1 - 成本比 - 佣金比例) × 单价 ÷ 单价</small>
+                </div>
+
+                <!-- 按钮组：测算按钮、修改货款按钮和重置按钮 -->
+	<div class="button-group">
+  	  <button class="btn-calculate" onclick="calculateCommission()">🔍 测算佣金比例</button>
+   	 <button class="btn-edit-cost" onclick="openEditCostModal()">修改货款</button>
+    	<button class="btn-reset" onclick="resetCalculateForm()">重置</button>
+	</div>
+
+            <!-- 测算结果 - 简洁双列布局（显示在按钮下方） -->
+            <div id="calcResult" class="result-simple" style="display: none;">
+                <span class="product-info" id="resultProduct">-</span>
+                <span class="commission-result" id="resultCommission">-</span>
             </div>
-            
-            <div class="items-per-page">
-                <span>总记录数：<span id="totalRecords">0</span> 条</span>
+
+            <!-- 成本构成展示（4x2网格，包含线上利润信息，显示在测算结果下方） -->
+            <div id="costBreakdown" style="display: none; margin-top: 20px;">
+                <h4 style="color: #6b5ca5; margin: 20px 0 10px;">💰 成本构成</h4>
+                <div class="cost-grid-8">
+                    <div class="cost-item">
+                        <span class="cost-label">货款</span>
+                        <span class="cost-value" id="displayCost">0.00</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">运费险</span>
+                        <span class="cost-value" id="displayInsurance">1.50</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">抖店手续费</span>
+                        <span class="cost-value" id="displayPlatformFee">0.00</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">退货费用</span>
+                        <span class="cost-value" id="displayReturnFee">0.53</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">线上利润率</span>
+                        <span class="cost-value" id="displayOnlineProfitRatio">-</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">线上利润额</span>
+                        <span class="cost-value" id="displayOnlineProfitAmount">-</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">总成本</span>
+                        <span class="cost-value"><strong id="displayTotalCost">0.00</strong></span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="cost-label">成本比</span>
+                        <span class="cost-value"><strong id="displayCostRatio">0.00</strong>%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改货款模态框 -->
+    <div id="editCostModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <h3 style="color: #722ed1; margin-bottom: 20px;">修改货款</h3>
+            <div style="margin-bottom: 20px;">
+                <p style="color: #666; margin-bottom: 10px;">当前产品: <span id="currentProductForEdit">-</span></p>
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #6b5ca5;">新货款金额 (元)</label>
+                <input type="number" id="newCostValue" step="0.01" style="width: 100%; padding: 12px; border: 1px solid #e0d4f0; border-radius: 8px; font-size: 16px;">
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="closeEditCostModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px; cursor: pointer;">取消</button>
+                <button onclick="saveNewCost()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px; cursor: pointer;">保存</button>
             </div>
         </div>
     </div>
@@ -471,6 +850,580 @@
         let totalPages = 1           // 总页数
         let allDataForPagination = [] // 分页用的完整数据
 
+        // ========== 产品数据库（从你的表格提取，包含价格，单位统一为g） ==========
+        const productDatabase = [
+            // 藏雪参系列
+            { name: '藏雪参', spec: '250g', price: 68, cost: 10.4 },
+            { name: '藏雪参', spec: '250g', price: 99, cost: 10.4 },
+            { name: '藏雪参', spec: '250g', price: 128, cost: 10.4 },
+            { name: '藏雪参', spec: '250g', price: 158, cost: 10.4 },
+            { name: '藏雪参', spec: '250g', price: 198, cost: 10.4 },
+            { name: '藏雪参', spec: '500g', price: 68, cost: 16.8 },
+            { name: '藏雪参', spec: '500g', price: 99, cost: 16.8 },
+            { name: '藏雪参', spec: '500g', price: 128, cost: 16.8 },
+            { name: '藏雪参', spec: '500g', price: 158, cost: 16.8 },
+            { name: '藏雪参', spec: '500g', price: 198, cost: 16.8 },
+            
+            // 谛王根/龙须石斛/菩提搽/金龙须/雪金灵
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 98, cost: 8.5 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 148, cost: 8.5 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 158, cost: 8.5 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 198, cost: 8.5 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 98, cost: 12 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 128, cost: 12 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 158, cost: 12 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 198, cost: 12 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 280, cost: 12 },
+            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 298, cost: 12 },
+            
+            // 黑灵果/青皮子/小胎柑
+            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 198, cost: 7 },
+            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 99, cost: 7 },
+            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 99, cost: 9 },
+            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 128, cost: 9 },
+            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 158, cost: 9 },
+            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 198, cost: 9 },
+            
+            // 帝王花/红花果
+            { name: '帝王花/红花果', spec: '250g', price: 98, cost: 8 },
+            { name: '帝王花/红花果', spec: '250g', price: 128, cost: 8 },
+            { name: '帝王花/红花果', spec: '500g', price: 158, cost: 12 },
+            { name: '帝王花/红花果', spec: '500g', price: 288, cost: 12 },
+            { name: '帝王花/红花果', spec: '500g', price: 88, cost: 12 },
+            
+            // 灵芝孢子粉
+            { name: '灵芝孢子粉', spec: '250g', price: 29.9, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 39.9, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 59.9, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 80, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 98, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 128, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 158, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '250g', price: 198, cost: 18.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 80, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 168, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 178, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 198, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 238, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 288, cost: 33.5 },
+            { name: '灵芝孢子粉', spec: '500g', price: 368, cost: 33.5 },
+            
+            // 龙血果/天灵果/红山参/藏灵果
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 99, cost: 6.3 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 128, cost: 6.3 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 69, cost: 6.3 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 138, cost: 6.3 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 128, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 99, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 58, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 88, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 158, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 198, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 69, cost: 9.4 },
+            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 138, cost: 9.4 },
+            
+            // 烤干洛神花
+            { name: '烤干洛神花', spec: '250g', price: 99, cost: 8.5 },
+            { name: '烤干洛神花', spec: '250g', price: 198, cost: 8.5 },
+            { name: '烤干洛神花', spec: '500g', price: 98, cost: 12.8 },
+            { name: '烤干洛神花', spec: '500g', price: 128, cost: 12.8 },
+            { name: '烤干洛神花', spec: '500g', price: 158, cost: 12.8 },
+            { name: '烤干洛神花', spec: '500g', price: 198, cost: 12.8 },
+            
+            // 冻干洛神花
+            { name: '冻干洛神花', spec: '50g', price: 30, cost: 8.5 },
+            
+            // 缅王花
+            { name: '缅王花', spec: '250g', price: 98, cost: 15 },
+            { name: '缅王花', spec: '500g', price: 128, cost: 25 },
+            { name: '缅王花', spec: '500g', price: 158, cost: 25 },
+            
+            // 农家天麻
+            { name: '农家天麻', spec: '250g', price: 118, cost: 35.5 },
+            { name: '农家天麻', spec: '250g', price: 138, cost: 35.5 },
+            { name: '农家天麻', spec: '500g', price: 168, cost: 68.5 },
+            { name: '农家天麻', spec: '500g', price: 198, cost: 68.5 },
+            
+            // 清留果
+            { name: '清留果', spec: '250g', price: 99, cost: 6 },
+            { name: '清留果', spec: '500g', price: 48, cost: 8 },
+            { name: '清留果', spec: '500g', price: 98, cost: 8 },
+            { name: '清留果', spec: '500g', price: 99, cost: 8 },
+            { name: '清留果', spec: '500g', price: 128, cost: 8 },
+            { name: '清留果', spec: '500g', price: 158, cost: 8 },
+            { name: '清留果', spec: '500g', price: 168, cost: 8 },
+            { name: '清留果', spec: '500g', price: 198, cost: 8 },
+            { name: '清留果', spec: '500g', price: 199, cost: 8 },
+            { name: '清留果', spec: '1000g', price: 298, cost: 16 },
+            { name: '清留果', spec: '1000g', price: 368, cost: 16 },
+            { name: '清留果', spec: '1000g', price: 358, cost: 16 },
+            
+            // 桑黄
+            { name: '桑黄', spec: '250g', price: 98, cost: 11 },
+            { name: '桑黄', spec: '250g', price: 198, cost: 11 },
+            { name: '桑黄', spec: '500g', price: 158, cost: 17.7 },
+            { name: '桑黄', spec: '500g', price: 198, cost: 17.7 },
+            
+            // 山药干/玉雪山灵片
+            { name: '山药干/玉雪山灵片', spec: '250g', price: 128, cost: 8.7 },
+            { name: '山药干/玉雪山灵片', spec: '500g', price: 198, cost: 12.8 },
+            
+            // 神牛根/龙凤根
+            { name: '神牛根/龙凤根', spec: '250g', price: 68, cost: 9.5 },
+            { name: '神牛根/龙凤根', spec: '250g', price: 88, cost: 9.5 },
+            { name: '神牛根/龙凤根', spec: '250g', price: 99, cost: 9.5 },
+            { name: '神牛根/龙凤根', spec: '250g', price: 128, cost: 9.5 },
+            { name: '神牛根/龙凤根', spec: '300g', price: 99, cost: 10.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 68, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 88, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 99, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 128, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 158, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 168, cost: 14.2 },
+            { name: '神牛根/龙凤根', spec: '500g', price: 198, cost: 14.2 },
+            
+            // 血三七/金不换
+            { name: '血三七/金不换', spec: '500g', price: 99, cost: 18 },
+            { name: '血三七/金不换', spec: '500g', price: 158, cost: 18 },
+            
+            // 血塞通/天灵片/红藤
+            { name: '血塞通/天灵片/红藤', spec: '250g', price: 88, cost: 6 },
+            { name: '血塞通/天灵片/红藤', spec: '500g', price: 99, cost: 8 },
+            { name: '血塞通/天灵片/红藤', spec: '500g', price: 128, cost: 8 },
+            { name: '血塞通/天灵片/红藤', spec: '500g', price: 158, cost: 8 },
+            
+            // 软红雪茶
+            { name: '软红雪茶', spec: '100g', price: 29, cost: 11.5 },
+            
+            // 硬红雪茶
+            { name: '硬红雪茶', spec: '100g', price: 29, cost: 7.7 },
+            
+            // 地参/虫草参
+            { name: '地参/虫草参', spec: '250g', price: 99, cost: 10.4 },
+            { name: '地参/虫草参', spec: '500g', price: 99, cost: 16.3 },
+            { name: '地参/虫草参', spec: '500g', price: 158, cost: 16.3 },
+            
+            // 玉精灵
+            { name: '玉精灵', spec: '250g', price: 88, cost: 8.7 },
+            { name: '玉精灵', spec: '500g', price: 138, cost: 10.3 },
+            { name: '玉精灵', spec: '500g', price: 128, cost: 10.3 },
+            { name: '玉精灵', spec: '500g', price: 198, cost: 10.3 },
+            
+            // 冰雪蝉/白虫草
+            { name: '冰雪蝉/白虫草', spec: '250g', price: 99, cost: 31 },
+            { name: '冰雪蝉/白虫草', spec: '250g', price: 128, cost: 31 },
+            { name: '冰雪蝉/白虫草', spec: '500g', price: 158, cost: 56 },
+            { name: '冰雪蝉/白虫草', spec: '500g', price: 198, cost: 56 },
+            
+            // 淡竹叶/雪域冰竹
+            { name: '淡竹叶/雪域冰竹', spec: '250g', price: 158, cost: 13 },
+            { name: '淡竹叶/雪域冰竹', spec: '500g', price: 158, cost: 21 },
+            
+            // 雪燕（3A）
+            { name: '雪燕（3A）', spec: '250g', price: 15, cost: 6 },
+            { name: '雪燕（3A）', spec: '250g', price: 88, cost: 6 },
+            { name: '雪燕（3A）', spec: '500g', price: 19.9, cost: 6 },
+            { name: '雪燕（3A）', spec: '500g', price: 39, cost: 13.25 },
+            { name: '雪燕（3A）', spec: '500g', price: 68, cost: 13.25 },
+            { name: '雪燕（3A）', spec: '1000g', price: 99, cost: 22.5 },
+            { name: '雪燕（3A）', spec: '1500g', price: 99, cost: 31.75 },
+            
+            // 黑灵芝
+            { name: '黑灵芝', spec: '250g', price: 297, cost: 11 },
+            { name: '黑灵芝', spec: '250g', price: 19.9, cost: 11 },
+            { name: '黑灵芝', spec: '500g', price: 19.9, cost: 13 },
+            { name: '黑灵芝', spec: '500g', price: 17, cost: 13 },
+            
+            // 五指毛桃
+            { name: '五指毛桃', spec: '250g', price: 158, cost: 14.5 },
+            { name: '五指毛桃', spec: '500g', price: 158, cost: 23.3 },
+            
+            // 柯子/黄金果
+            { name: '柯子/黄金果', spec: '250g', price: 99, cost: 7 },
+            { name: '柯子/黄金果', spec: '500g', price: 99, cost: 9 },
+            { name: '柯子/黄金果', spec: '500g', price: 128, cost: 9 },
+            { name: '柯子/黄金果', spec: '500g', price: 158, cost: 9 },
+            { name: '柯子/黄金果', spec: '500g', price: 198, cost: 9 },
+            
+            // 麦冬
+            { name: '麦冬', spec: '250g', price: 128, cost: 46.3 },
+            { name: '麦冬', spec: '500g', price: 188, cost: 87.5 },
+            
+            // 鹿茸片
+            { name: '鹿茸片', spec: '20g', price: 40, cost: 7.9 },
+            { name: '鹿茸片', spec: '50g', price: 80, cost: 16.2 },
+            { name: '鹿茸片', spec: '50g', price: 99, cost: 16.2 },
+            { name: '鹿茸片', spec: '100g', price: 120, cost: 26.5 },
+            { name: '鹿茸片', spec: '150g', price: 160, cost: 35 },
+            { name: '鹿茸片', spec: '200g', price: 160, cost: 47 },
+            
+            // 神农果
+            { name: '神农果', spec: '250g', price: 99, cost: 9.5 },
+            { name: '神农果', spec: '500g', price: 99, cost: 14 },
+            { name: '神农果', spec: '500g', price: 158, cost: 14 },
+            { name: '神农果', spec: '500g', price: 198, cost: 14 },
+            
+            // 麒麟籽/火棘果
+            { name: '麒麟籽/火棘果', spec: '250g', price: 99, cost: 8.7 },
+            { name: '麒麟籽/火棘果', spec: '500g', price: 99, cost: 12.7 },
+            { name: '麒麟籽/火棘果', spec: '500g', price: 128, cost: 12.7 },
+            { name: '麒麟籽/火棘果', spec: '500g', price: 158, cost: 12.7 },
+            { name: '麒麟籽/火棘果', spec: '500g', price: 198, cost: 12.7 },
+            { name: '麒麟籽/火棘果', spec: '500g', price: 298, cost: 12.7 },
+            { name: '麒麟籽/火棘果', spec: '1000g', price: 298, cost: 25.4 },  // 12.7*2
+            
+            // 乌金参/老黑参/黑金参
+            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 99, cost: 6.7 },
+            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 198, cost: 6.7 },
+            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 99, cost: 9 },
+            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 128, cost: 9 },
+            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 158, cost: 9 },
+            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 198, cost: 9 },
+            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 266, cost: 9 },
+            
+            // 乌金参片
+            { name: '乌金参片', spec: '100g', price: 100, cost: 6.2 },
+            { name: '乌金参片', spec: '150g', price: 69, cost: 6.7 },
+            { name: '乌金参片', spec: '200g', price: 90, cost: 7.4 },
+            { name: '乌金参片', spec: '250g', price: 99, cost: 8 },
+            { name: '乌金参片', spec: '500g', price: 158, cost: 12.5 },
+            
+            // 龙鳞果
+            { name: '龙鳞果', spec: '100g', price: 49, cost: 8.7 },
+            { name: '龙鳞果', spec: '200g', price: 79, cost: 13.6 },
+            { name: '龙鳞果', spec: '250g', price: 128, cost: 16.3 },
+            { name: '龙鳞果', spec: '500g', price: 99, cost: 29.5 },
+            { name: '龙鳞果', spec: '500g', price: 158, cost: 29.5 },
+            { name: '龙鳞果', spec: '500g', price: 198, cost: 29.5 },
+            
+            // 藏红花
+            { name: '藏红花', spec: '0.5g', price: 49.9, cost: 6.4 },
+            { name: '藏红花', spec: '1g', price: 69.9, cost: 11 },
+            { name: '藏红花', spec: '3g', price: 99, cost: 24.6 },
+            { name: '藏红花', spec: '5g', price: 198, cost: 37 },
+            
+            // 老虎膏
+            { name: '老虎膏', spec: '3瓶', price: 99, cost: 8.5 },
+            
+            // 蜈蚣膏
+            { name: '蜈蚣膏', spec: '2瓶', price: 99, cost: 8 },
+            
+            // 透骨贴
+            { name: '透骨贴', spec: '3盒', price: 39.9, cost: 6 },
+            { name: '透骨贴', spec: '2盒', price: 19.9, cost: 4 },
+            
+            // 千日红
+            { name: '千日红', spec: '250g', price: 99, cost: 10.4 },
+            { name: '千日红', spec: '250g', price: 128, cost: 10.4 },
+            { name: '千日红', spec: '250g', price: 158, cost: 10.4 },
+            { name: '千日红', spec: '500g', price: 128, cost: 16.5 },
+            { name: '千日红', spec: '500g', price: 158, cost: 16.5 },
+            { name: '千日红', spec: '500g', price: 198, cost: 16.5 },
+            { name: '千日红', spec: '500g', price: 238, cost: 16.5 },
+            
+            // 蓝蝴蝶/蓝精灵
+            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 198, cost: 22.2 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 128, cost: 22.2 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 158, cost: 22.2 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 198, cost: 39.7 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 238, cost: 39.7 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '50g', price: 98, cost: 8.5 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '100g', price: 68, cost: 11.8 },
+            { name: '蓝蝴蝶/蓝精灵', spec: '150g', price: 39, cost: 15.2 },
+            
+            // 黄金蕊/金丝蕊
+            { name: '黄金蕊/金丝蕊', spec: '500g', price: 398, cost: 135 },
+            { name: '黄金蕊/金丝蕊', spec: '250g', price: 298, cost: 68.5 },
+            { name: '黄金蕊/金丝蕊', spec: '100g', price: 99, cost: 29 },
+            { name: '黄金蕊/金丝蕊', spec: '100g', price: 128, cost: 29 },
+            { name: '黄金蕊/金丝蕊', spec: '50g', price: 58, cost: 17.5 },
+            
+            // 五行果
+            { name: '五行果', spec: '250g', price: 198, cost: 9.5 },
+            { name: '五行果', spec: '250g', price: 158, cost: 9.5 },
+            
+            // 虫草王（黑虫草）
+            { name: '虫草王（黑虫草）', spec: '500g', price: 128, cost: 23 },
+            { name: '虫草王（黑虫草）', spec: '500g', price: 158, cost: 23 },
+            
+            // 石斛粉
+            { name: '石斛粉', spec: '200g', price: 198, cost: 16 },
+            
+            // 虎王杖
+            { name: '虎王杖', spec: '250g', price: 199, cost: 7.7 },
+            { name: '虎王杖', spec: '250g', price: 99, cost: 7.7 },
+            { name: '虎王杖', spec: '500g', price: 158, cost: 10.7 },
+            { name: '虎王杖', spec: '500g', price: 198, cost: 10.7 },
+            
+            // 石斛条
+            { name: '石斛条', spec: '500g', price: 158, cost: 35 },
+            { name: '石斛条', spec: '500g', price: 198, cost: 35 },
+            
+            // 路路通
+            { name: '路路通', spec: '250g', price: 99, cost: 6.2 },
+            { name: '路路通', spec: '500g', price: 128, cost: 8 },
+            { name: '路路通', spec: '500g', price: 158, cost: 8 },
+            { name: '路路通', spec: '500g', price: 198, cost: 8 },
+            
+            // 绿萝花/菩提花
+            { name: '绿萝花/菩提花', spec: '250g', price: 158, cost: 14.5 },
+            { name: '绿萝花/菩提花', spec: '250g', price: 198, cost: 14.5 },
+            { name: '绿萝花/菩提花', spec: '250g', price: 99, cost: 14.5 },
+            { name: '绿萝花/菩提花', spec: '500g', price: 128, cost: 24.5 },
+            { name: '绿萝花/菩提花', spec: '500g', price: 158, cost: 24.5 },
+            
+            // 万寿菊
+            { name: '万寿菊', spec: '250g', price: 128, cost: 11 },
+            { name: '万寿菊', spec: '250g', price: 99, cost: 11 },
+            { name: '万寿菊', spec: '500g', price: 128, cost: 17 },
+            { name: '万寿菊', spec: '500g', price: 158, cost: 17 },
+            
+            // 农家三七
+            { name: '农家三七', spec: '250g', price: 118, cost: 12.5 },
+            
+            // 琥珀天麻/红天麻
+            { name: '琥珀天麻/红天麻', spec: '100g', price: 98, cost: 21 },
+            { name: '琥珀天麻/红天麻', spec: '250g', price: 158, cost: 46.5 },
+            
+            // 胰岛果
+            { name: '胰岛果', spec: '300g', price: 99, cost: 9.3 },
+            
+            // 猫爪草
+            { name: '猫爪草', spec: '250g', price: 158, cost: 21.9 },
+            { name: '猫爪草', spec: '250g', price: 198, cost: 21.9 },
+            
+            // 鸡爪参
+            { name: '鸡爪参', spec: '250g', price: 158, cost: 15.5 },
+            { name: '鸡爪参', spec: '250g', price: 198, cost: 15.5 },
+            
+            // 不老莓
+            { name: '不老莓', spec: '250g', price: 98, cost: 12 },
+            { name: '不老莓', spec: '250g', price: 99, cost: 12 },
+            { name: '不老莓', spec: '500g', price: 158, cost: 18.2 },
+            { name: '不老莓', spec: '500g', price: 159, cost: 18.2 },
+            
+            // 太子参/金龙参
+            { name: '太子参/金龙参', spec: '250g', price: 128, cost: 11.5 },
+            { name: '太子参/金龙参', spec: '250g', price: 99, cost: 11.5 },
+            { name: '太子参/金龙参', spec: '500g', price: 128, cost: 17.2 },
+            { name: '太子参/金龙参', spec: '500g', price: 158, cost: 17.2 },
+            { name: '太子参/金龙参', spec: '500g', price: 238, cost: 17.2 },
+            
+            // 水飞蓟/百岁籽
+            { name: '水飞蓟/百岁籽', spec: '250g', price: 158, cost: 8.3 },
+            { name: '水飞蓟/百岁籽', spec: '250g', price: 98, cost: 8.3 },
+            { name: '水飞蓟/百岁籽', spec: '500g', price: 158, cost: 11 },
+            { name: '水飞蓟/百岁籽', spec: '500g', price: 198, cost: 11 },
+            
+            // 康仙花/清流花
+            { name: '康仙花/清流花', spec: '250g', price: 99, cost: 19 },
+            { name: '康仙花/清流花', spec: '250g', price: 128, cost: 19 },
+            { name: '康仙花/清流花', spec: '250g', price: 158, cost: 19 },
+            { name: '康仙花/清流花', spec: '500g', price: 128, cost: 32 },
+            { name: '康仙花/清流花', spec: '500g', price: 158, cost: 32 },
+            
+            // 牛黄丸（玻璃小瓶）
+            { name: '牛黄丸（玻璃小瓶）', spec: '5g', price: 69.9, cost: 12.4 },
+            
+            // 牛黄丸（大瓶）
+            { name: '牛黄丸（大瓶）', spec: '5g', price: 69.9, cost: 11.25 },
+            
+            // 百宝花/茉莉花/罗汉果花
+            { name: '百宝花/茉莉花/罗汉果花', spec: '500g', price: 158, cost: 8 },
+            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 128, cost: 6.5 },
+            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 99, cost: 6.5 },
+            
+            // 松针油
+            { name: '松针油', spec: '1瓶', price: 78, cost: 7 },
+            { name: '松针油', spec: '2瓶', price: 140, cost: 13.5 },
+            { name: '松针油', spec: '6瓶', price: 268, cost: 35 },
+            { name: '松针油', spec: '12瓶', price: 488, cost: 65 },
+            
+            // 八大好汉料（新）
+            { name: '八大好汉料（新）', spec: '580g*1袋', price: 199, cost: 56 },
+            
+            // 地髓金
+            { name: '地髓金', spec: '150g', price: 69, cost: 9 },
+            { name: '地髓金', spec: '250g', price: 99, cost: 12.8 },
+            
+            // 赤灵芝
+            { name: '赤灵芝', spec: '250g', price: 99, cost: 9.75 },
+            { name: '赤灵芝', spec: '500g', price: 158, cost: 19.5 },
+            
+            // 化石草
+            { name: '化石草', spec: '100g', price: 69, cost: 8 },
+            { name: '化石草', spec: '200g', price: 99, cost: 11 },
+            
+            // 金丝红雪茶（软质）
+            { name: '金丝红雪茶（软质）', spec: '100g', price: 29, cost: 11.5 },
+            
+            // 金丝红雪茶（硬质）
+            { name: '金丝红雪茶（硬质）', spec: '100g', price: 29, cost: 7.7 },
+            
+            // 双肾子
+            { name: '双肾子', spec: '100g', price: 69, cost: 9.7 },
+            
+            // 黄芪
+            { name: '黄芪', spec: '80g', price: 69, cost: 7.8 },
+            
+            // 菟丝子
+            { name: '菟丝子', spec: '100g', price: 69, cost: 7.3 },
+            { name: '菟丝子', spec: '250g', price: 99, cost: 10.8 },
+            { name: '菟丝子', spec: '500g', price: 129, cost: 16.5 },
+            
+            // 当归压片
+            { name: '当归压片', spec: '20g', price: 49, cost: 6.7 },
+            { name: '当归压片', spec: '100g', price: 69, cost: 13.5 },
+            { name: '当归压片', spec: '250g', price: 128, cost: 26.3 },
+            { name: '当归压片', spec: '500g', price: 198, cost: 47.5 },
+            
+            // 去皮茯苓丁
+            { name: '去皮茯苓丁', spec: '100g', price: 69, cost: 7.4 },
+            { name: '去皮茯苓丁', spec: '250g', price: 99, cost: 11 },
+            { name: '去皮茯苓丁', spec: '500g', price: 158, cost: 17 },
+            
+            // 党参
+            { name: '党参', spec: '250g', price: 128, cost: 32 },
+            { name: '党参', spec: '500g', price: 198, cost: 59 },
+            
+            // 夏枯草
+            { name: '夏枯草', spec: '110g', price: 69, cost: 8.8 },
+            { name: '夏枯草', spec: '250g', price: 128, cost: 13.8 },
+            { name: '夏枯草', spec: '500g', price: 198, cost: 22.5 },
+            
+            // 桑葚干
+            { name: '桑葚干', spec: '500g', price: 128, cost: 11.5 },
+            
+            // 滇红花
+            { name: '滇红花', spec: '100g', price: 69, cost: 14.5 },
+            { name: '滇红花', spec: '200g', price: 99, cost: 24 },
+            
+            // 鸡血藤
+            { name: '鸡血藤', spec: '300g', price: 69, cost: 7.8 },
+            { name: '鸡血藤', spec: '500g', price: 99, cost: 10 },
+            
+            // 铁皮石斛花
+            { name: '铁皮石斛花', spec: '50g', price: 99, cost: 28 },
+            
+            // 九制15-20黄精
+            { name: '九制15-20黄精', spec: '250g', price: 128, cost: 27.8 },
+            { name: '九制15-20黄精', spec: '500g', price: 198, cost: 51.5 },
+            
+            // 九制黄精35-40
+            { name: '九制黄精35-40', spec: '250g', price: 128, cost: 38.8 },
+            { name: '九制黄精35-40', spec: '500g', price: 198, cost: 72.5 },
+            
+            // 岩斛
+            { name: '岩斛', spec: '200g', price: 128, cost: 34 },
+            { name: '岩斛', spec: '100g', price: 99, cost: 19.5 },
+            
+            // 金花茶
+            { name: '金花茶', spec: '50g', price: 68, cost: 12.5 },
+            { name: '金花茶', spec: '100g', price: 99, cost: 20.5 },
+            
+            // 冻干帝王果
+            { name: '冻干帝王果', spec: '100g', price: 99, cost: 24 },
+            
+            // 串串天麻
+            { name: '串串天麻', spec: '250g', price: 128, cost: 40 },
+            
+            // 九品香水连
+            { name: '九品香水连', spec: '50g', price: 79, cost: 25 },
+            
+            // 鼓槌石斛花
+            { name: '鼓槌石斛花', spec: '50g', price: 128, cost: 45 },
+            { name: '鼓槌石斛花', spec: '100g', price: 198, cost: 86 },
+            
+            // 牛黄粉(透明塑料瓶)
+            { name: '牛黄粉(透明塑料瓶)', spec: '5g', price: 68, cost: 8.15 },
+            { name: '牛黄粉(透明塑料瓶)', spec: '10g', price: 98, cost: 11.9 },
+            { name: '牛黄粉(透明塑料瓶)', spec: '20g', price: 148, cost: 19.4 },
+            
+            // 血珀降木/苏木
+            { name: '血珀降木/苏木', spec: '150g', price: 24.9, cost: 7.2 },
+            { name: '血珀降木/苏木', spec: '300g', price: 39.9, cost: 9.3 },
+            
+            // 天山紫金莲
+            { name: '天山紫金莲', spec: '50g', price: 69, cost: 16 },
+            
+            // 紫珠虫石斛兰
+            { name: '紫珠虫石斛兰', spec: '30g', price: 88, cost: 19.6 },
+            
+            // 龙血竭
+            { name: '龙血竭', spec: '100g', price: 99, cost: 24 },
+            { name: '龙血竭', spec: '250g', price: 158, cost: 52.5 },
+            
+            // 昆仑雪胎菊
+            { name: '昆仑雪胎菊', spec: '50g', price: 58, cost: 11.2 },
+            { name: '昆仑雪胎菊', spec: '100g', price: 98, cost: 17.5 },
+            
+            // 带皮茯苓
+            { name: '带皮茯苓', spec: '100g', price: 98, cost: 6.2 },
+            { name: '带皮茯苓', spec: '500g', price: 198, cost: 15 },
+            
+            // 甜当归
+            { name: '甜当归', spec: '200g', price: 198, cost: 11.6 },
+            { name: '甜当归', spec: '100g', price: 98, cost: 7.8 },
+            
+            // 血三七
+            { name: '血三七', spec: '250g', price: 98, cost: 10 },
+            { name: '血三七', spec: '100g', price: 68, cost: 6.4 },
+            
+            // 雪莲花
+            { name: '雪莲花', spec: '50g', price: 58, cost: 7.2 },
+            { name: '雪莲花', spec: '100g', price: 88, cost: 9.3 },
+            { name: '雪莲花', spec: '200g', price: 128, cost: 13.6 },
+            
+            // 小龙须雪燕
+            { name: '小龙须雪燕', spec: '50g', price: 99, cost: 7.3 },
+            
+            // 当归黑豆
+            { name: '当归黑豆', spec: '250g', price: 128, cost: 8.5 },
+            
+            // 叶子红糖
+            { name: '叶子红糖', spec: '500g', price: 98, cost: 10 },
+            { name: '叶子红糖', spec: '250g', price: 68, cost: 7.5 },
+            
+            // 雪域冰菊
+            { name: '雪域冰菊', spec: '50g', price: 38, cost: 7.75 },
+            { name: '雪域冰菊', spec: '100g', price: 68, cost: 10.5 },
+            { name: '雪域冰菊', spec: '250g', price: 128, cost: 20 },
+            
+            // 藏槟榔/火麒麟/火凤凰
+            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 168, cost: 20 },
+            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 84, cost: 20 },
+            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 128, cost: 20 },
+            
+            // 鹿胶
+            { name: '鹿胶', spec: '250g', price: 100, cost: 16.25 },
+            { name: '鹿胶', spec: '500g', price: 100, cost: 27.5 },
+            { name: '鹿胶', spec: '250g', price: 80, cost: 16.25 },
+            { name: '鹿胶', spec: '500g', price: 80, cost: 27.5 },
+            
+            // 西洋参
+            { name: '西洋参', spec: '50g', price: 60, cost: 16 },
+            { name: '西洋参', spec: '100g', price: 90, cost: 27 },
+            
+            // 藏红花蕊
+            { name: '藏红花蕊', spec: '100g', price: 98, cost: 7 },
+            { name: '藏红花蕊', spec: '200g', price: 128, cost: 9.8 },
+            { name: '藏红花蕊', spec: '250g', price: 158, cost: 11.3 },
+            
+            // 腾越清膏/熟地黄
+            { name: '腾越清膏/熟地黄', spec: '250g', price: 98, cost: 13 },
+            { name: '腾越清膏/熟地黄', spec: '500g', price: 198, cost: 21 },
+            { name: '腾越清膏/熟地黄', spec: '1000g', price: 198, cost: 42 },
+            
+            // 乾坤玺/九转菩提/茶膏
+            { name: '乾坤玺/九转菩提/茶膏', spec: '10粒', price: 100, cost: 5.6 },
+            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 90, cost: 7.7 },
+            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 200, cost: 7.7 },
+            
+            // 阿胶块
+            { name: '阿胶块', spec: '250g', price: 98, cost: 16.5 },
+            { name: '阿胶块', spec: '500g', price: 69, cost: 34.54 }  // 28.54+6
+        ];
+
         // ========== 工具函数 ==========
         function formatDate(date) {
             const y = date.getFullYear()
@@ -479,10 +1432,9 @@
             return `${y}-${m}-${d}`
         }
 
-        // 获取当前本地时间（正确处理时区）
+        // 获取当前本地时间
         function getCurrentLocalTime() {
             const now = new Date()
-            // 转换为数据库需要的ISO格式，但确保是本地时间
             return new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
         }
 
@@ -490,7 +1442,6 @@
         function formatTime(timeString) {
             if (!timeString) return '-'
             const date = new Date(timeString)
-            // 使用本地时间格式化，确保显示正确
             return date.toLocaleString('zh-CN', {
                 year: 'numeric',
                 month: '2-digit',
@@ -517,38 +1468,421 @@
             document.getElementById('commission').value = ''
         }
 
-        // ========== 同步数据 ==========
-        async function syncData() {
-            const syncBtn = document.querySelector('.btn-sync')
-            const originalText = syncBtn.innerHTML
-            syncBtn.innerHTML = '<span class="loading"></span>同步中...'
-            syncBtn.disabled = true
-
-            try {
-                const { data, error } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .select('*')
-                    .order('序号', { ascending: false })
-
-                if (error) throw error
-
-                originalDataList = data || []
-                currentPage = 1  // 同步后重置到第一页
-                renderTableData(originalDataList)
-                
-                lastSyncTime = new Date()
-                document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
-                
-                showAlert(`同步成功！共 ${originalDataList.length} 条数据`, 'success')
-            } catch (error) {
-                console.error('同步失败:', error)
-                showAlert('同步失败：' + error.message, 'danger')
-            } finally {
-                syncBtn.innerHTML = originalText
-                syncBtn.disabled = false
+        // ========== 标签页切换 ==========
+        function switchTab(tabName) {
+            document.getElementById('manageTab').classList.remove('active')
+            document.getElementById('calculateTab').classList.remove('active')
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active')
+            })
+            
+            document.getElementById(tabName + 'Tab').classList.add('active')
+            
+            if (tabName === 'manage') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active')
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active')
+                initDropdownLists()
             }
         }
 
+        // ========== 初始化产品名称和规格下拉列表 ==========
+        function initDropdownLists() {
+            // 初始化产品名称下拉列表
+            const productDatalist = document.getElementById('productNameList')
+            productDatalist.innerHTML = ''
+            
+            // 获取所有不重复的产品名称
+            const uniqueProducts = [...new Set(productDatabase.map(p => p.name))]
+            uniqueProducts.sort().forEach(productName => {
+                const option = document.createElement('option')
+                option.value = productName
+                productDatalist.appendChild(option)
+            })
+            
+            // 初始化规格下拉列表
+            const specDatalist = document.getElementById('specList')
+            specDatalist.innerHTML = ''
+            
+            // 获取所有不重复的规格
+            const uniqueSpecs = [...new Set(productDatabase.map(p => p.spec))]
+            uniqueSpecs.sort((a, b) => {
+                // 按数字大小排序
+                const numA = parseInt(a) || 0
+                const numB = parseInt(b) || 0
+                return numA - numB
+            }).forEach(spec => {
+                const option = document.createElement('option')
+                option.value = spec
+                specDatalist.appendChild(option)
+            })
+        }
+
+        // ========== 自动计算成本（输入单价时触发） ==========
+        function autoCalculate() {
+            const productName = document.getElementById('calcProductName').value.trim()
+            const spec = document.getElementById('calcSpec').value.trim()
+            const price = parseFloat(document.getElementById('calcPrice').value)
+            
+            if (!productName || !spec || !price || price <= 0) return
+            
+            // 查找匹配的产品
+            const product = findProduct(productName, spec, price)
+            
+            if (product) {
+                displayCostBreakdown(product, price)
+                document.getElementById('costBreakdown').style.display = 'block'
+            } else {
+                document.getElementById('costBreakdown').style.display = 'none'
+            }
+        }
+
+        // ========== 查找产品 ==========
+       function findProduct(productName, spec, price) {
+       if (!productName || !spec) return null;
+    
+    // 1. 精确匹配：名称+规格+价格都匹配
+    let product = productDatabase.find(p => 
+        p.name === productName && 
+        p.spec === spec && 
+        Math.abs(p.price - price) < 0.01
+    )
+    
+    // 2. 如果没找到，尝试只匹配名称和规格，价格取最接近的
+    if (!product) {
+        const candidates = productDatabase.filter(p => 
+            p.name === productName && p.spec === spec
+        )
+        if (candidates.length > 0) {
+            // 取价格最接近的
+            product = candidates.reduce((prev, curr) => {
+                return (Math.abs(curr.price - price) < Math.abs(prev.price - price) ? curr : prev)
+            })
+        }
+    }
+    
+    return product
+ }
+
+        // ========== 显示成本构成 ==========
+        function displayCostBreakdown(product, price) {
+            const shippingInsurance = 1.5
+            const platformFee = price * 0.03
+            const returnFee = 0.53
+            const totalCost = product.cost + shippingInsurance + platformFee + returnFee
+            const costRatio = totalCost / price
+            
+            document.getElementById('displayCost').textContent = product.cost.toFixed(2) + ' 元'
+            document.getElementById('displayInsurance').textContent = shippingInsurance.toFixed(2) + ' 元'
+            document.getElementById('displayPlatformFee').textContent = platformFee.toFixed(2) + ' 元'
+            document.getElementById('displayReturnFee').textContent = returnFee.toFixed(2) + ' 元'
+            document.getElementById('displayTotalCost').textContent = totalCost.toFixed(2) + ' 元'
+            document.getElementById('displayCostRatio').textContent = (costRatio * 100).toFixed(2)
+        }
+
+	// ========== 测算佣金 ==========
+	function calculateCommission() {
+    	const productName = document.getElementById('calcProductName').value.trim()
+    	const spec = document.getElementById('calcSpec').value.trim()
+    	const price = parseFloat(document.getElementById('calcPrice').value)
+    	const minProfit = parseFloat(document.getElementById('minProfit').value) / 100
+    	const maxProfit = parseFloat(document.getElementById('maxProfit').value) / 100
+
+    // 验证输入
+    if (!productName || !spec || !price || price <= 0) {
+        alert('请完整填写产品信息')
+        return
+    }
+
+    // 查找产品
+    let product = findProduct(productName, spec, price)
+    
+    // 如果没找到产品，询问是否作为新产品测算
+    if (!product) {
+        const useNewProduct = confirm(`未找到"${productName} ${spec}"的匹配信息，是否作为新产品进行测算？`)
+        
+        if (useNewProduct) {
+            // 创建一个临时产品对象
+            product = {
+                name: productName,
+                spec: spec,
+                price: price,
+                cost: 0
+            }
+            
+            // 直接打开修改货款模态框
+            openEditCostModal(true)
+        }
+        return
+    }
+
+    // 执行测算
+    performCalculation();
+}
+
+	// 执行测算（独立函数，供自动调用）
+    function performCalculation() {
+    const productName = document.getElementById('calcProductName').value.trim()
+    const spec = document.getElementById('calcSpec').value.trim()
+    const price = parseFloat(document.getElementById('calcPrice').value)
+    const minProfit = parseFloat(document.getElementById('minProfit').value) / 100
+    const maxProfit = parseFloat(document.getElementById('maxProfit').value) / 100
+
+    // 验证输入
+    if (!productName || !spec || !price || price <= 0) {
+        return
+    }
+
+    // 查找产品
+    const product = findProduct(productName, spec, price)
+    
+    if (!product) {
+        return
+    }
+
+    // 固定成本
+    const shippingInsurance = 1.5
+    const platformFee = price * 0.03
+    const returnFee = 0.53
+    const totalCost = product.cost + shippingInsurance + platformFee + returnFee
+    const costRatio = totalCost / price
+
+    // 显示成本构成
+    displayCostBreakdown(product, price)
+
+    // 寻找满足目标利润率的佣金比例
+    const results = []
+    
+    // 从0到1搜索佣金比例，步长0.001
+    for (let commission = 0; commission <= 1; commission += 0.001) {
+        const onlineProfit = (1 - costRatio - commission) * price
+        const onlineProfitRatio = onlineProfit / price
+        
+        if (onlineProfitRatio >= minProfit && onlineProfitRatio <= maxProfit) {
+            results.push({
+                commission: commission,
+                profitRatio: onlineProfitRatio,
+                profitAmount: onlineProfit
+            })
+        }
+    }
+
+    // 显示结果
+    const resultDiv = document.getElementById('calcResult')
+    
+    if (results.length > 0) {
+        const targetMid = (minProfit + maxProfit) / 2
+        const best = results.reduce((prev, curr) => {
+            return (Math.abs(curr.profitRatio - targetMid) < Math.abs(prev.profitRatio - targetMid) ? curr : prev)
+        })
+
+        document.getElementById('resultProduct').textContent = `${productName} ${spec} ${price}元`
+        document.getElementById('resultCommission').textContent = (best.commission * 100).toFixed(2) + '%'
+        
+        document.getElementById('displayOnlineProfitRatio').textContent = (best.profitRatio * 100).toFixed(2) + '%'
+        document.getElementById('displayOnlineProfitAmount').textContent = best.profitAmount.toFixed(2) + ' 元'
+        document.getElementById('currentProfitDisplay').textContent = (best.profitRatio * 100).toFixed(2) + '%'
+        
+        resultDiv.style.display = 'flex'
+    } else {
+        let bestCommission = 0
+        let bestProfit = 0
+        let bestProfitAmount = 0
+        let minDiff = Infinity
+        
+        for (let commission = 0; commission <= 1; commission += 0.001) {
+            const onlineProfit = (1 - costRatio - commission) * price
+            const onlineProfitRatio = onlineProfit / price
+            
+            const diff = Math.min(
+                Math.abs(onlineProfitRatio - minProfit),
+                Math.abs(onlineProfitRatio - maxProfit)
+            )
+            
+            if (diff < minDiff) {
+                minDiff = diff
+                bestCommission = commission
+                bestProfit = onlineProfitRatio
+                bestProfitAmount = onlineProfit
+            }
+        }
+        
+        document.getElementById('resultProduct').textContent = `${productName} ${spec} ${price}元`
+        document.getElementById('resultCommission').textContent = (bestCommission * 100).toFixed(2) + '%'
+        
+        document.getElementById('displayOnlineProfitRatio').textContent = (bestProfit * 100).toFixed(2) + '%'
+        document.getElementById('displayOnlineProfitAmount').textContent = bestProfitAmount.toFixed(2) + ' 元'
+        document.getElementById('currentProfitDisplay').textContent = (bestProfit * 100).toFixed(2) + '%'
+        
+        resultDiv.style.display = 'flex'
+    }
+    
+    document.getElementById('costBreakdown').style.display = 'block'
+ }
+	
+	// ========== 修改货款功能 ==========
+	let currentEditingProduct = null;  // 保存当前正在编辑的产品信息
+	let currentEditingPrice = 0;       // 保存当前编辑的价格
+	let isNewProduct = false;          // 是否为新产品
+
+	// 打开修改货款模态框
+	function openEditCostModal(isNew = false) {
+    	const productName = document.getElementById('calcProductName').value.trim()
+    	const spec = document.getElementById('calcSpec').value.trim()
+   	 const price = parseFloat(document.getElementById('calcPrice').value)
+    
+    if (!productName || !spec || !price || price <= 0) {
+        alert('请先填写产品信息')
+        return
+    }
+    
+    // 查找当前产品
+    let product = findProduct(productName, spec, price)
+    
+    // 如果是新产品标记，创建一个临时产品
+    if (isNew) {
+        product = {
+            name: productName,
+            spec: spec,
+            price: price,
+            cost: 0
+        }
+        isNewProduct = true
+    } else {
+        if (!product) {
+            alert('未找到匹配的产品信息，无法修改货款')
+            return
+        }
+        isNewProduct = false
+    }
+    
+    // 保存当前产品信息
+    currentEditingProduct = product
+    currentEditingPrice = price
+    
+    // 更新模态框显示
+    document.getElementById('currentProductForEdit').textContent = `${productName} ${spec} ${price}元`
+    document.getElementById('newCostValue').value = product.cost || 0
+    
+    // 显示模态框
+    document.getElementById('editCostModal').style.display = 'flex'
+}
+
+// 关闭修改货款模态框
+function closeEditCostModal() {
+    document.getElementById('editCostModal').style.display = 'none'
+    currentEditingProduct = null
+    isNewProduct = false
+}
+
+// 保存新货款并更新成本构成
+function saveNewCost() {
+    const newCost = parseFloat(document.getElementById('newCostValue').value)
+    
+    if (!newCost || newCost <= 0) {
+        alert('请输入有效的货款金额')
+        return
+    }
+    
+    if (!currentEditingProduct) {
+        alert('产品信息失效，请重新操作')
+        closeEditCostModal()
+        return
+    }
+    
+    // 更新产品的货款
+    currentEditingProduct.cost = newCost
+    
+    // 如果是新产品，将其添加到产品数据库中
+    if (isNewProduct) {
+        // 检查是否已存在（避免重复添加）
+        const existingIndex = productDatabase.findIndex(p => 
+            p.name === currentEditingProduct.name && 
+            p.spec === currentEditingProduct.spec && 
+            Math.abs(p.price - currentEditingProduct.price) < 0.01
+        )
+        
+        if (existingIndex === -1) {
+            // 添加到数据库
+            productDatabase.push({
+                name: currentEditingProduct.name,
+                spec: currentEditingProduct.spec,
+                price: currentEditingProduct.price,
+                cost: newCost
+            })
+            console.log('新产品已添加到临时数据库:', currentEditingProduct)
+        }
+    }
+    
+    // 重新计算并显示成本构成
+    const price = currentEditingPrice
+    const shippingInsurance = 1.5
+    const platformFee = price * 0.03
+    const returnFee = 0.53
+    const totalCost = newCost + shippingInsurance + platformFee + returnFee
+    const costRatio = totalCost / price
+    
+    // 更新成本构成显示
+    document.getElementById('displayCost').textContent = newCost.toFixed(2) + ' 元'
+    document.getElementById('displayInsurance').textContent = shippingInsurance.toFixed(2) + ' 元'
+    document.getElementById('displayPlatformFee').textContent = platformFee.toFixed(2) + ' 元'
+    document.getElementById('displayReturnFee').textContent = returnFee.toFixed(2) + ' 元'
+    document.getElementById('displayTotalCost').textContent = totalCost.toFixed(2) + ' 元'
+    document.getElementById('displayCostRatio').textContent = (costRatio * 100).toFixed(2)
+    
+    // 显示成本构成
+    document.getElementById('costBreakdown').style.display = 'block'
+    
+    // 清空之前的测算结果
+    document.getElementById('calcResult').style.display = 'none'
+    document.getElementById('displayOnlineProfitRatio').textContent = '-'
+    document.getElementById('displayOnlineProfitAmount').textContent = '-'
+    document.getElementById('currentProfitDisplay').textContent = '-'
+    
+    // 关闭模态框
+    closeEditCostModal()
+    
+    // 自动进行测算
+    setTimeout(() => {
+        performCalculation();
+    }, 100);
+ }
+	// ========== 重置测算表单 ==========
+function resetCalculateForm() {
+    // 清空输入框
+    document.getElementById('calcProductName').value = ''
+    document.getElementById('calcSpec').value = ''
+    document.getElementById('calcPrice').value = ''
+    
+    // 重置利润率范围为默认值
+    document.getElementById('minProfit').value = '9'
+    document.getElementById('maxProfit').value = '10'
+    
+    // 隐藏测算结果和成本构成
+    document.getElementById('calcResult').style.display = 'none'
+    document.getElementById('costBreakdown').style.display = 'none'
+    
+    // 清空所有显示数据
+    document.getElementById('resultProduct').textContent = '-'
+    document.getElementById('resultCommission').textContent = '-'
+    document.getElementById('displayCost').textContent = '0.00'
+    document.getElementById('displayInsurance').textContent = '1.50'
+    document.getElementById('displayPlatformFee').textContent = '0.00'
+    document.getElementById('displayReturnFee').textContent = '0.53'
+    document.getElementById('displayTotalCost').textContent = '0.00'
+    document.getElementById('displayCostRatio').textContent = '0.00'
+    document.getElementById('displayOnlineProfitRatio').textContent = '-'
+    document.getElementById('displayOnlineProfitAmount').textContent = '-'
+    document.getElementById('currentProfitDisplay').textContent = '-'
+    
+    // 重置当前编辑的产品信息
+    currentEditingProduct = null
+    isNewProduct = false
+    
+    // 显示重置成功的提示
+    showAlert('表单已重置', 'success')
+ }
         // ========== 渲染表格（带分页） ==========
         function renderTableData(dataList) {
             const tableBody = document.getElementById('tableBody')
@@ -559,7 +1893,6 @@
                 tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据</td>'
                 tableBody.appendChild(tr)
                 
-                // 更新分页信息
                 document.getElementById('totalRecords').textContent = '0'
                 document.getElementById('totalPages').textContent = '1'
                 document.getElementById('pageInput').value = '1'
@@ -568,20 +1901,16 @@
                 return
             }
             
-            // 保存完整数据用于分页
             allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
             
-            // 计算分页
             totalPages = Math.ceil(allDataForPagination.length / pageSize)
             if (currentPage > totalPages) currentPage = totalPages
             if (currentPage < 1) currentPage = 1
             
-            // 获取当前页的数据
             const start = (currentPage - 1) * pageSize
             const end = Math.min(start + pageSize, allDataForPagination.length)
             const pageData = allDataForPagination.slice(start, end)
             
-            // 渲染当前页
             pageData.forEach(item => {
                 const tr = document.createElement('tr')
                 tr.setAttribute('data-serial', item.序号)
@@ -598,13 +1927,10 @@
                 tableBody.appendChild(tr)
             })
             
-            // 更新分页信息
             document.getElementById('totalRecords').textContent = allDataForPagination.length
             document.getElementById('totalPages').textContent = totalPages
             document.getElementById('pageInput').value = currentPage
             document.getElementById('pageInput').max = totalPages
-            
-            // 更新按钮状态
             updatePaginationButtons()
         }
 
@@ -624,7 +1950,7 @@
                 if (error) throw error
 
                 originalDataList = data || []
-                currentPage = 1  // 加载数据时重置到第一页
+                currentPage = 1
                 renderTableData(originalDataList)
                 
                 if (!lastSyncTime) {
@@ -651,12 +1977,11 @@
 
         function changePageSize(newSize) {
             pageSize = parseInt(newSize)
-            currentPage = 1  // 重置到第一页
+            currentPage = 1
             renderTableData(allDataForPagination)
         }
 
         function updatePaginationButtons() {
-            // 获取按钮元素
             const firstBtn = document.getElementById('firstPage')
             const prevBtn = document.getElementById('prevPage')
             const nextBtn = document.getElementById('nextPage')
@@ -664,11 +1989,8 @@
             const pageInput = document.getElementById('pageInput')
             
             if (firstBtn && prevBtn && nextBtn && lastBtn) {
-                // 第一页时禁用首页和上一页
                 firstBtn.disabled = currentPage === 1
                 prevBtn.disabled = currentPage === 1
-                
-                // 最后一页时禁用末页和下一页
                 nextBtn.disabled = currentPage === totalPages
                 lastBtn.disabled = currentPage === totalPages
             }
@@ -704,7 +2026,6 @@
             }
             
             try {
-                // 检查是否已存在相同记录
                 const { data: existingData, error: queryError } = await supabaseClient
                     .from(TABLE_NAME)
                     .select('*')
@@ -714,11 +2035,9 @@
                 
                 if (queryError) throw queryError
 
-                // 获取当前本地时间
                 const currentTime = getCurrentLocalTime()
 
                 if (existingData && existingData.length > 0) {
-                    // 更新现有记录，同时更新录入时间为当前时间
                     const existing = existingData[0]
                     const { error: updateError } = await supabaseClient
                         .from(TABLE_NAME)
@@ -732,7 +2051,6 @@
                     if (updateError) throw updateError
                     showAlert(`检测到重复数据，已更新（录入时间已刷新为当前时间）！`, 'warning')
                 } else {
-                    // 插入新记录
                     const { error: insertError } = await supabaseClient
                         .from(TABLE_NAME)
                         .insert([
@@ -750,7 +2068,6 @@
                     showAlert(`数据提交成功！`, 'success')
                 }
                 
-                // 提交后立即重新加载数据
                 await loadDataToTable()
                 resetForm()
             } catch (error) {
@@ -787,30 +2104,7 @@
             }
         }
 
-        // ========== 清空数据 ==========
-        /*
-        async function clearAllData() {
-            if (confirm('确定清空所有数据？不可恢复！')) {
-                try {
-                    const { error } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .delete()
-                        .neq('id', 0)
-                    
-                    if (error) throw error
-                    
-                    await loadDataToTable()
-                    document.getElementById('selectAll').checked = false
-                    showAlert('所有数据已清空！', 'success')
-                } catch (error) {
-                    console.error('清空失败:', error)
-                    showAlert('清空失败：' + error.message, 'danger')
-                }
-            }
-                
-        }
-        */
-        // ========== 搜索数据（修改版，支持分页） ==========
+        // ========== 搜索数据 ==========
         function searchData() {
             const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
             const searchSpec = document.getElementById('searchSpec').value.trim().toLowerCase()
@@ -833,15 +2127,15 @@
             }
             
             showAlert(`找到 ${filteredData.length} 条匹配数据！`, 'success')
-            currentPage = 1  // 搜索时重置到第一页
+            currentPage = 1
             renderTableData(filteredData)
         }
 
-        // ========== 重置搜索（修改版） ==========
+        // ========== 重置搜索 ==========
         function resetSearch() {
             document.getElementById('searchTalent').value = ''
             document.getElementById('searchSpec').value = ''
-            currentPage = 1  // 重置到第一页
+            currentPage = 1
             renderTableData(originalDataList)
             showAlert('查找条件已重置！', 'success')
             document.getElementById('selectAll').checked = false
@@ -862,11 +2156,9 @@
                     return
                 }
                 
-                // 使用正确的编码方式
-                let csvContent = '序号,达人名称,商品规格,原始商品规格,商品价格,佣金,录入时间\n'
+                let csvContent = '序号,达人名称,商品规格,初始商品规格,商品价格,佣金,录入时间\n'
                 
                 data.forEach(item => {
-                    // 处理字段中的逗号和特殊字符
                     const row = [
                         item.序号,
                         `"${item.达人名称}"`,
@@ -879,7 +2171,6 @@
                     csvContent += row + '\n'
                 })
                 
-                // 使用 UTF-8 BOM 确保 Excel 打开不乱码
                 const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' })
                 const url = URL.createObjectURL(blob)
                 const a = document.createElement('a')
@@ -896,7 +2187,7 @@
             }
         }
     
-        // ========== 导入CSV（支持多种编码） ==========
+        // ========== 导入CSV ==========
         async function importCSVFile(e) {
             const file = e.target.files[0]
             if (!file) return
@@ -907,53 +2198,34 @@
 
             showAlert('正在导入数据，请稍候...', 'warning')
             
-            // 尝试用多种编码读取文件
             const reader = new FileReader()
             
-            // 先尝试用 GBK/GB2312 编码读取
             reader.onload = async function(event) {
                 try {
                     let csv = event.target.result
-                    console.log('用GBK编码读取的前100字符:', csv.substring(0, 100))
                     
-                    // 检查是否还是乱码（包含65533）
                     if (csv.charCodeAt(0) === 65533) {
-                        console.log('GBK编码读取仍然是乱码，尝试其他方式...')
-                        // 如果还是乱码，尝试用 TextDecoder 指定编码
                         try {
                             const arrayBuffer = await file.arrayBuffer()
-                            // 尝试常见的简体中文编码
                             const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
                             
                             for (const encoding of encodings) {
                                 try {
                                     const decoder = new TextDecoder(encoding)
                                     csv = decoder.decode(arrayBuffer)
-                                    console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
-                                    
-                                    // 检查是否包含中文字符（不包含65533）
                                     if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
-                                        console.log(`成功用${encoding}编码解码`)
                                         break
                                     }
-                                } catch (e) {
-                                    console.log(`${encoding}编码解码失败:`, e)
-                                }
+                                } catch (e) {}
                             }
-                        } catch (e) {
-                            console.error('ArrayBuffer读取失败:', e)
-                        }
+                        } catch (e) {}
                     }
                     
-                    // 移除BOM头
                     if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
                         csv = csv.substr(1)
                     }
                     
-                    // 按行分割
                     const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
-                    console.log('总行数:', lines.length)
-                    console.log('第一行:', lines[0])
                     
                     if (lines.length < 2) {
                         showAlert('表格中无有效数据！', 'warning')
@@ -961,28 +2233,15 @@
                         return
                     }
 
-                    // 解析表头
                     let headers = []
                     const firstLine = lines[0].trim()
                     
-                    // 尝试用逗号分隔
                     if (firstLine.includes(',')) {
                         headers = firstLine.split(',').map(h => {
                             return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
                         })
                     }
-                    
-                    console.log('解析后的表头:', headers)
 
-                    // 检查表头是否包含中文字符
-                    const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
-                    if (!hasChinese) {
-                        showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
-                        document.getElementById('importFile').value = ''
-                        return
-                    }
-
-                    // 获取字段索引
                     const getFieldIndex = (keyword) => {
                         return headers.findIndex(h => h.includes(keyword))
                     }
@@ -999,7 +2258,6 @@
                         return
                     }
 
-                    // 获取现有数据
                     const { data: allExistingData, error: fetchError } = await supabaseClient
                         .from(TABLE_NAME)
                         .select('*')
@@ -1007,7 +2265,6 @@
                     
                     if (fetchError) throw fetchError
 
-                    // 创建查重Map
                     const existingMap = new Map()
                     let maxSerial = 0
                     
@@ -1017,7 +2274,6 @@
                         if (item.序号 > maxSerial) maxSerial = item.序号
                     })
 
-                    // 处理数据行
                     const rows = lines.slice(1)
                     let successCount = 0
                     let updateCount = 0
@@ -1028,7 +2284,6 @@
                         const row = rows[i].trim()
                         if (!row) continue
                         
-                        // 解析行数据
                         const cells = []
                         let current = ''
                         let inQuotes = false
@@ -1107,7 +2362,6 @@
                 }
             }
             
-            // 尝试用GBK编码读取
             reader.readAsText(file, 'GBK')
         }
 
@@ -1128,6 +2382,8 @@
         window.onload = function() {
             loadDataToTable()
             document.getElementById('importFile').addEventListener('change', importCSVFile)
+            // 初始化时也调用一次，确保下拉列表有数据
+            initDropdownLists()
         }
     </script>
 </body>
