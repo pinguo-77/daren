@@ -928,578 +928,593 @@
         let totalPages = 1
         let allDataForPagination = []
 
-        // ========== 产品数据库（从你的表格提取，包含价格，单位统一为g） ==========
-        const productDatabase = [
-            // 藏雪参系列
-            { name: '藏雪参', spec: '250g', price: 68, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 99, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 128, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 158, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 198, cost: 10.4 },
-            { name: '藏雪参', spec: '500g', price: 68, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 99, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 128, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 158, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 198, cost: 16.8 },
-            
-            // 谛王根/龙须石斛/菩提搽/金龙须/雪金灵
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 98, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 148, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 158, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 198, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 98, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 128, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 158, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 198, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 280, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 298, cost: 12 },
-            
-            // 黑灵果/青皮子/小胎柑
-            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 198, cost: 7 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 99, cost: 7 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 99, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 128, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 158, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 198, cost: 9 },
-            
-            // 帝王花/红花果
-            { name: '帝王花/红花果', spec: '250g', price: 98, cost: 8 },
-            { name: '帝王花/红花果', spec: '250g', price: 128, cost: 8 },
-            { name: '帝王花/红花果', spec: '500g', price: 158, cost: 12 },
-            { name: '帝王花/红花果', spec: '500g', price: 288, cost: 12 },
-            { name: '帝王花/红花果', spec: '500g', price: 88, cost: 12 },
-            
-            // 灵芝孢子粉
-            { name: '灵芝孢子粉', spec: '250g', price: 29.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 39.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 59.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 80, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 98, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 128, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 158, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 198, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 80, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 168, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 178, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 198, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 238, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 288, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 368, cost: 33.5 },
-            
-            // 龙血果/天灵果/红山参/藏灵果
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 99, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 128, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 69, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 138, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 128, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 99, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 58, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 88, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 158, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 198, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 69, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 138, cost: 9.4 },
-            
-            // 烤干洛神花
-            { name: '烤干洛神花', spec: '250g', price: 99, cost: 8.5 },
-            { name: '烤干洛神花', spec: '250g', price: 198, cost: 8.5 },
-            { name: '烤干洛神花', spec: '500g', price: 98, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 128, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 158, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 198, cost: 12.8 },
-            
-            // 冻干洛神花
-            { name: '冻干洛神花', spec: '50g', price: 30, cost: 8.5 },
-            
-            // 缅王花
-            { name: '缅王花', spec: '250g', price: 98, cost: 15 },
-            { name: '缅王花', spec: '500g', price: 128, cost: 25 },
-            { name: '缅王花', spec: '500g', price: 158, cost: 25 },
-            
-            // 农家天麻
-            { name: '农家天麻', spec: '250g', price: 118, cost: 35.5 },
-            { name: '农家天麻', spec: '250g', price: 138, cost: 35.5 },
-            { name: '农家天麻', spec: '500g', price: 168, cost: 68.5 },
-            { name: '农家天麻', spec: '500g', price: 198, cost: 68.5 },
-            
-            // 清留果
-            { name: '清留果', spec: '250g', price: 99, cost: 6 },
-            { name: '清留果', spec: '500g', price: 48, cost: 8 },
-            { name: '清留果', spec: '500g', price: 98, cost: 8 },
-            { name: '清留果', spec: '500g', price: 99, cost: 8 },
-            { name: '清留果', spec: '500g', price: 128, cost: 8 },
-            { name: '清留果', spec: '500g', price: 158, cost: 8 },
-            { name: '清留果', spec: '500g', price: 168, cost: 8 },
-            { name: '清留果', spec: '500g', price: 198, cost: 8 },
-            { name: '清留果', spec: '500g', price: 199, cost: 8 },
-            { name: '清留果', spec: '1000g', price: 298, cost: 16 },
-            { name: '清留果', spec: '1000g', price: 368, cost: 16 },
-            { name: '清留果', spec: '1000g', price: 358, cost: 16 },
-            
-            // 桑黄
-            { name: '桑黄', spec: '250g', price: 98, cost: 11 },
-            { name: '桑黄', spec: '250g', price: 198, cost: 11 },
-            { name: '桑黄', spec: '500g', price: 158, cost: 17.7 },
-            { name: '桑黄', spec: '500g', price: 198, cost: 17.7 },
-            
-            // 山药干/玉雪山灵片
-            { name: '山药干/玉雪山灵片', spec: '250g', price: 128, cost: 8.7 },
-            { name: '山药干/玉雪山灵片', spec: '500g', price: 198, cost: 12.8 },
-            
-            // 神牛根/龙凤根
-            { name: '神牛根/龙凤根', spec: '250g', price: 68, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 88, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 99, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 128, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '300g', price: 99, cost: 10.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 68, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 88, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 99, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 128, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 158, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 168, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 198, cost: 14.2 },
-            
-            // 血三七/金不换
-            { name: '血三七/金不换', spec: '500g', price: 99, cost: 18 },
-            { name: '血三七/金不换', spec: '500g', price: 158, cost: 18 },
-            
-            // 血塞通/天灵片/红藤
-            { name: '血塞通/天灵片/红藤', spec: '250g', price: 88, cost: 6 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 99, cost: 8 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 128, cost: 8 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 158, cost: 8 },
-            
-            // 软红雪茶
-            { name: '软红雪茶', spec: '100g', price: 29, cost: 11.5 },
-            
-            // 硬红雪茶
-            { name: '硬红雪茶', spec: '100g', price: 29, cost: 7.7 },
-            
-            // 地参/虫草参
-            { name: '地参/虫草参', spec: '250g', price: 99, cost: 10.4 },
-            { name: '地参/虫草参', spec: '500g', price: 99, cost: 16.3 },
-            { name: '地参/虫草参', spec: '500g', price: 158, cost: 16.3 },
-            
-            // 玉精灵
-            { name: '玉精灵', spec: '250g', price: 88, cost: 8.7 },
-            { name: '玉精灵', spec: '500g', price: 138, cost: 10.3 },
-            { name: '玉精灵', spec: '500g', price: 128, cost: 10.3 },
-            { name: '玉精灵', spec: '500g', price: 198, cost: 10.3 },
-            
-            // 冰雪蝉/白虫草
-            { name: '冰雪蝉/白虫草', spec: '250g', price: 99, cost: 31 },
-            { name: '冰雪蝉/白虫草', spec: '250g', price: 128, cost: 31 },
-            { name: '冰雪蝉/白虫草', spec: '500g', price: 158, cost: 56 },
-            { name: '冰雪蝉/白虫草', spec: '500g', price: 198, cost: 56 },
-            
-            // 淡竹叶/雪域冰竹
-            { name: '淡竹叶/雪域冰竹', spec: '250g', price: 158, cost: 13 },
-            { name: '淡竹叶/雪域冰竹', spec: '500g', price: 158, cost: 21 },
-            
-            // 雪燕（3A）
-            { name: '雪燕（3A）', spec: '250g', price: 15, cost: 6 },
-            { name: '雪燕（3A）', spec: '250g', price: 88, cost: 6 },
-            { name: '雪燕（3A）', spec: '500g', price: 19.9, cost: 6 },
-            { name: '雪燕（3A）', spec: '500g', price: 39, cost: 13.25 },
-            { name: '雪燕（3A）', spec: '500g', price: 68, cost: 13.25 },
-            { name: '雪燕（3A）', spec: '1000g', price: 99, cost: 22.5 },
-            { name: '雪燕（3A）', spec: '1500g', price: 99, cost: 31.75 },
-            
-            // 黑灵芝
-            { name: '黑灵芝', spec: '250g', price: 297, cost: 11 },
-            { name: '黑灵芝', spec: '250g', price: 19.9, cost: 11 },
-            { name: '黑灵芝', spec: '500g', price: 19.9, cost: 13 },
-            { name: '黑灵芝', spec: '500g', price: 17, cost: 13 },
-            
-            // 五指毛桃
-            { name: '五指毛桃', spec: '250g', price: 158, cost: 14.5 },
-            { name: '五指毛桃', spec: '500g', price: 158, cost: 23.3 },
-            
-            // 柯子/黄金果
-            { name: '柯子/黄金果', spec: '250g', price: 99, cost: 7 },
-            { name: '柯子/黄金果', spec: '500g', price: 99, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 128, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 158, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 198, cost: 9 },
-            
-            // 麦冬
-            { name: '麦冬', spec: '250g', price: 128, cost: 46.3 },
-            { name: '麦冬', spec: '500g', price: 188, cost: 87.5 },
-            
-            // 鹿茸片
-            { name: '鹿茸片', spec: '20g', price: 40, cost: 7.9 },
-            { name: '鹿茸片', spec: '50g', price: 80, cost: 16.2 },
-            { name: '鹿茸片', spec: '50g', price: 99, cost: 16.2 },
-            { name: '鹿茸片', spec: '100g', price: 120, cost: 26.5 },
-            { name: '鹿茸片', spec: '150g', price: 160, cost: 35 },
-            { name: '鹿茸片', spec: '200g', price: 160, cost: 47 },
-            
-            // 神农果
-            { name: '神农果', spec: '250g', price: 99, cost: 9.5 },
-            { name: '神农果', spec: '500g', price: 99, cost: 14 },
-            { name: '神农果', spec: '500g', price: 158, cost: 14 },
-            { name: '神农果', spec: '500g', price: 198, cost: 14 },
-            
-            // 麒麟籽/火棘果
-            { name: '麒麟籽/火棘果', spec: '250g', price: 99, cost: 8.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 99, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 128, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 158, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 198, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 298, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '1000g', price: 298, cost: 25.4 },  // 12.7*2
-            
-            // 乌金参/老黑参/黑金参
-            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 99, cost: 6.7 },
-            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 198, cost: 6.7 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 99, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 128, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 158, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 198, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 266, cost: 9 },
-            
-            // 乌金参片
-            { name: '乌金参片', spec: '100g', price: 100, cost: 6.2 },
-            { name: '乌金参片', spec: '150g', price: 69, cost: 6.7 },
-            { name: '乌金参片', spec: '200g', price: 90, cost: 7.4 },
-            { name: '乌金参片', spec: '250g', price: 99, cost: 8 },
-            { name: '乌金参片', spec: '500g', price: 158, cost: 12.5 },
-            
-            // 龙鳞果
-            { name: '龙鳞果', spec: '100g', price: 49, cost: 8.7 },
-            { name: '龙鳞果', spec: '200g', price: 79, cost: 13.6 },
-            { name: '龙鳞果', spec: '250g', price: 128, cost: 16.3 },
-            { name: '龙鳞果', spec: '500g', price: 99, cost: 29.5 },
-            { name: '龙鳞果', spec: '500g', price: 158, cost: 29.5 },
-            { name: '龙鳞果', spec: '500g', price: 198, cost: 29.5 },
-            
-            // 藏红花
-            { name: '藏红花', spec: '0.5g', price: 49.9, cost: 6.4 },
-            { name: '藏红花', spec: '1g', price: 69.9, cost: 11 },
-            { name: '藏红花', spec: '3g', price: 99, cost: 24.6 },
-            { name: '藏红花', spec: '5g', price: 198, cost: 37 },
-            
-            // 老虎膏
-            { name: '老虎膏', spec: '3瓶', price: 99, cost: 8.5 },
-            
-            // 蜈蚣膏
-            { name: '蜈蚣膏', spec: '2瓶', price: 99, cost: 8 },
-            
-            // 透骨贴
-            { name: '透骨贴', spec: '3盒', price: 39.9, cost: 6 },
-            { name: '透骨贴', spec: '2盒', price: 19.9, cost: 4 },
-            
-            // 千日红
-            { name: '千日红', spec: '250g', price: 99, cost: 10.4 },
-            { name: '千日红', spec: '250g', price: 128, cost: 10.4 },
-            { name: '千日红', spec: '250g', price: 158, cost: 10.4 },
-            { name: '千日红', spec: '500g', price: 128, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 158, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 198, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 238, cost: 16.5 },
-            
-            // 蓝蝴蝶/蓝精灵
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 198, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 128, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 158, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 198, cost: 39.7 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 238, cost: 39.7 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '50g', price: 98, cost: 8.5 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '100g', price: 68, cost: 11.8 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '150g', price: 39, cost: 15.2 },
-            
-            // 黄金蕊/金丝蕊
-            { name: '黄金蕊/金丝蕊', spec: '500g', price: 398, cost: 135 },
-            { name: '黄金蕊/金丝蕊', spec: '250g', price: 298, cost: 68.5 },
-            { name: '黄金蕊/金丝蕊', spec: '100g', price: 99, cost: 29 },
-            { name: '黄金蕊/金丝蕊', spec: '100g', price: 128, cost: 29 },
-            { name: '黄金蕊/金丝蕊', spec: '50g', price: 58, cost: 17.5 },
-            
-            // 五行果
-            { name: '五行果', spec: '250g', price: 198, cost: 9.5 },
-            { name: '五行果', spec: '250g', price: 158, cost: 9.5 },
-            
-            // 虫草王（黑虫草）
-            { name: '虫草王（黑虫草）', spec: '500g', price: 128, cost: 23 },
-            { name: '虫草王（黑虫草）', spec: '500g', price: 158, cost: 23 },
-            
-            // 石斛粉
-            { name: '石斛粉', spec: '200g', price: 198, cost: 16 },
-            
-            // 虎王杖
-            { name: '虎王杖', spec: '250g', price: 199, cost: 7.7 },
-            { name: '虎王杖', spec: '250g', price: 99, cost: 7.7 },
-            { name: '虎王杖', spec: '500g', price: 158, cost: 10.7 },
-            { name: '虎王杖', spec: '500g', price: 198, cost: 10.7 },
-            
-            // 石斛条
-            { name: '石斛条', spec: '500g', price: 158, cost: 35 },
-            { name: '石斛条', spec: '500g', price: 198, cost: 35 },
-            
-            // 路路通
-            { name: '路路通', spec: '250g', price: 99, cost: 6.2 },
-            { name: '路路通', spec: '500g', price: 128, cost: 8 },
-            { name: '路路通', spec: '500g', price: 158, cost: 8 },
-            { name: '路路通', spec: '500g', price: 198, cost: 8 },
-            
-            // 绿萝花/菩提花
-            { name: '绿萝花/菩提花', spec: '250g', price: 158, cost: 14.5 },
-            { name: '绿萝花/菩提花', spec: '250g', price: 198, cost: 14.5 },
-            { name: '绿萝花/菩提花', spec: '250g', price: 99, cost: 14.5 },
-            { name: '绿萝花/菩提花', spec: '500g', price: 128, cost: 24.5 },
-            { name: '绿萝花/菩提花', spec: '500g', price: 158, cost: 24.5 },
-            
-            // 万寿菊
-            { name: '万寿菊', spec: '250g', price: 128, cost: 11 },
-            { name: '万寿菊', spec: '250g', price: 99, cost: 11 },
-            { name: '万寿菊', spec: '500g', price: 128, cost: 17 },
-            { name: '万寿菊', spec: '500g', price: 158, cost: 17 },
-            
-            // 农家三七
-            { name: '农家三七', spec: '250g', price: 118, cost: 12.5 },
-            
-            // 琥珀天麻/红天麻
-            { name: '琥珀天麻/红天麻', spec: '100g', price: 98, cost: 21 },
-            { name: '琥珀天麻/红天麻', spec: '250g', price: 158, cost: 46.5 },
-            
-            // 胰岛果
-            { name: '胰岛果', spec: '300g', price: 99, cost: 9.3 },
-            
-            // 猫爪草
-            { name: '猫爪草', spec: '250g', price: 158, cost: 21.9 },
-            { name: '猫爪草', spec: '250g', price: 198, cost: 21.9 },
-            
-            // 鸡爪参
-            { name: '鸡爪参', spec: '250g', price: 158, cost: 15.5 },
-            { name: '鸡爪参', spec: '250g', price: 198, cost: 15.5 },
-            
-            // 不老莓
-            { name: '不老莓', spec: '250g', price: 98, cost: 12 },
-            { name: '不老莓', spec: '250g', price: 99, cost: 12 },
-            { name: '不老莓', spec: '500g', price: 158, cost: 18.2 },
-            { name: '不老莓', spec: '500g', price: 159, cost: 18.2 },
-            
-            // 太子参/金龙参
-            { name: '太子参/金龙参', spec: '250g', price: 128, cost: 11.5 },
-            { name: '太子参/金龙参', spec: '250g', price: 99, cost: 11.5 },
-            { name: '太子参/金龙参', spec: '500g', price: 128, cost: 17.2 },
-            { name: '太子参/金龙参', spec: '500g', price: 158, cost: 17.2 },
-            { name: '太子参/金龙参', spec: '500g', price: 238, cost: 17.2 },
-            
-            // 水飞蓟/百岁籽
-            { name: '水飞蓟/百岁籽', spec: '250g', price: 158, cost: 8.3 },
-            { name: '水飞蓟/百岁籽', spec: '250g', price: 98, cost: 8.3 },
-            { name: '水飞蓟/百岁籽', spec: '500g', price: 158, cost: 11 },
-            { name: '水飞蓟/百岁籽', spec: '500g', price: 198, cost: 11 },
-            
-            // 康仙花/清流花
-            { name: '康仙花/清流花', spec: '250g', price: 99, cost: 19 },
-            { name: '康仙花/清流花', spec: '250g', price: 128, cost: 19 },
-            { name: '康仙花/清流花', spec: '250g', price: 158, cost: 19 },
-            { name: '康仙花/清流花', spec: '500g', price: 128, cost: 32 },
-            { name: '康仙花/清流花', spec: '500g', price: 158, cost: 32 },
-            
-            // 牛黄丸（玻璃小瓶）
-            { name: '牛黄丸（玻璃小瓶）', spec: '5g', price: 69.9, cost: 12.4 },
-            
-            // 牛黄丸（大瓶）
-            { name: '牛黄丸（大瓶）', spec: '5g', price: 69.9, cost: 11.25 },
-            
-            // 百宝花/茉莉花/罗汉果花
-            { name: '百宝花/茉莉花/罗汉果花', spec: '500g', price: 158, cost: 8 },
-            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 128, cost: 6.5 },
-            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 99, cost: 6.5 },
-            
-            // 松针油
-            { name: '松针油', spec: '1瓶', price: 78, cost: 7 },
-            { name: '松针油', spec: '2瓶', price: 140, cost: 13.5 },
-            { name: '松针油', spec: '6瓶', price: 268, cost: 35 },
-            { name: '松针油', spec: '12瓶', price: 488, cost: 65 },
-            
-            // 八大好汉料（新）
-            { name: '八大好汉料（新）', spec: '580g*1袋', price: 199, cost: 56 },
-            
-            // 地髓金
-            { name: '地髓金', spec: '150g', price: 69, cost: 9 },
-            { name: '地髓金', spec: '250g', price: 99, cost: 12.8 },
-            
-            // 赤灵芝
-            { name: '赤灵芝', spec: '250g', price: 99, cost: 9.75 },
-            { name: '赤灵芝', spec: '500g', price: 158, cost: 19.5 },
-            
-            // 化石草
-            { name: '化石草', spec: '100g', price: 69, cost: 8 },
-            { name: '化石草', spec: '200g', price: 99, cost: 11 },
-            
-            // 金丝红雪茶（软质）
-            { name: '金丝红雪茶（软质）', spec: '100g', price: 29, cost: 11.5 },
-            
-            // 金丝红雪茶（硬质）
-            { name: '金丝红雪茶（硬质）', spec: '100g', price: 29, cost: 7.7 },
-            
-            // 双肾子
-            { name: '双肾子', spec: '100g', price: 69, cost: 9.7 },
-            
-            // 黄芪
-            { name: '黄芪', spec: '80g', price: 69, cost: 7.8 },
-            
-            // 菟丝子
-            { name: '菟丝子', spec: '100g', price: 69, cost: 7.3 },
-            { name: '菟丝子', spec: '250g', price: 99, cost: 10.8 },
-            { name: '菟丝子', spec: '500g', price: 129, cost: 16.5 },
-            
-            // 当归压片
-            { name: '当归压片', spec: '20g', price: 49, cost: 6.7 },
-            { name: '当归压片', spec: '100g', price: 69, cost: 13.5 },
-            { name: '当归压片', spec: '250g', price: 128, cost: 26.3 },
-            { name: '当归压片', spec: '500g', price: 198, cost: 47.5 },
-            
-            // 去皮茯苓丁
-            { name: '去皮茯苓丁', spec: '100g', price: 69, cost: 7.4 },
-            { name: '去皮茯苓丁', spec: '250g', price: 99, cost: 11 },
-            { name: '去皮茯苓丁', spec: '500g', price: 158, cost: 17 },
-            
-            // 党参
-            { name: '党参', spec: '250g', price: 128, cost: 32 },
-            { name: '党参', spec: '500g', price: 198, cost: 59 },
-            
-            // 夏枯草
-            { name: '夏枯草', spec: '110g', price: 69, cost: 8.8 },
-            { name: '夏枯草', spec: '250g', price: 128, cost: 13.8 },
-            { name: '夏枯草', spec: '500g', price: 198, cost: 22.5 },
-            
-            // 桑葚干
-            { name: '桑葚干', spec: '500g', price: 128, cost: 11.5 },
-            
-            // 滇红花
-            { name: '滇红花', spec: '100g', price: 69, cost: 14.5 },
-            { name: '滇红花', spec: '200g', price: 99, cost: 24 },
-            
-            // 鸡血藤
-            { name: '鸡血藤', spec: '300g', price: 69, cost: 7.8 },
-            { name: '鸡血藤', spec: '500g', price: 99, cost: 10 },
-            
-            // 铁皮石斛花
-            { name: '铁皮石斛花', spec: '50g', price: 99, cost: 28 },
-            
-            // 九制15-20黄精
-            { name: '九制15-20黄精', spec: '250g', price: 128, cost: 27.8 },
-            { name: '九制15-20黄精', spec: '500g', price: 198, cost: 51.5 },
-            
-            // 九制黄精35-40
-            { name: '九制黄精35-40', spec: '250g', price: 128, cost: 38.8 },
-            { name: '九制黄精35-40', spec: '500g', price: 198, cost: 72.5 },
-            
-            // 岩斛
-            { name: '岩斛', spec: '200g', price: 128, cost: 34 },
-            { name: '岩斛', spec: '100g', price: 99, cost: 19.5 },
-            
-            // 金花茶
-            { name: '金花茶', spec: '50g', price: 68, cost: 12.5 },
-            { name: '金花茶', spec: '100g', price: 99, cost: 20.5 },
-            
-            // 冻干帝王果
-            { name: '冻干帝王果', spec: '100g', price: 99, cost: 24 },
-            
-            // 串串天麻
-            { name: '串串天麻', spec: '250g', price: 128, cost: 40 },
-            
-            // 九品香水连
-            { name: '九品香水连', spec: '50g', price: 79, cost: 25 },
-            
-            // 鼓槌石斛花
-            { name: '鼓槌石斛花', spec: '50g', price: 128, cost: 45 },
-            { name: '鼓槌石斛花', spec: '100g', price: 198, cost: 86 },
-            
-            // 牛黄粉(透明塑料瓶)
-            { name: '牛黄粉(透明塑料瓶)', spec: '5g', price: 68, cost: 8.15 },
-            { name: '牛黄粉(透明塑料瓶)', spec: '10g', price: 98, cost: 11.9 },
-            { name: '牛黄粉(透明塑料瓶)', spec: '20g', price: 148, cost: 19.4 },
-            
-            // 血珀降木/苏木
-            { name: '血珀降木/苏木', spec: '150g', price: 24.9, cost: 7.2 },
-            { name: '血珀降木/苏木', spec: '300g', price: 39.9, cost: 9.3 },
-            
-            // 天山紫金莲
-            { name: '天山紫金莲', spec: '50g', price: 69, cost: 16 },
-            
-            // 紫珠虫石斛兰
-            { name: '紫珠虫石斛兰', spec: '30g', price: 88, cost: 19.6 },
-            
-            // 龙血竭
-            { name: '龙血竭', spec: '100g', price: 99, cost: 24 },
-            { name: '龙血竭', spec: '250g', price: 158, cost: 52.5 },
-            
-            // 昆仑雪胎菊
-            { name: '昆仑雪胎菊', spec: '50g', price: 58, cost: 11.2 },
-            { name: '昆仑雪胎菊', spec: '100g', price: 98, cost: 17.5 },
-            
-            // 带皮茯苓
-            { name: '带皮茯苓', spec: '100g', price: 98, cost: 6.2 },
-            { name: '带皮茯苓', spec: '500g', price: 198, cost: 15 },
-            
-            // 甜当归
-            { name: '甜当归', spec: '200g', price: 198, cost: 11.6 },
-            { name: '甜当归', spec: '100g', price: 98, cost: 7.8 },
-            
-            // 血三七
-            { name: '血三七', spec: '250g', price: 98, cost: 10 },
-            { name: '血三七', spec: '100g', price: 68, cost: 6.4 },
-            
-            // 雪莲花
-            { name: '雪莲花', spec: '50g', price: 58, cost: 7.2 },
-            { name: '雪莲花', spec: '100g', price: 88, cost: 9.3 },
-            { name: '雪莲花', spec: '200g', price: 128, cost: 13.6 },
-            
-            // 小龙须雪燕
-            { name: '小龙须雪燕', spec: '50g', price: 99, cost: 7.3 },
-            
-            // 当归黑豆
-            { name: '当归黑豆', spec: '250g', price: 128, cost: 8.5 },
-            
-            // 叶子红糖
-            { name: '叶子红糖', spec: '500g', price: 98, cost: 10 },
-            { name: '叶子红糖', spec: '250g', price: 68, cost: 7.5 },
-            
-            // 雪域冰菊
-            { name: '雪域冰菊', spec: '50g', price: 38, cost: 7.75 },
-            { name: '雪域冰菊', spec: '100g', price: 68, cost: 10.5 },
-            { name: '雪域冰菊', spec: '250g', price: 128, cost: 20 },
-            
-            // 藏槟榔/火麒麟/火凤凰
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 168, cost: 20 },
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 84, cost: 20 },
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 128, cost: 20 },
-            
-            // 鹿胶
-            { name: '鹿胶', spec: '250g', price: 100, cost: 16.25 },
-            { name: '鹿胶', spec: '500g', price: 100, cost: 27.5 },
-            { name: '鹿胶', spec: '250g', price: 80, cost: 16.25 },
-            { name: '鹿胶', spec: '500g', price: 80, cost: 27.5 },
-            
-            // 西洋参
-            { name: '西洋参', spec: '50g', price: 60, cost: 16 },
-            { name: '西洋参', spec: '100g', price: 90, cost: 27 },
-            
-            // 藏红花蕊
-            { name: '藏红花蕊', spec: '100g', price: 98, cost: 7 },
-            { name: '藏红花蕊', spec: '200g', price: 128, cost: 9.8 },
-            { name: '藏红花蕊', spec: '250g', price: 158, cost: 11.3 },
-            
-            // 腾越清膏/熟地黄
-            { name: '腾越清膏/熟地黄', spec: '250g', price: 98, cost: 13 },
-            { name: '腾越清膏/熟地黄', spec: '500g', price: 198, cost: 21 },
-            { name: '腾越清膏/熟地黄', spec: '1000g', price: 198, cost: 42 },
-            
-            // 乾坤玺/九转菩提/茶膏
-            { name: '乾坤玺/九转菩提/茶膏', spec: '10粒', price: 100, cost: 5.6 },
-            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 90, cost: 7.7 },
-            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 200, cost: 7.7 },
-            
-            // 阿胶块
-            { name: '阿胶块', spec: '250g', price: 98, cost: 16.5 },
-            { name: '阿胶块', spec: '500g', price: 69, cost: 34.54 }  // 28.54+6
+    // ========== 产品数据库（从你的表格提取，包含价格，单位统一为g） ==========
+    const productDatabase = [
+    // 藏雪参系列
+    { name: '藏雪参', spec: '250g', price: 68, cost: 10.4 },
+    { name: '藏雪参', spec: '250g', price: 99, cost: 10.4 },
+    { name: '藏雪参', spec: '250g', price: 128, cost: 10.4 },
+    { name: '藏雪参', spec: '250g', price: 158, cost: 10.4 },
+    { name: '藏雪参', spec: '250g', price: 198, cost: 10.4 },
+    { name: '藏雪参', spec: '500g', price: 68, cost: 16.8 },
+    { name: '藏雪参', spec: '500g', price: 99, cost: 16.8 },
+    { name: '藏雪参', spec: '500g', price: 128, cost: 16.8 },
+    { name: '藏雪参', spec: '500g', price: 158, cost: 16.8 },
+    { name: '藏雪参', spec: '500g', price: 198, cost: 16.8 },
+    
+    // 谛王根/龙须石斛/菩提搽/金龙须/雪金灵
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 98, cost: 8.5 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 148, cost: 8.5 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 158, cost: 8.5 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 198, cost: 8.5 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 98, cost: 12 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 128, cost: 12 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 158, cost: 12 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 198, cost: 12 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 280, cost: 12 },
+    { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 298, cost: 12 },
+    
+    // 黑灵果/青皮子/小胎柑
+    { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 198, cost: 7 },
+    { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 99, cost: 7 },
+    { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 99, cost: 9 },
+    { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 128, cost: 9 },
+    { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 158, cost: 9 },
+    { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 198, cost: 9 },
+    
+    // 帝王花/红花果
+    { name: '帝王花/红花果', spec: '250g', price: 98, cost: 8 },
+    { name: '帝王花/红花果', spec: '250g', price: 128, cost: 8 },
+    { name: '帝王花/红花果', spec: '500g', price: 88, cost: 12 },
+    { name: '帝王花/红花果', spec: '500g', price: 158, cost: 12 },
+    { name: '帝王花/红花果', spec: '500g', price: 288, cost: 12 },
+    
+    // 灵芝孢子粉
+    { name: '灵芝孢子粉', spec: '250g', price: 29.9, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 39.9, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 59.9, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 80, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 98, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 128, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 158, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '250g', price: 198, cost: 18.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 80, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 168, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 178, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 198, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 238, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 288, cost: 33.5 },
+    { name: '灵芝孢子粉', spec: '500g', price: 368, cost: 33.5 },
+    
+    // 龙血果/天灵果/红山参/藏灵果
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 69, cost: 6.3 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 99, cost: 6.3 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 128, cost: 6.3 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 138, cost: 6.3 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 58, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 69, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 88, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 99, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 128, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 138, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 158, cost: 9.4 },
+    { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 198, cost: 9.4 },
+    
+    // 烤干洛神花
+    { name: '烤干洛神花', spec: '250g', price: 99, cost: 8.5 },
+    { name: '烤干洛神花', spec: '250g', price: 198, cost: 8.5 },
+    { name: '烤干洛神花', spec: '500g', price: 98, cost: 12.8 },
+    { name: '烤干洛神花', spec: '500g', price: 128, cost: 12.8 },
+    { name: '烤干洛神花', spec: '500g', price: 158, cost: 12.8 },
+    { name: '烤干洛神花', spec: '500g', price: 198, cost: 12.8 },
+    
+    // 冻干洛神花
+    { name: '冻干洛神花', spec: '50g', price: 30, cost: 8.5 },
+    
+    // 缅王花
+    { name: '缅王花', spec: '250g', price: 98, cost: 15 },
+    { name: '缅王花', spec: '500g', price: 128, cost: 25 },
+    { name: '缅王花', spec: '500g', price: 158, cost: 25 },
+    
+    // 农家天麻
+    { name: '农家天麻', spec: '250g', price: 118, cost: 35.5 },
+    { name: '农家天麻', spec: '250g', price: 138, cost: 35.5 },
+    { name: '农家天麻', spec: '500g', price: 168, cost: 68.5 },
+    { name: '农家天麻', spec: '500g', price: 198, cost: 68.5 },
+    
+    // 清留果
+    { name: '清留果', spec: '250g', price: 99, cost: 6 },
+    { name: '清留果', spec: '500g', price: 48, cost: 8 },
+    { name: '清留果', spec: '500g', price: 98, cost: 8 },
+    { name: '清留果', spec: '500g', price: 99, cost: 8 },
+    { name: '清留果', spec: '500g', price: 128, cost: 8 },
+    { name: '清留果', spec: '500g', price: 158, cost: 8 },
+    { name: '清留果', spec: '500g', price: 168, cost: 8 },
+    { name: '清留果', spec: '500g', price: 198, cost: 8 },
+    { name: '清留果', spec: '500g', price: 199, cost: 8 },
+    { name: '清留果', spec: '1000g', price: 298, cost: 16 },
+    { name: '清留果', spec: '1000g', price: 358, cost: 16 },
+    { name: '清留果', spec: '1000g', price: 368, cost: 16 },
+    
+    // 桑黄
+    { name: '桑黄', spec: '250g', price: 98, cost: 11 },
+    { name: '桑黄', spec: '250g', price: 198, cost: 11 },
+    { name: '桑黄', spec: '500g', price: 158, cost: 17.7 },
+    { name: '桑黄', spec: '500g', price: 198, cost: 17.7 },
+    
+    // 山药干/玉雪山灵片
+    { name: '山药干/玉雪山灵片', spec: '250g', price: 128, cost: 8.7 },
+    { name: '山药干/玉雪山灵片', spec: '500g', price: 198, cost: 12.8 },
+    
+    // 神牛根/龙凤根
+    { name: '神牛根/龙凤根', spec: '250g', price: 68, cost: 9.5 },
+    { name: '神牛根/龙凤根', spec: '250g', price: 88, cost: 9.5 },
+    { name: '神牛根/龙凤根', spec: '250g', price: 99, cost: 9.5 },
+    { name: '神牛根/龙凤根', spec: '250g', price: 128, cost: 9.5 },
+    { name: '神牛根/龙凤根', spec: '300g', price: 99, cost: 10.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 68, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 88, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 99, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 128, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 158, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 168, cost: 14.2 },
+    { name: '神牛根/龙凤根', spec: '500g', price: 198, cost: 14.2 },
+    
+    // 血三七/金不换
+    { name: '血三七/金不换', spec: '500g', price: 99, cost: 18 },
+    { name: '血三七/金不换', spec: '500g', price: 158, cost: 18 },
+    
+    // 血塞通/天灵片/红藤
+    { name: '血塞通/天灵片/红藤', spec: '250g', price: 88, cost: 6 },
+    { name: '血塞通/天灵片/红藤', spec: '500g', price: 99, cost: 8 },
+    { name: '血塞通/天灵片/红藤', spec: '500g', price: 128, cost: 8 },
+    { name: '血塞通/天灵片/红藤', spec: '500g', price: 158, cost: 8 },
+    
+    // 软红雪茶
+    { name: '软红雪茶', spec: '100g', price: 29, cost: 11.5 },
+    
+    // 硬红雪茶
+    { name: '硬红雪茶', spec: '100g', price: 29, cost: 7.7 },
+    
+    // 地参/虫草参
+    { name: '地参/虫草参', spec: '250g', price: 99, cost: 10.4 },
+    { name: '地参/虫草参', spec: '500g', price: 99, cost: 16.3 },
+    { name: '地参/虫草参', spec: '500g', price: 158, cost: 16.3 },
+    
+    // 玉精灵
+    { name: '玉精灵', spec: '250g', price: 88, cost: 8.7 },
+    { name: '玉精灵', spec: '500g', price: 128, cost: 10.3 },
+    { name: '玉精灵', spec: '500g', price: 138, cost: 10.3 },
+    { name: '玉精灵', spec: '500g', price: 198, cost: 10.3 },
+    
+    // 冰雪蝉/白虫草
+    { name: '冰雪蝉/白虫草', spec: '250g', price: 99, cost: 31 },
+    { name: '冰雪蝉/白虫草', spec: '250g', price: 128, cost: 31 },
+    { name: '冰雪蝉/白虫草', spec: '500g', price: 158, cost: 56 },
+    { name: '冰雪蝉/白虫草', spec: '500g', price: 198, cost: 56 },
+    
+    // 淡竹叶/雪域冰竹
+    { name: '淡竹叶/雪域冰竹', spec: '250g', price: 158, cost: 13 },
+    { name: '淡竹叶/雪域冰竹', spec: '500g', price: 158, cost: 21 },
+    
+    // 雪燕（3A）
+    { name: '雪燕（3A）', spec: '250g', price: 15, cost: 6 },
+    { name: '雪燕（3A）', spec: '250g', price: 88, cost: 6 },
+    { name: '雪燕（3A）', spec: '500g', price: 19.9, cost: 6 },
+    { name: '雪燕（3A）', spec: '500g', price: 39, cost: 13.25 },
+    { name: '雪燕（3A）', spec: '500g', price: 68, cost: 13.25 },
+    { name: '雪燕（3A）', spec: '1000g', price: 99, cost: 22.5 },
+    { name: '雪燕（3A）', spec: '1500g', price: 99, cost: 31.75 },
+    
+    // 黑灵芝
+    { name: '黑灵芝', spec: '250g', price: 19.9, cost: 11 },
+    { name: '黑灵芝', spec: '250g', price: 297, cost: 11 },
+    { name: '黑灵芝', spec: '500g', price: 17, cost: 13 },
+    { name: '黑灵芝', spec: '500g', price: 19.9, cost: 13 },
+    
+    // 五指毛桃
+    { name: '五指毛桃', spec: '250g', price: 158, cost: 14.5 },
+    { name: '五指毛桃', spec: '500g', price: 158, cost: 23.3 },
+    
+    // 柯子/黄金果
+    { name: '柯子/黄金果', spec: '250g', price: 99, cost: 7 },
+    { name: '柯子/黄金果', spec: '500g', price: 99, cost: 9 },
+    { name: '柯子/黄金果', spec: '500g', price: 128, cost: 9 },
+    { name: '柯子/黄金果', spec: '500g', price: 158, cost: 9 },
+    { name: '柯子/黄金果', spec: '500g', price: 198, cost: 9 },
+    
+    // 麦冬
+    { name: '麦冬', spec: '250g', price: 128, cost: 46.3 },
+    { name: '麦冬', spec: '500g', price: 188, cost: 87.5 },
+    
+    // 鹿茸片
+    { name: '鹿茸片', spec: '20g', price: 40, cost: 7.9 },
+    { name: '鹿茸片', spec: '50g', price: 80, cost: 16.2 },
+    { name: '鹿茸片', spec: '50g', price: 99, cost: 16.2 },
+    { name: '鹿茸片', spec: '100g', price: 120, cost: 26.5 },
+    { name: '鹿茸片', spec: '150g', price: 160, cost: 35 },
+    { name: '鹿茸片', spec: '200g', price: 160, cost: 47 },
+    
+    // 神农果
+    { name: '神农果', spec: '250g', price: 99, cost: 9.5 },
+    { name: '神农果', spec: '500g', price: 99, cost: 14 },
+    { name: '神农果', spec: '500g', price: 158, cost: 14 },
+    { name: '神农果', spec: '500g', price: 198, cost: 14 },
+    
+    // 麒麟籽/火棘果
+    { name: '麒麟籽/火棘果', spec: '250g', price: 99, cost: 8.7 },
+    { name: '麒麟籽/火棘果', spec: '500g', price: 99, cost: 12.7 },
+    { name: '麒麟籽/火棘果', spec: '500g', price: 128, cost: 12.7 },
+    { name: '麒麟籽/火棘果', spec: '500g', price: 158, cost: 12.7 },
+    { name: '麒麟籽/火棘果', spec: '500g', price: 198, cost: 12.7 },
+    { name: '麒麟籽/火棘果', spec: '500g', price: 298, cost: 12.7 },
+    { name: '麒麟籽/火棘果', spec: '1000g', price: 298, cost: 25.4 },
+    
+    // 乌金参/老黑参/黑金参
+    { name: '乌金参/老黑参/黑金参', spec: '250g', price: 99, cost: 6.7 },
+    { name: '乌金参/老黑参/黑金参', spec: '250g', price: 198, cost: 6.7 },
+    { name: '乌金参/老黑参/黑金参', spec: '500g', price: 99, cost: 9 },
+    { name: '乌金参/老黑参/黑金参', spec: '500g', price: 128, cost: 9 },
+    { name: '乌金参/老黑参/黑金参', spec: '500g', price: 158, cost: 9 },
+    { name: '乌金参/老黑参/黑金参', spec: '500g', price: 198, cost: 9 },
+    { name: '乌金参/老黑参/黑金参', spec: '500g', price: 266, cost: 9 },
+    
+    // 乌金参片
+    { name: '乌金参片', spec: '100g', price: 100, cost: 6.2 },
+    { name: '乌金参片', spec: '150g', price: 69, cost: 6.7 },
+    { name: '乌金参片', spec: '200g', price: 90, cost: 7.4 },
+    { name: '乌金参片', spec: '250g', price: 99, cost: 8 },
+    { name: '乌金参片', spec: '500g', price: 158, cost: 12.5 },
+    
+    // 龙鳞果
+    { name: '龙鳞果', spec: '100g', price: 49, cost: 8.7 },
+    { name: '龙鳞果', spec: '200g', price: 79, cost: 13.6 },
+    { name: '龙鳞果', spec: '250g', price: 128, cost: 16.3 },
+    { name: '龙鳞果', spec: '500g', price: 99, cost: 29.5 },
+    { name: '龙鳞果', spec: '500g', price: 158, cost: 29.5 },
+    { name: '龙鳞果', spec: '500g', price: 198, cost: 29.5 },
+    
+    // 藏红花
+    { name: '藏红花', spec: '0.5g', price: 49.9, cost: 6.4 },
+    { name: '藏红花', spec: '1g', price: 69.9, cost: 11 },
+    { name: '藏红花', spec: '3g', price: 99, cost: 24.6 },
+    { name: '藏红花', spec: '5g', price: 198, cost: 37 },
+    
+    // 老虎膏
+    { name: '老虎膏', spec: '3瓶', price: 99, cost: 8.5 },
+    
+    // 蜈蚣膏
+    { name: '蜈蚣膏', spec: '2瓶', price: 99, cost: 8 },
+    
+    // 透骨贴
+    { name: '透骨贴', spec: '2盒', price: 19.9, cost: 4 },
+    { name: '透骨贴', spec: '3盒', price: 39.9, cost: 6 },
+    
+    // 千日红
+    { name: '千日红', spec: '250g', price: 99, cost: 10.4 },
+    { name: '千日红', spec: '250g', price: 128, cost: 10.4 },
+    { name: '千日红', spec: '250g', price: 158, cost: 10.4 },
+    { name: '千日红', spec: '500g', price: 128, cost: 16.5 },
+    { name: '千日红', spec: '500g', price: 158, cost: 16.5 },
+    { name: '千日红', spec: '500g', price: 198, cost: 16.5 },
+    { name: '千日红', spec: '500g', price: 238, cost: 16.5 },
+    
+    // 蓝蝴蝶/蓝精灵
+    { name: '蓝蝴蝶/蓝精灵', spec: '50g', price: 98, cost: 8.5 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '100g', price: 68, cost: 11.8 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '150g', price: 39, cost: 15.2 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 128, cost: 22.2 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 158, cost: 22.2 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 198, cost: 22.2 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 198, cost: 39.7 },
+    { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 238, cost: 39.7 },
+    
+    // 黄金蕊/金丝蕊
+    { name: '黄金蕊/金丝蕊', spec: '50g', price: 58, cost: 17.5 },
+    { name: '黄金蕊/金丝蕊', spec: '100g', price: 99, cost: 29 },
+    { name: '黄金蕊/金丝蕊', spec: '100g', price: 128, cost: 29 },
+    { name: '黄金蕊/金丝蕊', spec: '250g', price: 298, cost: 68.5 },
+    { name: '黄金蕊/金丝蕊', spec: '500g', price: 398, cost: 135 },
+    
+    // 五行果
+    { name: '五行果', spec: '250g', price: 158, cost: 9.5 },
+    { name: '五行果', spec: '250g', price: 198, cost: 9.5 },
+    
+    // 虫草王（黑虫草）
+    { name: '虫草王（黑虫草）', spec: '500g', price: 128, cost: 23 },
+    { name: '虫草王（黑虫草）', spec: '500g', price: 158, cost: 23 },
+    
+    // 石斛粉
+    { name: '石斛粉', spec: '200g', price: 198, cost: 16 },
+    
+    // 虎王杖
+    { name: '虎王杖', spec: '250g', price: 99, cost: 7.7 },
+    { name: '虎王杖', spec: '250g', price: 199, cost: 7.7 },
+    { name: '虎王杖', spec: '500g', price: 158, cost: 10.7 },
+    { name: '虎王杖', spec: '500g', price: 198, cost: 10.7 },
+    
+    // 石斛条
+    { name: '石斛条', spec: '500g', price: 158, cost: 35 },
+    { name: '石斛条', spec: '500g', price: 198, cost: 35 },
+    
+    // 路路通
+    { name: '路路通', spec: '250g', price: 99, cost: 6.2 },
+    { name: '路路通', spec: '500g', price: 128, cost: 8 },
+    { name: '路路通', spec: '500g', price: 158, cost: 8 },
+    { name: '路路通', spec: '500g', price: 198, cost: 8 },
+    
+    // 绿萝花/菩提花
+    { name: '绿萝花/菩提花', spec: '250g', price: 99, cost: 14.5 },
+    { name: '绿萝花/菩提花', spec: '250g', price: 158, cost: 14.5 },
+    { name: '绿萝花/菩提花', spec: '250g', price: 198, cost: 14.5 },
+    { name: '绿萝花/菩提花', spec: '500g', price: 128, cost: 24.5 },
+    { name: '绿萝花/菩提花', spec: '500g', price: 158, cost: 24.5 },
+    
+    // 万寿菊
+    { name: '万寿菊', spec: '250g', price: 99, cost: 11 },
+    { name: '万寿菊', spec: '250g', price: 128, cost: 11 },
+    { name: '万寿菊', spec: '500g', price: 128, cost: 17 },
+    { name: '万寿菊', spec: '500g', price: 158, cost: 17 },
+    
+    // 农家三七
+    { name: '农家三七', spec: '250g', price: 118, cost: 12.5 },
+    
+    // 琥珀天麻/红天麻
+    { name: '琥珀天麻/红天麻', spec: '100g', price: 98, cost: 21 },
+    { name: '琥珀天麻/红天麻', spec: '250g', price: 158, cost: 46.5 },
+    
+    // 胰岛果
+    { name: '胰岛果', spec: '300g', price: 99, cost: 9.3 },
+    
+    // 猫爪草
+    { name: '猫爪草', spec: '250g', price: 158, cost: 21.9 },
+    { name: '猫爪草', spec: '250g', price: 198, cost: 21.9 },
+    
+    // 鸡爪参
+    { name: '鸡爪参', spec: '250g', price: 158, cost: 15.5 },
+    { name: '鸡爪参', spec: '250g', price: 198, cost: 15.5 },
+    
+    // 不老莓
+    { name: '不老莓', spec: '250g', price: 98, cost: 12 },
+    { name: '不老莓', spec: '250g', price: 99, cost: 12 },
+    { name: '不老莓', spec: '500g', price: 158, cost: 18.2 },
+    { name: '不老莓', spec: '500g', price: 159, cost: 18.2 },
+    
+    // 太子参/金龙参
+    { name: '太子参/金龙参', spec: '250g', price: 99, cost: 11.5 },
+    { name: '太子参/金龙参', spec: '250g', price: 128, cost: 11.5 },
+    { name: '太子参/金龙参', spec: '500g', price: 128, cost: 17.2 },
+    { name: '太子参/金龙参', spec: '500g', price: 158, cost: 17.2 },
+    { name: '太子参/金龙参', spec: '500g', price: 238, cost: 17.2 },
+    
+    // 水飞蓟/百岁籽
+    { name: '水飞蓟/百岁籽', spec: '250g', price: 98, cost: 8.3 },
+    { name: '水飞蓟/百岁籽', spec: '250g', price: 158, cost: 8.3 },
+    { name: '水飞蓟/百岁籽', spec: '500g', price: 158, cost: 11 },
+    { name: '水飞蓟/百岁籽', spec: '500g', price: 198, cost: 11 },
+    
+    // 康仙花/清流花
+    { name: '康仙花/清流花', spec: '250g', price: 99, cost: 19 },
+    { name: '康仙花/清流花', spec: '250g', price: 128, cost: 19 },
+    { name: '康仙花/清流花', spec: '250g', price: 158, cost: 19 },
+    { name: '康仙花/清流花', spec: '500g', price: 128, cost: 32 },
+    { name: '康仙花/清流花', spec: '500g', price: 158, cost: 32 },
+    
+    // 牛黄丸（玻璃小瓶）
+    { name: '牛黄丸（玻璃小瓶）', spec: '5g', price: 69.9, cost: 12.4 },
+    
+    // 牛黄丸（大瓶）
+    { name: '牛黄丸（大瓶）', spec: '5g', price: 69.9, cost: 11.25 },
+    
+    // 百宝花/茉莉花/罗汉果花
+    { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 99, cost: 6.5 },
+    { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 128, cost: 6.5 },
+    { name: '百宝花/茉莉花/罗汉果花', spec: '500g', price: 158, cost: 8 },
+    
+    // 松针油
+    { name: '松针油', spec: '1瓶', price: 78, cost: 7 },
+    { name: '松针油', spec: '2瓶', price: 140, cost: 13.5 },
+    { name: '松针油', spec: '6瓶', price: 268, cost: 35 },
+    { name: '松针油', spec: '12瓶', price: 488, cost: 65 },
+    
+    // 八大好汉料（新）
+    { name: '八大好汉料（新）', spec: '580g*1袋', price: 199, cost: 56 },
+    
+    // 地髓金
+    { name: '地髓金', spec: '150g', price: 69, cost: 9 },
+    { name: '地髓金', spec: '250g', price: 99, cost: 12.8 },
+    
+    // 赤灵芝
+    { name: '赤灵芝', spec: '250g', price: 99, cost: 9.75 },
+    { name: '赤灵芝', spec: '500g', price: 158, cost: 19.5 },
+    
+    // 化石草
+    { name: '化石草', spec: '100g', price: 69, cost: 8 },
+    { name: '化石草', spec: '200g', price: 99, cost: 11 },
+    
+    // 金丝红雪茶（软质）
+    { name: '金丝红雪茶（软质）', spec: '100g', price: 29, cost: 11.5 },
+    
+    // 金丝红雪茶（硬质）
+    { name: '金丝红雪茶（硬质）', spec: '100g', price: 29, cost: 7.7 },
+    
+    // 双肾子
+    { name: '双肾子', spec: '100g', price: 69, cost: 9.7 },
+    
+    // 黄芪
+    { name: '黄芪', spec: '80g', price: 69, cost: 7.8 },
+    
+    // 菟丝子
+    { name: '菟丝子', spec: '100g', price: 69, cost: 7.3 },
+    { name: '菟丝子', spec: '250g', price: 99, cost: 10.8 },
+    { name: '菟丝子', spec: '500g', price: 129, cost: 16.5 },
+    
+    // 当归压片
+    { name: '当归压片', spec: '20g', price: 49, cost: 6.7 },
+    { name: '当归压片', spec: '100g', price: 69, cost: 13.5 },
+    { name: '当归压片', spec: '250g', price: 128, cost: 26.3 },
+    { name: '当归压片', spec: '500g', price: 198, cost: 47.5 },
+    
+    // 去皮茯苓丁
+    { name: '去皮茯苓丁', spec: '100g', price: 69, cost: 7.4 },
+    { name: '去皮茯苓丁', spec: '250g', price: 99, cost: 11 },
+    { name: '去皮茯苓丁', spec: '500g', price: 158, cost: 17 },
+    
+    // 党参
+    { name: '党参', spec: '250g', price: 128, cost: 32 },
+    { name: '党参', spec: '500g', price: 198, cost: 59 },
+    
+    // 夏枯草
+    { name: '夏枯草', spec: '110g', price: 69, cost: 8.8 },
+    { name: '夏枯草', spec: '250g', price: 128, cost: 13.8 },
+    { name: '夏枯草', spec: '500g', price: 198, cost: 22.5 },
+    
+    // 桑葚干
+    { name: '桑葚干', spec: '500g', price: 128, cost: 11.5 },
+    
+    // 滇红花
+    { name: '滇红花', spec: '100g', price: 69, cost: 14.5 },
+    { name: '滇红花', spec: '200g', price: 99, cost: 24 },
+    
+    // 鸡血藤
+    { name: '鸡血藤', spec: '300g', price: 69, cost: 7.8 },
+    { name: '鸡血藤', spec: '500g', price: 99, cost: 10 },
+    
+    // 铁皮石斛花
+    { name: '铁皮石斛花', spec: '50g', price: 99, cost: 28 },
+    
+    // 九制15-20黄精
+    { name: '九制15-20黄精', spec: '250g', price: 128, cost: 27.8 },
+    { name: '九制15-20黄精', spec: '500g', price: 198, cost: 51.5 },
+    
+    // 九制黄精35-40
+    { name: '九制黄精35-40', spec: '250g', price: 128, cost: 38.8 },
+    { name: '九制黄精35-40', spec: '500g', price: 198, cost: 72.5 },
+    
+    // 岩斛
+    { name: '岩斛', spec: '100g', price: 99, cost: 19.5 },
+    { name: '岩斛', spec: '200g', price: 128, cost: 34 },
+    
+    // 金花茶
+    { name: '金花茶', spec: '50g', price: 68, cost: 12.5 },
+    { name: '金花茶', spec: '100g', price: 99, cost: 20.5 },
+    
+    // 冻干帝王果
+    { name: '冻干帝王果', spec: '100g', price: 99, cost: 24 },
+    
+    // 串串天麻
+    { name: '串串天麻', spec: '250g', price: 128, cost: 40 },
+    
+    // 九品香水连
+    { name: '九品香水连', spec: '50g', price: 79, cost: 25 },
+    
+    // 鼓槌石斛花
+    { name: '鼓槌石斛花', spec: '50g', price: 128, cost: 45 },
+    { name: '鼓槌石斛花', spec: '100g', price: 198, cost: 86 },
+    
+    // 牛黄粉(透明塑料瓶)
+    { name: '牛黄粉(透明塑料瓶)', spec: '5g', price: 68, cost: 8.15 },
+    { name: '牛黄粉(透明塑料瓶)', spec: '10g', price: 98, cost: 11.9 },
+    { name: '牛黄粉(透明塑料瓶)', spec: '20g', price: 148, cost: 19.4 },
+    
+    // 血珀降木/苏木
+    { name: '血珀降木/苏木', spec: '150g', price: 24.9, cost: 7.2 },
+    { name: '血珀降木/苏木', spec: '300g', price: 39.9, cost: 9.3 },
+    
+    // 天山紫金莲
+    { name: '天山紫金莲', spec: '50g', price: 69, cost: 16 },
+    
+    // 紫珠虫石斛兰
+    { name: '紫珠虫石斛兰', spec: '30g', price: 88, cost: 19.6 },
+    
+    // 龙血竭
+    { name: '龙血竭', spec: '100g', price: 99, cost: 24 },
+    { name: '龙血竭', spec: '250g', price: 158, cost: 52.5 },
+    
+    // 昆仑雪胎菊
+    { name: '昆仑雪胎菊', spec: '50g', price: 58, cost: 11.2 },
+    { name: '昆仑雪胎菊', spec: '100g', price: 98, cost: 17.5 },
+    
+    // 带皮茯苓
+    { name: '带皮茯苓', spec: '100g', price: 98, cost: 6.2 },
+    { name: '带皮茯苓', spec: '500g', price: 198, cost: 15 },
+    
+    // 甜当归
+    { name: '甜当归', spec: '100g', price: 98, cost: 7.8 },
+    { name: '甜当归', spec: '200g', price: 198, cost: 11.6 },
+    
+    // 血三七
+    { name: '血三七', spec: '100g', price: 68, cost: 6.4 },
+    { name: '血三七', spec: '250g', price: 98, cost: 10 },
+    
+    // 雪莲花
+    { name: '雪莲花', spec: '50g', price: 58, cost: 7.2 },
+    { name: '雪莲花', spec: '100g', price: 88, cost: 9.3 },
+    { name: '雪莲花', spec: '200g', price: 128, cost: 13.6 },
+    
+    // 小龙须雪燕
+    { name: '小龙须雪燕', spec: '50g', price: 99, cost: 7.3 },
+    
+    // 当归黑豆
+    { name: '当归黑豆', spec: '250g', price: 128, cost: 8.5 },
+    
+    // 叶子红糖
+    { name: '叶子红糖', spec: '250g', price: 68, cost: 7.5 },
+    { name: '叶子红糖', spec: '500g', price: 98, cost: 10 },
+    
+    // 雪域冰菊
+    { name: '雪域冰菊', spec: '50g', price: 38, cost: 7.75 },
+    { name: '雪域冰菊', spec: '100g', price: 68, cost: 10.5 },
+    { name: '雪域冰菊', spec: '250g', price: 128, cost: 20 },
+    
+    // 藏槟榔/火麒麟/火凤凰
+    { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 84, cost: 20 },
+    { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 128, cost: 20 },
+    { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 168, cost: 20 },
+    
+    // 鹿胶
+    { name: '鹿胶', spec: '250g', price: 80, cost: 16.25 },
+    { name: '鹿胶', spec: '250g', price: 100, cost: 16.25 },
+    { name: '鹿胶', spec: '500g', price: 80, cost: 27.5 },
+    { name: '鹿胶', spec: '500g', price: 100, cost: 27.5 },
+    
+    // 西洋参
+    { name: '西洋参', spec: '50g', price: 60, cost: 16 },
+    { name: '西洋参', spec: '100g', price: 90, cost: 27 },
+    
+    // 藏红花蕊
+    { name: '藏红花蕊', spec: '100g', price: 98, cost: 7 },
+    { name: '藏红花蕊', spec: '200g', price: 128, cost: 9.8 },
+    { name: '藏红花蕊', spec: '250g', price: 158, cost: 11.3 },
+    
+    // 腾越清膏/熟地黄
+    { name: '腾越清膏/熟地黄', spec: '250g', price: 98, cost: 13 },
+    { name: '腾越清膏/熟地黄', spec: '500g', price: 198, cost: 21 },
+    { name: '腾越清膏/熟地黄', spec: '1000g', price: 198, cost: 42 },
+    
+    // 乾坤玺/九转菩提/茶膏
+    { name: '乾坤玺/九转菩提/茶膏', spec: '10粒', price: 100, cost: 5.6 },
+    { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 90, cost: 7.7 },
+    { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 200, cost: 7.7 },
+    
+    // 阿胶块
+    { name: '阿胶块', spec: '250g', price: 98, cost: 16.5 },
+    { name: '阿胶块', spec: '500g', price: 69, cost: 34.54 },
+
+    // 燕窝系列
+    { name: '燕窝', spec: '525g*2盒', price: 99, cost: 35 },
+    
+    // 玉皇丹系列
+    { name: '玉皇丹', spec: '250g', price: 99, cost: 15 },
+    { name: '玉皇丹', spec: '500g', price: 158, cost: 25 },
+    
+    // 梅茶系列
+    { name: '梅茶', spec: '250g', price: 0, cost: 40 },    // 价格为空
+    { name: '梅茶', spec: '500g', price: 0, cost: 75 },    // 价格为空
+    
+    // 白首乌片系列
+    { name: '白首乌片', spec: '250g', price: 130, cost: 17.5 },
+    { name: '白首乌片', spec: '500g', price: 0, cost: 30 }   // 价格为空  
         ];
 
 
