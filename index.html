@@ -2282,130 +2282,263 @@
             }
         }
 
-        // ========== 导入CSV ==========
-        async function importCSVFile(e) {
-            const file = e.target.files[0]
-            if (!file) return
-            if (!file.name.endsWith('.csv')) {
-                showAlert('请导入 CSV 格式的表格文件！', 'danger')
+// ========== 导入CSV（支持多种编码和BOM头） ==========
+async function importCSVFile(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    if (!file.name.endsWith('.csv')) {
+        showAlert('请导入 CSV 格式的表格文件！', 'danger')
+        return
+    }
+
+    showAlert('正在导入数据，请稍候...', 'warning')
+    
+    const reader = new FileReader()
+    
+    reader.onload = async function(event) {
+        try {
+            let csv = event.target.result
+            
+            // 调试信息
+            console.log('原始文件前20个字符:', csv.substring(0, 20))
+            console.log('第一个字符的Unicode码:', csv.charCodeAt(0))
+            console.log('第二个字符的Unicode码:', csv.charCodeAt(1))
+            console.log('第三个字符的Unicode码:', csv.charCodeAt(2))
+            
+            // 处理BOM头 - 检查并移除
+            // 方式1: 移除UTF-8 BOM (EF BB BF)
+            if (csv.charCodeAt(0) === 0xEF && csv.charCodeAt(1) === 0xBB && csv.charCodeAt(2) === 0xBF) {
+                csv = csv.substr(3)
+                console.log('已移除UTF-8 BOM头')
+            }
+            // 方式2: 移除UTF-16 LE BOM (FF FE)
+            else if (csv.charCodeAt(0) === 0xFF && csv.charCodeAt(1) === 0xFE) {
+                csv = csv.substr(2)
+                console.log('已移除UTF-16 LE BOM头')
+            }
+            // 方式3: 移除UTF-16 BE BOM (FE FF)
+            else if (csv.charCodeAt(0) === 0xFE && csv.charCodeAt(1) === 0xFF) {
+                csv = csv.substr(2)
+                console.log('已移除UTF-16 BE BOM头')
+            }
+            
+            // 检查是否还是乱码（包含65533）
+            if (csv.charCodeAt(0) === 65533) {
+                console.log('检测到乱码，尝试其他编码...')
+                try {
+                    const arrayBuffer = await file.arrayBuffer()
+                    // 尝试常见的简体中文编码
+                    const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
+                    
+                    for (const encoding of encodings) {
+                        try {
+                            const decoder = new TextDecoder(encoding)
+                            csv = decoder.decode(arrayBuffer)
+                            console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
+                            
+                            // 检查是否包含中文字符（不包含65533）
+                            if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
+                                console.log(`成功用${encoding}编码解码`)
+                                // 解码后再次移除BOM头
+                                if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
+                                    csv = csv.substr(1)
+                                }
+                                break
+                            }
+                        } catch (e) {
+                            console.log(`${encoding}编码解码失败:`, e)
+                        }
+                    }
+                } catch (e) {
+                    console.error('ArrayBuffer读取失败:', e)
+                }
+            }
+            
+            // 移除可能残留的BOM头
+            if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
+                csv = csv.substr(1)
+            }
+            
+            // 按行分割
+            const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
+            console.log('总行数:', lines.length)
+            console.log('第一行原始内容:', lines[0])
+            
+            if (lines.length < 2) {
+                showAlert('表格中无有效数据！', 'warning')
+                document.getElementById('importFile').value = ''
                 return
             }
 
-            showAlert('正在导入数据，请稍候...', 'warning')
+            // 解析表头 - 移除引号和空格
+            let headers = []
+            const firstLine = lines[0].trim()
             
-            const reader = new FileReader()
-            reader.onload = async function(event) {
-                try {
-                    let csv = event.target.result
-                    if (csv.charCodeAt(0) === 0xFEFF) {
-                        csv = csv.substr(1)
-                    }
-                    const lines = csv.split(/\r\n|\n/).filter(line => line.trim() !== '')
-                    
-                    if (lines.length < 2) {
-                        showAlert('表格中无有效数据！', 'warning')
-                        document.getElementById('importFile').value = ''
-                        return
-                    }
+            if (firstLine.includes(',')) {
+                headers = firstLine.split(',').map(h => {
+                    return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
+                })
+            }
+            
+            console.log('解析后的表头:', headers)
+            console.log('表头数量:', headers.length)
 
-                    let headers = []
-                    const firstLine = lines[0].trim()
-                    if (firstLine.includes(',')) {
-                        headers = firstLine.split(',').map(h => h.replace(/^"|"$/g, '').trim())
-                    }
+            // 检查表头是否包含中文字符
+            const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
+            if (!hasChinese) {
+                showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
+                document.getElementById('importFile').value = ''
+                return
+            }
 
-                    const getFieldIndex = (keyword) => headers.findIndex(h => h.includes(keyword))
-                    const talentNameIndex = getFieldIndex('达人名称')
-                    const productSpecIndex = getFieldIndex('商品规格')
-                    const originalSpecIndex = getFieldIndex('原始商品规格')
-                    const productPriceIndex = getFieldIndex('商品价格')
-                    const commissionIndex = getFieldIndex('佣金')
-                    
-                    if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
-                        showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
-                        document.getElementById('importFile').value = ''
-                        return
-                    }
+            // 获取字段索引（使用includes进行模糊匹配）
+            const getFieldIndex = (keyword) => {
+                return headers.findIndex(h => h.includes(keyword))
+            }
 
-                    const { data: allExistingData, error: fetchError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .select('*')
-                        .order('序号', { ascending: false })
-                    
-                    if (fetchError) throw fetchError
+            const talentNameIndex = getFieldIndex('达人名称')
+            const productSpecIndex = getFieldIndex('商品规格')
+            const originalSpecIndex = getFieldIndex('原始商品规格')
+            const productPriceIndex = getFieldIndex('商品价格')
+            const commissionIndex = getFieldIndex('佣金')
+            
+            console.log('字段索引:', {
+                达人名称: talentNameIndex,
+                商品规格: productSpecIndex,
+                原始商品规格: originalSpecIndex,
+                商品价格: productPriceIndex,
+                佣金: commissionIndex
+            })
+            
+            if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
+                showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
+                document.getElementById('importFile').value = ''
+                return
+            }
 
-                    const existingMap = new Map()
-                    let maxSerial = 0
-                    allExistingData.forEach(item => {
-                        const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
-                        existingMap.set(key, item)
-                        if (item.序号 > maxSerial) maxSerial = item.序号
-                    })
+            // 获取现有数据
+            const { data: allExistingData, error: fetchError } = await supabaseClient
+                .from(TABLE_NAME)
+                .select('*')
+                .order('序号', { ascending: false })
+            
+            if (fetchError) throw fetchError
 
-                    const rows = lines.slice(1)
-                    let successCount = 0, updateCount = 0, nextSerial = maxSerial + 1
-                    const currentTime = getCurrentLocalTime()
+            // 创建查重Map
+            const existingMap = new Map()
+            let maxSerial = 0
+            
+            allExistingData.forEach(item => {
+                const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
+                existingMap.set(key, item)
+                if (item.序号 > maxSerial) maxSerial = item.序号
+            })
 
-                    for (let i = 0; i < rows.length; i++) {
-                        const row = rows[i].trim()
-                        if (!row) continue
-                        
-                        const cells = []
-                        let current = '', inQuotes = false
-                        for (let j = 0; j < row.length; j++) {
-                            const char = row[j]
-                            if (char === '"') inQuotes = !inQuotes
-                            else if (char === ',' && !inQuotes) { cells.push(current); current = '' }
-                            else current += char
-                        }
+            // 处理数据行
+            const rows = lines.slice(1)
+            let successCount = 0
+            let updateCount = 0
+            let nextSerial = maxSerial + 1
+            const currentTime = getCurrentLocalTime()
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i].trim()
+                if (!row) continue
+                
+                // 解析行数据（处理引号内的逗号）
+                const cells = []
+                let current = ''
+                let inQuotes = false
+                
+                for (let j = 0; j < row.length; j++) {
+                    const char = row[j]
+                    if (char === '"') {
+                        inQuotes = !inQuotes
+                    } else if (char === ',' && !inQuotes) {
                         cells.push(current)
-                        const cleanCells = cells.map(cell => cell.replace(/^"|"$/g, '').trim())
-
-                        const talentName = cleanCells[talentNameIndex] || ''
-                        const productSpec = cleanCells[productSpecIndex] || ''
-                        const originalSpec = originalSpecIndex >= 0 ? cleanCells[originalSpecIndex] || '' : ''
-                        const productPrice = parseFloat(cleanCells[productPriceIndex]) || 0
-                        const commission = parseFloat(cleanCells[commissionIndex]) || 0
-
-                        if (!talentName || !productSpec || productPrice <= 0) continue
-
-                        const key = `${talentName}|${productSpec}|${productPrice}`
-                        const existingItem = existingMap.get(key)
-
-                        if (existingItem) {
-                            await supabaseClient.from(TABLE_NAME).update({
-                                原始商品规格: originalSpec,
-                                佣金: commission,
-                                录入时间: currentTime
-                            }).eq('id', existingItem.id)
-                            updateCount++
-                        } else {
-                            await supabaseClient.from(TABLE_NAME).insert([{
-                                序号: nextSerial,
-                                达人名称: talentName,
-                                商品规格: productSpec,
-                                原始商品规格: originalSpec,
-                                商品价格: productPrice,
-                                佣金: commission,
-                                录入时间: currentTime
-                            }])
-                            successCount++
-                            existingMap.set(key, { 序号: nextSerial })
-                            nextSerial++
-                        }
+                        current = ''
+                    } else {
+                        current += char
                     }
+                }
+                cells.push(current)
+                
+                // 清理每个字段的引号和空格
+                const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+                
+                // 根据索引获取字段值
+                const talentName = talentNameIndex >= 0 && talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
+                const productSpec = productSpecIndex >= 0 && productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
+                const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
+                const productPrice = parseFloat(productPriceIndex >= 0 && productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
+                const commission = parseFloat(commissionIndex >= 0 && commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
 
-                    await loadDataToTable()
-                    document.getElementById('importFile').value = ''
-                    showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
-                } catch (err) {
-                    console.error('导入错误:', err)
-                    showAlert('导入失败：' + err.message, 'danger')
-                    document.getElementById('importFile').value = ''
+                // 验证必填字段
+                if (!talentName || !productSpec || productPrice <= 0) {
+                    console.log(`第${i+2}行跳过: 字段无效`, { talentName, productSpec, productPrice })
+                    continue
+                }
+
+                const key = `${talentName}|${productSpec}|${productPrice}`
+                const existingItem = existingMap.get(key)
+
+                if (existingItem) {
+                    // 更新现有记录
+                    const { error: updateError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .update({
+                            原始商品规格: originalSpec,
+                            佣金: commission,
+                            录入时间: currentTime
+                        })
+                        .eq('id', existingItem.id)
+                    
+                    if (!updateError) {
+                        updateCount++
+                        console.log(`第${i+2}行更新成功: ${talentName}`)
+                    }
+                } else {
+                    // 插入新记录
+                    const { error: insertError } = await supabaseClient
+                        .from(TABLE_NAME)
+                        .insert([{
+                            序号: nextSerial,
+                            达人名称: talentName,
+                            商品规格: productSpec,
+                            原始商品规格: originalSpec,
+                            商品价格: productPrice,
+                            佣金: commission,
+                            录入时间: currentTime
+                        }])
+                    
+                    if (!insertError) {
+                        successCount++
+                        existingMap.set(key, { 序号: nextSerial })
+                        nextSerial++
+                        console.log(`第${i+2}行插入成功: ${talentName}, 序号: ${nextSerial-1}`)
+                    }
                 }
             }
-            reader.readAsText(file, 'UTF-8')
+
+            await loadDataToTable()
+            document.getElementById('importFile').value = ''
+            
+            if (successCount > 0 || updateCount > 0) {
+                showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
+            } else {
+                showAlert('没有新数据被导入！', 'warning')
+            }
+            
+        } catch (err) {
+            console.error('导入错误:', err)
+            showAlert('导入失败：' + err.message, 'danger')
+            document.getElementById('importFile').value = ''
         }
+    }
+    
+    // 先尝试用UTF-8编码读取
+    reader.readAsText(file, 'UTF-8')
+ }
 
         // ========== 辅助函数 ==========
         function handleEnterKey(event) {
