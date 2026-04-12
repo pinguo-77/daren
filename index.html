@@ -40,10 +40,9 @@
             letter-spacing: 1px;
             font-size: 28px;
         }
-       /* 新增：佣金管理界面的标题左对齐 */
-      .table-container h2 {
+        .table-container h2 {
             text-align: left;
-	}
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -100,15 +99,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(130, 186, 158, 0.2);
         }
-        .btn-clear {
-            background-color: #ffb3ba;
-            color: #883e4a;
-        }
-        .btn-clear:hover {
-            background-color: #ff9aa2;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(255, 179, 186, 0.2);
-        }
         .btn-search {
             background-color: #8ecae6;
             color: white;
@@ -131,6 +121,36 @@
             background-color: #ffbaaf;
             color: #9e4333;
         }
+        /* 批量修改按钮样式 */
+	.btn-batch-cost {
+ 	   background-color: #82ba9e;
+  	  color: white;
+  	 padding: 8px 16px;
+   	 border: none;
+   	 border-radius: 6px;
+   	 cursor: pointer;
+   	 font-size: 13px;
+   	 transition: all 0.3s;
+	}
+	.btn-batch-cost:hover {
+  	  background-color: #6da88b;
+  	  transform: translateY(-1px);
+	}
+
+	.btn-batch-name {
+ 	 background-color: #c7b8e8;
+   	 color: #4a3a6e;
+    	padding: 8px 16px;
+   	 border: none;
+   	 border-radius: 6px;
+   	 cursor: pointer;
+   	 font-size: 13px;
+    	transition: all 0.3s;
+	}
+	.btn-batch-name:hover {
+   	 background-color: #b5a2e0;
+   	 transform: translateY(-1px);
+	}
         .btn-delete-selected:hover {
             background-color: #ff9f91;
             transform: translateY(-2px);
@@ -154,21 +174,19 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(181, 185, 208, 0.2);
         }
-        .btn-calculate {
-            background-color: #4CAF50;
+        .btn-export-pool {
+            background-color: #82ba9e;
             color: white;
-            padding: 12px 30px;
-            font-size: 16px;
+            padding: 6px 16px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
+            font-size: 13px;
+            transition: all 0.3s;
         }
-        .btn-calculate:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+        .btn-export-pool:hover {
+            background-color: #6da88b;
+            transform: translateY(-1px);
         }
         .import-file {
             padding: 8px;
@@ -290,7 +308,6 @@
             margin-top: 20px;
             padding: 15px 0;
         }
-        
         .pagination {
             display: flex;
             justify-content: center;
@@ -298,7 +315,6 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-        
         .pagination button {
             padding: 8px 16px;
             border: 1px solid #e0d4f0;
@@ -309,27 +325,23 @@
             transition: all 0.3s;
             font-size: 14px;
         }
-        
         .pagination button:hover:not(:disabled) {
             background-color: #9f7aea;
             color: white;
             border-color: #9f7aea;
             transform: translateY(-1px);
         }
-        
         .pagination button:disabled {
             background-color: #f5f5f5;
             color: #ccc;
             cursor: not-allowed;
             border-color: #ddd;
         }
-        
         .pagination .page-info {
             font-size: 14px;
             color: #666;
             margin: 0 10px;
         }
-        
         .pagination .page-input {
             width: 60px;
             padding: 6px;
@@ -338,13 +350,11 @@
             border-radius: 4px;
             font-size: 14px;
         }
-        
         .items-per-page {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        
         .items-per-page select {
             padding: 6px;
             border: 1px solid #e0d4f0;
@@ -354,7 +364,6 @@
             cursor: pointer;
             font-size: 14px;
         }
-        
         .items-per-page span {
             font-size: 14px;
             color: #666;
@@ -393,265 +402,318 @@
             display: block;
         }
         
-        /* ===== 测算界面样式 ===== */
-        .calculate-container {
-            background: white;
-            padding: 30px;
+        /* ===== 新品添加区域样式 ===== */
+        .new-product-section {
+            background: #f8f9fa;
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 3px 15px rgba(200, 180, 220, 0.1);
-            margin-top: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #e0d4f0;
         }
-        .calculate-form {
-            max-width: 600px;
-            margin: 0 auto;
+        .new-product-section h3 {
+            color: #722ed1;
+            margin-bottom: 20px;
         }
-        .range-selector {
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-calc {
+            background-color: #9f7aea;
+            color: white;
+        }
+        .btn-calc:hover {
+            background-color: #8762d6;
+        }
+        .btn-add-db {
+            background-color: #82ba9e;
+            color: white;
+        }
+        .btn-add-db:hover {
+            background-color: #6da88b;
+        }
+        .btn-add-talent {
+            background-color: #ffb347;
+            color: white;
+        }
+        .btn-add-talent:hover {
+            background-color: #ffa01e;
+        }
+        
+        /* 档位选择器样式 */
+        .range-selector-group {
+            margin-bottom: 20px;
+        }
+        .range-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .range-btn {
+            padding: 8px 20px;
+            border: 1px solid #e0d4f0;
+            background-color: white;
+            color: #6b5ca5;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        .range-btn:hover {
+            background-color: #f0e9f5;
+        }
+        .range-btn.active {
+            background-color: #9f7aea;
+            color: white;
+            border-color: #9f7aea;
+        }
+        .custom-range-panel {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .custom-range-inputs {
             display: flex;
             gap: 15px;
             align-items: center;
             flex-wrap: wrap;
         }
-        .range-selector input {
+        .custom-range-inputs input {
             width: 100px;
+            padding: 8px;
         }
-        .range-selector span {
-            color: #666;
-            font-weight: 500;
+        .btn-confirm {
+            background-color: #82ba9e;
+            color: white;
+            padding: 6px 16px;
         }
         
-        /* 测算结果框 - 简洁双列布局 */
-        .result-simple {
-            max-width: 600px;
-            margin: 30px auto 0;
-            padding: 20px 25px;
-            background-color: #f8f9fa;
-            border-radius: 12px;
-            border: 1px solid #e0d4f0;
+        /* 档位筛选器样式 */
+        .filter-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1px solid #e0d4f0;
+            background-color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .filter-btn.active {
+            background-color: #9f7aea;
+            color: white;
+            border-color: #9f7aea;
         }
         
-        .product-info {
-            font-size: 18px;
-            font-weight: 500;
-            color: #333;
+        /* 测算结果区域 */
+        .calc-result-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0d4f0;
+            display: none;
         }
-        
-        .commission-result {
-            font-size: 28px;
-            font-weight: 700;
+        .calc-result-area h4 {
             color: #722ed1;
+            margin-bottom: 15px;
         }
-        
-        /* ===== 成本构成网格布局（4x2） ===== */
-        .cost-grid-8 {
+        .result-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin: 15px 0;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e0d4f0;
+            margin-bottom: 15px;
         }
-        
-        .cost-item {
+        .result-item {
             display: flex;
             flex-direction: column;
-            gap: 5px;
         }
-        
-        .cost-label {
-            font-size: 13px;
+        .result-item .label {
+            font-size: 12px;
             color: #999;
-            font-weight: normal;
         }
-        
-        .cost-value {
-            font-size: 16px;
-            font-weight: 500;
-            color: #666;
-        }
-        
-        .cost-value strong {
-            color: #722ed1;
+        .result-item .value {
+            font-size: 18px;
             font-weight: 600;
+            color: #333;
         }
-        
-        /* ===== 修改货款按钮样式 ===== */
-        .btn-edit-cost {
-            background-color: #ffb347;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        .btn-edit-cost:hover {
-            background-color: #ffa01e;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(255, 179, 71, 0.2);
-        }
-        
-        /* ===== 当前利润率显示 ===== */
-        .current-profit {
+        .result-item .value.highlight {
             color: #722ed1;
+        }
+
+        /* 浅色文字样式 */
+        .value-light {
+            font-size: 18px;
             font-weight: 500;
+            color: #aaa;
         }
         
-        /* ===== 模态框样式 ===== */
-        .modal-overlay {
-            display: none;
+        /* 数据池表格样式 */
+        .data-pool-section {
+            margin-top: 30px;
+            border-top: 2px solid #f0e9f5;
+            padding-top: 20px;
+        }
+        .data-pool-section h3 {
+            color: #722ed1;
+            margin-bottom: 15px;
+        }
+        .data-pool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        .search-bar .form-group {
+            margin-bottom: 0;
+            flex: 1;
+            min-width: 150px;
+        }
+        .search-bar input, .search-bar select {
+            width: 100%;
+            padding: 8px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        #dataPoolTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #dataPoolTable th,
+        #dataPoolTable td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0e9f5;
+        }
+        #dataPoolTable th {
+            background-color: #f5f0fa;
+            font-weight: 500;
+            color: #6b5ca5;
+        }
+        #dataPoolTable tr:hover {
+            background-color: #fcf8ff;
+        }
+        .edit-btn, .delete-btn {
+            padding: 4px 10px;
+            font-size: 12px;
+            margin: 0 3px;
+            border-radius: 4px;
+        }
+        .edit-btn {
+            background-color: #8ecae6;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #ffbaaf;
+            color: #9e4333;
+        }
+        .inline-edit {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #b899f0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        /* 负数数据提示模态框 */
+        .negative-data-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
-            z-index: 1000;
+            z-index: 1001;
+            display: none;
             justify-content: center;
             align-items: center;
         }
-        .modal-content {
+        .negative-data-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .negative-data-content h3 {
+            color: #e53e3e;
+            margin-bottom: 15px;
+        }
+        .negative-data-content pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        
+        /* 添加达人佣金模态框 */
+        .talent-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1002;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .talent-modal-content {
             background: white;
             padding: 30px;
             border-radius: 12px;
             max-width: 400px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        
-        /* ===== 目标利润率范围右侧显示样式 ===== */
-        .profit-display {
-            margin-left: 15px;
+        .talent-modal-content h3 {
             color: #722ed1;
-            font-weight: 500;
+            margin-bottom: 20px;
         }
         
-        /* ===== 按钮组布局 ===== */
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* 测算佣金比例按钮 - 马卡龙紫色 (与系统主色调一致) */
-.button-group .btn-calculate {
-    flex: 2;
-    background-color: #9f7aea;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-}
-.button-group .btn-calculate:hover {
-    background-color: #8762d6;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(159, 122, 234, 0.2);
-}
-
-/* 修改货款按钮 - 马卡龙薄荷绿 */
-.button-group .btn-edit-cost {
-    flex: 1;
-    background-color: #a1ddc9;
-    color: #2c5a4a;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-}
-.button-group .btn-edit-cost:hover {
-    background-color: #8ecab6;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(161, 221, 201, 0.3);
-}
-
-/* 重置按钮 - 马卡龙浅灰 */
-.button-group .btn-reset {
-    flex: 1;
-    background-color: #e9e9e9;
-    color: #666666;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-}
-.button-group .btn-reset:hover {
-    background-color: #d9d9d9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 添加数据按钮 - 浅紫色 */
-.button-group .btn-add-data {
-    flex: 1;
-    background-color: #c7b8e8;
-    color: #4a3a6e;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-}
-.button-group .btn-add-data:hover {
-    background-color: #b5a2e0;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(199, 184, 232, 0.3);
-}
-
-/* 添加数据模态框 */
-.add-data-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-.add-data-modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-.add-data-modal-content h3 {
-    color: #722ed1;
-    margin-bottom: 20px;
-}
-.add-data-modal-content .form-group {
-    margin-bottom: 20px;
-}
-.add-data-modal-content button {
-    margin-top: 10px;
-}
+        /* datalist 输入框样式 */
+        input[list] {
+            background-color: #fcfbff;
+        }
     </style>
-    <!-- 引入 Supabase -->
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- 标签页切换 -->
     <div class="tab-container">
         <button class="tab-btn active" onclick="switchTab('manage')">佣金管理</button>
         <button class="tab-btn" onclick="switchTab('calculate')">佣金测算</button>
@@ -667,31 +729,26 @@
                 <label for="talentName">达人名称 <span class="required">*</span></label>
                 <input type="text" id="talentName" placeholder="请输入达人名称，如：二姐">
             </div>
-            
             <div class="form-group">
-                <label for="productSpec">商品规格（当前售卖规格） <span class="required">*</span></label>
-                <input type="text" id="productSpec" placeholder="请输入商品规格，如：孢子粉250g*2瓶">
+                <label for="productSpec">商品规格（当前售卖规格）<span class="required">*</span></label>
+                <input type="text" id="productSpec" placeholder="请输入商品规格，如：灵芝孢子粉500g">
             </div>
-
             <div class="form-group">
                 <label for="originalSpec">初始商品规格（选填）</label>
                 <input type="text" id="originalSpec" placeholder="选填，如：当前售卖的是缅缅小胎胎10粒，该项可以填入九转菩提10粒">
             </div>
-            
             <div class="form-group">
                 <label for="productPrice">商品价格 <span class="required">*</span></label>
-                <input type="number" id="productPrice" step="0.01" placeholder="请输入商品价格，如：128">
+                <input type="number" id="productPrice" step="0.01" placeholder="请输入商品价格，如：198">
             </div>
-            
             <div class="form-group">
-                <label for="commission">佣金比例<span class="required">*</span></label>
-                <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.74">
+                <label for="commission">佣金比例 <span class="required">*</span></label>
+                <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.79">
             </div>
             
             <div class="btn-group">
                 <button class="btn-submit" onclick="submitData()">提交数据</button>
                 <button class="btn-export" onclick="exportData()">导出最新数据</button>
-                <!--button class="btn-clear" onclick="clearAllData()">清空所有数据</button-->
                 <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
                 <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
                 <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
@@ -701,7 +758,6 @@
 
         <div class="table-container">
             <h2>所有数据记录 <span id="syncTime" class="sync-time"></span></h2>
-            
             <div class="search-container">
                 <div class="search-item">
                     <label for="searchTalent">查找达人名称</label>
@@ -717,7 +773,6 @@
                     <button class="btn-delete-selected" onclick="deleteSelectedRows()">删除选中记录</button>
                 </div>
             </div>
-            
             <table id="dataTable">
                 <thead>
                     <tr>
@@ -728,14 +783,12 @@
                         <th>初始商品规格</th>
                         <th>商品价格</th>
                         <th>佣金</th>
+                        <th>线上百分比</th>
                         <th>录入时间</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
-                </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
-            
-            <!-- 分页控件 -->
             <div class="pagination-container">
                 <div class="items-per-page">
                     <span>每页显示：</span>
@@ -746,23 +799,14 @@
                         <option value="100">100 条</option>
                     </select>
                 </div>
-                
                 <div class="pagination">
                     <button onclick="goToPage(1)" id="firstPage" disabled>首页</button>
                     <button onclick="goToPage(currentPage - 1)" id="prevPage" disabled>上一页</button>
-                    
-                    <span class="page-info">
-                        第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 
-                        共 <span id="totalPages">1</span> 页
-                    </span>
-                    
+                    <span class="page-info">第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 共 <span id="totalPages">1</span> 页</span>
                     <button onclick="goToPage(currentPage + 1)" id="nextPage">下一页</button>
                     <button onclick="goToPage(totalPages)" id="lastPage">末页</button>
                 </div>
-                
-                <div class="items-per-page">
-                    <span>总记录数：<span id="totalRecords">0</span> 条</span>
-                </div>
+                <div class="items-per-page"><span>总记录数：<span id="totalRecords">0</span> 条</span></div>
             </div>
         </div>
     </div>
@@ -770,137 +814,238 @@
     <!-- ===== 佣金测算界面 ===== -->
     <div id="calculateTab" class="tab-content">
         <div class="calculate-container">
-            <h2>佣金测算工具</h2>
+            <!-- 可测算与添加新品区域 -->
+            <div class="new-product-section">
+                <h3>可测算与添加新品</h3>
+                
+                <!-- 档位选择器 -->
+	<div class="range-selector-group">
+   	 <label>线上百分比 <span class="required">*</span></label>
+    	<div class="range-buttons">
+       	 <button type="button" class="range-btn active" data-min="0.068" data-max="0.08" onclick="selectProfitRange('档位一', 0.068, 0.08, this)">档位一：6.8% - 8%</button>
+        	<button type="button" class="range-btn" data-min="0.088" data-max="0.10" onclick="selectProfitRange('档位二', 0.088, 0.10, this)">档位二：8.8% - 10%</button>
+        	<button type="button" class="range-btn" onclick="showCustomRangeDialog(this)">自定义</button>
+   	 </div>
+
+                    <div id="customRangePanel" class="custom-range-panel">
+                        <div class="custom-range-inputs">
+                            <div>
+                                <label style="font-size: 12px;">最小值 (%)</label>
+                                <input type="number" id="customMinProfit" step="0.1" placeholder="6.8">
+                            </div>
+                            <div>
+                                <label style="font-size: 12px;">最大值 (%)</label>
+                                <input type="number" id="customMaxProfit" step="0.1" placeholder="8.0">
+                            </div>
+                            <button class="btn-confirm" onclick="confirmCustomRange()">确认</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>单价（元）<span class="required">*</span></label>
+                        <input type="number" id="newPrice" step="0.01" placeholder="请输入单价">
+                    </div>
+                    <div class="form-group">
+                        <label>最终品名 <span class="required">*</span></label>
+                        <input type="text" id="newFinalName" placeholder="请输入最终品名">
+                    </div>
+                    <div class="form-group">
+                        <label>规格 <span class="required">*</span></label>
+                        <input type="text" id="newSpec" placeholder="请输入规格，如：250g">
+                    </div>
+                    <div class="form-group">
+                        <label>货款（元） <span class="required"> </span></label>
+                        <input type="number" id="newCost" step="0.01" placeholder="请输入货款">
+                    </div>
+                </div>
+                <div class="button-row" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                    <button class="btn-calc" onclick="checkAndCalculateNewProduct()" style="flex: 1;">🔍 测算</button>
+                    <button class="btn-add-db" id="btnAddToDatabase" onclick="addToDatabase()" disabled style="flex: 1;">📥 添加到数据库</button>
+                    <button class="btn-add-talent" id="btnAddToCommission" onclick="openTalentModal()" style="flex: 1;">👤 添加达人佣金</button>
+                    <button class="btn-sync" onclick="syncCalcData()" style="flex: 1; background-color: #b5b9d0; color: #4a4e69;">🔄 同步数据</button>
+                </div>
+                <div id="calcResultArea" class="calc-result-area">
+                    <h4>📊 测算结果</h4>
+                    
+                    <!-- 第一行 -->
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="label">佣金比例</span>
+                            <span class="value highlight" id="calcResultCommission">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">线上百分比</span>
+                            <span class="value" id="calcResultOnlinePercent">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">线上利润额</span>
+                            <span class="value-light" id="calcResultOnlineProfit">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">尾款利润额</span>
+                            <span class="value-light" id="calcResultFinalProfit">-</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; margin: 10px 0;"></div>
+
+                    <!-- 第二行 -->
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="label">货款</span>
+                            <span class="value" id="calcResultCost">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">运费险</span>
+                            <span class="value-light" id="calcResultInsurance">1.50元</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">抖店手续费</span>
+                            <span class="value-light" id="calcResultPlatformFee">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">退货费用</span>
+                            <span class="value-light" id="calcResultReturnFee">0.53元</span>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; margin: 10px 0;"></div>
+
+                    <!-- 第三行：总成本 + 成本比 -->
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="label">总成本</span>
+                            <span class="value-light" id="calcResultTotalCost">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">成本比</span>
+                            <span class="value-light" id="calcResultCostRatio">-</span>
+                        </div>
+                        <div class="result-item"></div>
+                        <div class="result-item"></div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="calculate-form">
-                <!-- 输入表单 -->
-                <div class="form-group">
-                    <label>品名 <span class="required">*</span></label>
-                    <input type="text" id="calcProductName" placeholder="如：鹿茸片" list="productNameList" autocomplete="off">
-                    <datalist id="productNameList"></datalist>
+            <!-- 佣金测算表 -->
+            <div class="data-pool-section">
+                <div class="data-pool-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <h3 style="margin: 0;">佣金测算表</h3>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span id="calcSyncTime" class="sync-time" style="color: #888; font-size: 14px;"></span>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label>规格 <span class="required">*</span></label>
-                    <input type="text" id="calcSpec" placeholder="请选择规格，如：250g" list="specList" autocomplete="off">
-                    <datalist id="specList"></datalist>
+                
+                <!-- 档位筛选器 + 导出按钮 -->
+                <div class="filter-bar">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-range="all" onclick="filterByRange('all')">全部档位</button>
+                        <button class="filter-btn" data-range="档位一" onclick="filterByRange('档位一')">档位一 (6.8%-8%)</button>
+                        <button class="filter-btn" data-range="档位二" onclick="filterByRange('档位二')">档位二 (8.8%-10%)</button>
+                        <button class="filter-btn" data-range="自定义" onclick="filterByRange('自定义')">自定义</button>
+                    </div>
+                    <button class="btn-export-pool" onclick="exportPoolData()">导出表格</button>
                 </div>
-
-                <div class="form-group">
-                    <label>单价（元） <span class="required">*</span></label>
-                    <input type="number" id="calcPrice" step="0.01" placeholder="请输入单价" oninput="autoCalculate()">
+                
+                <!-- 搜索栏 - 品名输入框 + 规格可输入可下拉 + 单价可输入可下拉 -->
+                <div class="search-bar" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: flex-end;">
+                    <div class="form-group" style="flex: 2; min-width: 180px;">
+                        <label style="font-size: 12px; margin-bottom: 4px;">品名</label>
+                        <input type="text" id="poolSearch" placeholder="输入品名关键词" style="padding: 8px;">
+                    </div>
+                    <div class="form-group" style="flex: 1.5; min-width: 150px;">
+                        <label style="font-size: 12px; margin-bottom: 4px;">规格</label>
+                        <input type="text" id="poolSearchSpec" list="specOptionsList" placeholder="选择或输入规格" style="padding: 8px;" autocomplete="off">
+                        <datalist id="specOptionsList"></datalist>
+                    </div>
+                    <div class="form-group" style="flex: 1.5; min-width: 150px;">
+                        <label style="font-size: 12px; margin-bottom: 4px;">单价(元)</label>
+                        <input type="text" id="poolSearchPrice" list="priceOptionsList" placeholder="选择或输入单价" style="padding: 8px;" autocomplete="off">
+                        <datalist id="priceOptionsList"></datalist>
+                    </div>
+                    <button class="btn-search" onclick="searchDataPool()" style="padding: 8px 16px;">搜索</button>
+                    <button class="btn-reset-search" onclick="resetDataPoolSearch()" style="padding: 8px 16px;">重置</button>
+                    <button class="btn-delete-selected" onclick="deleteSelectedPoolRows()" style="padding: 8px 16px;">删除选中</button>
+	    <button class="btn-batch-cost" id="batchModifyCostBtn" onclick="openBatchCostModal()" style="display: none; padding: 8px 16px; background-color: #82ba9e; color: white; border-radius: 6px;">批量修改货款</button>
+  	    <button class="btn-batch-name" id="batchModifyNameBtn" onclick="openBatchNameModal()" style="display: none; padding: 8px 16px; background-color: #c7b8e8; color: #4a3a6e; border-radius: 6px;">批量修改品名</button>
                 </div>
-
-                <!-- 目标利润率范围选择 -->
-                <div class="form-group">
-                    <label>目标线上利润率范围</label>
-                    <div class="range-selector">
-                        <input type="number" id="minProfit" step="0.1" value="9" min="0" max="100"> %
-                        <span>至</span>
-                        <input type="number" id="maxProfit" step="0.1" value="10" min="0" max="100"> %
-                        <span class="profit-display">当前: <span id="currentProfitDisplay">-</span></span>
-                    </div>
-                    <small style="color: #666;">线上利润率 = (1 - 成本比 - 佣金比例) × 单价 ÷ 单价</small>
+                <div class="table-wrapper">
+                    <table id="dataPoolTable">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-cell"><input type="checkbox" id="selectAllPool" class="select-all-checkbox" onclick="toggleSelectAllPool()"></th>
+                                <th>佣金比例</th>
+                                <th>单价</th>
+                                <th>最终品名</th>
+                                <th>规格</th>
+                                <th>货款</th>
+                                <th>线上百分比</th>
+                                <th>档位</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataPoolBody"><tr><td colspan="9" style="text-align:center;">加载中...<\/td><\/tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <!-- 按钮组：测算按钮、修改货款按钮、重置按钮、添加数据按钮 -->
-                <div class="button-group">
-                    <button class="btn-calculate" onclick="calculateCommission()">🔍 测算佣金比例</button>
-                    <button class="btn-edit-cost" onclick="openEditCostModal()">修改货款</button>
-                    <button class="btn-reset" onclick="resetCalculateForm()">重置</button>
-                    <button class="btn-add-data" onclick="openAddDataModal()">添加数据</button>
-                </div>
-            </div>
-
-            <!-- 测算结果 - 简洁双列布局（显示在按钮下方） -->
-            <div id="calcResult" class="result-simple" style="display: none;">
-                <span class="product-info" id="resultProduct">-</span>
-                <span class="commission-result" id="resultCommission">-</span>
-            </div>
-
-            <!-- 成本构成展示（4x2网格，包含线上利润信息，显示在测算结果下方） -->
-            <div id="costBreakdown" style="display: none; margin-top: 20px;">
-                <h4 style="color: #6b5ca5; margin: 20px 0 10px;">💰 成本构成</h4>
-                <div class="cost-grid-8">
-                    <div class="cost-item">
-                        <span class="cost-label">货款</span>
-                        <span class="cost-value" id="displayCost">0.00</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">运费险</span>
-                        <span class="cost-value" id="displayInsurance">1.50</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">抖店手续费</span>
-                        <span class="cost-value" id="displayPlatformFee">0.00</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">退货费用</span>
-                        <span class="cost-value" id="displayReturnFee">0.53</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">线上利润率</span>
-                        <span class="cost-value" id="displayOnlineProfitRatio">-</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">线上利润额</span>
-                        <span class="cost-value" id="displayOnlineProfitAmount">-</span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">总成本</span>
-                        <span class="cost-value"><strong id="displayTotalCost">0.00</strong></span>
-                    </div>
-                    <div class="cost-item">
-                        <span class="cost-label">成本比</span>
-                        <span class="cost-value"><strong id="displayCostRatio">0.00</strong>%</span>
-                    </div>
+                <div class="pagination" id="poolPagination">
+                    <button onclick="goToPoolPage(1)" id="poolFirstPage" disabled>首页</button>
+                    <button onclick="goToPoolPage(currentPoolPage - 1)" id="poolPrevPage" disabled>上一页</button>
+                    <span>第 <span id="poolCurrentPage">1</span> / <span id="poolTotalPages">1</span> 页</span>
+                    <button onclick="goToPoolPage(currentPoolPage + 1)" id="poolNextPage">下一页</button>
+                    <button onclick="goToPoolPage(poolTotalPages)" id="poolLastPage">末页</button>
+                    <span style="margin-left: 15px; color: #666;">总记录数：<span id="poolTotalRecords">0</span> 条</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 添加数据模态框 -->
-    <div id="addDataModal" class="add-data-modal">
-        <div class="add-data-modal-content">
-            <h3>📝 添加数据到佣金管理</h3>
+    <!-- 添加达人佣金模态框 -->
+    <div id="talentModal" class="talent-modal">
+        <div class="talent-modal-content">
+            <h3>👤 添加达人佣金</h3>
             <div class="form-group">
                 <label>达人名称 <span class="required">*</span></label>
-                <input type="text" id="addTalentName" placeholder="请输入达人名称">
+                <input type="text" id="talentNameInput" placeholder="请输入达人名称">
             </div>
-            <div class="form-group">
-                <label>当前测算数据</label>
-                <div id="currentCalcData" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-top: 5px;">
-                    品名：-<br>
-                    规格：-<br>
-                    单价：-<br>
-                    佣金比例：-<br>
-                    货款：-
-                </div>
+            <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                请先勾选佣金测算表中的产品
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeAddDataModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px; cursor: pointer;">取消</button>
-                <button onclick="confirmAddToManagement()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px; cursor: pointer;">确认添加</button>
+                <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
             </div>
+        </div>
+    </div>
+
+    <!-- 负数数据提示模态框 -->
+    <div id="negativeDataModal" class="negative-data-modal">
+        <div class="negative-data-content">
+            <h3>⚠️ 警告：存在负数数据</h3>
+            <p>以下数据为负数，请检查！</p>
+            <pre id="negativeDataContent"></pre>
+            <button onclick="closeNegativeModal()" style="margin-top: 15px; padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认</button>
         </div>
     </div>
 
     <!-- 修改货款模态框 -->
     <div id="editCostModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
-        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%;">
             <h3 style="color: #722ed1; margin-bottom: 20px;">修改货款</h3>
             <div style="margin-bottom: 20px;">
                 <p style="color: #666; margin-bottom: 10px;">当前产品: <span id="currentProductForEdit">-</span></p>
                 <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #6b5ca5;">新货款金额 (元)</label>
-                <input type="number" id="newCostValue" step="0.01" style="width: 100%; padding: 12px; border: 1px solid #e0d4f0; border-radius: 8px; font-size: 16px;">
+                <input type="number" id="newCostValue" step="0.01" style="width: 100%; padding: 12px; border: 1px solid #e0d4f0; border-radius: 8px;">
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeEditCostModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px; cursor: pointer;">取消</button>
-                <button onclick="saveNewCost()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px; cursor: pointer;">保存</button>
+                <button onclick="closeEditCostModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                <button onclick="saveNewCost()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">保存</button>
             </div>
         </div>
     </div>
 
-    <!-- 底部文字 -->
     <div class="footer">
         <div>微信小程序待开发，敬请期待🤪</div>
         <div>系统有待完善，多多包涵。。。</div>
@@ -910,598 +1055,37 @@
         // ========== Supabase 配置 ==========
         const SUPABASE_URL = 'https://pnvyinskupjqoddeqltf.supabase.co'
         const SUPABASE_KEY = 'sb_publishable_SoyJYHhMCi3RHO4QcIUqrw_-Xmd1FWx'
-        
-        // 表名
         const TABLE_NAME = '达人佣金表'
+        const CALC_TABLE_NAME = '佣金测算表'
         
-        // 初始化 Supabase 客户端
         const { createClient } = supabase
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY)
 
         // 数据存储
         let originalDataList = []
         let lastSyncTime = null
-
-        // ========== 分页配置 ==========
-        let currentPage = 1
-        let pageSize = 20
-        let totalPages = 1
-        let allDataForPagination = []
-
-        // ========== 产品数据库（从你的表格提取，包含价格，单位统一为g） ==========
-        const productDatabase = [
-            // 藏雪参系列
-            { name: '藏雪参', spec: '250g', price: 68, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 99, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 128, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 158, cost: 10.4 },
-            { name: '藏雪参', spec: '250g', price: 198, cost: 10.4 },
-            { name: '藏雪参', spec: '500g', price: 68, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 99, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 128, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 158, cost: 16.8 },
-            { name: '藏雪参', spec: '500g', price: 198, cost: 16.8 },
-            
-            // 谛王根/龙须石斛/菩提搽/金龙须/雪金灵
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 98, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 148, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 158, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '250g', price: 198, cost: 8.5 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 98, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 128, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 158, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 198, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 280, cost: 12 },
-            { name: '谛王根/龙须石斛/菩提搽/金龙须/雪金灵', spec: '500g', price: 298, cost: 12 },
-            
-            // 黑灵果/青皮子/小胎柑
-            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 198, cost: 7 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '250g', price: 99, cost: 7 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 99, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 128, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 158, cost: 9 },
-            { name: '黑灵果/青皮子/小胎柑', spec: '500g', price: 198, cost: 9 },
-            
-            // 帝王花/红花果
-            { name: '帝王花/红花果', spec: '250g', price: 98, cost: 8 },
-            { name: '帝王花/红花果', spec: '250g', price: 128, cost: 8 },
-            { name: '帝王花/红花果', spec: '500g', price: 158, cost: 12 },
-            { name: '帝王花/红花果', spec: '500g', price: 288, cost: 12 },
-            { name: '帝王花/红花果', spec: '500g', price: 88, cost: 12 },
-            
-            // 灵芝孢子粉
-            { name: '灵芝孢子粉', spec: '250g', price: 29.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 39.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 59.9, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 80, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 98, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 128, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 158, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '250g', price: 198, cost: 18.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 80, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 168, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 178, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 198, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 238, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 288, cost: 33.5 },
-            { name: '灵芝孢子粉', spec: '500g', price: 368, cost: 33.5 },
-            
-            // 龙血果/天灵果/红山参/藏灵果
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 99, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 128, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 69, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '250g', price: 138, cost: 6.3 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 128, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 99, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 58, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 88, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 158, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 198, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 69, cost: 9.4 },
-            { name: '龙血果/天灵果/红山参/藏灵果', spec: '500g', price: 138, cost: 9.4 },
-            
-            // 烤干洛神花
-            { name: '烤干洛神花', spec: '250g', price: 99, cost: 8.5 },
-            { name: '烤干洛神花', spec: '250g', price: 198, cost: 8.5 },
-            { name: '烤干洛神花', spec: '500g', price: 98, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 128, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 158, cost: 12.8 },
-            { name: '烤干洛神花', spec: '500g', price: 198, cost: 12.8 },
-            
-            // 冻干洛神花
-            { name: '冻干洛神花', spec: '50g', price: 30, cost: 8.5 },
-            
-            // 缅王花
-            { name: '缅王花', spec: '250g', price: 98, cost: 15 },
-            { name: '缅王花', spec: '500g', price: 128, cost: 25 },
-            { name: '缅王花', spec: '500g', price: 158, cost: 25 },
-            
-            // 农家天麻
-            { name: '农家天麻', spec: '250g', price: 118, cost: 35.5 },
-            { name: '农家天麻', spec: '250g', price: 138, cost: 35.5 },
-            { name: '农家天麻', spec: '500g', price: 168, cost: 68.5 },
-            { name: '农家天麻', spec: '500g', price: 198, cost: 68.5 },
-            
-            // 清留果
-            { name: '清留果', spec: '250g', price: 99, cost: 6 },
-            { name: '清留果', spec: '500g', price: 48, cost: 8 },
-            { name: '清留果', spec: '500g', price: 98, cost: 8 },
-            { name: '清留果', spec: '500g', price: 99, cost: 8 },
-            { name: '清留果', spec: '500g', price: 128, cost: 8 },
-            { name: '清留果', spec: '500g', price: 158, cost: 8 },
-            { name: '清留果', spec: '500g', price: 168, cost: 8 },
-            { name: '清留果', spec: '500g', price: 198, cost: 8 },
-            { name: '清留果', spec: '500g', price: 199, cost: 8 },
-            { name: '清留果', spec: '1000g', price: 298, cost: 16 },
-            { name: '清留果', spec: '1000g', price: 368, cost: 16 },
-            { name: '清留果', spec: '1000g', price: 358, cost: 16 },
-            
-            // 桑黄
-            { name: '桑黄', spec: '250g', price: 98, cost: 11 },
-            { name: '桑黄', spec: '250g', price: 198, cost: 11 },
-            { name: '桑黄', spec: '500g', price: 158, cost: 17.7 },
-            { name: '桑黄', spec: '500g', price: 198, cost: 17.7 },
-            
-            // 山药干/玉雪山灵片
-            { name: '山药干/玉雪山灵片', spec: '250g', price: 128, cost: 8.7 },
-            { name: '山药干/玉雪山灵片', spec: '500g', price: 198, cost: 12.8 },
-            
-            // 神牛根/龙凤根
-            { name: '神牛根/龙凤根', spec: '250g', price: 68, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 88, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 99, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '250g', price: 128, cost: 9.5 },
-            { name: '神牛根/龙凤根', spec: '300g', price: 99, cost: 10.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 68, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 88, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 99, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 128, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 158, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 168, cost: 14.2 },
-            { name: '神牛根/龙凤根', spec: '500g', price: 198, cost: 14.2 },
-            
-            // 血三七/金不换
-            { name: '血三七/金不换', spec: '500g', price: 99, cost: 18 },
-            { name: '血三七/金不换', spec: '500g', price: 158, cost: 18 },
-            
-            // 血塞通/天灵片/红藤
-            { name: '血塞通/天灵片/红藤', spec: '250g', price: 88, cost: 6 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 99, cost: 8 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 128, cost: 8 },
-            { name: '血塞通/天灵片/红藤', spec: '500g', price: 158, cost: 8 },
-            
-            // 软红雪茶
-            { name: '软红雪茶', spec: '100g', price: 29, cost: 11.5 },
-            
-            // 硬红雪茶
-            { name: '硬红雪茶', spec: '100g', price: 29, cost: 7.7 },
-            
-            // 地参/虫草参
-            { name: '地参/虫草参', spec: '250g', price: 99, cost: 10.4 },
-            { name: '地参/虫草参', spec: '500g', price: 99, cost: 16.3 },
-            { name: '地参/虫草参', spec: '500g', price: 158, cost: 16.3 },
-            
-            // 玉精灵
-            { name: '玉精灵', spec: '250g', price: 88, cost: 8.7 },
-            { name: '玉精灵', spec: '500g', price: 138, cost: 10.3 },
-            { name: '玉精灵', spec: '500g', price: 128, cost: 10.3 },
-            { name: '玉精灵', spec: '500g', price: 198, cost: 10.3 },
-            
-            // 冰雪蝉/白虫草
-            { name: '冰雪蝉/白虫草', spec: '250g', price: 99, cost: 31 },
-            { name: '冰雪蝉/白虫草', spec: '250g', price: 128, cost: 31 },
-            { name: '冰雪蝉/白虫草', spec: '500g', price: 158, cost: 56 },
-            { name: '冰雪蝉/白虫草', spec: '500g', price: 198, cost: 56 },
-            
-            // 淡竹叶/雪域冰竹
-            { name: '淡竹叶/雪域冰竹', spec: '250g', price: 158, cost: 13 },
-            { name: '淡竹叶/雪域冰竹', spec: '500g', price: 158, cost: 21 },
-            
-            // 雪燕（3A）
-            { name: '雪燕（3A）', spec: '250g', price: 15, cost: 6 },
-            { name: '雪燕（3A）', spec: '250g', price: 88, cost: 6 },
-            { name: '雪燕（3A）', spec: '500g', price: 19.9, cost: 6 },
-            { name: '雪燕（3A）', spec: '500g', price: 39, cost: 13.25 },
-            { name: '雪燕（3A）', spec: '500g', price: 68, cost: 13.25 },
-            { name: '雪燕（3A）', spec: '1000g', price: 99, cost: 22.5 },
-            { name: '雪燕（3A）', spec: '1500g', price: 99, cost: 31.75 },
-            
-            // 黑灵芝
-            { name: '黑灵芝', spec: '250g', price: 297, cost: 11 },
-            { name: '黑灵芝', spec: '250g', price: 19.9, cost: 11 },
-            { name: '黑灵芝', spec: '500g', price: 19.9, cost: 13 },
-            { name: '黑灵芝', spec: '500g', price: 17, cost: 13 },
-            
-            // 五指毛桃
-            { name: '五指毛桃', spec: '250g', price: 158, cost: 14.5 },
-            { name: '五指毛桃', spec: '500g', price: 158, cost: 23.3 },
-            
-            // 柯子/黄金果
-            { name: '柯子/黄金果', spec: '250g', price: 99, cost: 7 },
-            { name: '柯子/黄金果', spec: '500g', price: 99, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 128, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 158, cost: 9 },
-            { name: '柯子/黄金果', spec: '500g', price: 198, cost: 9 },
-            
-            // 麦冬
-            { name: '麦冬', spec: '250g', price: 128, cost: 46.3 },
-            { name: '麦冬', spec: '500g', price: 188, cost: 87.5 },
-            
-            // 鹿茸片
-            { name: '鹿茸片', spec: '20g', price: 40, cost: 7.9 },
-            { name: '鹿茸片', spec: '50g', price: 80, cost: 16.2 },
-            { name: '鹿茸片', spec: '50g', price: 99, cost: 16.2 },
-            { name: '鹿茸片', spec: '100g', price: 120, cost: 26.5 },
-            { name: '鹿茸片', spec: '150g', price: 160, cost: 35 },
-            { name: '鹿茸片', spec: '200g', price: 160, cost: 47 },
-            
-            // 神农果
-            { name: '神农果', spec: '250g', price: 99, cost: 9.5 },
-            { name: '神农果', spec: '500g', price: 99, cost: 14 },
-            { name: '神农果', spec: '500g', price: 158, cost: 14 },
-            { name: '神农果', spec: '500g', price: 198, cost: 14 },
-            
-            // 麒麟籽/火棘果
-            { name: '麒麟籽/火棘果', spec: '250g', price: 99, cost: 8.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 99, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 128, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 158, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 198, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '500g', price: 298, cost: 12.7 },
-            { name: '麒麟籽/火棘果', spec: '1000g', price: 298, cost: 25.4 },  // 12.7*2
-            
-            // 乌金参/老黑参/黑金参
-            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 99, cost: 6.7 },
-            { name: '乌金参/老黑参/黑金参', spec: '250g', price: 198, cost: 6.7 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 99, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 128, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 158, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 198, cost: 9 },
-            { name: '乌金参/老黑参/黑金参', spec: '500g', price: 266, cost: 9 },
-            
-            // 乌金参片
-            { name: '乌金参片', spec: '100g', price: 100, cost: 6.2 },
-            { name: '乌金参片', spec: '150g', price: 69, cost: 6.7 },
-            { name: '乌金参片', spec: '200g', price: 90, cost: 7.4 },
-            { name: '乌金参片', spec: '250g', price: 99, cost: 8 },
-            { name: '乌金参片', spec: '500g', price: 158, cost: 12.5 },
-            
-            // 龙鳞果
-            { name: '龙鳞果', spec: '100g', price: 49, cost: 8.7 },
-            { name: '龙鳞果', spec: '200g', price: 79, cost: 13.6 },
-            { name: '龙鳞果', spec: '250g', price: 128, cost: 16.3 },
-            { name: '龙鳞果', spec: '500g', price: 99, cost: 29.5 },
-            { name: '龙鳞果', spec: '500g', price: 158, cost: 29.5 },
-            { name: '龙鳞果', spec: '500g', price: 198, cost: 29.5 },
-            
-            // 藏红花
-            { name: '藏红花', spec: '0.5g', price: 49.9, cost: 6.4 },
-            { name: '藏红花', spec: '1g', price: 69.9, cost: 11 },
-            { name: '藏红花', spec: '3g', price: 99, cost: 24.6 },
-            { name: '藏红花', spec: '5g', price: 198, cost: 37 },
-            
-            // 老虎膏
-            { name: '老虎膏', spec: '3瓶', price: 99, cost: 8.5 },
-            
-            // 蜈蚣膏
-            { name: '蜈蚣膏', spec: '2瓶', price: 99, cost: 8 },
-            
-            // 透骨贴
-            { name: '透骨贴', spec: '3盒', price: 39.9, cost: 6 },
-            { name: '透骨贴', spec: '2盒', price: 19.9, cost: 4 },
-            
-            // 千日红
-            { name: '千日红', spec: '250g', price: 99, cost: 10.4 },
-            { name: '千日红', spec: '250g', price: 128, cost: 10.4 },
-            { name: '千日红', spec: '250g', price: 158, cost: 10.4 },
-            { name: '千日红', spec: '500g', price: 128, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 158, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 198, cost: 16.5 },
-            { name: '千日红', spec: '500g', price: 238, cost: 16.5 },
-            
-            // 蓝蝴蝶/蓝精灵
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 198, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 128, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '250g', price: 158, cost: 22.2 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 198, cost: 39.7 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '500g', price: 238, cost: 39.7 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '50g', price: 98, cost: 8.5 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '100g', price: 68, cost: 11.8 },
-            { name: '蓝蝴蝶/蓝精灵', spec: '150g', price: 39, cost: 15.2 },
-            
-            // 黄金蕊/金丝蕊
-            { name: '黄金蕊/金丝蕊', spec: '500g', price: 398, cost: 135 },
-            { name: '黄金蕊/金丝蕊', spec: '250g', price: 298, cost: 68.5 },
-            { name: '黄金蕊/金丝蕊', spec: '100g', price: 99, cost: 29 },
-            { name: '黄金蕊/金丝蕊', spec: '100g', price: 128, cost: 29 },
-            { name: '黄金蕊/金丝蕊', spec: '50g', price: 58, cost: 17.5 },
-            
-            // 五行果
-            { name: '五行果', spec: '250g', price: 198, cost: 9.5 },
-            { name: '五行果', spec: '250g', price: 158, cost: 9.5 },
-            
-            // 虫草王（黑虫草）
-            { name: '虫草王（黑虫草）', spec: '500g', price: 128, cost: 23 },
-            { name: '虫草王（黑虫草）', spec: '500g', price: 158, cost: 23 },
-            
-            // 石斛粉
-            { name: '石斛粉', spec: '200g', price: 198, cost: 16 },
-            
-            // 虎王杖
-            { name: '虎王杖', spec: '250g', price: 199, cost: 7.7 },
-            { name: '虎王杖', spec: '250g', price: 99, cost: 7.7 },
-            { name: '虎王杖', spec: '500g', price: 158, cost: 10.7 },
-            { name: '虎王杖', spec: '500g', price: 198, cost: 10.7 },
-            
-            // 石斛条
-            { name: '石斛条', spec: '500g', price: 158, cost: 35 },
-            { name: '石斛条', spec: '500g', price: 198, cost: 35 },
-            
-            // 路路通
-            { name: '路路通', spec: '250g', price: 99, cost: 6.2 },
-            { name: '路路通', spec: '500g', price: 128, cost: 8 },
-            { name: '路路通', spec: '500g', price: 158, cost: 8 },
-            { name: '路路通', spec: '500g', price: 198, cost: 8 },
-            
-            // 绿萝花/菩提花
-            { name: '绿萝花/菩提花', spec: '250g', price: 158, cost: 15.6 },
-            { name: '绿萝花/菩提花', spec: '250g', price: 198, cost: 15.6 },
-            { name: '绿萝花/菩提花', spec: '250g', price: 99, cost: 14.5 },
-            { name: '绿萝花/菩提花', spec: '500g', price: 128, cost: 24.5 },
-            { name: '绿萝花/菩提花', spec: '500g', price: 158, cost: 24.5 },
-            
-            // 万寿菊
-            { name: '万寿菊', spec: '250g', price: 128, cost: 11 },
-            { name: '万寿菊', spec: '250g', price: 99, cost: 11 },
-            { name: '万寿菊', spec: '500g', price: 128, cost: 17 },
-            { name: '万寿菊', spec: '500g', price: 158, cost: 17 },
-            
-            // 农家三七
-            { name: '农家三七', spec: '250g', price: 118, cost: 12.5 },
-            
-            // 琥珀天麻/红天麻
-            { name: '琥珀天麻/红天麻', spec: '100g', price: 98, cost: 21 },
-            { name: '琥珀天麻/红天麻', spec: '250g', price: 158, cost: 46.5 },
-            
-            // 胰岛果
-            { name: '胰岛果', spec: '300g', price: 99, cost: 9.3 },
-            
-            // 猫爪草
-            { name: '猫爪草', spec: '250g', price: 158, cost: 21.9 },
-            { name: '猫爪草', spec: '250g', price: 198, cost: 21.9 },
-            
-            // 鸡爪参
-            { name: '鸡爪参', spec: '250g', price: 158, cost: 15.5 },
-            { name: '鸡爪参', spec: '250g', price: 198, cost: 15.5 },
-            
-            // 不老莓
-            { name: '不老莓', spec: '250g', price: 98, cost: 12 },
-            { name: '不老莓', spec: '250g', price: 99, cost: 12 },
-            { name: '不老莓', spec: '500g', price: 158, cost: 18.2 },
-            { name: '不老莓', spec: '500g', price: 159, cost: 18.2 },
-            
-            // 太子参/金龙参
-            { name: '太子参/金龙参', spec: '250g', price: 128, cost: 11.5 },
-            { name: '太子参/金龙参', spec: '250g', price: 99, cost: 11.5 },
-            { name: '太子参/金龙参', spec: '500g', price: 128, cost: 17.2 },
-            { name: '太子参/金龙参', spec: '500g', price: 158, cost: 17.2 },
-            { name: '太子参/金龙参', spec: '500g', price: 238, cost: 17.2 },
-            
-            // 水飞蓟/百岁籽
-            { name: '水飞蓟/百岁籽', spec: '250g', price: 158, cost: 8.3 },
-            { name: '水飞蓟/百岁籽', spec: '250g', price: 98, cost: 8.3 },
-            { name: '水飞蓟/百岁籽', spec: '500g', price: 158, cost: 11 },
-            { name: '水飞蓟/百岁籽', spec: '500g', price: 198, cost: 11 },
-            
-            // 康仙花/清流花
-            { name: '康仙花/清流花', spec: '250g', price: 99, cost: 19 },
-            { name: '康仙花/清流花', spec: '250g', price: 128, cost: 19 },
-            { name: '康仙花/清流花', spec: '250g', price: 158, cost: 19 },
-            { name: '康仙花/清流花', spec: '500g', price: 128, cost: 32 },
-            { name: '康仙花/清流花', spec: '500g', price: 158, cost: 32 },
-            
-            // 牛黄丸（玻璃小瓶）
-            { name: '牛黄丸（玻璃小瓶）', spec: '5g', price: 69.9, cost: 12.4 },
-            
-            // 牛黄丸（大瓶）
-            { name: '牛黄丸（大瓶）', spec: '5g', price: 69.9, cost: 11.25 },
-            
-            // 百宝花/茉莉花/罗汉果花
-            { name: '百宝花/茉莉花/罗汉果花', spec: '500g', price: 158, cost: 8 },
-            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 128, cost: 6.5 },
-            { name: '百宝花/茉莉花/罗汉果花', spec: '250g', price: 99, cost: 6.5 },
-            
-            // 松针油
-            { name: '松针油', spec: '1瓶', price: 78, cost: 7 },
-            { name: '松针油', spec: '2瓶', price: 140, cost: 13.5 },
-            { name: '松针油', spec: '6瓶', price: 268, cost: 35 },
-            { name: '松针油', spec: '12瓶', price: 488, cost: 65 },
-            
-            // 八大好汉料（新）
-            { name: '八大好汉料（新）', spec: '580g*1袋', price: 199, cost: 56 },
-            
-            // 地髓金
-            { name: '地髓金', spec: '150g', price: 69, cost: 9 },
-            { name: '地髓金', spec: '250g', price: 99, cost: 12.8 },
-            
-            // 赤灵芝
-            { name: '赤灵芝', spec: '250g', price: 99, cost: 9.75 },
-            { name: '赤灵芝', spec: '500g', price: 158, cost: 19.5 },
-            
-            // 化石草
-            { name: '化石草', spec: '100g', price: 69, cost: 8 },
-            { name: '化石草', spec: '200g', price: 99, cost: 11 },
-            
-            // 金丝红雪茶（软质）
-            { name: '金丝红雪茶（软质）', spec: '100g', price: 29, cost: 11.5 },
-            
-            // 金丝红雪茶（硬质）
-            { name: '金丝红雪茶（硬质）', spec: '100g', price: 29, cost: 7.7 },
-            
-            // 双肾子
-            { name: '双肾子', spec: '100g', price: 69, cost: 9.7 },
-            
-            // 黄芪
-            { name: '黄芪', spec: '80g', price: 69, cost: 7.8 },
-            
-            // 菟丝子
-            { name: '菟丝子', spec: '100g', price: 69, cost: 7.3 },
-            { name: '菟丝子', spec: '250g', price: 99, cost: 10.8 },
-            { name: '菟丝子', spec: '500g', price: 129, cost: 16.5 },
-            
-            // 当归压片
-            { name: '当归压片', spec: '20g', price: 49, cost: 6.7 },
-            { name: '当归压片', spec: '100g', price: 69, cost: 13.5 },
-            { name: '当归压片', spec: '250g', price: 128, cost: 26.3 },
-            { name: '当归压片', spec: '500g', price: 198, cost: 47.5 },
-            
-            // 去皮茯苓丁
-            { name: '去皮茯苓丁', spec: '100g', price: 69, cost: 7.4 },
-            { name: '去皮茯苓丁', spec: '250g', price: 99, cost: 11 },
-            { name: '去皮茯苓丁', spec: '500g', price: 158, cost: 17 },
-            
-            // 党参
-            { name: '党参', spec: '250g', price: 128, cost: 32 },
-            { name: '党参', spec: '500g', price: 198, cost: 59 },
-            
-            // 夏枯草
-            { name: '夏枯草', spec: '110g', price: 69, cost: 8.8 },
-            { name: '夏枯草', spec: '250g', price: 128, cost: 13.8 },
-            { name: '夏枯草', spec: '500g', price: 198, cost: 22.5 },
-            
-            // 桑葚干
-            { name: '桑葚干', spec: '500g', price: 128, cost: 11.5 },
-            
-            // 滇红花
-            { name: '滇红花', spec: '100g', price: 69, cost: 14.5 },
-            { name: '滇红花', spec: '200g', price: 99, cost: 24 },
-            
-            // 鸡血藤
-            { name: '鸡血藤', spec: '300g', price: 69, cost: 7.8 },
-            { name: '鸡血藤', spec: '500g', price: 99, cost: 10 },
-            
-            // 铁皮石斛花
-            { name: '铁皮石斛花', spec: '50g', price: 99, cost: 28 },
-            
-            // 九制15-20黄精
-            { name: '九制15-20黄精', spec: '250g', price: 128, cost: 27.8 },
-            { name: '九制15-20黄精', spec: '500g', price: 198, cost: 51.5 },
-            
-            // 九制黄精35-40
-            { name: '九制黄精35-40', spec: '250g', price: 128, cost: 38.8 },
-            { name: '九制黄精35-40', spec: '500g', price: 198, cost: 72.5 },
-            
-            // 岩斛
-            { name: '岩斛', spec: '200g', price: 128, cost: 34 },
-            { name: '岩斛', spec: '100g', price: 99, cost: 19.5 },
-            
-            // 金花茶
-            { name: '金花茶', spec: '50g', price: 68, cost: 12.5 },
-            { name: '金花茶', spec: '100g', price: 99, cost: 20.5 },
-            
-            // 冻干帝王果
-            { name: '冻干帝王果', spec: '100g', price: 99, cost: 24 },
-            
-            // 串串天麻
-            { name: '串串天麻', spec: '250g', price: 128, cost: 40 },
-            
-            // 九品香水连
-            { name: '九品香水连', spec: '50g', price: 79, cost: 25 },
-            
-            // 鼓槌石斛花
-            { name: '鼓槌石斛花', spec: '50g', price: 128, cost: 45 },
-            { name: '鼓槌石斛花', spec: '100g', price: 198, cost: 86 },
-            
-            // 牛黄粉(透明塑料瓶)
-            { name: '牛黄粉(透明塑料瓶)', spec: '5g', price: 68, cost: 8.15 },
-            { name: '牛黄粉(透明塑料瓶)', spec: '10g', price: 98, cost: 11.9 },
-            { name: '牛黄粉(透明塑料瓶)', spec: '20g', price: 148, cost: 19.4 },
-            
-            // 血珀降木/苏木
-            { name: '血珀降木/苏木', spec: '150g', price: 24.9, cost: 7.2 },
-            { name: '血珀降木/苏木', spec: '300g', price: 39.9, cost: 9.3 },
-            
-            // 天山紫金莲
-            { name: '天山紫金莲', spec: '50g', price: 69, cost: 16 },
-            
-            // 紫珠虫石斛兰
-            { name: '紫珠虫石斛兰', spec: '30g', price: 88, cost: 19.6 },
-            
-            // 龙血竭
-            { name: '龙血竭', spec: '100g', price: 99, cost: 24 },
-            { name: '龙血竭', spec: '250g', price: 158, cost: 52.5 },
-            
-            // 昆仑雪胎菊
-            { name: '昆仑雪胎菊', spec: '50g', price: 58, cost: 11.2 },
-            { name: '昆仑雪胎菊', spec: '100g', price: 98, cost: 17.5 },
-            
-            // 带皮茯苓
-            { name: '带皮茯苓', spec: '100g', price: 98, cost: 6.2 },
-            { name: '带皮茯苓', spec: '500g', price: 198, cost: 15 },
-            
-            // 甜当归
-            { name: '甜当归', spec: '200g', price: 198, cost: 11.6 },
-            { name: '甜当归', spec: '100g', price: 98, cost: 7.8 },
-            
-            // 血三七
-            { name: '血三七', spec: '250g', price: 98, cost: 10 },
-            { name: '血三七', spec: '100g', price: 68, cost: 6.4 },
-            
-            // 雪莲花
-            { name: '雪莲花', spec: '50g', price: 58, cost: 7.2 },
-            { name: '雪莲花', spec: '100g', price: 88, cost: 9.3 },
-            { name: '雪莲花', spec: '200g', price: 128, cost: 13.6 },
-            
-            // 小龙须雪燕
-            { name: '小龙须雪燕', spec: '50g', price: 99, cost: 7.3 },
-            
-            // 当归黑豆
-            { name: '当归黑豆', spec: '250g', price: 128, cost: 8.5 },
-            
-            // 叶子红糖
-            { name: '叶子红糖', spec: '500g', price: 98, cost: 10 },
-            { name: '叶子红糖', spec: '250g', price: 68, cost: 7.5 },
-            
-            // 雪域冰菊
-            { name: '雪域冰菊', spec: '50g', price: 38, cost: 7.75 },
-            { name: '雪域冰菊', spec: '100g', price: 68, cost: 10.5 },
-            { name: '雪域冰菊', spec: '250g', price: 128, cost: 20 },
-            
-            // 藏槟榔/火麒麟/火凤凰
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 168, cost: 20 },
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 84, cost: 20 },
-            { name: '藏槟榔/火麒麟/火凤凰', spec: '100g', price: 128, cost: 20 },
-            
-            // 鹿胶
-            { name: '鹿胶', spec: '250g', price: 100, cost: 16.25 },
-            { name: '鹿胶', spec: '500g', price: 100, cost: 27.5 },
-            { name: '鹿胶', spec: '250g', price: 80, cost: 16.25 },
-            { name: '鹿胶', spec: '500g', price: 80, cost: 27.5 },
-            
-            // 西洋参
-            { name: '西洋参', spec: '50g', price: 60, cost: 16 },
-            { name: '西洋参', spec: '100g', price: 90, cost: 27 },
-            
-            // 藏红花蕊
-            { name: '藏红花蕊', spec: '100g', price: 98, cost: 7 },
-            { name: '藏红花蕊', spec: '200g', price: 128, cost: 9.8 },
-            { name: '藏红花蕊', spec: '250g', price: 158, cost: 11.3 },
-            
-            // 腾越清膏/熟地黄
-            { name: '腾越清膏/熟地黄', spec: '250g', price: 98, cost: 13 },
-            { name: '腾越清膏/熟地黄', spec: '500g', price: 198, cost: 21 },
-            { name: '腾越清膏/熟地黄', spec: '1000g', price: 198, cost: 42 },
-            
-            // 乾坤玺/九转菩提/茶膏
-            { name: '乾坤玺/九转菩提/茶膏', spec: '10粒', price: 100, cost: 5.6 },
-            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 90, cost: 7.7 },
-            { name: '乾坤玺/九转菩提/茶膏', spec: '20粒', price: 200, cost: 7.7 },
-            
-            // 阿胶块
-            { name: '阿胶块', spec: '250g', price: 98, cost: 16.5 },
-            { name: '阿胶块', spec: '500g', price: 69, cost: 34.54 }  // 28.54+6
-        ];
-
+        let currentPage = 1, pageSize = 20, totalPages = 1, allDataForPagination = []
+        
+        // 数据池分页配置
+        let currentPoolPage = 1, poolPageSize = 15, poolTotalPages = 1, poolTotalRecords = 0
+        let poolSearchKeyword = ''
+        let poolSearchSpec = ''      // 规格搜索关键词
+        let poolSearchPrice = ''     // 单价搜索关键词
+        let currentRangeFilter = 'all'  // 档位筛选
+        let editingRowId = null
+        let currentCalculatedData = null
+        let calcLastSyncTime = null
+        
+        // 当前选择的档位
+        let currentRange = {
+            name: '档位一',
+            min: 0.068,
+            max: 0.08
+        }
+        
+        // 下拉框选项数据
+        let specOptions = []
+        let priceOptions = []
 
         // ========== 工具函数 ==========
         function formatDate(date) {
@@ -1510,33 +1094,21 @@
             const d = String(date.getDate()).padStart(2, '0')
             return `${y}-${m}-${d}`
         }
-
         function getCurrentLocalTime() {
             const now = new Date()
             return new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString()
         }
-
         function formatTime(timeString) {
             if (!timeString) return '-'
             const date = new Date(timeString)
-            return date.toLocaleString('zh-CN', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).replace(/\//g, '-')
+            return date.toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).replace(/\//g, '-')
         }
-
         function showAlert(message, type) {
             const box = document.getElementById('alertBox')
             box.textContent = message
             box.className = `alert alert-${type}`
             setTimeout(() => box.className = 'alert', 3000)
         }
-
         function resetForm() {
             document.getElementById('talentName').value = ''
             document.getElementById('productSpec').value = ''
@@ -1545,548 +1117,1384 @@
             document.getElementById('commission').value = ''
         }
 
+        // ========== 加载下拉框选项 ==========
+        async function loadFilterOptions() {
+            try {
+                // 获取所有不重复的规格
+                const { data: specData, error: specError } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('规格')
+                    .order('规格')
+                
+                if (!specError && specData) {
+                    const uniqueSpecs = [...new Set(specData.map(item => item.规格).filter(s => s && s.trim()))]
+                    specOptions = uniqueSpecs
+                    const specDatalist = document.getElementById('specOptionsList')
+                    if (specDatalist) {
+                        specDatalist.innerHTML = ''
+                        uniqueSpecs.forEach(spec => {
+                            const option = document.createElement('option')
+                            option.value = spec
+                            specDatalist.appendChild(option)
+                        })
+                    }
+                }
+                
+                // 获取所有不重复的单价
+                const { data: priceData, error: priceError } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('单价')
+                    .order('单价')
+                
+                if (!priceError && priceData) {
+                    const uniquePrices = [...new Set(priceData.map(item => item.单价).filter(p => p && p > 0))]
+                    uniquePrices.sort((a, b) => a - b)
+                    priceOptions = uniquePrices
+                    const priceDatalist = document.getElementById('priceOptionsList')
+                    if (priceDatalist) {
+                        priceDatalist.innerHTML = ''
+                        uniquePrices.forEach(price => {
+                            const option = document.createElement('option')
+                            option.value = price
+                            priceDatalist.appendChild(option)
+                        })
+                    }
+                }
+            } catch (error) {
+                console.error('加载筛选选项失败:', error)
+            }
+        }
+
+        // ========== 档位选择功能 ==========
+        function selectProfitRange(name, min, max, btn) {
+            currentRange = { name, min, max }
+            
+            document.querySelectorAll('.range-btn').forEach(btn => {
+                btn.classList.remove('active')
+            })
+            if (btn) btn.classList.add('active')
+            
+            document.getElementById('customRangePanel').style.display = 'none'
+            
+            console.log(`档位已切换: ${name} ${min*100}%-${max*100}%`)
+        }
+        
+        function showCustomRangeDialog(btn) {
+            document.querySelectorAll('.range-btn').forEach(btn => {
+                btn.classList.remove('active')
+            })
+            if (btn) btn.classList.add('active')
+            
+            document.getElementById('customRangePanel').style.display = 'block'
+            document.getElementById('customMinProfit').value = ''
+            document.getElementById('customMaxProfit').value = ''
+        }
+        
+        function confirmCustomRange() {
+            let min = parseFloat(document.getElementById('customMinProfit').value) / 100
+            let max = parseFloat(document.getElementById('customMaxProfit').value) / 100
+            
+            if (isNaN(min) || isNaN(max) || min >= max || min < 0 || max > 1) {
+                alert('请输入有效的利润率范围（6.8-100之间，最小值小于最大值）')
+                return
+            }
+            
+            currentRange = {
+                name: '自定义',
+                min: min,
+                max: max
+            }
+            
+            document.getElementById('customRangePanel').style.display = 'none'
+            console.log(`自定义档位: ${min*100}%-${max*100}%`)
+        }
+        
+        function getRangeDisplay(item) {
+            if (item.利润率档位 === '档位一') {
+                return ' (6.8%-8%)'
+            } else if (item.利润率档位 === '档位二') {
+                return ' (8.8%-10%)'
+            } else if (item.利润率档位 === '自定义') {
+                const min = (item.自定义最小利润率 * 100).toFixed(1)
+                const max = (item.自定义最大利润率 * 100).toFixed(1)
+                return `自定义 (${min}%-${max}%)`
+            }
+            return ' (8.8%-10%)'
+        }
+
+        function getRangeDisplaySimple(rangeName) {
+            if (rangeName === '档位一') return '6.8%-8%'
+            if (rangeName === '档位二') return '8.8%-10%'
+            if (rangeName === '自定义') return '自定义'
+            return rangeName
+        }
+
         // ========== 标签页切换 ==========
         function switchTab(tabName) {
             document.getElementById('manageTab').classList.remove('active')
             document.getElementById('calculateTab').classList.remove('active')
-            
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active')
-            })
-            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'))
             document.getElementById(tabName + 'Tab').classList.add('active')
-            
             if (tabName === 'manage') {
                 document.querySelectorAll('.tab-btn')[0].classList.add('active')
             } else {
                 document.querySelectorAll('.tab-btn')[1].classList.add('active')
-                initDropdownLists()
+                syncCalcData()
             }
         }
 
-        // ========== 初始化下拉列表 ==========
-        function initDropdownLists() {
-            const productDatalist = document.getElementById('productNameList')
-            productDatalist.innerHTML = ''
-            const uniqueProducts = [...new Set(productDatabase.map(p => p.name))]
-            uniqueProducts.sort().forEach(productName => {
-                const option = document.createElement('option')
-                option.value = productName
-                productDatalist.appendChild(option)
-            })
+        // ========== 新品添加与测算 ==========
+        async function checkAndCalculateNewProduct() {
+            const price = parseFloat(document.getElementById('newPrice').value)
+            const finalName = document.getElementById('newFinalName').value.trim()
+            const spec = document.getElementById('newSpec').value.trim()
+            let cost = parseFloat(document.getElementById('newCost').value)
             
-            const specDatalist = document.getElementById('specList')
-            specDatalist.innerHTML = ''
-            const uniqueSpecs = [...new Set(productDatabase.map(p => p.spec))]
-            uniqueSpecs.sort().forEach(spec => {
-                const option = document.createElement('option')
-                option.value = spec
-                specDatalist.appendChild(option)
-            })
-        }
-
-        // ========== 自动计算成本 ==========
-        function autoCalculate() {
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            
-            if (!productName || !spec || !price || price <= 0) return
-            
-            const product = findProduct(productName, spec, price)
-            
-            if (product) {
-                displayCostBreakdown(product, price)
-                document.getElementById('costBreakdown').style.display = 'block'
-            } else {
-                document.getElementById('costBreakdown').style.display = 'none'
-            }
-        }
-
-        // ========== 查找产品 ==========
-        function findProduct(productName, spec, price) {
-            if (!productName || !spec) return null;
-            
-            let product = productDatabase.find(p => 
-                p.name === productName && 
-                p.spec === spec && 
-                Math.abs(p.price - price) < 0.01
-            )
-            
-            if (!product) {
-                const candidates = productDatabase.filter(p => 
-                    p.name === productName && p.spec === spec
-                )
-                if (candidates.length > 0) {
-                    product = candidates.reduce((prev, curr) => {
-                        return (Math.abs(curr.price - price) < Math.abs(prev.price - price) ? curr : prev)
-                    })
-                }
-            }
-            
-            return product
-        }
-
-        // ========== 显示成本构成 ==========
-        function displayCostBreakdown(product, price) {
-            const shippingInsurance = 1.5
-            const platformFee = price * 0.03
-            const returnFee = 0.53
-            const totalCost = product.cost + shippingInsurance + platformFee + returnFee
-            const costRatio = totalCost / price
-            
-            document.getElementById('displayCost').textContent = product.cost.toFixed(2) + ' 元'
-            document.getElementById('displayInsurance').textContent = shippingInsurance.toFixed(2) + ' 元'
-            document.getElementById('displayPlatformFee').textContent = platformFee.toFixed(2) + ' 元'
-            document.getElementById('displayReturnFee').textContent = returnFee.toFixed(2) + ' 元'
-            document.getElementById('displayTotalCost').textContent = totalCost.toFixed(2) + ' 元'
-            document.getElementById('displayCostRatio').textContent = (costRatio * 100).toFixed(2)
-        }
-
-        // ========== 测算佣金 ==========
-        function calculateCommission() {
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            const minProfit = parseFloat(document.getElementById('minProfit').value) / 100
-            const maxProfit = parseFloat(document.getElementById('maxProfit').value) / 100
-
-            if (!productName || !spec || !price || price <= 0) {
-                alert('请完整填写产品信息')
-                return
-            }
-
-            let product = findProduct(productName, spec, price)
-            
-            if (!product) {
-                const useNewProduct = confirm(`未找到"${productName} ${spec}"的匹配信息，是否作为新产品进行测算？`)
-                if (useNewProduct) {
-                    product = { name: productName, spec: spec, price: price, cost: 0 }
-                    openEditCostModal(true)
-                }
-                return
-            }
-
-            performCalculation();
-        }
-
-        // 执行测算
-        function performCalculation() {
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            const minProfit = parseFloat(document.getElementById('minProfit').value) / 100
-            const maxProfit = parseFloat(document.getElementById('maxProfit').value) / 100
-
-            if (!productName || !spec || !price || price <= 0) return
-
-            const product = findProduct(productName, spec, price)
-            if (!product) return
-
-            const shippingInsurance = 1.5
-            const platformFee = price * 0.03
-            const returnFee = 0.53
-            const totalCost = product.cost + shippingInsurance + platformFee + returnFee
-            const costRatio = totalCost / price
-
-            displayCostBreakdown(product, price)
-
-            const results = []
-            for (let commission = 0; commission <= 1; commission += 0.001) {
-                const onlineProfit = (1 - costRatio - commission) * price
-                const onlineProfitRatio = onlineProfit / price
-                if (onlineProfitRatio >= minProfit && onlineProfitRatio <= maxProfit) {
-                    results.push({ commission: commission, profitRatio: onlineProfitRatio, profitAmount: onlineProfit })
-                }
-            }
-
-            const resultDiv = document.getElementById('calcResult')
-            
-            if (results.length > 0) {
-                const targetMid = (minProfit + maxProfit) / 2
-                const best = results.reduce((prev, curr) => {
-                    return (Math.abs(curr.profitRatio - targetMid) < Math.abs(prev.profitRatio - targetMid) ? curr : prev)
-                })
-                document.getElementById('resultProduct').textContent = `${productName} ${spec} ${price}元`
-                document.getElementById('resultCommission').textContent = (best.commission * 100).toFixed(2) + '%'
-                document.getElementById('displayOnlineProfitRatio').textContent = (best.profitRatio * 100).toFixed(2) + '%'
-                document.getElementById('displayOnlineProfitAmount').textContent = best.profitAmount.toFixed(2) + ' 元'
-                document.getElementById('currentProfitDisplay').textContent = (best.profitRatio * 100).toFixed(2) + '%'
-                resultDiv.style.display = 'flex'
-            } else {
-                let bestCommission = 0, bestProfit = 0, bestProfitAmount = 0, minDiff = Infinity
-                for (let commission = 0; commission <= 1; commission += 0.001) {
-                    const onlineProfit = (1 - costRatio - commission) * price
-                    const onlineProfitRatio = onlineProfit / price
-                    const diff = Math.min(Math.abs(onlineProfitRatio - minProfit), Math.abs(onlineProfitRatio - maxProfit))
-                    if (diff < minDiff) {
-                        minDiff = diff; bestCommission = commission; bestProfit = onlineProfitRatio; bestProfitAmount = onlineProfit
-                    }
-                }
-                document.getElementById('resultProduct').textContent = `${productName} ${spec} ${price}元`
-                document.getElementById('resultCommission').textContent = (bestCommission * 100).toFixed(2) + '%'
-                document.getElementById('displayOnlineProfitRatio').textContent = (bestProfit * 100).toFixed(2) + '%'
-                document.getElementById('displayOnlineProfitAmount').textContent = bestProfitAmount.toFixed(2) + ' 元'
-                document.getElementById('currentProfitDisplay').textContent = (bestProfit * 100).toFixed(2) + '%'
-                resultDiv.style.display = 'flex'
-            }
-            document.getElementById('costBreakdown').style.display = 'block'
-        }
-
-        // ========== 修改货款功能 ==========
-        let currentEditingProduct = null
-        let currentEditingPrice = 0
-        let isNewProduct = false
-
-        function openEditCostModal(isNew = false) {
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            
-            if (!productName || !spec || !price || price <= 0) {
-                alert('请先填写产品信息')
+            if (!price || !finalName || !spec) {
+                showAlert('请填写单价、最终品名和规格', 'warning')
                 return
             }
             
-            let product = findProduct(productName, spec, price)
-            if (isNew) {
-                product = { name: productName, spec: spec, price: price, cost: 0 }
-                isNewProduct = true
-            } else {
-                if (!product) {
-                    alert('未找到匹配的产品信息，无法修改货款')
-                    return
-                }
-                isNewProduct = false
-            }
-            
-            currentEditingProduct = product
-            currentEditingPrice = price
-            document.getElementById('currentProductForEdit').textContent = `${productName} ${spec} ${price}元`
-            document.getElementById('newCostValue').value = product.cost || 0
-            document.getElementById('editCostModal').style.display = 'flex'
-        }
-
-        function closeEditCostModal() {
-            document.getElementById('editCostModal').style.display = 'none'
-            currentEditingProduct = null
-            isNewProduct = false
-        }
-
-        function saveNewCost() {
-            const newCost = parseFloat(document.getElementById('newCostValue').value)
-            if (!newCost || newCost <= 0) {
-                alert('请输入有效的货款金额')
-                return
-            }
-            if (!currentEditingProduct) {
-                alert('产品信息失效，请重新操作')
-                closeEditCostModal()
-                return
-            }
-            
-            currentEditingProduct.cost = newCost
-            
-            if (isNewProduct) {
-                const existingIndex = productDatabase.findIndex(p => 
-                    p.name === currentEditingProduct.name && 
-                    p.spec === currentEditingProduct.spec && 
-                    Math.abs(p.price - currentEditingProduct.price) < 0.01
-                )
-                if (existingIndex === -1) {
-                    productDatabase.push({
-                        name: currentEditingProduct.name,
-                        spec: currentEditingProduct.spec,
-                        price: currentEditingProduct.price,
-                        cost: newCost
-                    })
-                }
-            }
-            
-            const price = currentEditingPrice
-            const shippingInsurance = 1.5
-            const platformFee = price * 0.03
-            const returnFee = 0.53
-            const totalCost = newCost + shippingInsurance + platformFee + returnFee
-            const costRatio = totalCost / price
-            
-            document.getElementById('displayCost').textContent = newCost.toFixed(2) + ' 元'
-            document.getElementById('displayTotalCost').textContent = totalCost.toFixed(2) + ' 元'
-            document.getElementById('displayCostRatio').textContent = (costRatio * 100).toFixed(2)
-            document.getElementById('costBreakdown').style.display = 'block'
-            document.getElementById('calcResult').style.display = 'none'
-            document.getElementById('displayOnlineProfitRatio').textContent = '-'
-            document.getElementById('displayOnlineProfitAmount').textContent = '-'
-            document.getElementById('currentProfitDisplay').textContent = '-'
-            
-            closeEditCostModal()
-            
-            setTimeout(() => {
-                performCalculation()
-            }, 100)
-        }
-
-        // ========== 重置测算表单 ==========
-        function resetCalculateForm() {
-            document.getElementById('calcProductName').value = ''
-            document.getElementById('calcSpec').value = ''
-            document.getElementById('calcPrice').value = ''
-            document.getElementById('minProfit').value = '9'
-            document.getElementById('maxProfit').value = '10'
-            document.getElementById('calcResult').style.display = 'none'
-            document.getElementById('costBreakdown').style.display = 'none'
-            document.getElementById('resultProduct').textContent = '-'
-            document.getElementById('resultCommission').textContent = '-'
-            document.getElementById('displayCost').textContent = '0.00'
-            document.getElementById('displayTotalCost').textContent = '0.00'
-            document.getElementById('displayCostRatio').textContent = '0.00'
-            document.getElementById('displayOnlineProfitRatio').textContent = '-'
-            document.getElementById('displayOnlineProfitAmount').textContent = '-'
-            document.getElementById('currentProfitDisplay').textContent = '-'
-            currentEditingProduct = null
-            isNewProduct = false
-            showAlert('表单已重置', 'success')
-        }
-
-        // ========== 添加数据到佣金管理 ==========
-        function openAddDataModal() {
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            const commission = document.getElementById('resultCommission').textContent
-            
-            if (!productName || !spec || !price || price <= 0 || commission === '-') {
-                alert('请先完成测算')
-                return
-            }
-            
-            // 获取当前货款
-            const costText = document.getElementById('displayCost').textContent
-            const cost = parseFloat(costText) || 0
-            
-            document.getElementById('addTalentName').value = ''
-            document.getElementById('currentCalcData').innerHTML = `
-                品名：${productName}<br>
-                规格：${spec}<br>
-                单价：${price}元<br>
-                佣金比例：${commission}<br>
-                货款：${cost}元
-            `
-            document.getElementById('addDataModal').style.display = 'flex'
-        }
-        
-        function closeAddDataModal() {
-            document.getElementById('addDataModal').style.display = 'none'
-            document.getElementById('addTalentName').value = ''
-        }
-        
-        async function confirmAddToManagement() {
-            const talentName = document.getElementById('addTalentName').value.trim()
-            if (!talentName) {
-                alert('请输入达人名称')
-                return
-            }
-            
-            const productName = document.getElementById('calcProductName').value.trim()
-            const spec = document.getElementById('calcSpec').value.trim()
-            const price = parseFloat(document.getElementById('calcPrice').value)
-            const commissionText = document.getElementById('resultCommission').textContent
-            const commission = parseFloat(commissionText) / 100
-            const costText = document.getElementById('displayCost').textContent
-            const originalSpec = ''  // 初始商品规格留空
-            
-            if (!productName || !spec || !price || !commission) {
-                alert('测算数据不完整，请重新测算')
-                closeAddDataModal()
-                return
-            }
-            
-            try {
-                const currentTime = getCurrentLocalTime()
-                
-                // 获取最大序号
-                const { data: maxData, error: maxError } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .select('序号')
-                    .order('序号', { ascending: false })
+            if (!cost || isNaN(cost) || cost === 0) {
+                const { data, error } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('货款')
+                    .eq('最终品名', finalName)
+                    .eq('规格', spec)
+                    .order('id', { ascending: false })
                     .limit(1)
                 
-                let nextSerial = 1
-                if (!maxError && maxData && maxData.length > 0) {
-                    nextSerial = maxData[0].序号 + 1
+                if (data && data.length > 0) {
+                    cost = data[0].货款
+                    document.getElementById('newCost').value = cost
+                    showAlert(`已自动匹配货款：${cost}元`, 'success')
+                } else {
+                    const userInput = prompt(`未找到"${finalName} ${spec}"的货款信息\n请输入该产品的货款金额（元）：`)
+                    if (userInput === null) return
+                    const userCost = parseFloat(userInput)
+                    if (isNaN(userCost) || userCost <= 0) {
+                        showAlert('请输入有效的货款金额', 'warning')
+                        return
+                    }
+                    cost = userCost
+                    document.getElementById('newCost').value = cost
+                    showAlert(`已使用您输入的货款：${cost}元`, 'success')
                 }
-                
-                // 插入数据
-                const { error: insertError } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .insert([{
-                        序号: nextSerial,
-                        达人名称: talentName,
-                        商品规格: productName + ' ' + spec,
-                        原始商品规格: originalSpec,
-                        商品价格: price,
-                        佣金: commission,
-                        录入时间: currentTime
-                    }])
-                
-                if (insertError) throw insertError
-                
-                showAlert(`数据添加成功！达人：${talentName}`, 'success')
-                closeAddDataModal()
-                
-                // 刷新佣金管理界面数据
-                await loadDataToTable()
-                
-                // 可选：切换到佣金管理标签页
-                switchTab('manage')
-                
-            } catch (error) {
-                console.error('添加失败:', error)
-                alert('添加失败：' + error.message)
             }
+            
+            if (!cost || cost <= 0) {
+                showAlert('货款必须大于0', 'warning')
+                return
+            }
+            
+            const { data: existing } = await supabaseClient
+                .from(CALC_TABLE_NAME)
+                .select('*')
+                .eq('单价', price)
+                .eq('最终品名', finalName)
+                .eq('规格', spec)
+                .eq('货款', cost)
+            
+            if (existing && existing.length > 0) {
+                const existingProduct = existing[0]
+                const existingRangeName = existingProduct.利润率档位 || '档位二'
+                const currentRangeName = currentRange.name
+                
+                if (existingRangeName === currentRangeName) {
+                    displayCalculatedResult(existingProduct)
+                    showAlert('该产品已存在，可直接使用', 'success')
+                    document.getElementById('btnAddToDatabase').disabled = true
+                    document.getElementById('btnAddToCommission').disabled = false
+                    currentCalculatedData = existingProduct
+                } else {
+                    const useNewRange = confirm(`该产品已存在（原档位：${getRangeDisplaySimple(existingRangeName)}），\n是否使用当前档位（${getRangeDisplaySimple(currentRangeName)}）重新测算？`)
+                    if (useNewRange) {
+                        recalculateWithCurrentRange(price, finalName, spec, cost)
+                    } else {
+                        displayCalculatedResult(existingProduct)
+                        showAlert('该产品已存在，可直接使用', 'success')
+                        document.getElementById('btnAddToDatabase').disabled = true
+                        document.getElementById('btnAddToCommission').disabled = false
+                        currentCalculatedData = existingProduct
+                    }
+                }
+                return
+            }
+            
+            calculateNewProduct(price, finalName, spec, cost)
         }
 
-        // ========== 同步数据 ==========
-        async function syncData() {
-            const syncBtn = document.querySelector('.btn-sync')
-            const originalText = syncBtn.innerHTML
-            syncBtn.innerHTML = '<span class="loading"></span>同步中...'
-            syncBtn.disabled = true
+        function recalculateWithCurrentRange(price, finalName, spec, cost) {
+            const platformFee = Math.round(price * 0.03 * 10000) / 10000;
+            const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
+            const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
+            
+            let targetMin, targetMax;
+            if (currentRange.name === '档位一') {
+                targetMin = 0.068;
+                targetMax = 0.08;
+            } else if (currentRange.name === '档位二') {
+                targetMin = 0.088;
+                targetMax = 0.10;
+            } else if (currentRange.name === '自定义') {
+                targetMin = currentRange.min;
+                targetMax = currentRange.max;
+            } else {
+                targetMin = 0.088;
+                targetMax = 0.10;
+            }
+            
+            let bestCommission = 0.70;
+            let bestProfitRatio = 0;
+            let bestProfitAmount = 0;
+            let minDiff = Infinity;
+            
+            for (let i = 0; i <= 100; i++) {
+                const commission = i / 100;
+                const q = 1 - costRatio - commission;
+                if (q >= targetMin && q <= targetMax) {
+                    bestCommission = commission;
+                    bestProfitRatio = q;
+                    bestProfitAmount = (1 - costRatio - commission) * price;
+                    break;
+                }
+                const diff = Math.abs(q - targetMin);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    bestCommission = commission;
+                    bestProfitRatio = q;
+                    bestProfitAmount = (1 - costRatio - commission) * price;
+                }
+            }
+            
+            bestCommission = Math.round(bestCommission * 100) / 100;
+            const onlineProfit = Math.round(((1 - costRatio - bestCommission) * price) * 10000) / 10000;
+            const onlinePercent = Math.round((onlineProfit / price) * 10000) / 10000;
+            const finalProfit = price * 0.85 - price * bestCommission * 0.7 - price * bestCommission * 0.15 * 0.3 - totalCost;
+            const finalProfitRounded = Math.round(finalProfit * 10000) / 10000;
+            
+            const calculatedData = {
+                单价: price,
+                最终品名: finalName,
+                规格: spec,
+                货款: cost,
+                佣金比例: bestCommission,
+                线上百分比: onlinePercent,
+                线上利润: onlineProfit,
+                成本比: costRatio,
+                总成本: totalCost,
+                抖店手续费: platformFee,
+                尾款利润: finalProfitRounded,
+                利润率档位: currentRange.name,
+                自定义最小利润率: currentRange.name === '自定义' ? currentRange.min : null,
+                自定义最大利润率: currentRange.name === '自定义' ? currentRange.max : null
+            };
+            
+            displayCalculatedResult(calculatedData);
+            showAlert(`已用${getRangeDisplaySimple(currentRange.name)}重新测算`, 'success');
+            document.getElementById('btnAddToDatabase').disabled = false;
+            document.getElementById('btnAddToCommission').disabled = true;
+            currentCalculatedData = calculatedData;
+        }
 
+        function calculateNewProduct(price, finalName, spec, cost) {
+            const platformFee = Math.round(price * 0.03 * 10000) / 10000;
+            const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
+            const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
+            
+            let targetMin, targetMax;
+            if (currentRange.name === '档位一') {
+                targetMin = 0.068;
+                targetMax = 0.08;
+            } else if (currentRange.name === '档位二') {
+                targetMin = 0.088;
+                targetMax = 0.10;
+            } else if (currentRange.name === '自定义') {
+                targetMin = currentRange.min;
+                targetMax = currentRange.max;
+            } else {
+                targetMin = 0.088;
+                targetMax = 0.10;
+            }
+            
+            let bestCommission = 0.70;
+            let bestProfitRatio = 0;
+            let bestProfitAmount = 0;
+            let minDiff = Infinity;
+            
+            for (let i = 0; i <= 100; i++) {
+                const commission = i / 100;
+                const q = 1 - costRatio - commission;
+                if (q >= targetMin && q <= targetMax) {
+                    bestCommission = commission;
+                    bestProfitRatio = q;
+                    bestProfitAmount = (1 - costRatio - commission) * price;
+                    break;
+                }
+                const diff = Math.abs(q - targetMin);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    bestCommission = commission;
+                    bestProfitRatio = q;
+                    bestProfitAmount = (1 - costRatio - commission) * price;
+                }
+            }
+            
+            bestCommission = Math.round(bestCommission * 100) / 100;
+            const onlineProfit = Math.round(((1 - costRatio - bestCommission) * price) * 10000) / 10000;
+            const onlinePercent = Math.round((onlineProfit / price) * 10000) / 10000;
+            const finalProfit = price * 0.85 - price * bestCommission * 0.7 - price * bestCommission * 0.15 * 0.3 - totalCost;
+            const finalProfitRounded = Math.round(finalProfit * 10000) / 10000;
+            
+            const calculatedData = {
+                单价: price,
+                最终品名: finalName,
+                规格: spec,
+                货款: cost,
+                佣金比例: bestCommission,
+                线上百分比: onlinePercent,
+                线上利润: onlineProfit,
+                成本比: costRatio,
+                总成本: totalCost,
+                抖店手续费: platformFee,
+                尾款利润: finalProfitRounded,
+                利润率档位: currentRange.name,
+                自定义最小利润率: currentRange.name === '自定义' ? currentRange.min : null,
+                自定义最大利润率: currentRange.name === '自定义' ? currentRange.max : null
+            };
+            
+            displayCalculatedResult(calculatedData);
+            showAlert('测算完成，可添加至数据库', 'success');
+            document.getElementById('btnAddToDatabase').disabled = false;
+            document.getElementById('btnAddToCommission').disabled = true;
+            currentCalculatedData = calculatedData;
+        }
+        
+        function displayCalculatedResult(data) {
+            document.getElementById('calcResultCommission').textContent = (data.佣金比例 * 100).toFixed(2) + '%'
+            document.getElementById('calcResultOnlinePercent').textContent = ((data.线上百分比 || 0) * 100).toFixed(2) + '%'
+            document.getElementById('calcResultOnlineProfit').textContent = (data.线上利润 || 0).toFixed(2) + '元'
+            
+            let finalProfit = data.尾款利润
+            if (!finalProfit && finalProfit !== 0) {
+                const price = data.单价
+                const commission = data.佣金比例
+                const totalCost = data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)
+                finalProfit = price * 0.85 - price * commission * 0.7 - price * commission * 0.15 * 0.3 - totalCost
+            }
+            document.getElementById('calcResultFinalProfit').textContent = (finalProfit || 0).toFixed(2) + '元'
+            
+            document.getElementById('calcResultCost').textContent = (data.货款 || 0).toFixed(2) + '元'
+            document.getElementById('calcResultInsurance').textContent = '1.50元'
+            document.getElementById('calcResultPlatformFee').textContent = (data.抖店手续费 || data.单价 * 0.03).toFixed(2) + '元'
+            document.getElementById('calcResultReturnFee').textContent = '0.53元'
+            
+            document.getElementById('calcResultTotalCost').textContent = (data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)).toFixed(2) + '元'
+            document.getElementById('calcResultCostRatio').textContent = ((data.成本比 || 0) * 100).toFixed(2) + '%'
+            
+            document.getElementById('calcResultArea').style.display = 'block'
+            
+            if ((data.线上利润 || 0) < 0 || ((data.线上百分比 || 0) < 0)) {
+                const negativeInfo = `产品：${data.最终品名} ${data.规格}\n单价：${data.单价}元\n货款：${data.货款}元\n佣金比例：${(data.佣金比例 * 100).toFixed(2)}%\n线上利润：${(data.线上利润 || 0).toFixed(2)}元\n线上百分比：${((data.线上百分比 || 0) * 100).toFixed(2)}%\n成本比：${((data.成本比 || 0) * 100).toFixed(2)}%`
+                document.getElementById('negativeDataContent').textContent = negativeInfo
+                document.getElementById('negativeDataModal').style.display = 'flex'
+            }
+        }
+        
+        async function addToDatabase() {
+            if (!currentCalculatedData) return
+            
+            const onlinePercent = currentCalculatedData.线上百分比 || 0
+            
+            let targetMin, targetMax, rangeName
+            if (currentRange.name === '档位一') {
+                targetMin = 0.068
+                targetMax = 0.08
+                rangeName = '档位一'
+            } else if (currentRange.name === '档位二') {
+                targetMin = 0.088
+                targetMax = 0.10
+                rangeName = '档位二'
+            } else if (currentRange.name === '自定义') {
+                targetMin = currentRange.min
+                targetMax = currentRange.max
+                rangeName = '自定义'
+            } else {
+                targetMin = 0.088
+                targetMax = 0.10
+                rangeName = '档位二'
+            }
+            
+            const isInRange = onlinePercent >= targetMin && onlinePercent <= targetMax
+            let finalRangeName = rangeName
+            let customMin = null
+            let customMax = null
+            
+            if (!isInRange && rangeName !== '自定义') {
+                const userChoice = confirm(
+                    `当前计算出的线上百分比为 ${(onlinePercent * 100).toFixed(2)}%\n` +
+                    `不在您选择的${rangeName}（${(targetMin * 100).toFixed(1)}%-${(targetMax * 100).toFixed(1)}%）范围内。\n\n` +
+                    `是否使用自定义档位（${(onlinePercent * 100).toFixed(2)}%）保存？\n` +
+                    `点击"确定"使用自定义档位，点击"取消"仍使用${rangeName}保存。`
+                )
+                if (userChoice) {
+                    finalRangeName = '自定义'
+                    customMin = onlinePercent - 0.005
+                    customMax = onlinePercent + 0.005
+                    if (customMin < 0) customMin = 0
+                    if (customMax > 1) customMax = 1
+                }
+            }
+            
+            const insertData = {
+                单价: currentCalculatedData.单价,
+                最终品名: currentCalculatedData.最终品名,
+                规格: currentCalculatedData.规格,
+                货款: currentCalculatedData.货款,
+                利润率档位: finalRangeName
+            }
+            
+            if (finalRangeName === '自定义') {
+                insertData.自定义最小利润率 = customMin !== null ? customMin : currentRange.min
+                insertData.自定义最大利润率 = customMax !== null ? customMax : currentRange.max
+            }
+            
+            const { data, error } = await supabaseClient
+                .from(CALC_TABLE_NAME)
+                .insert([insertData])
+                .select()
+            
+            if (error) {
+                showAlert('添加失败：' + error.message, 'danger')
+            } else {
+                showAlert('添加成功，数据库已自动计算', 'success')
+                document.getElementById('btnAddToDatabase').disabled = true
+                document.getElementById('btnAddToCommission').disabled = false
+                if (data && data.length > 0) {
+                    currentCalculatedData = data[0]
+                    displayCalculatedResult(data[0])
+                }
+                await syncCalcData()
+            }
+        }
+        
+        // ========== 佣金测算表数据操作 ==========
+        async function syncCalcData() {
+            const syncBtns = document.querySelectorAll('#calculateTab .btn-sync')
+            const originalTexts = []
+            syncBtns.forEach((btn, idx) => {
+                originalTexts[idx] = btn.innerHTML
+                btn.innerHTML = '<span class="loading"></span>同步中...'
+                btn.disabled = true
+            })
             try {
-                const { data, error } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .select('*')
-                    .order('序号', { ascending: false })
-
-                if (error) throw error
-
-                originalDataList = data || []
-                currentPage = 1
-                renderTableData(originalDataList)
-                
-                lastSyncTime = new Date()
-                document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
-                
-                showAlert(`同步成功！共 ${originalDataList.length} 条数据`, 'success')
+                await loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+                await loadFilterOptions()
+                calcLastSyncTime = new Date()
+                document.getElementById('calcSyncTime').innerHTML = `最后同步：${calcLastSyncTime.toLocaleString('zh-CN')}`
             } catch (error) {
                 console.error('同步失败:', error)
                 showAlert('同步失败：' + error.message, 'danger')
             } finally {
-                syncBtn.innerHTML = originalText
-                syncBtn.disabled = false
+                syncBtns.forEach((btn, idx) => {
+                    btn.innerHTML = originalTexts[idx]
+                    btn.disabled = false
+                })
             }
         }
-
-        // ========== 渲染表格 ==========
-        function renderTableData(dataList) {
-            const tableBody = document.getElementById('tableBody')
-            tableBody.innerHTML = ''
+        
+        function filterByRange(range) {
+            currentRangeFilter = range
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active')
+                if (btn.getAttribute('data-range') === range) {
+                    btn.classList.add('active')
+                }
+            })
+            loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+        }
+        
+        async function loadDataPool(page = 1, keyword = '', specKeyword = '', priceKeyword = '', rangeFilter = 'all') {
+            currentPoolPage = page
+            poolSearchKeyword = keyword
+            poolSearchSpec = specKeyword
+            poolSearchPrice = priceKeyword
+            currentRangeFilter = rangeFilter
             
-            if (!dataList || dataList.length === 0) {
-                const tr = document.createElement('tr')
-                tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据</td>'
-                tableBody.appendChild(tr)
-                document.getElementById('totalRecords').textContent = '0'
-                document.getElementById('totalPages').textContent = '1'
-                document.getElementById('pageInput').value = '1'
-                updatePaginationButtons()
+            let query = supabaseClient
+                .from(CALC_TABLE_NAME)
+                .select('id, 佣金比例, 单价, 最终品名, 规格, 货款, 线上百分比, 利润率档位, 自定义最小利润率, 自定义最大利润率', { count: 'exact' })
+                .order('id', { ascending: false })
+            
+            if (keyword) {
+                query = query.ilike('最终品名', `%${keyword}%`)
+            }
+            
+            if (specKeyword) {
+                query = query.eq('规格', specKeyword)
+            }
+            
+            if (priceKeyword) {
+                const priceNum = parseFloat(priceKeyword)
+                if (!isNaN(priceNum)) {
+                    query = query.eq('单价', priceNum)
+                }
+            }
+            
+            if (rangeFilter !== 'all') {
+                query = query.eq('利润率档位', rangeFilter)
+            }
+            
+            const start = (page - 1) * poolPageSize
+            const { data, error, count } = await query.range(start, start + poolPageSize - 1)
+            if (error) { 
+                console.error('加载失败:', error)
+                document.getElementById('dataPoolBody').innerHTML = '<tr><td colspan="9" style="text-align:center;">加载失败，请刷新页面<\/td><\/tr>'
+                return 
+            }
+            poolTotalRecords = count || 0
+            poolTotalPages = Math.ceil(poolTotalRecords / poolPageSize)
+            renderDataPoolTable(data || [])
+            updatePoolPagination()
+        }
+        
+        function renderDataPoolTable(data) {
+            const tbody = document.getElementById('dataPoolBody')
+            if (!data || data.length === 0) { 
+                tbody.innerHTML = '<td><td colspan="9" style="text-align:center;">暂无数据<\/td><\/tr>'
+                return 
+            }
+            tbody.innerHTML = data.map(item => `
+                <tr data-id="${item.id}" data-product='${JSON.stringify(item)}'>
+                    <td class="checkbox-cell"><input type="checkbox" class="pool-row-checkbox" value="${item.id}" onchange="updateBatchButtonsVisibility()"><\/td>
+                    <td class="editable-cell" data-field="佣金比例">${(item.佣金比例 * 100).toFixed(2)}%<\/td>
+                    <td class="editable-cell" data-field="单价">${item.单价}<\/td>
+                    <td class="editable-cell" data-field="最终品名">${item.最终品名}<\/td>
+                    <td class="editable-cell" data-field="规格">${item.规格}<\/td>
+                    <td class="editable-cell" data-field="货款">${item.货款}<\/td>
+                    <td>${((item.线上百分比 || 0) * 100).toFixed(2)}%<\/td>
+                    <td>${getRangeDisplay(item)}<\/td>
+                    <td>
+                        <button class="edit-btn" onclick="startEditRow(${item.id})">编辑</button>
+                        <button class="delete-btn" onclick="deletePoolItem(${item.id})">删除</button>
+                    <\/td>
+                <\/tr>
+            `).join('')
+        }
+        
+        function updatePoolPagination() {
+            document.getElementById('poolCurrentPage').textContent = currentPoolPage
+            document.getElementById('poolTotalPages').textContent = poolTotalPages
+            document.getElementById('poolTotalRecords').textContent = poolTotalRecords
+            document.getElementById('poolFirstPage').disabled = currentPoolPage <= 1
+            document.getElementById('poolPrevPage').disabled = currentPoolPage <= 1
+            document.getElementById('poolNextPage').disabled = currentPoolPage >= poolTotalPages
+            document.getElementById('poolLastPage').disabled = currentPoolPage >= poolTotalPages
+        }
+        
+        function goToPoolPage(page) {
+            if (page < 1 || page > poolTotalPages) return
+            loadDataPool(page, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+        }
+        
+        function searchDataPool() {
+            poolSearchKeyword = document.getElementById('poolSearch').value.trim()
+            poolSearchSpec = document.getElementById('poolSearchSpec').value.trim()
+            poolSearchPrice = document.getElementById('poolSearchPrice').value.trim()
+            loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+        }
+        
+        function resetDataPoolSearch() {
+            document.getElementById('poolSearch').value = ''
+            document.getElementById('poolSearchSpec').value = ''
+            document.getElementById('poolSearchPrice').value = ''
+            poolSearchKeyword = ''
+            poolSearchSpec = ''
+            poolSearchPrice = ''
+            loadDataPool(1, '', '', '', currentRangeFilter)
+        }
+        
+        function toggleSelectAllPool() {
+            const isChecked = document.getElementById('selectAllPool').checked
+            document.querySelectorAll('.pool-row-checkbox').forEach(cb => cb.checked = isChecked)
+	  updateBatchButtonsVisibility()  // 添加这一行
+        }
+        
+        async function deleteSelectedPoolRows() {
+            const selected = document.querySelectorAll('.pool-row-checkbox:checked')
+            if (selected.length === 0) { showAlert('请先选择要删除的记录！', 'warning'); return }
+            if (!confirm(`确定删除 ${selected.length} 条记录？`)) return
+            
+            const ids = Array.from(selected).map(cb => parseInt(cb.value))
+            try {
+                const { error } = await supabaseClient.from(CALC_TABLE_NAME).delete().in('id', ids)
+                if (error) throw error
+                showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
+                document.getElementById('selectAllPool').checked = false
+                await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+	updateBatchButtonsVisibility()  // 添加这一行
+            } catch (error) {
+                console.error('删除失败:', error)
+                showAlert('删除失败：' + error.message, 'danger')
+            }
+        }
+	// ========== 批量修改功能 ==========
+// 监听复选框变化，控制批量按钮显示
+function updateBatchButtonsVisibility() {
+    const selectedCount = document.querySelectorAll('.pool-row-checkbox:checked').length
+    const batchCostBtn = document.getElementById('batchModifyCostBtn')
+    const batchNameBtn = document.getElementById('batchModifyNameBtn')
+    
+    if (selectedCount > 0) {
+        batchCostBtn.style.display = 'inline-block'
+        batchNameBtn.style.display = 'inline-block'
+    } else {
+        batchCostBtn.style.display = 'none'
+        batchNameBtn.style.display = 'none'
+    }
+}
+
+// 获取选中的ID列表
+function getSelectedIds() {
+    const selected = document.querySelectorAll('.pool-row-checkbox:checked')
+    return Array.from(selected).map(cb => parseInt(cb.value))
+}
+
+// 批量修改货款弹窗
+function openBatchCostModal() {
+    const selectedIds = getSelectedIds()
+    if (selectedIds.length === 0) {
+        showAlert('请先勾选要修改的记录', 'warning')
+        return
+    }
+    
+    // 获取选中产品的当前信息用于预览
+    const selectedRows = []
+    document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
+        const row = cb.closest('tr')
+        if (row && row.dataset.product) {
+            try {
+                const product = JSON.parse(row.dataset.product)
+                selectedRows.push(product)
+            } catch(e) {}
+        }
+    })
+    
+    let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>品名</th><th>规格</th><th>原货款</th><th>新货款</th></tr></thead><tbody>'
+    selectedRows.forEach(product => {
+        previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td>${product.货款}元</td><td class="preview-cost">-</td></tr>`
+    })
+    previewHtml += '</tbody></table></div>'
+    
+    const modalHtml = `
+        <div id="batchCostModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1003; display: flex; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
+                <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改货款</h3>
+                <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>新货款金额 (元)</label>
+                    <input type="number" id="batchNewCost" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新货款金额">
+                </div>
+                ${previewHtml}
+                <div style="margin-top: 15px; padding: 8px; background-color: #fff8e6; border-radius: 6px; font-size: 13px; color: #b58900;">
+                    ⚠️ 注意：修改货款后，佣金比例和线上百分比将重新计算
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                    <button onclick="confirmBatchModifyCost()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
+                </div>
+            </div>
+        </div>
+    `
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml)
+    
+    // 预览功能
+    const costInput = document.getElementById('batchNewCost')
+    costInput.addEventListener('input', function() {
+        const newCost = parseFloat(this.value)
+        if (!isNaN(newCost)) {
+            document.querySelectorAll('.preview-cost').forEach(el => {
+                el.textContent = newCost.toFixed(2) + '元'
+            })
+        } else {
+            document.querySelectorAll('.preview-cost').forEach(el => {
+                el.textContent = '-'
+            })
+        }
+    })
+}
+
+// 批量修改品名弹窗
+function openBatchNameModal() {
+    const selectedIds = getSelectedIds()
+    if (selectedIds.length === 0) {
+        showAlert('请先勾选要修改的记录', 'warning')
+        return
+    }
+    
+    // 获取选中产品的当前信息用于预览
+    const selectedRows = []
+    document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
+        const row = cb.closest('tr')
+        if (row && row.dataset.product) {
+            try {
+                const product = JSON.parse(row.dataset.product)
+                selectedRows.push(product)
+            } catch(e) {}
+        }
+    })
+    
+    let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>原品名</th><th>规格</th><th>新品名</th></tr></thead><tbody>'
+    selectedRows.forEach(product => {
+        previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td class="preview-name">-</td></tr>`
+    })
+    previewHtml += '</tbody></table></div>'
+    
+    const modalHtml = `
+        <div id="batchNameModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1004; display: flex; justify-content: center; align-items: center;">
+            <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
+                <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改最终品名</h3>
+                <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>统一替换为</label>
+                    <input type="text" id="batchNewName" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新最终品名">
+                </div>
+                ${previewHtml}
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                    <button onclick="confirmBatchModifyName()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
+                </div>
+            </div>
+        </div>
+    `
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml)
+    
+    // 预览功能
+    const nameInput = document.getElementById('batchNewName')
+    nameInput.addEventListener('input', function() {
+        const newName = this.value.trim()
+        if (newName) {
+            document.querySelectorAll('.preview-name').forEach(el => {
+                el.textContent = newName
+            })
+        } else {
+            document.querySelectorAll('.preview-name').forEach(el => {
+                el.textContent = '-'
+            })
+        }
+    })
+}
+
+// 关闭批量修改弹窗
+function closeBatchModal() {
+    const modals = ['batchCostModal', 'batchNameModal']
+    modals.forEach(id => {
+        const modal = document.getElementById(id)
+        if (modal) modal.remove()
+    })
+}
+
+// 确认批量修改货款
+async function confirmBatchModifyCost() {
+    const newCost = parseFloat(document.getElementById('batchNewCost').value)
+    if (isNaN(newCost) || newCost <= 0) {
+        showAlert('请输入有效的货款金额', 'warning')
+        return
+    }
+    
+    const selectedIds = getSelectedIds()
+    if (selectedIds.length === 0) {
+        showAlert('没有选中的记录', 'warning')
+        closeBatchModal()
+        return
+    }
+    
+    closeBatchModal()
+    showAlert(`正在批量修改 ${selectedIds.length} 条记录的货款...`, 'warning')
+    
+    let successCount = 0
+    let failCount = 0
+    
+    for (const id of selectedIds) {
+        const { error } = await supabaseClient
+            .from(CALC_TABLE_NAME)
+            .update({ 货款: newCost })
+            .eq('id', id)
+        
+        if (error) {
+            failCount++
+            console.error(`更新ID ${id} 失败:`, error)
+        } else {
+            successCount++
+        }
+    }
+    
+    if (failCount > 0) {
+        showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+    } else {
+        showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+    }
+    
+    await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+}
+
+// 确认批量修改品名
+async function confirmBatchModifyName() {
+    const newName = document.getElementById('batchNewName').value.trim()
+    if (!newName) {
+        showAlert('请输入新的最终品名', 'warning')
+        return
+    }
+    
+    const selectedIds = getSelectedIds()
+    if (selectedIds.length === 0) {
+        showAlert('没有选中的记录', 'warning')
+        closeBatchModal()
+        return
+    }
+    
+    closeBatchModal()
+    showAlert(`正在批量修改 ${selectedIds.length} 条记录的品名...`, 'warning')
+    
+    let successCount = 0
+    let failCount = 0
+    
+    for (const id of selectedIds) {
+        const { error } = await supabaseClient
+            .from(CALC_TABLE_NAME)
+            .update({ 最终品名: newName })
+            .eq('id', id)
+        
+        if (error) {
+            failCount++
+            console.error(`更新ID ${id} 失败:`, error)
+        } else {
+            successCount++
+        }
+    }
+    
+    if (failCount > 0) {
+        showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+    } else {
+        showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+    }
+    
+    await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+ }
+        
+        async function startEditRow(id) {
+    if (editingRowId) await saveEditRow()
+    editingRowId = id
+    const row = document.querySelector(`#dataPoolBody tr[data-id="${id}"]`)
+    if (!row) return
+    const product = JSON.parse(row.dataset.product)
+    const cells = row.querySelectorAll('.editable-cell')
+    cells.forEach(cell => {
+        const field = cell.dataset.field
+        let value = product[field]
+        if (field === '佣金比例') {
+            // 佣金比例：存储的是小数（如0.79），编辑时显示为百分比数值（79），保存时再转换回小数
+            value = (value ).toFixed(2)
+        }
+        cell.innerHTML = `<input class="inline-edit" type="text" value="${value}" data-field="${field}">`
+    })
+    const actionCell = row.cells[8]
+    actionCell.innerHTML = `<button class="edit-btn" onclick="saveEditRow()">保存</button><button class="delete-btn" onclick="cancelEditRow()">取消</button>`
+}
+        
+        async function saveEditRow() {
+            if (!editingRowId) return
+            const row = document.querySelector(`#dataPoolBody tr[data-id="${editingRowId}"]`)
+            if (!row) return
+            
+            const inputs = row.querySelectorAll('.inline-edit')
+            const updates = {}
+            let hasError = false
+            
+            inputs.forEach(input => {
+                const field = input.dataset.field
+                let value = input.value.trim()
+                if (field === '单价' || field === '货款') { 
+                    value = parseFloat(value)
+                    if (isNaN(value)) hasError = true
+                    updates[field] = value 
+                }
+                else { 
+                    updates[field] = value 
+                }
+            })
+            
+            if (hasError) {
+                showAlert('请输入有效的数字', 'danger')
                 return
             }
             
-            allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
-            totalPages = Math.ceil(allDataForPagination.length / pageSize)
-            if (currentPage > totalPages) currentPage = totalPages
-            if (currentPage < 1) currentPage = 1
+            const { error } = await supabaseClient.from(CALC_TABLE_NAME).update(updates).eq('id', editingRowId)
+            if (error) { 
+                showAlert('更新失败：' + error.message, 'danger')
+                return 
+            }
             
-            const start = (currentPage - 1) * pageSize
-            const end = Math.min(start + pageSize, allDataForPagination.length)
-            const pageData = allDataForPagination.slice(start, end)
-            
-            pageData.forEach(item => {
-                const tr = document.createElement('tr')
-                tr.setAttribute('data-serial', item.序号)
-                tr.innerHTML = `
-                    <td class="checkbox-cell"><input type="checkbox" class="row-checkbox" value="${item.序号}"></td>
-                    <td>${item.序号}</td>
-                    <td>${item.达人名称}</td>
-                    <td>${item.商品规格}</td>
-                    <td>${item.原始商品规格 || '-'}</td>
-                    <td>${Number(item.商品价格).toFixed(2)}</td>
-                    <td>${Number(item.佣金).toFixed(2)}</td>
-                    <td>${formatTime(item.录入时间)}</td>
-                `
-                tableBody.appendChild(tr)
-            })
-            
-            document.getElementById('totalRecords').textContent = allDataForPagination.length
-            document.getElementById('totalPages').textContent = totalPages
-            document.getElementById('pageInput').value = currentPage
-            updatePaginationButtons()
+            showAlert('更新成功，佣金比例已自动重新计算', 'success')
+            cancelEditRow()
+            await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-
-        // ========== 加载数据 ==========
-        async function loadDataToTable(filterData = null) {
+        
+        function cancelEditRow() { editingRowId = null; loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter) }
+        
+        async function deletePoolItem(id) {
+            if (!confirm('确定删除该记录吗？')) return
+            const { error } = await supabaseClient.from(CALC_TABLE_NAME).delete().eq('id', id)
+            if (error) { showAlert('删除失败：' + error.message, 'danger'); return }
+            showAlert('删除成功', 'success')
+            await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+        }
+        
+        // ========== 导出佣金测算表数据 ==========
+        async function exportPoolData() {
             try {
-                if (filterData) {
-                    renderTableData(filterData)
+                showAlert('正在准备导出数据，请稍候...', 'warning')
+                
+                let query = supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('*')
+                    .order('id', { ascending: false })
+                
+                if (currentRangeFilter !== 'all') {
+                    query = query.eq('利润率档位', currentRangeFilter)
+                }
+                
+                if (poolSearchKeyword) {
+                    query = query.ilike('最终品名', `%${poolSearchKeyword}%`)
+                }
+                
+                if (poolSearchSpec) {
+                    query = query.eq('规格', poolSearchSpec)
+                }
+                
+                if (poolSearchPrice) {
+                    const priceNum = parseFloat(poolSearchPrice)
+                    if (!isNaN(priceNum)) {
+                        query = query.eq('单价', priceNum)
+                    }
+                }
+                
+                const { data, error } = await query
+                if (error) throw error
+                if (!data || data.length === 0) {
+                    showAlert('暂无数据可导出！', 'warning')
                     return
                 }
+                
+                const columns = [
+                    { key: 'id', name: 'ID' },
+                    { key: '编号', name: '编号' },
+                    { key: '品名', name: '品名' },
+                    { key: '佣金比例', name: '佣金比例', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '单价', name: '单价', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '最终品名', name: '最终品名' },
+                    { key: '规格', name: '规格' },
+                    { key: '货款', name: '货款', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '运费', name: '运费' },  // 修改：移除 formatter，直接输出文本
+                    { key: '运费险', name: '运费险', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '抖店手续费', name: '抖店手续费', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '退货费用', name: '退货费用', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '总成本', name: '总成本', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '成本比', name: '成本比', formatter: (v) => v ? (v * 100).toFixed(4) + '%' : '' },
+                    { key: '线上利润', name: '线上利润', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '尾款利润', name: '尾款利润', formatter: (v) => v ? v.toFixed(2) : '' },
+                    { key: '尾款利润百分比', name: '尾款利润百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+	    { key: '线上百分比', name: '线上百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '发货总润比', name: '发货总润比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: 'GMV毛利比', name: 'GMV毛利比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '利润率档位', name: '利润率档位' },
+                    { key: '自定义最小利润率', name: '自定义最小利润率', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '自定义最大利润率', name: '自定义最大利润率', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '创建时间', name: '创建时间', formatter: (v) => v ? formatTime(v) : '' },
+                    { key: '更新时间', name: '更新时间', formatter: (v) => v ? formatTime(v) : '' }
+                ]
+                
+                let csvContent = columns.map(col => col.name).join(',') + '\n'
+                
+                data.forEach(item => {
+                    const row = columns.map(col => {
+                        let value = item[col.key]
+                        if (col.formatter) {
+                            value = col.formatter(value)
+                        } else if (value === null || value === undefined) {
+                            value = ''
+                        } else if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
+                            value = `"${value.replace(/"/g, '""')}"`
+                        }
+                        return value
+                    }).join(',')
+                    csvContent += row + '\n'
+                })
+                
+                let fileName = '佣金测算表'
+                if (currentRangeFilter !== 'all') fileName += `_${currentRangeFilter}`
+                fileName += `_${formatDate(new Date())}.csv`
+                
+                const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' })
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = fileName
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                URL.revokeObjectURL(url)
+                
+                showAlert(`导出成功！共 ${data.length} 条数据`, 'success')
+            } catch (error) {
+                console.error('导出失败:', error)
+                showAlert('导出失败：' + error.message, 'danger')
+            }
+        }
+        
+        // 提取品名选项（处理斜杠分隔和括号备注）
+function extractNameOptions(originalName) {
+    if (!originalName) return []
+    
+    let options = []
+    
+    // 1. 先按斜杠分割（这是主要的分隔符）
+    if (originalName.includes('/')) {
+        const splitNames = originalName.split('/').map(n => n.trim()).filter(n => n)
+        options.push(...splitNames)
+    } else {
+        options.push(originalName)
+    }
+    
+    // 2. 对每个选项，再处理括号内容（移除括号及括号内内容作为备选）
+    // 注意：不要使用全局正则，每次重新创建
+    const additionalOptions = []
+    
+    for (const opt of options) {
+        // 每次循环重新创建正则，避免状态残留
+        const bracketPattern = /[（(][^）)]*[）)]/
+        if (bracketPattern.test(opt)) {
+            const withoutBracket = opt.replace(bracketPattern, '').trim()
+            if (withoutBracket && withoutBracket !== opt && !options.includes(withoutBracket)) {
+                additionalOptions.push(withoutBracket)
+            }
+        }
+    }
+    options.push(...additionalOptions)
+    
+    // 3. 去重（保留原始顺序）
+    const uniqueOptions = []
+    for (const opt of options) {
+        if (!uniqueOptions.includes(opt)) {
+            uniqueOptions.push(opt)
+        }
+    }
+    
+    console.log('提取的品名选项:', uniqueOptions)  // 调试用，可删除
+    
+    return uniqueOptions
+}
+        
+        // 清理品名：移除括号内容
+        function cleanProductName(name) {
+            if (!name) return name
+            let cleaned = name.replace(/[（(][^）)]*[）)]/g, '').trim()
+            if (!cleaned) return name
+            return cleaned
+        }
 
-                const { data, error } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .select('*')
-                    .order('序号', { ascending: false })
+        // ========== 添加达人佣金 ==========
+        function openTalentModal() {
+    const selected = document.querySelectorAll('.pool-row-checkbox:checked')
+    if (selected.length === 0) {
+        alert('请先在佣金测算表中勾选一条产品')
+        return
+    }
+    if (selected.length > 1) {
+        alert('只能勾选一条产品，请重新选择')
+        return
+    }
+    
+    const checkbox = selected[0]
+    const row = checkbox.closest('tr')
+    if (!row) {
+        alert('获取产品信息失败，请重试')
+        return
+    }
+    
+    let product = null
+    if (row.dataset.product) {
+        try {
+            product = JSON.parse(row.dataset.product)
+        } catch(e) {
+            console.error('解析失败:', e)
+        }
+    }
+    
+    if (!product) {
+        const cells = row.cells
+        product = {
+            id: row.getAttribute('data-id') || Date.now(),
+            佣金比例: parseFloat(cells[1]?.innerText || '0') / 100,
+            单价: parseFloat(cells[2]?.innerText || '0'),
+            最终品名: cells[3]?.innerText || '',
+            规格: cells[4]?.innerText || '',
+            货款: parseFloat(cells[5]?.innerText || '0'),
+            线上百分比: parseFloat(cells[6]?.innerText || '0') / 100 || 0
+        }
+    }
+    
+    if (!product || !product.最终品名) {
+        alert('产品数据无效，请刷新页面后重试')
+        return
+    }
+    
+    // 存储完整产品数据
+    currentCalculatedData = product
+    
+    // 处理品名：提取可选的品名选项
+    const finalName = product.最终品名
+    let nameOptions = extractNameOptions(finalName)
+    let selectedName = nameOptions.length > 0 ? nameOptions[0] : finalName
+    
+    // 构建品名选择HTML（使用 Select 下拉框 + 可编辑输入框）
+let nameSelectHtml = ''
+if (nameOptions.length > 1) {
+    // 生成选项HTML
+    const optionsHtml = nameOptions.map(name => `<option value="${name.replace(/"/g, '&quot;')}">${name}</option>`).join('')
+    nameSelectHtml = `
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label>选择品名 <span class="required">*</span></label>
+            <select id="selectedProductNameSelect" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0; margin-bottom: 8px;" onchange="document.getElementById('selectedProductNameInput').value = this.value">
+                <option value="">请选择</option>
+                ${optionsHtml}
+                <option value="">手动输入</option>
+            </select>
+            <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="或直接输入修改" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
+            <small style="color: #999;">可从下拉列表选择，或直接输入修改</small>
+        </div>
+    `
+} else {
+    nameSelectHtml = `
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label>品名 <span class="required">*</span></label>
+            <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="请输入品名" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
+        </div>
+    `
+}
+    
+    // 更新模态框内容
+    const modalContent = document.querySelector('#talentModal .talent-modal-content')
+    
+    modalContent.innerHTML = `
+        <h3>👤 添加达人佣金</h3>
+        ${nameSelectHtml}
+        <div class="form-group">
+            <label>达人名称 <span class="required">*</span></label>
+            <input type="text" id="talentNameInput" placeholder="请输入达人名称">
+        </div>
+        <div class="form-group">
+            <label>初始商品规格 <span class="required"></span></label>
+            <input type="text" id="originalProductSpec" placeholder="选填">
+            <small style="color: #999;">选填，用于记录产品原始规格信息</small>
+        </div>
+        <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+            单价：${product.单价}元<br>
+            佣金比例：${(product.佣金比例 * 100).toFixed(2)}%<br>
+            线上百分比：${((product.线上百分比 || 0) * 100).toFixed(2)}%
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+            <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
+        </div>
+    `
+    
+    document.getElementById('talentModal').style.display = 'flex'
+}
+        
+        async function confirmAddToCommission() {
+    // 获取用户输入
+    const talentName = document.getElementById('talentNameInput')?.value.trim() || ''
+    // 优先从输入框获取，如果输入框为空则从下拉框获取
+	let selectedName = document.getElementById('selectedProductNameInput')?.value.trim() || ''
+	if (!selectedName) {
+    const selectEl = document.getElementById('selectedProductNameSelect')
+    if (selectEl && selectEl.value && selectEl.value !== '' && selectEl.value !== '') {
+        selectedName = selectEl.value
+    }
+}
+    const originalSpec = document.getElementById('originalProductSpec')?.value.trim() || ''
+    
+    // 验证必填字段
+    if (!talentName) { 
+        showAlert('请输入达人名称', 'warning'); 
+        return 
+    }
+    if (!selectedName) {
+        showAlert('请输入最终品名', 'warning');
+        return
+    }
+    if (!currentCalculatedData) { 
+        showAlert('产品数据不存在，请重新勾选产品', 'danger'); 
+        return 
+    }
+    
+    // 获取最大序号
+    const { data: maxData } = await supabaseClient
+        .from(TABLE_NAME)
+        .select('序号')
+        .order('序号', { ascending: false })
+        .limit(1)
+    
+    const nextSerial = (maxData && maxData[0]?.序号) ? maxData[0].序号 + 1 : 1
+    
+    // 构建商品规格：选择的品名 + 规格（不加空格）
+    const productSpec = `${selectedName}${currentCalculatedData.规格}`
+    
+    // 获取线上百分比
+    const onlinePercent = currentCalculatedData.线上百分比 || 0
+    
+    // 插入数据到达人佣金表
+    const { error } = await supabaseClient
+        .from(TABLE_NAME)
+        .insert([{
+            序号: nextSerial,
+            达人名称: talentName,
+            商品规格: productSpec,
+            初始商品规格: originalSpec,
+            商品价格: currentCalculatedData.单价,
+            佣金: currentCalculatedData.佣金比例,
+            线上百分比: onlinePercent,
+            录入时间: getCurrentLocalTime()
+        }])
+    
+    if (error) { 
+        console.error('添加失败:', error)
+        showAlert('添加失败：' + error.message, 'danger') 
+    } else { 
+        showAlert(`已添加达人"${talentName}"的佣金数据`, 'success')
+        closeTalentModal()
+        await loadDataToTable()
+    }
+}
+        
+        function closeTalentModal() {
+            // 恢复模态框原始内容
+            const modalContent = document.querySelector('#talentModal .talent-modal-content')
+            modalContent.innerHTML = `
+                <h3>👤 添加达人佣金</h3>
+                <div class="form-group">
+                    <label>达人名称 <span class="required">*</span></label>
+                    <input type="text" id="talentNameInput" placeholder="请输入达人名称">
+                </div>
+                <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                    请先勾选佣金测算表中的产品
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                    <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
+                </div>
+            `
+            document.getElementById('talentModal').style.display = 'none'
+        }
+        
+        function closeNegativeModal() { document.getElementById('negativeDataModal').style.display = 'none' }
+        function closeEditCostModal() { document.getElementById('editCostModal').style.display = 'none' }
+        function saveNewCost() { document.getElementById('editCostModal').style.display = 'none'; showAlert('货款已更新', 'success') }
 
+        // ========== 佣金管理界面原有函数 ==========
+        async function syncData() {
+            const syncBtn = document.querySelector('#manageTab .btn-sync')
+            const originalText = syncBtn.innerHTML
+            syncBtn.innerHTML = '<span class="loading"></span>同步中...'
+            syncBtn.disabled = true
+            try {
+                const { data, error } = await supabaseClient.from(TABLE_NAME).select('*').order('序号', { ascending: false })
                 if (error) throw error
-
                 originalDataList = data || []
                 currentPage = 1
                 renderTableData(originalDataList)
-                
-                if (!lastSyncTime) {
-                    lastSyncTime = new Date()
-                    document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
-                }
-            } catch (error) {
-                console.error('加载数据失败:', error)
-                showAlert('加载数据失败：' + error.message, 'danger')
-            }
+                lastSyncTime = new Date()
+                document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
+                showAlert(`同步成功！共 ${originalDataList.length} 条数据`, 'success')
+            } catch (error) { console.error('同步失败:', error); showAlert('同步失败：' + error.message, 'danger')
+            } finally { syncBtn.innerHTML = originalText; syncBtn.disabled = false }
         }
-
-        // ========== 分页函数 ==========
+        
+        function renderTableData(dataList) {
+    const tableBody = document.getElementById('tableBody')
+    tableBody.innerHTML = ''
+    if (!dataList || dataList.length === 0) {
+        const tr = document.createElement('tr')
+        tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据<\/td><\/tr>'
+        tableBody.appendChild(tr)
+        document.getElementById('totalRecords').textContent = '0'
+        document.getElementById('totalPages').textContent = '1'
+        document.getElementById('pageInput').value = '1'
+        updatePaginationButtons()
+        return
+    }
+    allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
+    totalPages = Math.ceil(allDataForPagination.length / pageSize)
+    if (currentPage > totalPages) currentPage = totalPages
+    if (currentPage < 1) currentPage = 1
+    const start = (currentPage - 1) * pageSize
+    const end = Math.min(start + pageSize, allDataForPagination.length)
+    const pageData = allDataForPagination.slice(start, end)
+    pageData.forEach(item => {
+        const tr = document.createElement('tr')
+        tr.setAttribute('data-serial', item.序号)
+        tr.innerHTML = `<td class="checkbox-cell"><input type="checkbox" class="row-checkbox" value="${item.序号}"><\/td>
+            <td>${item.序号}<\/td><td>${item.达人名称}<\/td><td>${item.商品规格}<\/td>
+            <td>${item.初始商品规格 || '-'}<\/td><td>${Number(item.商品价格).toFixed(2)}<\/td>
+            <td>${Number(item.佣金).toFixed(2)}<\/td>
+            <td>${item.线上百分比 ? (Number(item.线上百分比) * 100).toFixed(2) + '%' : '-'}<\/td>
+            <td>${formatTime(item.录入时间)}<\/td>`
+        tableBody.appendChild(tr)
+    })
+    document.getElementById('totalRecords').textContent = allDataForPagination.length
+    document.getElementById('totalPages').textContent = totalPages
+    document.getElementById('pageInput').value = currentPage
+    updatePaginationButtons()
+}
+        
+        async function loadDataToTable(filterData = null) {
+            try {
+                if (filterData) { renderTableData(filterData); return }
+                const { data, error } = await supabaseClient.from(TABLE_NAME).select('*').order('序号', { ascending: false })
+                if (error) throw error
+                originalDataList = data || []
+                currentPage = 1
+                renderTableData(originalDataList)
+                if (!lastSyncTime) { lastSyncTime = new Date(); document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}` }
+            } catch (error) { console.error('加载数据失败:', error); showAlert('加载数据失败：' + error.message, 'danger') }
+        }
+        
         function goToPage(page) {
             page = parseInt(page)
             if (isNaN(page) || page < 1) page = 1
             if (page > totalPages) page = totalPages
-            if (page !== currentPage) {
-                currentPage = page
-                renderTableData(allDataForPagination)
-            }
+            if (page !== currentPage) { currentPage = page; renderTableData(allDataForPagination) }
         }
-
-        function changePageSize(newSize) {
-            pageSize = parseInt(newSize)
-            currentPage = 1
-            renderTableData(allDataForPagination)
-        }
-
+        function changePageSize(newSize) { pageSize = parseInt(newSize); currentPage = 1; renderTableData(allDataForPagination) }
         function updatePaginationButtons() {
-            const firstBtn = document.getElementById('firstPage')
-            const prevBtn = document.getElementById('prevPage')
-            const nextBtn = document.getElementById('nextPage')
-            const lastBtn = document.getElementById('lastPage')
-            
+            const firstBtn = document.getElementById('firstPage'), prevBtn = document.getElementById('prevPage')
+            const nextBtn = document.getElementById('nextPage'), lastBtn = document.getElementById('lastPage')
             if (firstBtn && prevBtn && nextBtn && lastBtn) {
-                firstBtn.disabled = currentPage === 1
-                prevBtn.disabled = currentPage === 1
-                nextBtn.disabled = currentPage === totalPages
-                lastBtn.disabled = currentPage === totalPages
+                firstBtn.disabled = currentPage === 1; prevBtn.disabled = currentPage === 1
+                nextBtn.disabled = currentPage === totalPages; lastBtn.disabled = currentPage === totalPages
             }
         }
-
-        // ========== 提交数据 ==========
+        
+        let isSubmitting = false
         async function submitData() {
+            if (isSubmitting) {
+                showAlert('正在提交中，请勿重复点击', 'warning')
+                return
+            }
+            
             const talentName = document.getElementById('talentName').value.trim()
             const productSpec = document.getElementById('productSpec').value.trim()
             const originalSpec = document.getElementById('originalSpec').value.trim()
@@ -2110,6 +2518,12 @@
                 return
             }
             
+            isSubmitting = true
+            const submitBtn = document.querySelector('#manageTab .btn-submit')
+            const originalBtnText = submitBtn.innerHTML
+            submitBtn.innerHTML = '<span class="loading"></span>提交中...'
+            submitBtn.disabled = true
+            
             try {
                 const { data: existingData, error: queryError } = await supabaseClient
                     .from(TABLE_NAME)
@@ -2119,15 +2533,15 @@
                     .eq('商品价格', productPrice)
                 
                 if (queryError) throw queryError
-
+                
                 const currentTime = getCurrentLocalTime()
-
+                
                 if (existingData && existingData.length > 0) {
                     const existing = existingData[0]
                     const { error: updateError } = await supabaseClient
                         .from(TABLE_NAME)
                         .update({
-                            原始商品规格: originalSpec,
+                            初始商品规格: originalSpec,
                             佣金: commission,
                             录入时间: currentTime
                         })
@@ -2136,31 +2550,54 @@
                     if (updateError) throw updateError
                     showAlert(`检测到重复数据，已更新！`, 'warning')
                 } else {
-                    const { data: maxData } = await supabaseClient
+                    const { data: doubleCheck, error: checkError } = await supabaseClient
                         .from(TABLE_NAME)
-                        .select('序号')
-                        .order('序号', { ascending: false })
+                        .select('*')
+                        .eq('达人名称', talentName)
+                        .eq('商品规格', productSpec)
+                        .eq('商品价格', productPrice)
                         .limit(1)
                     
-                    let nextSerial = 1
-                    if (maxData && maxData.length > 0) {
-                        nextSerial = maxData[0].序号 + 1
+                    if (checkError) throw checkError
+                    
+                    if (doubleCheck && doubleCheck.length > 0) {
+                        const existing = doubleCheck[0]
+                        const { error: updateError } = await supabaseClient
+                            .from(TABLE_NAME)
+                            .update({
+                                初始商品规格: originalSpec,
+                                佣金: commission,
+                                录入时间: currentTime
+                            })
+                            .eq('id', existing.id)
+                        
+                        if (updateError) throw updateError
+                        showAlert(`检测到重复数据，已更新！`, 'warning')
+                    } else {
+                        const { data: maxData } = await supabaseClient
+                            .from(TABLE_NAME)
+                            .select('序号')
+                            .order('序号', { ascending: false })
+                            .limit(1)
+                        
+                        let nextSerial = 1
+                        if (maxData && maxData.length > 0) nextSerial = maxData[0].序号 + 1
+                        
+                        const { error: insertError } = await supabaseClient
+                            .from(TABLE_NAME)
+                            .insert([{
+                                序号: nextSerial,
+                                达人名称: talentName,
+                                商品规格: productSpec,
+                                初始商品规格: originalSpec,
+                                商品价格: productPrice,
+                                佣金: commission,
+                                录入时间: currentTime
+                            }])
+                        
+                        if (insertError) throw insertError
+                        showAlert(`数据提交成功！`, 'success')
                     }
-                    
-                    const { error: insertError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .insert([{
-                            序号: nextSerial,
-                            达人名称: talentName,
-                            商品规格: productSpec,
-                            原始商品规格: originalSpec,
-                            商品价格: productPrice,
-                            佣金: commission,
-                            录入时间: currentTime
-                        }])
-                    
-                    if (insertError) throw insertError
-                    showAlert(`数据提交成功！`, 'success')
                 }
                 
                 await loadDataToTable()
@@ -2168,65 +2605,42 @@
             } catch (error) {
                 console.error('提交失败:', error)
                 showAlert('提交失败：' + error.message, 'danger')
+            } finally {
+                isSubmitting = false
+                submitBtn.innerHTML = originalBtnText
+                submitBtn.disabled = false
             }
         }
-
-        // ========== 删除选中 ==========
+        
         async function deleteSelectedRows() {
-            const selected = document.querySelectorAll('.row-checkbox:checked')
-            if (selected.length === 0) {
-                showAlert('请先选择要删除的记录！', 'warning')
-                return
-            }
+            const selected = document.querySelectorAll('#manageTab .row-checkbox:checked')
+            if (selected.length === 0) { showAlert('请先选择要删除的记录！', 'warning'); return }
             if (!confirm(`确定删除 ${selected.length} 条记录？`)) return
-            
             const serials = Array.from(selected).map(cb => parseInt(cb.value))
-            
             try {
-                const { error } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .delete()
-                    .in('序号', serials)
-                
+                const { error } = await supabaseClient.from(TABLE_NAME).delete().in('序号', serials)
                 if (error) throw error
-                
                 await loadDataToTable()
                 document.getElementById('selectAll').checked = false
                 showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
-            } catch (error) {
-                console.error('删除失败:', error)
-                showAlert('删除失败：' + error.message, 'danger')
-            }
+            } catch (error) { console.error('删除失败:', error); showAlert('删除失败：' + error.message, 'danger') }
         }
-
-        // ========== 搜索数据 ==========
+        
         function searchData() {
             const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
             const searchSpec = document.getElementById('searchSpec').value.trim().toLowerCase()
-            
-            if (!searchTalent && !searchSpec) {
-                showAlert('请输入查找关键词！', 'warning')
-                return
-            }
-            
+            if (!searchTalent && !searchSpec) { showAlert('请输入查找关键词！', 'warning'); return }
             const filteredData = originalDataList.filter(item => {
                 const talentMatch = item.达人名称.toLowerCase().includes(searchTalent)
                 const specMatch = item.商品规格.toLowerCase().includes(searchSpec)
                 return (talentMatch && !searchSpec) || (specMatch && !searchTalent) || (talentMatch && specMatch)
             })
-            
-            if (filteredData.length === 0) {
-                showAlert('未找到匹配的数据！', 'warning')
-                renderTableData([])
-                return
-            }
-            
+            if (filteredData.length === 0) { showAlert('未找到匹配的数据！', 'warning'); renderTableData([]); return }
             showAlert(`找到 ${filteredData.length} 条匹配数据！`, 'success')
             currentPage = 1
             renderTableData(filteredData)
         }
-
-        // ========== 重置搜索 ==========
+        
         function resetSearch() {
             document.getElementById('searchTalent').value = ''
             document.getElementById('searchSpec').value = ''
@@ -2235,334 +2649,107 @@
             showAlert('查找条件已重置！', 'success')
             document.getElementById('selectAll').checked = false
         }
-
-        // ========== 导出数据 ==========
+        
         async function exportData() {
             try {
-                const { data, error } = await supabaseClient
-                    .from(TABLE_NAME)
-                    .select('*')
-                    .order('序号')
-                
+                const { data, error } = await supabaseClient.from(TABLE_NAME).select('*').order('序号')
                 if (error) throw error
-                
-                if (!data || data.length === 0) {
-                    showAlert('暂无数据可导出！', 'warning')
-                    return
-                }
-                
-                let csvContent = '序号,达人名称,商品规格,初始商品规格,商品价格,佣金,录入时间\n'
-                
+                if (!data || data.length === 0) { showAlert('暂无数据可导出！', 'warning'); return }
+                let csvContent = '序号,达人名称,商品规格,初始商品规格,商品价格,佣金,线上百分比,录入时间\n'
                 data.forEach(item => {
-                    const row = [
-                        item.序号,
-                        `"${item.达人名称}"`,
-                        `"${item.商品规格}"`,
-                        `"${item.原始商品规格 || ''}"`,
-                        item.商品价格,
-                        item.佣金,
-                        `"${formatTime(item.录入时间)}"`
-                    ].join(',')
+                    const row = [item.序号, `"${item.达人名称}"`, `"${item.商品规格}"`, `"${item.初始商品规格 || ''}"`, item.商品价格, item.佣金, item.线上百分比 ? (item.线上百分比 * 100).toFixed(2) + '%' : '-', `"${formatTime(item.录入时间)}"`].join(',')
                     csvContent += row + '\n'
                 })
-                
                 const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' })
                 const url = URL.createObjectURL(blob)
-                const a = document.createElement('a')
-                a.href = url
-                a.download = `达人佣金数据_${formatDate(new Date())}.csv`
-                document.body.appendChild(a)
-                a.click()
-                document.body.removeChild(a)
-                URL.revokeObjectURL(url)
+                const a = document.createElement('a'); a.href = url; a.download = `达人佣金数据_${formatDate(new Date())}.csv`
+                document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url)
                 showAlert('导出成功！', 'success')
-            } catch (error) {
-                console.error('导出失败:', error)
-                showAlert('导出失败：' + error.message, 'danger')
-            }
+            } catch (error) { console.error('导出失败:', error); showAlert('导出失败：' + error.message, 'danger') }
         }
-
-// ========== 导入CSV（支持多种编码和BOM头） ==========
-async function importCSVFile(e) {
-    const file = e.target.files[0]
-    if (!file) return
-    if (!file.name.endsWith('.csv')) {
-        showAlert('请导入 CSV 格式的表格文件！', 'danger')
-        return
-    }
-
-    showAlert('正在导入数据，请稍候...', 'warning')
-    
-    const reader = new FileReader()
-    
-    reader.onload = async function(event) {
-        try {
-            let csv = event.target.result
-            
-            // 调试信息
-            console.log('原始文件前20个字符:', csv.substring(0, 20))
-            console.log('第一个字符的Unicode码:', csv.charCodeAt(0))
-            console.log('第二个字符的Unicode码:', csv.charCodeAt(1))
-            console.log('第三个字符的Unicode码:', csv.charCodeAt(2))
-            
-            // 处理BOM头 - 检查并移除
-            // 方式1: 移除UTF-8 BOM (EF BB BF)
-            if (csv.charCodeAt(0) === 0xEF && csv.charCodeAt(1) === 0xBB && csv.charCodeAt(2) === 0xBF) {
-                csv = csv.substr(3)
-                console.log('已移除UTF-8 BOM头')
-            }
-            // 方式2: 移除UTF-16 LE BOM (FF FE)
-            else if (csv.charCodeAt(0) === 0xFF && csv.charCodeAt(1) === 0xFE) {
-                csv = csv.substr(2)
-                console.log('已移除UTF-16 LE BOM头')
-            }
-            // 方式3: 移除UTF-16 BE BOM (FE FF)
-            else if (csv.charCodeAt(0) === 0xFE && csv.charCodeAt(1) === 0xFF) {
-                csv = csv.substr(2)
-                console.log('已移除UTF-16 BE BOM头')
-            }
-            
-            // 检查是否还是乱码（包含65533）
-            if (csv.charCodeAt(0) === 65533) {
-                console.log('检测到乱码，尝试其他编码...')
+        
+        async function importCSVFile(e) {
+            const file = e.target.files[0]
+            if (!file) return
+            if (!file.name.endsWith('.csv')) { showAlert('请导入 CSV 格式的表格文件！', 'danger'); return }
+            showAlert('正在导入数据，请稍候...', 'warning')
+            const reader = new FileReader()
+            reader.onload = async function(event) {
                 try {
-                    const arrayBuffer = await file.arrayBuffer()
-                    // 尝试常见的简体中文编码
-                    const encodings = ['gbk', 'gb2312', 'gb18030', 'utf-8']
-                    
-                    for (const encoding of encodings) {
-                        try {
-                            const decoder = new TextDecoder(encoding)
-                            csv = decoder.decode(arrayBuffer)
-                            console.log(`用${encoding}编码解码的前100字符:`, csv.substring(0, 100))
-                            
-                            // 检查是否包含中文字符（不包含65533）
-                            if (!csv.includes('�') && /[\u4e00-\u9fa5]/.test(csv)) {
-                                console.log(`成功用${encoding}编码解码`)
-                                // 解码后再次移除BOM头
-                                if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
-                                    csv = csv.substr(1)
-                                }
-                                break
-                            }
-                        } catch (e) {
-                            console.log(`${encoding}编码解码失败:`, e)
+                    let csv = event.target.result
+                    if (csv.charCodeAt(0) === 0xFEFF) csv = csv.substr(1)
+                    const lines = csv.split(/\r\n|\n/).filter(line => line.trim() !== '')
+                    if (lines.length < 2) { showAlert('表格中无有效数据！', 'warning'); document.getElementById('importFile').value = ''; return }
+                    let headers = []
+                    const firstLine = lines[0].trim()
+                    if (firstLine.includes(',')) headers = firstLine.split(',').map(h => h.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+                    const getFieldIndex = (keyword) => headers.findIndex(h => h.includes(keyword))
+                    const talentNameIndex = getFieldIndex('达人名称')
+                    const productSpecIndex = getFieldIndex('商品规格')
+                    const originalSpecIndex = (() => { let i = getFieldIndex('初始商品规格'); if (i === -1) i = getFieldIndex('初始商品规格'); return i })()
+                    const productPriceIndex = getFieldIndex('商品价格')
+                    const commissionIndex = getFieldIndex('佣金')
+                    const onlinePercentIndex = getFieldIndex('线上百分比')
+                    if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
+                        showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
+                        document.getElementById('importFile').value = ''; return
+                    }
+                    const { data: allExistingData } = await supabaseClient.from(TABLE_NAME).select('*').order('序号', { ascending: false })
+                    const existingMap = new Map()
+                    let maxSerial = 0
+                    allExistingData.forEach(item => { const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`; existingMap.set(key, item); if (item.序号 > maxSerial) maxSerial = item.序号 })
+                    const rows = lines.slice(1)
+                    let successCount = 0, updateCount = 0, nextSerial = maxSerial + 1
+                    const currentTime = getCurrentLocalTime()
+                    for (let i = 0; i < rows.length; i++) {
+                        const row = rows[i].trim()
+                        if (!row) continue
+                        const cells = []
+                        let current = '', inQuotes = false
+                        for (let j = 0; j < row.length; j++) {
+                            const char = row[j]
+                            if (char === '"') inQuotes = !inQuotes
+                            else if (char === ',' && !inQuotes) { cells.push(current); current = '' }
+                            else current += char
+                        }
+                        cells.push(current)
+                        const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
+                        const talentName = talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
+                        const productSpec = productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
+                        const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
+                        const productPrice = parseFloat(productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
+                        const commission = parseFloat(commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
+                        let onlinePercent = null
+                        if (onlinePercentIndex >= 0 && onlinePercentIndex < cleanCells.length && cleanCells[onlinePercentIndex]) {
+                            const percentStr = cleanCells[onlinePercentIndex].replace('%', '')
+                            onlinePercent = parseFloat(percentStr) / 100
+                        }
+                        if (!talentName || !productSpec || productPrice <= 0) continue
+                        const key = `${talentName}|${productSpec}|${productPrice}`
+                        const existingItem = existingMap.get(key)
+                        if (existingItem) {
+                            await supabaseClient.from(TABLE_NAME).update({ 初始商品规格: originalSpec, 佣金: commission, 线上百分比: onlinePercent !== null ? onlinePercent : existingItem.线上百分比, 录入时间: currentTime }).eq('id', existingItem.id)
+                            updateCount++
+                        } else {
+                            await supabaseClient.from(TABLE_NAME).insert([{ 序号: nextSerial, 达人名称: talentName, 商品规格: productSpec, 初始商品规格: originalSpec, 商品价格: productPrice, 佣金: commission, 线上百分比: onlinePercent, 录入时间: currentTime }])
+                            successCount++; existingMap.set(key, { 序号: nextSerial }); nextSerial++
                         }
                     }
-                } catch (e) {
-                    console.error('ArrayBuffer读取失败:', e)
-                }
+                    await loadDataToTable()
+                    document.getElementById('importFile').value = ''
+                    showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
+                } catch (err) { console.error('导入错误:', err); showAlert('导入失败：' + err.message, 'danger'); document.getElementById('importFile').value = '' }
             }
-            
-            // 移除可能残留的BOM头
-            if (csv.charCodeAt(0) === 0xFEFF || csv.charCodeAt(0) === 0xEFBBBF) {
-                csv = csv.substr(1)
-            }
-            
-            // 按行分割
-            const lines = csv.split(/\r\n|\n|\r/).filter(line => line.trim() !== '')
-            console.log('总行数:', lines.length)
-            console.log('第一行原始内容:', lines[0])
-            
-            if (lines.length < 2) {
-                showAlert('表格中无有效数据！', 'warning')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 解析表头 - 移除引号和空格
-            let headers = []
-            const firstLine = lines[0].trim()
-            
-            if (firstLine.includes(',')) {
-                headers = firstLine.split(',').map(h => {
-                    return h.replace(/^["'\s]+|["'\s]+$/g, '').trim()
-                })
-            }
-            
-            console.log('解析后的表头:', headers)
-            console.log('表头数量:', headers.length)
-
-            // 检查表头是否包含中文字符
-            const hasChinese = headers.some(h => /[\u4e00-\u9fa5]/.test(h))
-            if (!hasChinese) {
-                showAlert('文件编码可能不正确，请将CSV文件另存为UTF-8编码', 'danger')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 获取字段索引（使用includes进行模糊匹配）
-            const getFieldIndex = (keyword) => {
-                return headers.findIndex(h => h.includes(keyword))
-            }
-
-                const talentNameIndex = getFieldIndex('达人名称')
-	const productSpecIndex = getFieldIndex('商品规格')
-	// 同时支持"原始商品规格"和"初始商品规格"
-	const originalSpecIndex = (() => {
-  	  let index = getFieldIndex('原始商品规格')
-  	  if (index === -1) index = getFieldIndex('初始商品规格')
-   	 return index
-	})()
-	const productPriceIndex = getFieldIndex('商品价格')
-	const commissionIndex = getFieldIndex('佣金')
-            
-            console.log('字段索引:', {
-                达人名称: talentNameIndex,
-                商品规格: productSpecIndex,
-                原始商品规格: originalSpecIndex,
-                商品价格: productPriceIndex,
-                佣金: commissionIndex
-            })
-            
-            if (talentNameIndex === -1 || productSpecIndex === -1 || productPriceIndex === -1 || commissionIndex === -1) {
-                showAlert('无法识别表头字段，请确保CSV包含：达人名称、商品规格、商品价格、佣金', 'danger')
-                document.getElementById('importFile').value = ''
-                return
-            }
-
-            // 获取现有数据
-            const { data: allExistingData, error: fetchError } = await supabaseClient
-                .from(TABLE_NAME)
-                .select('*')
-                .order('序号', { ascending: false })
-            
-            if (fetchError) throw fetchError
-
-            // 创建查重Map
-            const existingMap = new Map()
-            let maxSerial = 0
-            
-            allExistingData.forEach(item => {
-                const key = `${item.达人名称}|${item.商品规格}|${item.商品价格}`
-                existingMap.set(key, item)
-                if (item.序号 > maxSerial) maxSerial = item.序号
-            })
-
-            // 处理数据行
-            const rows = lines.slice(1)
-            let successCount = 0
-            let updateCount = 0
-            let nextSerial = maxSerial + 1
-            const currentTime = getCurrentLocalTime()
-
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i].trim()
-                if (!row) continue
-                
-                // 解析行数据（处理引号内的逗号）
-                const cells = []
-                let current = ''
-                let inQuotes = false
-                
-                for (let j = 0; j < row.length; j++) {
-                    const char = row[j]
-                    if (char === '"') {
-                        inQuotes = !inQuotes
-                    } else if (char === ',' && !inQuotes) {
-                        cells.push(current)
-                        current = ''
-                    } else {
-                        current += char
-                    }
-                }
-                cells.push(current)
-                
-                // 清理每个字段的引号和空格
-                const cleanCells = cells.map(cell => cell.replace(/^["'\s]+|["'\s]+$/g, '').trim())
-                
-                // 根据索引获取字段值
-	const talentName = talentNameIndex >= 0 && talentNameIndex < cleanCells.length ? cleanCells[talentNameIndex] : ''
-	const productSpec = productSpecIndex >= 0 && productSpecIndex < cleanCells.length ? cleanCells[productSpecIndex] : ''
-	const originalSpec = originalSpecIndex >= 0 && originalSpecIndex < cleanCells.length ? cleanCells[originalSpecIndex] || '' : ''
-	const productPrice = parseFloat(productPriceIndex >= 0 && productPriceIndex < cleanCells.length ? cleanCells[productPriceIndex] || '0' : '0') || 0
-	const commission = parseFloat(commissionIndex >= 0 && commissionIndex < cleanCells.length ? cleanCells[commissionIndex] || '0' : '0') || 0
-
-                // 验证必填字段
-                if (!talentName || !productSpec || productPrice <= 0) {
-                    console.log(`第${i+2}行跳过: 字段无效`, { talentName, productSpec, productPrice })
-                    continue
-                }
-
-                const key = `${talentName}|${productSpec}|${productPrice}`
-                const existingItem = existingMap.get(key)
-
-                if (existingItem) {
-                    // 更新现有记录
-                    const { error: updateError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .update({
-                            原始商品规格: originalSpec,
-                            佣金: commission,
-                            录入时间: currentTime
-                        })
-                        .eq('id', existingItem.id)
-                    
-                    if (!updateError) {
-                        updateCount++
-                        console.log(`第${i+2}行更新成功: ${talentName}`)
-                    }
-                } else {
-                    // 插入新记录
-                    const { error: insertError } = await supabaseClient
-                        .from(TABLE_NAME)
-                        .insert([{
-                            序号: nextSerial,
-                            达人名称: talentName,
-                            商品规格: productSpec,
-                            原始商品规格: originalSpec,
-                            商品价格: productPrice,
-                            佣金: commission,
-                            录入时间: currentTime
-                        }])
-                    
-                    if (!insertError) {
-                        successCount++
-                        existingMap.set(key, { 序号: nextSerial })
-                        nextSerial++
-                        console.log(`第${i+2}行插入成功: ${talentName}, 序号: ${nextSerial-1}`)
-                    }
-                }
-            }
-
-            await loadDataToTable()
-            document.getElementById('importFile').value = ''
-            
-            if (successCount > 0 || updateCount > 0) {
-                showAlert(`导入完成：新增 ${successCount} 条，更新 ${updateCount} 条！`, 'success')
-            } else {
-                showAlert('没有新数据被导入！', 'warning')
-            }
-            
-        } catch (err) {
-            console.error('导入错误:', err)
-            showAlert('导入失败：' + err.message, 'danger')
-            document.getElementById('importFile').value = ''
+            reader.readAsText(file, 'UTF-8')
         }
-    }
-    
-    // 先尝试用UTF-8编码读取
-    reader.readAsText(file, 'UTF-8')
- }
-
-        // ========== 辅助函数 ==========
-        function handleEnterKey(event) {
-            if (event.keyCode === 13 || event.key === 'Enter') {
-                event.preventDefault()
-                searchData()
-            }
-        }
-
-        function toggleSelectAll() {
-            const isChecked = document.getElementById('selectAll').checked
-            document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = isChecked)
-        }
-
-        // ========== 初始化 ==========
+        
+        function handleEnterKey(event) { if (event.keyCode === 13 || event.key === 'Enter') { event.preventDefault(); searchData() } }
+        function toggleSelectAll() { const isChecked = document.getElementById('selectAll').checked; document.querySelectorAll('#manageTab .row-checkbox').forEach(cb => cb.checked = isChecked) }
+        
         window.onload = function() {
             loadDataToTable()
             document.getElementById('importFile').addEventListener('change', importCSVFile)
-            initDropdownLists()
+            syncCalcData()
         }
     </script>
 </body>
