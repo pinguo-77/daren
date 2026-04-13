@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,14 @@
             box-sizing: border-box;
             font-family: "微软雅黑", Arial, sans-serif;
         }
+
         body {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background-color: #faf9f7;
         }
+
         .container {
             background: white;
             padding: 30px;
@@ -25,6 +28,7 @@
             margin-bottom: 20px;
             border: 1px solid #f0e9f5;
         }
+
         h1 {
             text-align: center;
             color: #aa33a6;
@@ -32,6 +36,7 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
+
         h2 {
             text-align: center;
             color: #aa33a6;
@@ -40,19 +45,24 @@
             letter-spacing: 1px;
             font-size: 28px;
         }
+
         .table-container h2 {
             text-align: left;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: #6b5ca5;
         }
-        input, select {
+
+        input,
+        select {
             width: 100%;
             padding: 12px;
             border: 1px solid #e0d4f0;
@@ -61,17 +71,21 @@
             transition: border-color 0.3s;
             background-color: #fcfbff;
         }
-        input:focus, select:focus {
+
+        input:focus,
+        select:focus {
             outline: none;
             border-color: #b899f0;
             box-shadow: 0 0 0 3px rgba(179, 145, 240, 0.1);
         }
+
         .btn-group {
             display: flex;
             gap: 10px;
             margin-top: 20px;
             flex-wrap: wrap;
         }
+
         button {
             padding: 12px 24px;
             border: none;
@@ -81,99 +95,116 @@
             transition: all 0.3s;
             font-weight: 500;
         }
+
         .btn-submit {
             background-color: #9f7aea;
             color: white;
         }
+
         .btn-submit:hover {
             background-color: #8762d6;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(159, 122, 234, 0.2);
         }
+
         .btn-export {
             background-color: #82ba9e;
             color: white;
         }
+
         .btn-export:hover {
             background-color: #6da88b;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(130, 186, 158, 0.2);
         }
+
         .btn-search {
             background-color: #8ecae6;
             color: white;
         }
+
         .btn-search:hover {
             background-color: #6baed6;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(142, 202, 230, 0.2);
         }
+
         .btn-reset-search {
             background-color: #ffd6ba;
             color: #9e5e37;
         }
+
         .btn-reset-search:hover {
             background-color: #ffc299;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(255, 214, 186, 0.2);
         }
+
         .btn-delete-selected {
             background-color: #ffbaaf;
             color: #9e4333;
         }
-        /* 批量修改按钮样式 */
-	.btn-batch-cost {
- 	   background-color: #82ba9e;
-  	  color: white;
-  	 padding: 8px 16px;
-   	 border: none;
-   	 border-radius: 6px;
-   	 cursor: pointer;
-   	 font-size: 13px;
-   	 transition: all 0.3s;
-	}
-	.btn-batch-cost:hover {
-  	  background-color: #6da88b;
-  	  transform: translateY(-1px);
-	}
 
-	.btn-batch-name {
- 	 background-color: #c7b8e8;
-   	 color: #4a3a6e;
-    	padding: 8px 16px;
-   	 border: none;
-   	 border-radius: 6px;
-   	 cursor: pointer;
-   	 font-size: 13px;
-    	transition: all 0.3s;
-	}
-	.btn-batch-name:hover {
-   	 background-color: #b5a2e0;
-   	 transform: translateY(-1px);
-	}
+        .btn-batch-cost {
+            background-color: #82ba9e;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-batch-cost:hover {
+            background-color: #6da88b;
+            transform: translateY(-1px);
+        }
+
+        .btn-batch-name {
+            background-color: #c7b8e8;
+            color: #4a3a6e;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-batch-name:hover {
+            background-color: #b5a2e0;
+            transform: translateY(-1px);
+        }
+
         .btn-delete-selected:hover {
             background-color: #ff9f91;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(255, 186, 175, 0.2);
         }
+
         .btn-import {
             background-color: #f7cac9;
             color: #8a5a5a;
         }
+
         .btn-import:hover {
             background-color: #f5b5b4;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(247, 202, 201, 0.2);
         }
+
         .btn-sync {
             background-color: #b5b9d0;
             color: #4a4e69;
         }
+
         .btn-sync:hover {
             background-color: #a5a9c4;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(181, 185, 208, 0.2);
         }
+
         .btn-export-pool {
             background-color: #82ba9e;
             color: white;
@@ -184,16 +215,19 @@
             font-size: 13px;
             transition: all 0.3s;
         }
+
         .btn-export-pool:hover {
             background-color: #6da88b;
             transform: translateY(-1px);
         }
+
         .import-file {
             padding: 8px;
             border: 1px dashed #e0d4f0;
             border-radius: 8px;
             cursor: pointer;
         }
+
         .table-container {
             background: white;
             padding: 30px;
@@ -202,16 +236,19 @@
             margin-top: 20px;
             border: 1px solid #f0e9f5;
         }
+
         .search-container {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
+
         .search-item {
             flex: 1;
             min-width: 200px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -219,56 +256,69 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        th, td {
+
+        th,
+        td {
             padding: 14px;
             text-align: left;
             border-bottom: 1px solid #f0e9f5;
         }
+
         th {
             background-color: #f5f0fa;
             font-weight: 500;
             color: #6b5ca5;
         }
+
         tr:hover {
             background-color: #fcf8ff;
         }
+
         .alert {
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
             display: none;
         }
+
         .alert-warning {
             background-color: #fff8e6;
             color: #b58900;
             border: 1px solid #ffe8a3;
             display: block;
         }
+
         .alert-success {
             background-color: #f0fff4;
             color: #2b7a4b;
             border: 1px solid #b7eb8f;
             display: block;
         }
+
         .alert-danger {
             background-color: #fff1f0;
             color: #c53030;
             border: 1px solid #ffccc7;
             display: block;
         }
+
         .required {
             color: #e53e3e;
         }
+
         .checkbox-cell {
             text-align: center;
         }
+
         .select-all-checkbox {
             cursor: pointer;
             accent-color: #9f7aea;
         }
+
         .row-checkbox {
             accent-color: #9f7aea;
         }
+
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -277,6 +327,7 @@
             font-size: 14px;
             line-height: 1.8;
         }
+
         .loading {
             display: inline-block;
             width: 20px;
@@ -288,17 +339,23 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
+
         .sync-time {
             color: #888;
             font-size: 14px;
             margin-left: 15px;
         }
-        
-        /* ===== 分页样式 ===== */
+
         .pagination-container {
             display: flex;
             justify-content: space-between;
@@ -308,6 +365,7 @@
             margin-top: 20px;
             padding: 15px 0;
         }
+
         .pagination {
             display: flex;
             justify-content: center;
@@ -315,6 +373,7 @@
             gap: 10px;
             flex-wrap: wrap;
         }
+
         .pagination button {
             padding: 8px 16px;
             border: 1px solid #e0d4f0;
@@ -325,23 +384,27 @@
             transition: all 0.3s;
             font-size: 14px;
         }
+
         .pagination button:hover:not(:disabled) {
             background-color: #9f7aea;
             color: white;
             border-color: #9f7aea;
             transform: translateY(-1px);
         }
+
         .pagination button:disabled {
             background-color: #f5f5f5;
             color: #ccc;
             cursor: not-allowed;
             border-color: #ddd;
         }
+
         .pagination .page-info {
             font-size: 14px;
             color: #666;
             margin: 0 10px;
         }
+
         .pagination .page-input {
             width: 60px;
             padding: 6px;
@@ -350,11 +413,13 @@
             border-radius: 4px;
             font-size: 14px;
         }
+
         .items-per-page {
             display: flex;
             align-items: center;
             gap: 8px;
         }
+
         .items-per-page select {
             padding: 6px;
             border: 1px solid #e0d4f0;
@@ -364,12 +429,12 @@
             cursor: pointer;
             font-size: 14px;
         }
+
         .items-per-page span {
             font-size: 14px;
             color: #666;
         }
-        
-        /* ===== 标签页样式 ===== */
+
         .tab-container {
             display: flex;
             gap: 10px;
@@ -377,6 +442,7 @@
             border-bottom: 2px solid #f0e9f5;
             padding-bottom: 10px;
         }
+
         .tab-btn {
             padding: 10px 30px;
             border: none;
@@ -388,21 +454,24 @@
             color: #6b5ca5;
             transition: all 0.3s;
         }
+
         .tab-btn:hover {
             background-color: #e0d4f0;
         }
+
         .tab-btn.active {
             background-color: #9f7aea;
             color: white;
         }
+
         .tab-content {
             display: none;
         }
+
         .tab-content.active {
             display: block;
         }
-        
-        /* ===== 新品添加区域样式 ===== */
+
         .new-product-section {
             background: #f8f9fa;
             padding: 20px;
@@ -410,54 +479,64 @@
             margin-bottom: 30px;
             border: 1px solid #e0d4f0;
         }
+
         .new-product-section h3 {
             color: #722ed1;
             margin-bottom: 20px;
         }
+
         .form-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-bottom: 20px;
         }
+
         .button-row {
             display: flex;
             gap: 10px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
+
         .btn-calc {
             background-color: #9f7aea;
             color: white;
         }
+
         .btn-calc:hover {
             background-color: #8762d6;
         }
+
         .btn-add-db {
             background-color: #82ba9e;
             color: white;
         }
+
         .btn-add-db:hover {
             background-color: #6da88b;
         }
+
         .btn-add-talent {
             background-color: #ffb347;
             color: white;
         }
+
         .btn-add-talent:hover {
             background-color: #ffa01e;
         }
-        
-        /* 档位选择器样式 */
+
         .range-selector-group {
             margin-bottom: 20px;
         }
+
         .range-buttons {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 10px;
         }
+
         .range-btn {
             padding: 8px 20px;
             border: 1px solid #e0d4f0;
@@ -468,14 +547,17 @@
             transition: all 0.3s;
             font-size: 14px;
         }
+
         .range-btn:hover {
             background-color: #f0e9f5;
         }
+
         .range-btn.active {
             background-color: #9f7aea;
             color: white;
             border-color: #9f7aea;
         }
+
         .custom-range-panel {
             display: none;
             margin-top: 10px;
@@ -483,23 +565,25 @@
             background-color: #f8f9fa;
             border-radius: 8px;
         }
+
         .custom-range-inputs {
             display: flex;
             gap: 15px;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .custom-range-inputs input {
             width: 100px;
             padding: 8px;
         }
+
         .btn-confirm {
             background-color: #82ba9e;
             color: white;
             padding: 6px 16px;
         }
-        
-        /* 档位筛选器样式 */
+
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -508,11 +592,13 @@
             gap: 10px;
             margin-bottom: 15px;
         }
+
         .filter-buttons {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
+
         .filter-btn {
             padding: 6px 16px;
             border: 1px solid #e0d4f0;
@@ -521,13 +607,13 @@
             cursor: pointer;
             font-size: 13px;
         }
+
         .filter-btn.active {
             background-color: #9f7aea;
             color: white;
             border-color: #9f7aea;
         }
-        
-        /* 测算结果区域 */
+
         .calc-result-area {
             margin-top: 20px;
             padding: 15px;
@@ -536,50 +622,56 @@
             border: 1px solid #e0d4f0;
             display: none;
         }
+
         .calc-result-area h4 {
             color: #722ed1;
             margin-bottom: 15px;
         }
+
         .result-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-bottom: 15px;
         }
+
         .result-item {
             display: flex;
             flex-direction: column;
         }
+
         .result-item .label {
             font-size: 12px;
             color: #999;
         }
+
         .result-item .value {
             font-size: 18px;
             font-weight: 600;
             color: #333;
         }
+
         .result-item .value.highlight {
             color: #722ed1;
         }
 
-        /* 浅色文字样式 */
         .value-light {
             font-size: 18px;
             font-weight: 500;
             color: #aaa;
         }
-        
-        /* 数据池表格样式 */
+
         .data-pool-section {
             margin-top: 30px;
             border-top: 2px solid #f0e9f5;
             padding-top: 20px;
         }
+
         .data-pool-section h3 {
             color: #722ed1;
             margin-bottom: 15px;
         }
+
         .data-pool-header {
             display: flex;
             justify-content: space-between;
@@ -588,6 +680,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
+
         .search-bar {
             display: flex;
             gap: 10px;
@@ -595,50 +688,63 @@
             flex-wrap: wrap;
             align-items: flex-end;
         }
+
         .search-bar .form-group {
             margin-bottom: 0;
             flex: 1;
             min-width: 150px;
         }
-        .search-bar input, .search-bar select {
+
+        .search-bar input,
+        .search-bar select {
             width: 100%;
             padding: 8px;
         }
+
         .table-wrapper {
             overflow-x: auto;
         }
+
         #dataPoolTable {
             width: 100%;
             border-collapse: collapse;
         }
+
         #dataPoolTable th,
         #dataPoolTable td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #f0e9f5;
         }
+
         #dataPoolTable th {
             background-color: #f5f0fa;
             font-weight: 500;
             color: #6b5ca5;
         }
+
         #dataPoolTable tr:hover {
             background-color: #fcf8ff;
         }
-        .edit-btn, .delete-btn {
+
+        .edit-btn,
+        .delete-btn {
             padding: 4px 10px;
             font-size: 12px;
             margin: 0 3px;
             border-radius: 4px;
         }
+
         .edit-btn {
             background-color: #8ecae6;
             color: white;
         }
+
         .delete-btn {
             background-color: #ffbaaf;
             color: #9e4333;
         }
+
         .inline-edit {
             width: 100%;
             padding: 6px;
@@ -646,20 +752,20 @@
             border-radius: 4px;
             font-size: 14px;
         }
-        
-        /* 负数数据提示模态框 */
+
         .negative-data-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1001;
             display: none;
             justify-content: center;
             align-items: center;
         }
+
         .negative-data-content {
             background: white;
             padding: 25px;
@@ -669,10 +775,12 @@
             max-height: 80vh;
             overflow-y: auto;
         }
+
         .negative-data-content h3 {
             color: #e53e3e;
             margin-bottom: 15px;
         }
+
         .negative-data-content pre {
             background-color: #f8f9fa;
             padding: 15px;
@@ -680,20 +788,20 @@
             overflow-x: auto;
             font-size: 12px;
         }
-        
-        /* 添加达人佣金模态框 */
+
         .talent-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1002;
             display: none;
             justify-content: center;
             align-items: center;
         }
+
         .talent-modal-content {
             background: white;
             padding: 30px;
@@ -701,18 +809,54 @@
             max-width: 400px;
             width: 90%;
         }
+
         .talent-modal-content h3 {
             color: #722ed1;
             margin-bottom: 20px;
         }
-        
-        /* datalist 输入框样式 */
+
         input[list] {
             background-color: #fcfbff;
+        }
+
+        /* 自定义模糊匹配下拉框样式 */
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e0d4f0;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .autocomplete-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #f0e9f5;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #f5f0fa;
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 100%;
         }
     </style>
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
     <div class="tab-container">
         <button class="tab-btn active" onclick="switchTab('manage')">佣金管理</button>
@@ -724,7 +868,7 @@
         <div class="container">
             <h1>达人佣金管理系统</h1>
             <div id="alertBox" class="alert"></div>
-            
+
             <div class="form-group">
                 <label for="talentName">达人名称 <span class="required">*</span></label>
                 <input type="text" id="talentName" placeholder="请输入达人名称，如：二姐">
@@ -745,13 +889,13 @@
                 <label for="commission">佣金比例 <span class="required">*</span></label>
                 <input type="number" id="commission" step="0.01" placeholder="请输入佣金，如：0.79">
             </div>
-            
+
             <div class="btn-group">
                 <button class="btn-submit" onclick="submitData()">提交数据</button>
                 <button class="btn-export" onclick="exportData()">导出最新数据</button>
                 <input type="file" id="importFile" class="import-file" accept=".csv" style="display:none;">
                 <button class="btn-import" onclick="document.getElementById('importFile').click()">导入表格</button>
-                <button class="btn-sync" onclick="syncData()">🔄 同步数据</button>
+                <button class="btn-sync" onclick="syncData()">同步数据</button>
             </div>
             <div id="syncStatus" style="margin-top: 10px; font-size: 14px; color: #666;"></div>
         </div>
@@ -776,7 +920,8 @@
             <table id="dataTable">
                 <thead>
                     <tr>
-                        <th class="checkbox-cell"><input type="checkbox" id="selectAll" class="select-all-checkbox" onclick="toggleSelectAll()"></th>
+                        <th class="checkbox-cell"><input type="checkbox" id="selectAll" class="select-all-checkbox"
+                                onclick="toggleSelectAll()"></th>
                         <th>序号</th>
                         <th>达人名称</th>
                         <th>商品规格</th>
@@ -802,7 +947,8 @@
                 <div class="pagination">
                     <button onclick="goToPage(1)" id="firstPage" disabled>首页</button>
                     <button onclick="goToPage(currentPage - 1)" id="prevPage" disabled>上一页</button>
-                    <span class="page-info">第 <input type="number" id="pageInput" class="page-input" min="1" value="1" onchange="goToPage(this.value)"> 页 共 <span id="totalPages">1</span> 页</span>
+                    <span class="page-info">第 <input type="number" id="pageInput" class="page-input" min="1" value="1"
+                            onchange="goToPage(this.value)"> 页 共 <span id="totalPages">1</span> 页</span>
                     <button onclick="goToPage(currentPage + 1)" id="nextPage">下一页</button>
                     <button onclick="goToPage(totalPages)" id="lastPage">末页</button>
                 </div>
@@ -814,19 +960,18 @@
     <!-- ===== 佣金测算界面 ===== -->
     <div id="calculateTab" class="tab-content">
         <div class="calculate-container">
-            <!-- 可测算与添加新品区域 -->
             <div class="new-product-section">
                 <h3>可测算与添加新品</h3>
-                
-                <!-- 档位选择器 -->
-	<div class="range-selector-group">
-   	 <label>线上百分比 <span class="required">*</span></label>
-    	<div class="range-buttons">
-       	 <button type="button" class="range-btn active" data-min="0.068" data-max="0.08" onclick="selectProfitRange('档位一', 0.068, 0.08, this)">档位一：6.8% - 8%</button>
-        	<button type="button" class="range-btn" data-min="0.088" data-max="0.10" onclick="selectProfitRange('档位二', 0.088, 0.10, this)">档位二：8.8% - 10%</button>
-        	<button type="button" class="range-btn" onclick="showCustomRangeDialog(this)">自定义</button>
-   	 </div>
 
+                <div class="range-selector-group">
+                    <label>线上百分比 <span class="required">*</span></label>
+                    <div class="range-buttons">
+                        <button type="button" class="range-btn active" data-min="0.068" data-max="0.08"
+                            onclick="selectProfitRange('档位一', 0.068, 0.08, this)">档位一：6.8% - 8%</button>
+                        <button type="button" class="range-btn" data-min="0.088" data-max="0.10"
+                            onclick="selectProfitRange('档位二', 0.088, 0.10, this)">档位二：8.8% - 10%</button>
+                        <button type="button" class="range-btn" onclick="showCustomRangeDialog(this)">自定义</button>
+                    </div>
                     <div id="customRangePanel" class="custom-range-panel">
                         <div class="custom-range-inputs">
                             <div>
@@ -841,7 +986,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label>单价（元）<span class="required">*</span></label>
@@ -849,27 +994,34 @@
                     </div>
                     <div class="form-group">
                         <label>最终品名 <span class="required">*</span></label>
-                        <input type="text" id="newFinalName" placeholder="请输入最终品名">
+                        <div class="input-wrapper" style="position: relative;">
+                            <input type="text" id="newFinalName" placeholder="请输入品名" autocomplete="off"
+                                oninput="showProductSuggestions(this.value)" onfocus="showProductSuggestions('')">
+                            <div id="productSuggestions" class="autocomplete-list"
+                                style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e0d4f0; border-radius: 4px; max-height: 200px; overflow-y: auto; z-index: 1000;">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>规格 <span class="required">*</span></label>
                         <input type="text" id="newSpec" placeholder="请输入规格，如：250g">
                     </div>
                     <div class="form-group">
-                        <label>货款（元） <span class="required"> </span></label>
+                        <label>货款（元）</label>
                         <input type="number" id="newCost" step="0.01" placeholder="请输入货款">
                     </div>
                 </div>
                 <div class="button-row" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                     <button class="btn-calc" onclick="checkAndCalculateNewProduct()" style="flex: 1;">🔍 测算</button>
-                    <button class="btn-add-db" id="btnAddToDatabase" onclick="addToDatabase()" disabled style="flex: 1;">📥 添加到数据库</button>
-                    <button class="btn-add-talent" id="btnAddToCommission" onclick="openTalentModal()" style="flex: 1;">👤 添加达人佣金</button>
-                    <button class="btn-sync" onclick="syncCalcData()" style="flex: 1; background-color: #b5b9d0; color: #4a4e69;">🔄 同步数据</button>
+                    <button class="btn-add-db" id="btnAddToDatabase" onclick="addToDatabase()" disabled
+                        style="flex: 1;">📥 添加到数据库</button>
+                    <button class="btn-add-talent" id="btnAddToCommission" onclick="openTalentModal()"
+                        style="flex: 1;">👤 添加达人佣金</button>
+                    <button class="btn-sync" onclick="syncCalcData()"
+                        style="flex: 1; background-color: #b5b9d0; color: #4a4e69;">🔄 同步数据</button>
                 </div>
                 <div id="calcResultArea" class="calc-result-area">
                     <h4>📊 测算结果</h4>
-                    
-                    <!-- 第一行 -->
                     <div class="result-grid">
                         <div class="result-item">
                             <span class="label">佣金比例</span>
@@ -888,10 +1040,7 @@
                             <span class="value-light" id="calcResultFinalProfit">-</span>
                         </div>
                     </div>
-
                     <div style="border-top: 1px solid #eee; margin: 10px 0;"></div>
-
-                    <!-- 第二行 -->
                     <div class="result-grid">
                         <div class="result-item">
                             <span class="label">货款</span>
@@ -910,10 +1059,7 @@
                             <span class="value-light" id="calcResultReturnFee">0.53元</span>
                         </div>
                     </div>
-
                     <div style="border-top: 1px solid #eee; margin: 10px 0;"></div>
-
-                    <!-- 第三行：总成本 + 成本比 -->
                     <div class="result-grid">
                         <div class="result-item">
                             <span class="label">总成本</span>
@@ -928,54 +1074,62 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- 佣金测算表 -->
+
             <div class="data-pool-section">
-                <div class="data-pool-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div class="data-pool-header"
+                    style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                     <h3 style="margin: 0;">佣金测算表</h3>
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <span id="calcSyncTime" class="sync-time" style="color: #888; font-size: 14px;"></span>
                     </div>
                 </div>
-                
-                <!-- 档位筛选器 + 导出按钮 -->
+
                 <div class="filter-bar">
                     <div class="filter-buttons">
                         <button class="filter-btn active" data-range="all" onclick="filterByRange('all')">全部档位</button>
-                        <button class="filter-btn" data-range="档位一" onclick="filterByRange('档位一')">档位一 (6.8%-8%)</button>
-                        <button class="filter-btn" data-range="档位二" onclick="filterByRange('档位二')">档位二 (8.8%-10%)</button>
+                        <button class="filter-btn" data-range="档位一" onclick="filterByRange('档位一')">档位一
+                            (6.8%-8%)</button>
+                        <button class="filter-btn" data-range="档位二" onclick="filterByRange('档位二')">档位二
+                            (8.8%-10%)</button>
                         <button class="filter-btn" data-range="自定义" onclick="filterByRange('自定义')">自定义</button>
                     </div>
                     <button class="btn-export-pool" onclick="exportPoolData()">导出表格</button>
                 </div>
-                
-                <!-- 搜索栏 - 品名输入框 + 规格可输入可下拉 + 单价可输入可下拉 -->
-                <div class="search-bar" style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: flex-end;">
+
+                <div class="search-bar"
+                    style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: flex-end;">
                     <div class="form-group" style="flex: 2; min-width: 180px;">
                         <label style="font-size: 12px; margin-bottom: 4px;">品名</label>
                         <input type="text" id="poolSearch" placeholder="输入品名关键词" style="padding: 8px;">
                     </div>
                     <div class="form-group" style="flex: 1.5; min-width: 150px;">
                         <label style="font-size: 12px; margin-bottom: 4px;">规格</label>
-                        <input type="text" id="poolSearchSpec" list="specOptionsList" placeholder="选择或输入规格" style="padding: 8px;" autocomplete="off">
+                        <input type="text" id="poolSearchSpec" list="specOptionsList" placeholder="选择或输入规格"
+                            style="padding: 8px;" autocomplete="off">
                         <datalist id="specOptionsList"></datalist>
                     </div>
                     <div class="form-group" style="flex: 1.5; min-width: 150px;">
                         <label style="font-size: 12px; margin-bottom: 4px;">单价(元)</label>
-                        <input type="text" id="poolSearchPrice" list="priceOptionsList" placeholder="选择或输入单价" style="padding: 8px;" autocomplete="off">
+                        <input type="text" id="poolSearchPrice" list="priceOptionsList" placeholder="选择或输入单价"
+                            style="padding: 8px;" autocomplete="off">
                         <datalist id="priceOptionsList"></datalist>
                     </div>
                     <button class="btn-search" onclick="searchDataPool()" style="padding: 8px 16px;">搜索</button>
-                    <button class="btn-reset-search" onclick="resetDataPoolSearch()" style="padding: 8px 16px;">重置</button>
-                    <button class="btn-delete-selected" onclick="deleteSelectedPoolRows()" style="padding: 8px 16px;">删除选中</button>
-	    <button class="btn-batch-cost" id="batchModifyCostBtn" onclick="openBatchCostModal()" style="display: none; padding: 8px 16px; background-color: #82ba9e; color: white; border-radius: 6px;">批量修改货款</button>
-  	    <button class="btn-batch-name" id="batchModifyNameBtn" onclick="openBatchNameModal()" style="display: none; padding: 8px 16px; background-color: #c7b8e8; color: #4a3a6e; border-radius: 6px;">批量修改品名</button>
+                    <button class="btn-reset-search" onclick="resetDataPoolSearch()"
+                        style="padding: 8px 16px;">重置</button>
+                    <button class="btn-delete-selected" onclick="deleteSelectedPoolRows()"
+                        style="padding: 8px 16px;">删除选中</button>
+                    <button class="btn-batch-cost" id="batchModifyCostBtn" onclick="openBatchCostModal()"
+                        style="display: none; padding: 8px 16px; background-color: #82ba9e; color: white; border-radius: 6px;">批量修改货款</button>
+                    <button class="btn-batch-name" id="batchModifyNameBtn" onclick="openBatchNameModal()"
+                        style="display: none; padding: 8px 16px; background-color: #c7b8e8; color: #4a3a6e; border-radius: 6px;">批量修改品名</button>
                 </div>
                 <div class="table-wrapper">
                     <table id="dataPoolTable">
                         <thead>
                             <tr>
-                                <th class="checkbox-cell"><input type="checkbox" id="selectAllPool" class="select-all-checkbox" onclick="toggleSelectAllPool()"></th>
+                                <th class="checkbox-cell"><input type="checkbox" id="selectAllPool"
+                                        class="select-all-checkbox" onclick="toggleSelectAllPool()"></th>
                                 <th>佣金比例</th>
                                 <th>单价</th>
                                 <th>最终品名</th>
@@ -986,7 +1140,10 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody id="dataPoolBody"><tr><td colspan="9" style="text-align:center;">加载中...<\/td><\/tr>
+                        <tbody id="dataPoolBody">
+                            <tr>
+                                <td colspan="9" style="text-align:center;">加载中...<\ /td>
+                                        <\ /tr>
                         </tbody>
                     </table>
                 </div>
@@ -1002,7 +1159,6 @@
         </div>
     </div>
 
-    <!-- 添加达人佣金模态框 -->
     <div id="talentModal" class="talent-modal">
         <div class="talent-modal-content">
             <h3>👤 添加达人佣金</h3>
@@ -1010,38 +1166,44 @@
                 <label>达人名称 <span class="required">*</span></label>
                 <input type="text" id="talentNameInput" placeholder="请输入达人名称">
             </div>
-            <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+            <div id="selectedProductInfo"
+                style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
                 请先勾选佣金测算表中的产品
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
-                <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
+                <button onclick="closeTalentModal()"
+                    style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                <button onclick="confirmAddToCommission()"
+                    style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
             </div>
         </div>
     </div>
 
-    <!-- 负数数据提示模态框 -->
     <div id="negativeDataModal" class="negative-data-modal">
         <div class="negative-data-content">
             <h3>⚠️ 警告：存在负数数据</h3>
             <p>以下数据为负数，请检查！</p>
             <pre id="negativeDataContent"></pre>
-            <button onclick="closeNegativeModal()" style="margin-top: 15px; padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认</button>
+            <button onclick="closeNegativeModal()"
+                style="margin-top: 15px; padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认</button>
         </div>
     </div>
 
-    <!-- 修改货款模态框 -->
-    <div id="editCostModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div id="editCostModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
         <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%;">
             <h3 style="color: #722ed1; margin-bottom: 20px;">修改货款</h3>
             <div style="margin-bottom: 20px;">
                 <p style="color: #666; margin-bottom: 10px;">当前产品: <span id="currentProductForEdit">-</span></p>
                 <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #6b5ca5;">新货款金额 (元)</label>
-                <input type="number" id="newCostValue" step="0.01" style="width: 100%; padding: 12px; border: 1px solid #e0d4f0; border-radius: 8px;">
+                <input type="number" id="newCostValue" step="0.01"
+                    style="width: 100%; padding: 12px; border: 1px solid #e0d4f0; border-radius: 8px;">
             </div>
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeEditCostModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
-                <button onclick="saveNewCost()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">保存</button>
+                <button onclick="closeEditCostModal()"
+                    style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                <button onclick="saveNewCost()"
+                    style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">保存</button>
             </div>
         </div>
     </div>
@@ -1057,35 +1219,32 @@
         const SUPABASE_KEY = 'sb_publishable_SoyJYHhMCi3RHO4QcIUqrw_-Xmd1FWx'
         const TABLE_NAME = '达人佣金表'
         const CALC_TABLE_NAME = '佣金测算表'
-        
+
         const { createClient } = supabase
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-        // 数据存储
         let originalDataList = []
         let lastSyncTime = null
         let currentPage = 1, pageSize = 20, totalPages = 1, allDataForPagination = []
-        
-        // 数据池分页配置
+
         let currentPoolPage = 1, poolPageSize = 15, poolTotalPages = 1, poolTotalRecords = 0
         let poolSearchKeyword = ''
-        let poolSearchSpec = ''      // 规格搜索关键词
-        let poolSearchPrice = ''     // 单价搜索关键词
-        let currentRangeFilter = 'all'  // 档位筛选
+        let poolSearchSpec = ''
+        let poolSearchPrice = ''
+        let currentRangeFilter = 'all'
         let editingRowId = null
         let currentCalculatedData = null
         let calcLastSyncTime = null
-        
-        // 当前选择的档位
+
         let currentRange = {
             name: '档位一',
             min: 0.068,
             max: 0.08
         }
-        
-        // 下拉框选项数据
+
         let specOptions = []
         let priceOptions = []
+        let allProductNames = []  // 存储所有产品名称，用于模糊匹配
 
         // ========== 工具函数 ==========
         function formatDate(date) {
@@ -1117,15 +1276,142 @@
             document.getElementById('commission').value = ''
         }
 
+        // ========== 产品名称模糊匹配 ==========
+        let allProductNamesList = []  // 存储所有产品名称
+
+        // 加载所有产品名称
+        async function loadAllProductNames() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('最终品名')
+                    .order('最终品名')
+
+                if (!error && data) {
+                    const uniqueNames = [...new Set(data.map(item => item.最终品名).filter(n => n && n.trim()))]
+                    allProductNamesList = uniqueNames
+                }
+            } catch (error) {
+                console.error('加载产品名称失败:', error)
+            }
+        }
+
+        // 显示产品名称建议（模糊匹配）
+        function showProductSuggestions(keyword) {
+            const suggestionsDiv = document.getElementById('productSuggestions')
+            if (!suggestionsDiv) return
+
+            if (!keyword || keyword.trim() === '') {
+                // 没有输入时，显示前10条常用产品
+                const topNames = allProductNamesList.slice(0, 10)
+                if (topNames.length === 0) {
+                    suggestionsDiv.style.display = 'none'
+                    return
+                }
+                suggestionsDiv.innerHTML = topNames.map(name =>
+                    `<div class="autocomplete-item" onclick="selectProductName('${name.replace(/'/g, "\\'")}')">${escapeHtml(name)}</div>`
+                ).join('')
+                suggestionsDiv.style.display = 'block'
+                return
+            }
+
+            // 模糊匹配：包含关键词
+            const keywordLower = keyword.toLowerCase()
+            const matched = allProductNamesList.filter(name =>
+                name.toLowerCase().includes(keywordLower)
+            ).slice(0, 15)  // 最多显示15条
+
+            if (matched.length === 0) {
+                suggestionsDiv.style.display = 'none'
+                return
+            }
+
+            suggestionsDiv.innerHTML = matched.map(name =>
+                `<div class="autocomplete-item" onclick="selectProductName('${name.replace(/'/g, "\\'")}')">${escapeHtml(name)}</div>`
+            ).join('')
+            suggestionsDiv.style.display = 'block'
+        }
+
+        // 选择产品名称
+        function selectProductName(name) {
+            document.getElementById('newFinalName').value = name
+            document.getElementById('productSuggestions').style.display = 'none'
+            // 可选：自动触发货款匹配
+            autoMatchCost()
+        }
+
+        // 自动匹配货款
+        async function autoMatchCost() {
+            const finalName = document.getElementById('newFinalName').value.trim()
+            const spec = document.getElementById('newSpec').value.trim()
+            const price = parseFloat(document.getElementById('newPrice').value)
+
+            if (!finalName || !spec || !price) return
+
+            // 查找匹配的产品
+            const { data, error } = await supabaseClient
+                .from(CALC_TABLE_NAME)
+                .select('货款')
+                .eq('最终品名', finalName)
+                .eq('规格', spec)
+                .order('id', { ascending: false })
+                .limit(1)
+
+            if (!error && data && data.length > 0) {
+                const cost = data[0].货款
+                document.getElementById('newCost').value = cost
+                showAlert(`已自动匹配货款：${cost}元`, 'success')
+            }
+        }
+
+        // HTML转义函数
+        function escapeHtml(text) {
+            const div = document.createElement('div')
+            div.textContent = text
+            return div.innerHTML
+        }
+
+        // 点击其他地方关闭下拉框
+        document.addEventListener('click', function (e) {
+            const wrapper = document.querySelector('.input-wrapper')
+            const suggestions = document.getElementById('productSuggestions')
+            if (wrapper && suggestions && !wrapper.contains(e.target)) {
+                suggestions.style.display = 'none'
+            }
+        })
+
+        // ========== 模糊匹配筛选产品名称（实时过滤） ==========
+        function filterProductNames(keyword) {
+            const input = document.getElementById('newFinalName')
+            if (!keyword || keyword.trim() === '') {
+                // 如果清空输入，重新加载所有选项
+                loadAllProductNames()
+                return
+            }
+
+            const filtered = allProductNames.filter(name =>
+                name.toLowerCase().includes(keyword.toLowerCase())
+            )
+
+            const datalist = document.getElementById('productNameDatalist')
+            if (datalist) {
+                datalist.innerHTML = ''
+                filtered.slice(0, 20).forEach(name => {
+                    const option = document.createElement('option')
+                    option.value = name
+                    datalist.appendChild(option)
+                })
+            }
+        }
+
         // ========== 加载下拉框选项 ==========
         async function loadFilterOptions() {
             try {
-                // 获取所有不重复的规格
                 const { data: specData, error: specError } = await supabaseClient
                     .from(CALC_TABLE_NAME)
                     .select('规格')
                     .order('规格')
-                
+
                 if (!specError && specData) {
                     const uniqueSpecs = [...new Set(specData.map(item => item.规格).filter(s => s && s.trim()))]
                     specOptions = uniqueSpecs
@@ -1139,13 +1425,12 @@
                         })
                     }
                 }
-                
-                // 获取所有不重复的单价
+
                 const { data: priceData, error: priceError } = await supabaseClient
                     .from(CALC_TABLE_NAME)
                     .select('单价')
                     .order('单价')
-                
+
                 if (!priceError && priceData) {
                     const uniquePrices = [...new Set(priceData.map(item => item.单价).filter(p => p && p > 0))]
                     uniquePrices.sort((a, b) => a - b)
@@ -1168,53 +1453,34 @@
         // ========== 档位选择功能 ==========
         function selectProfitRange(name, min, max, btn) {
             currentRange = { name, min, max }
-            
-            document.querySelectorAll('.range-btn').forEach(btn => {
-                btn.classList.remove('active')
-            })
+            document.querySelectorAll('.range-btn').forEach(btn => btn.classList.remove('active'))
             if (btn) btn.classList.add('active')
-            
             document.getElementById('customRangePanel').style.display = 'none'
-            
-            console.log(`档位已切换: ${name} ${min*100}%-${max*100}%`)
         }
-        
+
         function showCustomRangeDialog(btn) {
-            document.querySelectorAll('.range-btn').forEach(btn => {
-                btn.classList.remove('active')
-            })
+            document.querySelectorAll('.range-btn').forEach(btn => btn.classList.remove('active'))
             if (btn) btn.classList.add('active')
-            
             document.getElementById('customRangePanel').style.display = 'block'
             document.getElementById('customMinProfit').value = ''
             document.getElementById('customMaxProfit').value = ''
         }
-        
+
         function confirmCustomRange() {
             let min = parseFloat(document.getElementById('customMinProfit').value) / 100
             let max = parseFloat(document.getElementById('customMaxProfit').value) / 100
-            
             if (isNaN(min) || isNaN(max) || min >= max || min < 0 || max > 1) {
                 alert('请输入有效的利润率范围（6.8-100之间，最小值小于最大值）')
                 return
             }
-            
-            currentRange = {
-                name: '自定义',
-                min: min,
-                max: max
-            }
-            
+            currentRange = { name: '自定义', min: min, max: max }
             document.getElementById('customRangePanel').style.display = 'none'
-            console.log(`自定义档位: ${min*100}%-${max*100}%`)
         }
-        
+
         function getRangeDisplay(item) {
-            if (item.利润率档位 === '档位一') {
-                return ' (6.8%-8%)'
-            } else if (item.利润率档位 === '档位二') {
-                return ' (8.8%-10%)'
-            } else if (item.利润率档位 === '自定义') {
+            if (item.利润率档位 === '档位一') return ' (6.8%-8%)'
+            if (item.利润率档位 === '档位二') return ' (8.8%-10%)'
+            if (item.利润率档位 === '自定义') {
                 const min = (item.自定义最小利润率 * 100).toFixed(1)
                 const max = (item.自定义最大利润率 * 100).toFixed(1)
                 return `自定义 (${min}%-${max}%)`
@@ -1249,12 +1515,12 @@
             const finalName = document.getElementById('newFinalName').value.trim()
             const spec = document.getElementById('newSpec').value.trim()
             let cost = parseFloat(document.getElementById('newCost').value)
-            
+
             if (!price || !finalName || !spec) {
                 showAlert('请填写单价、最终品名和规格', 'warning')
                 return
             }
-            
+
             if (!cost || isNaN(cost) || cost === 0) {
                 const { data, error } = await supabaseClient
                     .from(CALC_TABLE_NAME)
@@ -1263,7 +1529,7 @@
                     .eq('规格', spec)
                     .order('id', { ascending: false })
                     .limit(1)
-                
+
                 if (data && data.length > 0) {
                     cost = data[0].货款
                     document.getElementById('newCost').value = cost
@@ -1281,12 +1547,12 @@
                     showAlert(`已使用您输入的货款：${cost}元`, 'success')
                 }
             }
-            
+
             if (!cost || cost <= 0) {
                 showAlert('货款必须大于0', 'warning')
                 return
             }
-            
+
             const { data: existing } = await supabaseClient
                 .from(CALC_TABLE_NAME)
                 .select('*')
@@ -1294,12 +1560,12 @@
                 .eq('最终品名', finalName)
                 .eq('规格', spec)
                 .eq('货款', cost)
-            
+
             if (existing && existing.length > 0) {
                 const existingProduct = existing[0]
                 const existingRangeName = existingProduct.利润率档位 || '档位二'
                 const currentRangeName = currentRange.name
-                
+
                 if (existingRangeName === currentRangeName) {
                     displayCalculatedResult(existingProduct)
                     showAlert('该产品已存在，可直接使用', 'success')
@@ -1320,7 +1586,7 @@
                 }
                 return
             }
-            
+
             calculateNewProduct(price, finalName, spec, cost)
         }
 
@@ -1328,7 +1594,7 @@
             const platformFee = Math.round(price * 0.03 * 10000) / 10000;
             const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
             const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
-            
+
             let targetMin, targetMax;
             if (currentRange.name === '档位一') {
                 targetMin = 0.068;
@@ -1343,12 +1609,12 @@
                 targetMin = 0.088;
                 targetMax = 0.10;
             }
-            
+
             let bestCommission = 0.70;
             let bestProfitRatio = 0;
             let bestProfitAmount = 0;
             let minDiff = Infinity;
-            
+
             for (let i = 0; i <= 100; i++) {
                 const commission = i / 100;
                 const q = 1 - costRatio - commission;
@@ -1366,13 +1632,13 @@
                     bestProfitAmount = (1 - costRatio - commission) * price;
                 }
             }
-            
+
             bestCommission = Math.round(bestCommission * 100) / 100;
             const onlineProfit = Math.round(((1 - costRatio - bestCommission) * price) * 10000) / 10000;
             const onlinePercent = Math.round((onlineProfit / price) * 10000) / 10000;
             const finalProfit = price * 0.85 - price * bestCommission * 0.7 - price * bestCommission * 0.15 * 0.3 - totalCost;
             const finalProfitRounded = Math.round(finalProfit * 10000) / 10000;
-            
+
             const calculatedData = {
                 单价: price,
                 最终品名: finalName,
@@ -1389,7 +1655,7 @@
                 自定义最小利润率: currentRange.name === '自定义' ? currentRange.min : null,
                 自定义最大利润率: currentRange.name === '自定义' ? currentRange.max : null
             };
-            
+
             displayCalculatedResult(calculatedData);
             showAlert(`已用${getRangeDisplaySimple(currentRange.name)}重新测算`, 'success');
             document.getElementById('btnAddToDatabase').disabled = false;
@@ -1401,7 +1667,7 @@
             const platformFee = Math.round(price * 0.03 * 10000) / 10000;
             const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
             const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
-            
+
             let targetMin, targetMax;
             if (currentRange.name === '档位一') {
                 targetMin = 0.068;
@@ -1416,12 +1682,12 @@
                 targetMin = 0.088;
                 targetMax = 0.10;
             }
-            
+
             let bestCommission = 0.70;
             let bestProfitRatio = 0;
             let bestProfitAmount = 0;
             let minDiff = Infinity;
-            
+
             for (let i = 0; i <= 100; i++) {
                 const commission = i / 100;
                 const q = 1 - costRatio - commission;
@@ -1439,13 +1705,13 @@
                     bestProfitAmount = (1 - costRatio - commission) * price;
                 }
             }
-            
+
             bestCommission = Math.round(bestCommission * 100) / 100;
             const onlineProfit = Math.round(((1 - costRatio - bestCommission) * price) * 10000) / 10000;
             const onlinePercent = Math.round((onlineProfit / price) * 10000) / 10000;
             const finalProfit = price * 0.85 - price * bestCommission * 0.7 - price * bestCommission * 0.15 * 0.3 - totalCost;
             const finalProfitRounded = Math.round(finalProfit * 10000) / 10000;
-            
+
             const calculatedData = {
                 单价: price,
                 最终品名: finalName,
@@ -1462,19 +1728,19 @@
                 自定义最小利润率: currentRange.name === '自定义' ? currentRange.min : null,
                 自定义最大利润率: currentRange.name === '自定义' ? currentRange.max : null
             };
-            
+
             displayCalculatedResult(calculatedData);
             showAlert('测算完成，可添加至数据库', 'success');
             document.getElementById('btnAddToDatabase').disabled = false;
             document.getElementById('btnAddToCommission').disabled = true;
             currentCalculatedData = calculatedData;
         }
-        
+
         function displayCalculatedResult(data) {
             document.getElementById('calcResultCommission').textContent = (data.佣金比例 * 100).toFixed(2) + '%'
             document.getElementById('calcResultOnlinePercent').textContent = ((data.线上百分比 || 0) * 100).toFixed(2) + '%'
             document.getElementById('calcResultOnlineProfit').textContent = (data.线上利润 || 0).toFixed(2) + '元'
-            
+
             let finalProfit = data.尾款利润
             if (!finalProfit && finalProfit !== 0) {
                 const price = data.单价
@@ -1483,29 +1749,29 @@
                 finalProfit = price * 0.85 - price * commission * 0.7 - price * commission * 0.15 * 0.3 - totalCost
             }
             document.getElementById('calcResultFinalProfit').textContent = (finalProfit || 0).toFixed(2) + '元'
-            
+
             document.getElementById('calcResultCost').textContent = (data.货款 || 0).toFixed(2) + '元'
             document.getElementById('calcResultInsurance').textContent = '1.50元'
             document.getElementById('calcResultPlatformFee').textContent = (data.抖店手续费 || data.单价 * 0.03).toFixed(2) + '元'
             document.getElementById('calcResultReturnFee').textContent = '0.53元'
-            
+
             document.getElementById('calcResultTotalCost').textContent = (data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)).toFixed(2) + '元'
             document.getElementById('calcResultCostRatio').textContent = ((data.成本比 || 0) * 100).toFixed(2) + '%'
-            
+
             document.getElementById('calcResultArea').style.display = 'block'
-            
+
             if ((data.线上利润 || 0) < 0 || ((data.线上百分比 || 0) < 0)) {
                 const negativeInfo = `产品：${data.最终品名} ${data.规格}\n单价：${data.单价}元\n货款：${data.货款}元\n佣金比例：${(data.佣金比例 * 100).toFixed(2)}%\n线上利润：${(data.线上利润 || 0).toFixed(2)}元\n线上百分比：${((data.线上百分比 || 0) * 100).toFixed(2)}%\n成本比：${((data.成本比 || 0) * 100).toFixed(2)}%`
                 document.getElementById('negativeDataContent').textContent = negativeInfo
                 document.getElementById('negativeDataModal').style.display = 'flex'
             }
         }
-        
+
         async function addToDatabase() {
             if (!currentCalculatedData) return
-            
+
             const onlinePercent = currentCalculatedData.线上百分比 || 0
-            
+
             let targetMin, targetMax, rangeName
             if (currentRange.name === '档位一') {
                 targetMin = 0.068
@@ -1524,12 +1790,12 @@
                 targetMax = 0.10
                 rangeName = '档位二'
             }
-            
+
             const isInRange = onlinePercent >= targetMin && onlinePercent <= targetMax
             let finalRangeName = rangeName
             let customMin = null
             let customMax = null
-            
+
             if (!isInRange && rangeName !== '自定义') {
                 const userChoice = confirm(
                     `当前计算出的线上百分比为 ${(onlinePercent * 100).toFixed(2)}%\n` +
@@ -1545,7 +1811,7 @@
                     if (customMax > 1) customMax = 1
                 }
             }
-            
+
             const insertData = {
                 单价: currentCalculatedData.单价,
                 最终品名: currentCalculatedData.最终品名,
@@ -1553,17 +1819,17 @@
                 货款: currentCalculatedData.货款,
                 利润率档位: finalRangeName
             }
-            
+
             if (finalRangeName === '自定义') {
                 insertData.自定义最小利润率 = customMin !== null ? customMin : currentRange.min
                 insertData.自定义最大利润率 = customMax !== null ? customMax : currentRange.max
             }
-            
+
             const { data, error } = await supabaseClient
                 .from(CALC_TABLE_NAME)
                 .insert([insertData])
                 .select()
-            
+
             if (error) {
                 showAlert('添加失败：' + error.message, 'danger')
             } else {
@@ -1577,32 +1843,49 @@
                 await syncCalcData()
             }
         }
-        
+
         // ========== 佣金测算表数据操作 ==========
+        let isSyncing = false
+
         async function syncCalcData() {
-            const syncBtns = document.querySelectorAll('#calculateTab .btn-sync')
-            const originalTexts = []
-            syncBtns.forEach((btn, idx) => {
-                originalTexts[idx] = btn.innerHTML
-                btn.innerHTML = '<span class="loading"></span>同步中...'
-                btn.disabled = true
-            })
+            if (isSyncing) {
+                console.log('同步正在进行中，请勿重复点击')
+                return
+            }
+
+            const syncBtn = document.querySelector('#calculateTab .new-product-section .btn-sync')
+            if (!syncBtn) return
+
+            isSyncing = true
+            const originalText = syncBtn.innerHTML
+            syncBtn.innerHTML = '<span class="loading"></span>同步中...'
+            syncBtn.disabled = true
+
             try {
+                await loadAllProductNames()  // 添加这一行
+                await loadAllProductNames()  // 加载产品名称用于模糊匹配
                 await loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
                 await loadFilterOptions()
                 calcLastSyncTime = new Date()
-                document.getElementById('calcSyncTime').innerHTML = `最后同步：${calcLastSyncTime.toLocaleString('zh-CN')}`
+                const syncTimeSpan = document.getElementById('calcSyncTime')
+                if (syncTimeSpan) {
+                    syncTimeSpan.innerHTML = `最后同步：${calcLastSyncTime.toLocaleString('zh-CN')}`
+                }
             } catch (error) {
                 console.error('同步失败:', error)
-                showAlert('同步失败：' + error.message, 'danger')
+                let errorMsg = error.message || '同步失败'
+                if (errorMsg.includes('Failed to fetch')) {
+                    showAlert('网络连接失败，请检查网络后重试', 'danger')
+                } else {
+                    showAlert('同步失败：' + errorMsg, 'danger')
+                }
             } finally {
-                syncBtns.forEach((btn, idx) => {
-                    btn.innerHTML = originalTexts[idx]
-                    btn.disabled = false
-                })
+                syncBtn.innerHTML = originalText
+                syncBtn.disabled = false
+                isSyncing = false
             }
         }
-        
+
         function filterByRange(range) {
             currentRangeFilter = range
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1613,56 +1896,58 @@
             })
             loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-        
+
         async function loadDataPool(page = 1, keyword = '', specKeyword = '', priceKeyword = '', rangeFilter = 'all') {
             currentPoolPage = page
             poolSearchKeyword = keyword
             poolSearchSpec = specKeyword
             poolSearchPrice = priceKeyword
             currentRangeFilter = rangeFilter
-            
+
             let query = supabaseClient
                 .from(CALC_TABLE_NAME)
                 .select('id, 佣金比例, 单价, 最终品名, 规格, 货款, 线上百分比, 利润率档位, 自定义最小利润率, 自定义最大利润率', { count: 'exact' })
                 .order('id', { ascending: false })
-            
+
             if (keyword) {
                 query = query.ilike('最终品名', `%${keyword}%`)
             }
-            
+
             if (specKeyword) {
                 query = query.eq('规格', specKeyword)
             }
-            
+
             if (priceKeyword) {
                 const priceNum = parseFloat(priceKeyword)
                 if (!isNaN(priceNum)) {
                     query = query.eq('单价', priceNum)
                 }
             }
-            
+
             if (rangeFilter !== 'all') {
                 query = query.eq('利润率档位', rangeFilter)
             }
-            
+
             const start = (page - 1) * poolPageSize
             const { data, error, count } = await query.range(start, start + poolPageSize - 1)
-            if (error) { 
+
+            if (error) {
                 console.error('加载失败:', error)
                 document.getElementById('dataPoolBody').innerHTML = '<tr><td colspan="9" style="text-align:center;">加载失败，请刷新页面<\/td><\/tr>'
-                return 
+                throw error
             }
+
             poolTotalRecords = count || 0
             poolTotalPages = Math.ceil(poolTotalRecords / poolPageSize)
             renderDataPoolTable(data || [])
             updatePoolPagination()
         }
-        
+
         function renderDataPoolTable(data) {
             const tbody = document.getElementById('dataPoolBody')
-            if (!data || data.length === 0) { 
-                tbody.innerHTML = '<td><td colspan="9" style="text-align:center;">暂无数据<\/td><\/tr>'
-                return 
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;">暂无数据<\/td><\/tr>'
+                return
             }
             tbody.innerHTML = data.map(item => `
                 <tr data-id="${item.id}" data-product='${JSON.stringify(item)}'>
@@ -1676,12 +1961,11 @@
                     <td>${getRangeDisplay(item)}<\/td>
                     <td>
                         <button class="edit-btn" onclick="startEditRow(${item.id})">编辑</button>
-                        <button class="delete-btn" onclick="deletePoolItem(${item.id})">删除</button>
                     <\/td>
                 <\/tr>
             `).join('')
         }
-        
+
         function updatePoolPagination() {
             document.getElementById('poolCurrentPage').textContent = currentPoolPage
             document.getElementById('poolTotalPages').textContent = poolTotalPages
@@ -1691,19 +1975,19 @@
             document.getElementById('poolNextPage').disabled = currentPoolPage >= poolTotalPages
             document.getElementById('poolLastPage').disabled = currentPoolPage >= poolTotalPages
         }
-        
+
         function goToPoolPage(page) {
             if (page < 1 || page > poolTotalPages) return
             loadDataPool(page, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-        
+
         function searchDataPool() {
             poolSearchKeyword = document.getElementById('poolSearch').value.trim()
             poolSearchSpec = document.getElementById('poolSearchSpec').value.trim()
             poolSearchPrice = document.getElementById('poolSearchPrice').value.trim()
             loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-        
+
         function resetDataPoolSearch() {
             document.getElementById('poolSearch').value = ''
             document.getElementById('poolSearchSpec').value = ''
@@ -1713,18 +1997,18 @@
             poolSearchPrice = ''
             loadDataPool(1, '', '', '', currentRangeFilter)
         }
-        
+
         function toggleSelectAllPool() {
             const isChecked = document.getElementById('selectAllPool').checked
             document.querySelectorAll('.pool-row-checkbox').forEach(cb => cb.checked = isChecked)
-	  updateBatchButtonsVisibility()  // 添加这一行
+            updateBatchButtonsVisibility()
         }
-        
+
         async function deleteSelectedPoolRows() {
             const selected = document.querySelectorAll('.pool-row-checkbox:checked')
             if (selected.length === 0) { showAlert('请先选择要删除的记录！', 'warning'); return }
             if (!confirm(`确定删除 ${selected.length} 条记录？`)) return
-            
+
             const ids = Array.from(selected).map(cb => parseInt(cb.value))
             try {
                 const { error } = await supabaseClient.from(CALC_TABLE_NAME).delete().in('id', ids)
@@ -1732,362 +2016,431 @@
                 showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
                 document.getElementById('selectAllPool').checked = false
                 await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
-	updateBatchButtonsVisibility()  // 添加这一行
+                updateBatchButtonsVisibility()
             } catch (error) {
                 console.error('删除失败:', error)
                 showAlert('删除失败：' + error.message, 'danger')
             }
         }
-	// ========== 批量修改功能 ==========
-// 监听复选框变化，控制批量按钮显示
-function updateBatchButtonsVisibility() {
-    const selectedCount = document.querySelectorAll('.pool-row-checkbox:checked').length
-    const batchCostBtn = document.getElementById('batchModifyCostBtn')
-    const batchNameBtn = document.getElementById('batchModifyNameBtn')
-    
-    if (selectedCount > 0) {
-        batchCostBtn.style.display = 'inline-block'
-        batchNameBtn.style.display = 'inline-block'
-    } else {
-        batchCostBtn.style.display = 'none'
-        batchNameBtn.style.display = 'none'
-    }
-}
 
-// 获取选中的ID列表
-function getSelectedIds() {
-    const selected = document.querySelectorAll('.pool-row-checkbox:checked')
-    return Array.from(selected).map(cb => parseInt(cb.value))
-}
+        function updateBatchButtonsVisibility() {
+            const selectedCount = document.querySelectorAll('.pool-row-checkbox:checked').length
+            const batchCostBtn = document.getElementById('batchModifyCostBtn')
+            const batchNameBtn = document.getElementById('batchModifyNameBtn')
 
-// 批量修改货款弹窗
-function openBatchCostModal() {
-    const selectedIds = getSelectedIds()
-    if (selectedIds.length === 0) {
-        showAlert('请先勾选要修改的记录', 'warning')
-        return
-    }
-    
-    // 获取选中产品的当前信息用于预览
-    const selectedRows = []
-    document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
-        const row = cb.closest('tr')
-        if (row && row.dataset.product) {
-            try {
-                const product = JSON.parse(row.dataset.product)
-                selectedRows.push(product)
-            } catch(e) {}
+            if (selectedCount > 0) {
+                batchCostBtn.style.display = 'inline-block'
+                batchNameBtn.style.display = 'inline-block'
+            } else {
+                batchCostBtn.style.display = 'none'
+                batchNameBtn.style.display = 'none'
+            }
         }
-    })
-    
-    let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>品名</th><th>规格</th><th>原货款</th><th>新货款</th></tr></thead><tbody>'
-    selectedRows.forEach(product => {
-        previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td>${product.货款}元</td><td class="preview-cost">-</td></tr>`
-    })
-    previewHtml += '</tbody></table></div>'
-    
-    const modalHtml = `
-        <div id="batchCostModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1003; display: flex; justify-content: center; align-items: center;">
-            <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
-                <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改货款</h3>
-                <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
-                <div class="form-group" style="margin-top: 15px;">
-                    <label>新货款金额 (元)</label>
-                    <input type="number" id="batchNewCost" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新货款金额">
-                </div>
-                ${previewHtml}
-                <div style="margin-top: 15px; padding: 8px; background-color: #fff8e6; border-radius: 6px; font-size: 13px; color: #b58900;">
-                    ⚠️ 注意：修改货款后，佣金比例和线上百分比将重新计算
-                </div>
-                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-                    <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
-                    <button onclick="confirmBatchModifyCost()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
-                </div>
-            </div>
-        </div>
-    `
-    
-    document.body.insertAdjacentHTML('beforeend', modalHtml)
-    
-    // 预览功能
-    const costInput = document.getElementById('batchNewCost')
-    costInput.addEventListener('input', function() {
-        const newCost = parseFloat(this.value)
-        if (!isNaN(newCost)) {
-            document.querySelectorAll('.preview-cost').forEach(el => {
-                el.textContent = newCost.toFixed(2) + '元'
+
+        function getSelectedIds() {
+            const selected = document.querySelectorAll('.pool-row-checkbox:checked')
+            return Array.from(selected).map(cb => parseInt(cb.value))
+        }
+
+        function openBatchCostModal() {
+            const selectedIds = getSelectedIds()
+            if (selectedIds.length === 0) {
+                showAlert('请先勾选要修改的记录', 'warning')
+                return
+            }
+
+            const selectedRows = []
+            document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
+                const row = cb.closest('tr')
+                if (row && row.dataset.product) {
+                    try {
+                        const product = JSON.parse(row.dataset.product)
+                        selectedRows.push(product)
+                    } catch (e) { }
+                }
             })
-        } else {
-            document.querySelectorAll('.preview-cost').forEach(el => {
-                el.textContent = '-'
+
+            let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>品名</th><th>规格</th><th>原货款</th><th>新货款</th></tr></thead><tbody>'
+            selectedRows.forEach(product => {
+                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td>${product.货款}元</td><td class="preview-cost">-</td></tr>`
+            })
+            previewHtml += '</tbody></table></div>'
+
+            const modalHtml = `
+                <div id="batchCostModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1003; display: flex; justify-content: center; align-items: center;">
+                    <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
+                        <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改货款</h3>
+                        <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>新货款金额 (元)</label>
+                            <input type="number" id="batchNewCost" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新货款金额">
+                        </div>
+                        ${previewHtml}
+                        <div style="margin-top: 15px; padding: 8px; background-color: #fff8e6; border-radius: 6px; font-size: 13px; color: #b58900;">
+                            ⚠️ 注意：修改货款后，佣金比例和线上百分比将重新计算
+                        </div>
+                        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                            <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                            <button onclick="confirmBatchModifyCost()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
+                        </div>
+                    </div>
+                </div>
+            `
+            document.body.insertAdjacentHTML('beforeend', modalHtml)
+
+            const costInput = document.getElementById('batchNewCost')
+            costInput.addEventListener('input', function () {
+                const newCost = parseFloat(this.value)
+                if (!isNaN(newCost)) {
+                    document.querySelectorAll('.preview-cost').forEach(el => {
+                        el.textContent = newCost.toFixed(2) + '元'
+                    })
+                } else {
+                    document.querySelectorAll('.preview-cost').forEach(el => {
+                        el.textContent = '-'
+                    })
+                }
             })
         }
-    })
-}
 
-// 批量修改品名弹窗
-function openBatchNameModal() {
-    const selectedIds = getSelectedIds()
-    if (selectedIds.length === 0) {
-        showAlert('请先勾选要修改的记录', 'warning')
-        return
-    }
-    
-    // 获取选中产品的当前信息用于预览
-    const selectedRows = []
-    document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
-        const row = cb.closest('tr')
-        if (row && row.dataset.product) {
-            try {
-                const product = JSON.parse(row.dataset.product)
-                selectedRows.push(product)
-            } catch(e) {}
-        }
-    })
-    
-    let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>原品名</th><th>规格</th><th>新品名</th></tr></thead><tbody>'
-    selectedRows.forEach(product => {
-        previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td class="preview-name">-</td></tr>`
-    })
-    previewHtml += '</tbody></table></div>'
-    
-    const modalHtml = `
-        <div id="batchNameModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1004; display: flex; justify-content: center; align-items: center;">
-            <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
-                <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改最终品名</h3>
-                <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
-                <div class="form-group" style="margin-top: 15px;">
-                    <label>统一替换为</label>
-                    <input type="text" id="batchNewName" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新最终品名">
-                </div>
-                ${previewHtml}
-                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-                    <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
-                    <button onclick="confirmBatchModifyName()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
-                </div>
-            </div>
-        </div>
-    `
-    
-    document.body.insertAdjacentHTML('beforeend', modalHtml)
-    
-    // 预览功能
-    const nameInput = document.getElementById('batchNewName')
-    nameInput.addEventListener('input', function() {
-        const newName = this.value.trim()
-        if (newName) {
-            document.querySelectorAll('.preview-name').forEach(el => {
-                el.textContent = newName
+        function openBatchNameModal() {
+            const selectedIds = getSelectedIds()
+            if (selectedIds.length === 0) {
+                showAlert('请先勾选要修改的记录', 'warning')
+                return
+            }
+
+            const selectedRows = []
+            document.querySelectorAll('.pool-row-checkbox:checked').forEach(cb => {
+                const row = cb.closest('tr')
+                if (row && row.dataset.product) {
+                    try {
+                        const product = JSON.parse(row.dataset.product)
+                        selectedRows.push(product)
+                    } catch (e) { }
+                }
             })
-        } else {
-            document.querySelectorAll('.preview-name').forEach(el => {
-                el.textContent = '-'
+
+            let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>原品名</th><th>规格</th><th>新品名</th></tr></thead><tbody>'
+            selectedRows.forEach(product => {
+                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td class="preview-name">-</td></tr>`
+            })
+            previewHtml += '</tbody></table></div>'
+
+            const modalHtml = `
+                <div id="batchNameModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1004; display: flex; justify-content: center; align-items: center;">
+                    <div style="background: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%;">
+                        <h3 style="color: #722ed1; margin-bottom: 15px;">批量修改最终品名</h3>
+                        <p>已选中 <strong>${selectedIds.length}</strong> 条记录</p>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label>统一替换为</label>
+                            <input type="text" id="batchNewName" style="width: 100%; padding: 10px; border: 1px solid #e0d4f0; border-radius: 6px;" placeholder="请输入新最终品名">
+                        </div>
+                        ${previewHtml}
+                        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                            <button onclick="closeBatchModal()" style="padding: 8px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                            <button onclick="confirmBatchModifyName()" style="padding: 8px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认修改</button>
+                        </div>
+                    </div>
+                </div>
+            `
+            document.body.insertAdjacentHTML('beforeend', modalHtml)
+
+            const nameInput = document.getElementById('batchNewName')
+            nameInput.addEventListener('input', function () {
+                const newName = this.value.trim()
+                if (newName) {
+                    document.querySelectorAll('.preview-name').forEach(el => {
+                        el.textContent = newName
+                    })
+                } else {
+                    document.querySelectorAll('.preview-name').forEach(el => {
+                        el.textContent = '-'
+                    })
+                }
             })
         }
-    })
-}
 
-// 关闭批量修改弹窗
-function closeBatchModal() {
-    const modals = ['batchCostModal', 'batchNameModal']
-    modals.forEach(id => {
-        const modal = document.getElementById(id)
-        if (modal) modal.remove()
-    })
-}
-
-// 确认批量修改货款
-async function confirmBatchModifyCost() {
-    const newCost = parseFloat(document.getElementById('batchNewCost').value)
-    if (isNaN(newCost) || newCost <= 0) {
-        showAlert('请输入有效的货款金额', 'warning')
-        return
-    }
-    
-    const selectedIds = getSelectedIds()
-    if (selectedIds.length === 0) {
-        showAlert('没有选中的记录', 'warning')
-        closeBatchModal()
-        return
-    }
-    
-    closeBatchModal()
-    showAlert(`正在批量修改 ${selectedIds.length} 条记录的货款...`, 'warning')
-    
-    let successCount = 0
-    let failCount = 0
-    
-    for (const id of selectedIds) {
-        const { error } = await supabaseClient
-            .from(CALC_TABLE_NAME)
-            .update({ 货款: newCost })
-            .eq('id', id)
-        
-        if (error) {
-            failCount++
-            console.error(`更新ID ${id} 失败:`, error)
-        } else {
-            successCount++
+        function closeBatchModal() {
+            const modals = ['batchCostModal', 'batchNameModal']
+            modals.forEach(id => {
+                const modal = document.getElementById(id)
+                if (modal) modal.remove()
+            })
         }
-    }
-    
-    if (failCount > 0) {
-        showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
-    } else {
-        showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
-    }
-    
-    await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
-}
 
-// 确认批量修改品名
-async function confirmBatchModifyName() {
-    const newName = document.getElementById('batchNewName').value.trim()
-    if (!newName) {
-        showAlert('请输入新的最终品名', 'warning')
-        return
-    }
-    
-    const selectedIds = getSelectedIds()
-    if (selectedIds.length === 0) {
-        showAlert('没有选中的记录', 'warning')
-        closeBatchModal()
-        return
-    }
-    
-    closeBatchModal()
-    showAlert(`正在批量修改 ${selectedIds.length} 条记录的品名...`, 'warning')
-    
-    let successCount = 0
-    let failCount = 0
-    
-    for (const id of selectedIds) {
-        const { error } = await supabaseClient
-            .from(CALC_TABLE_NAME)
-            .update({ 最终品名: newName })
-            .eq('id', id)
-        
-        if (error) {
-            failCount++
-            console.error(`更新ID ${id} 失败:`, error)
-        } else {
-            successCount++
+        async function confirmBatchModifyCost() {
+            const newCost = parseFloat(document.getElementById('batchNewCost').value)
+            if (isNaN(newCost) || newCost <= 0) {
+                showAlert('请输入有效的货款金额', 'warning')
+                return
+            }
+
+            const selectedIds = getSelectedIds()
+            if (selectedIds.length === 0) {
+                showAlert('没有选中的记录', 'warning')
+                closeBatchModal()
+                return
+            }
+
+            closeBatchModal()
+            showAlert(`正在批量修改 ${selectedIds.length} 条记录的货款...`, 'warning')
+
+            let successCount = 0
+            let failCount = 0
+
+            for (const id of selectedIds) {
+                const { error } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .update({ 货款: newCost })
+                    .eq('id', id)
+
+                if (error) {
+                    failCount++
+                    console.error(`更新ID ${id} 失败:`, error)
+                } else {
+                    successCount++
+                }
+            }
+
+            if (failCount > 0) {
+                showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+            } else {
+                showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+            }
+
+            await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-    }
-    
-    if (failCount > 0) {
-        showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
-    } else {
-        showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
-    }
-    
-    await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
- }
-        
+
+        async function confirmBatchModifyName() {
+            const newName = document.getElementById('batchNewName').value.trim()
+            if (!newName) {
+                showAlert('请输入新的最终品名', 'warning')
+                return
+            }
+
+            const selectedIds = getSelectedIds()
+            if (selectedIds.length === 0) {
+                showAlert('没有选中的记录', 'warning')
+                closeBatchModal()
+                return
+            }
+
+            closeBatchModal()
+            showAlert(`正在批量修改 ${selectedIds.length} 条记录的品名...`, 'warning')
+
+            let successCount = 0
+            let failCount = 0
+
+            for (const id of selectedIds) {
+                const { error } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .update({ 最终品名: newName })
+                    .eq('id', id)
+
+                if (error) {
+                    failCount++
+                    console.error(`更新ID ${id} 失败:`, error)
+                } else {
+                    successCount++
+                }
+            }
+
+            if (failCount > 0) {
+                showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+            } else {
+                showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+            }
+
+            await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+        }
+
         async function startEditRow(id) {
-    if (editingRowId) await saveEditRow()
-    editingRowId = id
-    const row = document.querySelector(`#dataPoolBody tr[data-id="${id}"]`)
-    if (!row) return
-    const product = JSON.parse(row.dataset.product)
-    const cells = row.querySelectorAll('.editable-cell')
-    cells.forEach(cell => {
-        const field = cell.dataset.field
-        let value = product[field]
-        if (field === '佣金比例') {
-            // 佣金比例：存储的是小数（如0.79），编辑时显示为百分比数值（79），保存时再转换回小数
-            value = (value ).toFixed(2)
+            if (editingRowId) await saveEditRow()
+            editingRowId = id
+            const row = document.querySelector(`#dataPoolBody tr[data-id="${id}"]`)
+            if (!row) return
+            const product = JSON.parse(row.dataset.product)
+            const cells = row.querySelectorAll('.editable-cell')
+            cells.forEach(cell => {
+                const field = cell.dataset.field
+                let value = product[field]
+                if (field === '佣金比例') {
+                    value = (value * 100).toFixed(2)
+                }
+                cell.innerHTML = `<input class="inline-edit" type="text" value="${value}" data-field="${field}">`
+            })
+            const actionCell = row.cells[8]
+            actionCell.innerHTML = `<button class="edit-btn" onclick="saveEditRow()">保存</button><button class="delete-btn" onclick="cancelEditRow()">取消</button>`
         }
-        cell.innerHTML = `<input class="inline-edit" type="text" value="${value}" data-field="${field}">`
-    })
-    const actionCell = row.cells[8]
-    actionCell.innerHTML = `<button class="edit-btn" onclick="saveEditRow()">保存</button><button class="delete-btn" onclick="cancelEditRow()">取消</button>`
-}
-        
+
         async function saveEditRow() {
             if (!editingRowId) return
+
             const row = document.querySelector(`#dataPoolBody tr[data-id="${editingRowId}"]`)
-            if (!row) return
-            
+            if (!row) {
+                cancelEditRow()
+                return
+            }
+
+            const product = JSON.parse(row.dataset.product)
             const inputs = row.querySelectorAll('.inline-edit')
             const updates = {}
             let hasError = false
-            
+
             inputs.forEach(input => {
                 const field = input.dataset.field
                 let value = input.value.trim()
-                if (field === '单价' || field === '货款') { 
+                if (field === '单价' || field === '货款') {
                     value = parseFloat(value)
                     if (isNaN(value)) hasError = true
-                    updates[field] = value 
+                    updates[field] = value
                 }
-                else { 
-                    updates[field] = value 
+                else if (field === '佣金比例') {
+                    value = parseFloat(value) / 100
+                    if (isNaN(value)) hasError = true
+                    updates[field] = value
+                }
+                else {
+                    updates[field] = value
                 }
             })
-            
+
             if (hasError) {
                 showAlert('请输入有效的数字', 'danger')
                 return
             }
-            
-            const { error } = await supabaseClient.from(CALC_TABLE_NAME).update(updates).eq('id', editingRowId)
-            if (error) { 
-                showAlert('更新失败：' + error.message, 'danger')
-                return 
+
+            if (Object.keys(updates).length === 0) {
+                cancelEditRow()
+                showAlert('未做任何修改', 'warning')
+                return
             }
-            
-            showAlert('更新成功，佣金比例已自动重新计算', 'success')
+
+            const affectsProfitPercent = updates.货款 !== undefined || updates.单价 !== undefined || updates.佣金比例 !== undefined
+
+            if (affectsProfitPercent) {
+                const currentPrice = updates.单价 !== undefined ? updates.单价 : product.单价
+                const currentCost = updates.货款 !== undefined ? updates.货款 : product.货款
+                const currentCommission = updates.佣金比例 !== undefined ? updates.佣金比例 : product.佣金比例
+
+                const originalRangeName = product.利润率档位 || '档位二'
+                let targetMin, targetMax, rangeDisplay
+
+                if (originalRangeName === '档位一') {
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
+                } else if (originalRangeName === '档位二') {
+                    targetMin = 0.088
+                    targetMax = 0.10
+                    rangeDisplay = '档位二（8.8% - 10%）'
+                } else if (originalRangeName === '自定义') {
+                    targetMin = product.自定义最小利润率 || 0.088
+                    targetMax = product.自定义最大利润率 || 0.10
+                    rangeDisplay = `自定义档位（${(targetMin * 100).toFixed(1)}% - ${(targetMax * 100).toFixed(1)}%）`
+                } else {
+                    targetMin = 0.088
+                    targetMax = 0.10
+                    rangeDisplay = '默认档位（8.8% - 10%）'
+                }
+
+                const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
+                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
+                const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
+
+                let newOnlinePercent
+                if (updates.佣金比例 !== undefined) {
+                    newOnlinePercent = Math.round((1 - costRatio - currentCommission) * 10000) / 10000
+                } else {
+                    let bestCommission = currentCommission
+                    let minDiff = Infinity
+                    for (let i = 0; i <= 100; i++) {
+                        const commission = i / 100
+                        const q = 1 - costRatio - commission
+                        if (q >= targetMin && q <= targetMax) {
+                            bestCommission = commission
+                            break
+                        }
+                        const diff = Math.abs(q - targetMin)
+                        if (diff < minDiff) {
+                            minDiff = diff
+                            bestCommission = commission
+                        }
+                    }
+                    bestCommission = Math.round(bestCommission * 100) / 100
+                    newOnlinePercent = Math.round((1 - costRatio - bestCommission) * 10000) / 10000
+                }
+
+                const isInRange = newOnlinePercent >= targetMin - 0.0001 && newOnlinePercent <= targetMax + 0.0001
+
+                if (!isInRange) {
+                    const warningMessage =
+                        `⚠️ 档位范围警告\n\n` +
+                        `修改后的"线上百分比"不在原档位：${rangeDisplay} 范围内！\n\n` +
+                        `💡 操作建议：\n` +
+                        `   • 本次修改不会保存，原数据保持不变\n` +
+                        `   • 请前往【佣金测算】界面，重新选择档位后点击【测算】\n` +
+                        `   • 确认新数据符合要求后，点击【添加到数据库】`
+
+                    alert(warningMessage)
+                    cancelEditRow()
+                    showAlert('修改已取消，原数据保持不变。请前往佣金测算界面重新测算添加。', 'warning')
+                    return
+                }
+            }
+
+            const { error } = await supabaseClient.from(CALC_TABLE_NAME).update(updates).eq('id', editingRowId)
+            if (error) {
+                showAlert('更新失败：' + error.message, 'danger')
+                return
+            }
+
+            showAlert('更新成功！', 'success')
             cancelEditRow()
             await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-        
-        function cancelEditRow() { editingRowId = null; loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter) }
-        
-        async function deletePoolItem(id) {
-            if (!confirm('确定删除该记录吗？')) return
-            const { error } = await supabaseClient.from(CALC_TABLE_NAME).delete().eq('id', id)
-            if (error) { showAlert('删除失败：' + error.message, 'danger'); return }
-            showAlert('删除成功', 'success')
-            await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
+
+        function cancelEditRow() {
+            editingRowId = null
+            loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
-        
-        // ========== 导出佣金测算表数据 ==========
+
         async function exportPoolData() {
             try {
                 showAlert('正在准备导出数据，请稍候...', 'warning')
-                
+
                 let query = supabaseClient
                     .from(CALC_TABLE_NAME)
                     .select('*')
                     .order('id', { ascending: false })
-                
+
                 if (currentRangeFilter !== 'all') {
                     query = query.eq('利润率档位', currentRangeFilter)
                 }
-                
+
                 if (poolSearchKeyword) {
                     query = query.ilike('最终品名', `%${poolSearchKeyword}%`)
                 }
-                
+
                 if (poolSearchSpec) {
                     query = query.eq('规格', poolSearchSpec)
                 }
-                
+
                 if (poolSearchPrice) {
                     const priceNum = parseFloat(poolSearchPrice)
                     if (!isNaN(priceNum)) {
                         query = query.eq('单价', priceNum)
                     }
                 }
-                
+
                 const { data, error } = await query
                 if (error) throw error
                 if (!data || data.length === 0) {
                     showAlert('暂无数据可导出！', 'warning')
                     return
                 }
-                
+
                 const columns = [
                     { key: 'id', name: 'ID' },
                     { key: '编号', name: '编号' },
@@ -2097,7 +2450,7 @@ async function confirmBatchModifyName() {
                     { key: '最终品名', name: '最终品名' },
                     { key: '规格', name: '规格' },
                     { key: '货款', name: '货款', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '运费', name: '运费' },  // 修改：移除 formatter，直接输出文本
+                    { key: '运费', name: '运费' },
                     { key: '运费险', name: '运费险', formatter: (v) => v ? v.toFixed(2) : '' },
                     { key: '抖店手续费', name: '抖店手续费', formatter: (v) => v ? v.toFixed(2) : '' },
                     { key: '退货费用', name: '退货费用', formatter: (v) => v ? v.toFixed(2) : '' },
@@ -2106,7 +2459,7 @@ async function confirmBatchModifyName() {
                     { key: '线上利润', name: '线上利润', formatter: (v) => v ? v.toFixed(2) : '' },
                     { key: '尾款利润', name: '尾款利润', formatter: (v) => v ? v.toFixed(2) : '' },
                     { key: '尾款利润百分比', name: '尾款利润百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-	    { key: '线上百分比', name: '线上百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    { key: '线上百分比', name: '线上百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
                     { key: '发货总润比', name: '发货总润比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
                     { key: 'GMV毛利比', name: 'GMV毛利比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
                     { key: '利润率档位', name: '利润率档位' },
@@ -2115,9 +2468,9 @@ async function confirmBatchModifyName() {
                     { key: '创建时间', name: '创建时间', formatter: (v) => v ? formatTime(v) : '' },
                     { key: '更新时间', name: '更新时间', formatter: (v) => v ? formatTime(v) : '' }
                 ]
-                
+
                 let csvContent = columns.map(col => col.name).join(',') + '\n'
-                
+
                 data.forEach(item => {
                     const row = columns.map(col => {
                         let value = item[col.key]
@@ -2132,11 +2485,11 @@ async function confirmBatchModifyName() {
                     }).join(',')
                     csvContent += row + '\n'
                 })
-                
+
                 let fileName = '佣金测算表'
                 if (currentRangeFilter !== 'all') fileName += `_${currentRangeFilter}`
                 fileName += `_${formatDate(new Date())}.csv`
-                
+
                 const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' })
                 const url = URL.createObjectURL(blob)
                 const a = document.createElement('a')
@@ -2146,58 +2499,43 @@ async function confirmBatchModifyName() {
                 a.click()
                 document.body.removeChild(a)
                 URL.revokeObjectURL(url)
-                
+
                 showAlert(`导出成功！共 ${data.length} 条数据`, 'success')
             } catch (error) {
                 console.error('导出失败:', error)
                 showAlert('导出失败：' + error.message, 'danger')
             }
         }
-        
-        // 提取品名选项（处理斜杠分隔和括号备注）
-function extractNameOptions(originalName) {
-    if (!originalName) return []
-    
-    let options = []
-    
-    // 1. 先按斜杠分割（这是主要的分隔符）
-    if (originalName.includes('/')) {
-        const splitNames = originalName.split('/').map(n => n.trim()).filter(n => n)
-        options.push(...splitNames)
-    } else {
-        options.push(originalName)
-    }
-    
-    // 2. 对每个选项，再处理括号内容（移除括号及括号内内容作为备选）
-    // 注意：不要使用全局正则，每次重新创建
-    const additionalOptions = []
-    
-    for (const opt of options) {
-        // 每次循环重新创建正则，避免状态残留
-        const bracketPattern = /[（(][^）)]*[）)]/
-        if (bracketPattern.test(opt)) {
-            const withoutBracket = opt.replace(bracketPattern, '').trim()
-            if (withoutBracket && withoutBracket !== opt && !options.includes(withoutBracket)) {
-                additionalOptions.push(withoutBracket)
+
+        function extractNameOptions(originalName) {
+            if (!originalName) return []
+            let options = []
+            if (originalName.includes('/')) {
+                const splitNames = originalName.split('/').map(n => n.trim()).filter(n => n)
+                options.push(...splitNames)
+            } else {
+                options.push(originalName)
             }
+            const additionalOptions = []
+            for (const opt of options) {
+                const bracketPattern = /[（(][^）)]*[）)]/
+                if (bracketPattern.test(opt)) {
+                    const withoutBracket = opt.replace(bracketPattern, '').trim()
+                    if (withoutBracket && withoutBracket !== opt && !options.includes(withoutBracket)) {
+                        additionalOptions.push(withoutBracket)
+                    }
+                }
+            }
+            options.push(...additionalOptions)
+            const uniqueOptions = []
+            for (const opt of options) {
+                if (!uniqueOptions.includes(opt)) {
+                    uniqueOptions.push(opt)
+                }
+            }
+            return uniqueOptions
         }
-    }
-    options.push(...additionalOptions)
-    
-    // 3. 去重（保留原始顺序）
-    const uniqueOptions = []
-    for (const opt of options) {
-        if (!uniqueOptions.includes(opt)) {
-            uniqueOptions.push(opt)
-        }
-    }
-    
-    console.log('提取的品名选项:', uniqueOptions)  // 调试用，可删除
-    
-    return uniqueOptions
-}
-        
-        // 清理品名：移除括号内容
+
         function cleanProductName(name) {
             if (!name) return name
             let cleaned = name.replace(/[（(][^）)]*[）)]/g, '').trim()
@@ -2205,183 +2543,179 @@ function extractNameOptions(originalName) {
             return cleaned
         }
 
-        // ========== 添加达人佣金 ==========
         function openTalentModal() {
-    const selected = document.querySelectorAll('.pool-row-checkbox:checked')
-    if (selected.length === 0) {
-        alert('请先在佣金测算表中勾选一条产品')
-        return
-    }
-    if (selected.length > 1) {
-        alert('只能勾选一条产品，请重新选择')
-        return
-    }
-    
-    const checkbox = selected[0]
-    const row = checkbox.closest('tr')
-    if (!row) {
-        alert('获取产品信息失败，请重试')
-        return
-    }
-    
-    let product = null
-    if (row.dataset.product) {
-        try {
-            product = JSON.parse(row.dataset.product)
-        } catch(e) {
-            console.error('解析失败:', e)
+            const selected = document.querySelectorAll('.pool-row-checkbox:checked')
+            if (selected.length === 0) {
+                alert('请先在佣金测算表中勾选一条产品')
+                return
+            }
+            if (selected.length > 1) {
+                alert('只能勾选一条产品，请重新选择')
+                return
+            }
+
+            const checkbox = selected[0]
+            const row = checkbox.closest('tr')
+            if (!row) {
+                alert('获取产品信息失败，请重试')
+                return
+            }
+
+            let product = null
+            if (row.dataset.product) {
+                try {
+                    product = JSON.parse(row.dataset.product)
+                } catch (e) {
+                    console.error('解析失败:', e)
+                }
+            }
+
+            if (!product) {
+                const cells = row.cells
+                product = {
+                    id: row.getAttribute('data-id') || Date.now(),
+                    佣金比例: parseFloat(cells[1]?.innerText || '0') / 100,
+                    单价: parseFloat(cells[2]?.innerText || '0'),
+                    最终品名: cells[3]?.innerText || '',
+                    规格: cells[4]?.innerText || '',
+                    货款: parseFloat(cells[5]?.innerText || '0'),
+                    线上百分比: parseFloat(cells[6]?.innerText || '0') / 100 || 0
+                }
+            }
+
+            if (!product || !product.最终品名) {
+                alert('产品数据无效，请刷新页面后重试')
+                return
+            }
+
+            currentCalculatedData = product
+
+            const finalName = product.最终品名
+            let nameOptions = extractNameOptions(finalName)
+            let selectedName = nameOptions.length > 0 ? nameOptions[0] : finalName
+
+            let nameSelectHtml = ''
+            if (nameOptions.length > 1) {
+                const optionsHtml = nameOptions.map(name => `<option value="${name.replace(/"/g, '&quot;')}">${name}</option>`).join('')
+                nameSelectHtml = `
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>选择商品规格 <span class="required">*</span></label>
+                        <select id="selectedProductNameSelect" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0; margin-bottom: 8px;" onchange="document.getElementById('selectedProductNameInput').value = this.value">
+                            <option value="">请选择</option>
+                            ${optionsHtml}
+                            <option value="">手动输入</option>
+                        </select>
+                        <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="或直接输入修改" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
+                        <small style="color: #999;">可从下拉列表选择，或直接输入修改</small>
+                    </div>
+                `
+            } else {
+                nameSelectHtml = `
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>品名 <span class="required">*</span></label>
+                        <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="请输入品名" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
+                    </div>
+                `
+            }
+
+            const modalContent = document.querySelector('#talentModal .talent-modal-content')
+
+            modalContent.innerHTML = `
+                <h3>👤 添加达人佣金</h3>
+                ${nameSelectHtml}
+                <div class="form-group">
+                    <label>达人名称 <span class="required">*</span></label>
+                    <input type="text" id="talentNameInput" placeholder="请输入达人名称">
+                </div>
+                <div class="form-group">
+                    <label>初始商品规格 <span class="required"></span></label>
+                    <input type="text" id="originalProductSpec" placeholder="选填">
+                    <small style="color: #999;">选填，用于记录产品原始规格信息</small>
+                </div>
+                <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                    单价：${product.单价}元<br>
+                    佣金比例：${(product.佣金比例 * 100).toFixed(2)}%<br>
+                    线上百分比：${((product.线上百分比 || 0) * 100).toFixed(2)}%
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
+                    <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
+                </div>
+            `
+
+            document.getElementById('talentModal').style.display = 'flex'
         }
-    }
-    
-    if (!product) {
-        const cells = row.cells
-        product = {
-            id: row.getAttribute('data-id') || Date.now(),
-            佣金比例: parseFloat(cells[1]?.innerText || '0') / 100,
-            单价: parseFloat(cells[2]?.innerText || '0'),
-            最终品名: cells[3]?.innerText || '',
-            规格: cells[4]?.innerText || '',
-            货款: parseFloat(cells[5]?.innerText || '0'),
-            线上百分比: parseFloat(cells[6]?.innerText || '0') / 100 || 0
-        }
-    }
-    
-    if (!product || !product.最终品名) {
-        alert('产品数据无效，请刷新页面后重试')
-        return
-    }
-    
-    // 存储完整产品数据
-    currentCalculatedData = product
-    
-    // 处理品名：提取可选的品名选项
-    const finalName = product.最终品名
-    let nameOptions = extractNameOptions(finalName)
-    let selectedName = nameOptions.length > 0 ? nameOptions[0] : finalName
-    
-    // 构建品名选择HTML（使用 Select 下拉框 + 可编辑输入框）
-let nameSelectHtml = ''
-if (nameOptions.length > 1) {
-    // 生成选项HTML
-    const optionsHtml = nameOptions.map(name => `<option value="${name.replace(/"/g, '&quot;')}">${name}</option>`).join('')
-    nameSelectHtml = `
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label>选择品名 <span class="required">*</span></label>
-            <select id="selectedProductNameSelect" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0; margin-bottom: 8px;" onchange="document.getElementById('selectedProductNameInput').value = this.value">
-                <option value="">请选择</option>
-                ${optionsHtml}
-                <option value="">手动输入</option>
-            </select>
-            <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="或直接输入修改" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
-            <small style="color: #999;">可从下拉列表选择，或直接输入修改</small>
-        </div>
-    `
-} else {
-    nameSelectHtml = `
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label>品名 <span class="required">*</span></label>
-            <input type="text" id="selectedProductNameInput" value="${selectedName.replace(/"/g, '&quot;')}" placeholder="请输入品名" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #e0d4f0;">
-        </div>
-    `
-}
-    
-    // 更新模态框内容
-    const modalContent = document.querySelector('#talentModal .talent-modal-content')
-    
-    modalContent.innerHTML = `
-        <h3>👤 添加达人佣金</h3>
-        ${nameSelectHtml}
-        <div class="form-group">
-            <label>达人名称 <span class="required">*</span></label>
-            <input type="text" id="talentNameInput" placeholder="请输入达人名称">
-        </div>
-        <div class="form-group">
-            <label>初始商品规格 <span class="required"></span></label>
-            <input type="text" id="originalProductSpec" placeholder="选填">
-            <small style="color: #999;">选填，用于记录产品原始规格信息</small>
-        </div>
-        <div id="selectedProductInfo" style="background-color: #f5f0fa; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
-            单价：${product.单价}元<br>
-            佣金比例：${(product.佣金比例 * 100).toFixed(2)}%<br>
-            线上百分比：${((product.线上百分比 || 0) * 100).toFixed(2)}%
-        </div>
-        <div style="display: flex; gap: 10px; justify-content: flex-end;">
-            <button onclick="closeTalentModal()" style="padding: 10px 20px; background-color: #f0e9f5; border: none; border-radius: 6px;">取消</button>
-            <button onclick="confirmAddToCommission()" style="padding: 10px 20px; background-color: #9f7aea; color: white; border: none; border-radius: 6px;">确认添加</button>
-        </div>
-    `
-    
-    document.getElementById('talentModal').style.display = 'flex'
-}
-        
+
         async function confirmAddToCommission() {
-    // 获取用户输入
-    const talentName = document.getElementById('talentNameInput')?.value.trim() || ''
-    // 优先从输入框获取，如果输入框为空则从下拉框获取
-	let selectedName = document.getElementById('selectedProductNameInput')?.value.trim() || ''
-	if (!selectedName) {
-    const selectEl = document.getElementById('selectedProductNameSelect')
-    if (selectEl && selectEl.value && selectEl.value !== '' && selectEl.value !== '') {
-        selectedName = selectEl.value
-    }
-}
-    const originalSpec = document.getElementById('originalProductSpec')?.value.trim() || ''
-    
-    // 验证必填字段
-    if (!talentName) { 
-        showAlert('请输入达人名称', 'warning'); 
-        return 
-    }
-    if (!selectedName) {
-        showAlert('请输入最终品名', 'warning');
-        return
-    }
-    if (!currentCalculatedData) { 
-        showAlert('产品数据不存在，请重新勾选产品', 'danger'); 
-        return 
-    }
-    
-    // 获取最大序号
-    const { data: maxData } = await supabaseClient
-        .from(TABLE_NAME)
-        .select('序号')
-        .order('序号', { ascending: false })
-        .limit(1)
-    
-    const nextSerial = (maxData && maxData[0]?.序号) ? maxData[0].序号 + 1 : 1
-    
-    // 构建商品规格：选择的品名 + 规格（不加空格）
-    const productSpec = `${selectedName}${currentCalculatedData.规格}`
-    
-    // 获取线上百分比
-    const onlinePercent = currentCalculatedData.线上百分比 || 0
-    
-    // 插入数据到达人佣金表
-    const { error } = await supabaseClient
-        .from(TABLE_NAME)
-        .insert([{
-            序号: nextSerial,
-            达人名称: talentName,
-            商品规格: productSpec,
-            初始商品规格: originalSpec,
-            商品价格: currentCalculatedData.单价,
-            佣金: currentCalculatedData.佣金比例,
-            线上百分比: onlinePercent,
-            录入时间: getCurrentLocalTime()
-        }])
-    
-    if (error) { 
-        console.error('添加失败:', error)
-        showAlert('添加失败：' + error.message, 'danger') 
-    } else { 
-        showAlert(`已添加达人"${talentName}"的佣金数据`, 'success')
-        closeTalentModal()
-        await loadDataToTable()
-    }
-}
-        
+            const talentName = document.getElementById('talentNameInput')?.value.trim() || ''
+            let selectedName = document.getElementById('selectedProductNameInput')?.value.trim() || ''
+            if (!selectedName) {
+                const selectEl = document.getElementById('selectedProductNameSelect')
+                if (selectEl && selectEl.value && selectEl.value !== '') {
+                    selectedName = selectEl.value
+                }
+            }
+            const originalSpecInput = document.getElementById('originalProductSpec')?.value.trim() || ''
+            const currentSpec = currentCalculatedData.规格 || ''
+
+            if (!talentName) {
+                showAlert('请输入达人名称', 'warning');
+                return
+            }
+            if (!selectedName) {
+                showAlert('请输入最终品名', 'warning');
+                return
+            }
+            if (!currentCalculatedData) {
+                showAlert('产品数据不存在，请重新勾选产品', 'danger');
+                return
+            }
+
+            const { data: maxData } = await supabaseClient
+                .from(TABLE_NAME)
+                .select('序号')
+                .order('序号', { ascending: false })
+                .limit(1)
+
+            const nextSerial = (maxData && maxData[0]?.序号) ? maxData[0].序号 + 1 : 1
+
+            const productSpec = `${selectedName}${currentSpec}`
+
+            let finalOriginalSpec = ''
+            if (originalSpecInput) {
+                finalOriginalSpec = `${originalSpecInput}${currentSpec}`
+            }
+
+            const onlinePercent = currentCalculatedData.线上百分比 || 0
+
+            const { error } = await supabaseClient
+                .from(TABLE_NAME)
+                .insert([{
+                    序号: nextSerial,
+                    达人名称: talentName,
+                    商品规格: productSpec,
+                    初始商品规格: finalOriginalSpec,
+                    商品价格: currentCalculatedData.单价,
+                    佣金: currentCalculatedData.佣金比例,
+                    线上百分比: onlinePercent,
+                    录入时间: getCurrentLocalTime()
+                }])
+
+            if (error) {
+                console.error('添加失败:', error)
+                showAlert('添加失败：' + error.message, 'danger')
+            } else {
+                let successMsg = `已添加达人"${talentName}"的佣金数据\n商品规格：${productSpec}`
+                if (finalOriginalSpec) {
+                    successMsg += `\n初始商品规格：${finalOriginalSpec}`
+                }
+                showAlert(successMsg, 'success')
+                closeTalentModal()
+                await loadDataToTable()
+            }
+        }
+
         function closeTalentModal() {
-            // 恢复模态框原始内容
             const modalContent = document.querySelector('#talentModal .talent-modal-content')
             modalContent.innerHTML = `
                 <h3>👤 添加达人佣金</h3>
@@ -2399,12 +2733,11 @@ if (nameOptions.length > 1) {
             `
             document.getElementById('talentModal').style.display = 'none'
         }
-        
+
         function closeNegativeModal() { document.getElementById('negativeDataModal').style.display = 'none' }
         function closeEditCostModal() { document.getElementById('editCostModal').style.display = 'none' }
         function saveNewCost() { document.getElementById('editCostModal').style.display = 'none'; showAlert('货款已更新', 'success') }
 
-        // ========== 佣金管理界面原有函数 ==========
         async function syncData() {
             const syncBtn = document.querySelector('#manageTab .btn-sync')
             const originalText = syncBtn.innerHTML
@@ -2419,47 +2752,48 @@ if (nameOptions.length > 1) {
                 lastSyncTime = new Date()
                 document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}`
                 showAlert(`同步成功！共 ${originalDataList.length} 条数据`, 'success')
-            } catch (error) { console.error('同步失败:', error); showAlert('同步失败：' + error.message, 'danger')
+            } catch (error) {
+                console.error('同步失败:', error); showAlert('同步失败：' + error.message, 'danger')
             } finally { syncBtn.innerHTML = originalText; syncBtn.disabled = false }
         }
-        
+
         function renderTableData(dataList) {
-    const tableBody = document.getElementById('tableBody')
-    tableBody.innerHTML = ''
-    if (!dataList || dataList.length === 0) {
-        const tr = document.createElement('tr')
-        tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据<\/td><\/tr>'
-        tableBody.appendChild(tr)
-        document.getElementById('totalRecords').textContent = '0'
-        document.getElementById('totalPages').textContent = '1'
-        document.getElementById('pageInput').value = '1'
-        updatePaginationButtons()
-        return
-    }
-    allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
-    totalPages = Math.ceil(allDataForPagination.length / pageSize)
-    if (currentPage > totalPages) currentPage = totalPages
-    if (currentPage < 1) currentPage = 1
-    const start = (currentPage - 1) * pageSize
-    const end = Math.min(start + pageSize, allDataForPagination.length)
-    const pageData = allDataForPagination.slice(start, end)
-    pageData.forEach(item => {
-        const tr = document.createElement('tr')
-        tr.setAttribute('data-serial', item.序号)
-        tr.innerHTML = `<td class="checkbox-cell"><input type="checkbox" class="row-checkbox" value="${item.序号}"><\/td>
-            <td>${item.序号}<\/td><td>${item.达人名称}<\/td><td>${item.商品规格}<\/td>
-            <td>${item.初始商品规格 || '-'}<\/td><td>${Number(item.商品价格).toFixed(2)}<\/td>
-            <td>${Number(item.佣金).toFixed(2)}<\/td>
-            <td>${item.线上百分比 ? (Number(item.线上百分比) * 100).toFixed(2) + '%' : '-'}<\/td>
-            <td>${formatTime(item.录入时间)}<\/td>`
-        tableBody.appendChild(tr)
-    })
-    document.getElementById('totalRecords').textContent = allDataForPagination.length
-    document.getElementById('totalPages').textContent = totalPages
-    document.getElementById('pageInput').value = currentPage
-    updatePaginationButtons()
-}
-        
+            const tableBody = document.getElementById('tableBody')
+            tableBody.innerHTML = ''
+            if (!dataList || dataList.length === 0) {
+                const tr = document.createElement('tr')
+                tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据<\/td><\/tr>'
+                tableBody.appendChild(tr)
+                document.getElementById('totalRecords').textContent = '0'
+                document.getElementById('totalPages').textContent = '1'
+                document.getElementById('pageInput').value = '1'
+                updatePaginationButtons()
+                return
+            }
+            allDataForPagination = [...dataList].sort((a, b) => b.序号 - a.序号)
+            totalPages = Math.ceil(allDataForPagination.length / pageSize)
+            if (currentPage > totalPages) currentPage = totalPages
+            if (currentPage < 1) currentPage = 1
+            const start = (currentPage - 1) * pageSize
+            const end = Math.min(start + pageSize, allDataForPagination.length)
+            const pageData = allDataForPagination.slice(start, end)
+            pageData.forEach(item => {
+                const tr = document.createElement('tr')
+                tr.setAttribute('data-serial', item.序号)
+                tr.innerHTML = `<td class="checkbox-cell"><input type="checkbox" class="row-checkbox" value="${item.序号}"><\/td>
+                    <td>${item.序号}<\/td><td>${item.达人名称}<\/td><td>${item.商品规格}<\/td>
+                    <td>${item.初始商品规格 || '-'}<\/td><td>${Number(item.商品价格).toFixed(2)}<\/td>
+                    <td>${Number(item.佣金).toFixed(2)}<\/td>
+                    <td>${item.线上百分比 ? (Number(item.线上百分比) * 100).toFixed(2) + '%' : '-'}<\/td>
+                    <td>${formatTime(item.录入时间)}<\/td>`
+                tableBody.appendChild(tr)
+            })
+            document.getElementById('totalRecords').textContent = allDataForPagination.length
+            document.getElementById('totalPages').textContent = totalPages
+            document.getElementById('pageInput').value = currentPage
+            updatePaginationButtons()
+        }
+
         async function loadDataToTable(filterData = null) {
             try {
                 if (filterData) { renderTableData(filterData); return }
@@ -2471,7 +2805,7 @@ if (nameOptions.length > 1) {
                 if (!lastSyncTime) { lastSyncTime = new Date(); document.getElementById('syncTime').innerHTML = `最后同步：${lastSyncTime.toLocaleString('zh-CN')}` }
             } catch (error) { console.error('加载数据失败:', error); showAlert('加载数据失败：' + error.message, 'danger') }
         }
-        
+
         function goToPage(page) {
             page = parseInt(page)
             if (isNaN(page) || page < 1) page = 1
@@ -2487,28 +2821,28 @@ if (nameOptions.length > 1) {
                 nextBtn.disabled = currentPage === totalPages; lastBtn.disabled = currentPage === totalPages
             }
         }
-        
+
         let isSubmitting = false
         async function submitData() {
             if (isSubmitting) {
                 showAlert('正在提交中，请勿重复点击', 'warning')
                 return
             }
-            
+
             const talentName = document.getElementById('talentName').value.trim()
             const productSpec = document.getElementById('productSpec').value.trim()
             const originalSpec = document.getElementById('originalSpec').value.trim()
             const productPriceStr = document.getElementById('productPrice').value.trim()
             const commissionStr = document.getElementById('commission').value.trim()
-            
+
             if (!talentName || !productSpec || !productPriceStr || !commissionStr) {
                 showAlert('请填写所有必填字段！', 'warning')
                 return
             }
-            
+
             const productPrice = parseFloat(productPriceStr)
             const commission = parseFloat(commissionStr)
-            
+
             if (isNaN(productPrice) || productPrice < 0) {
                 showAlert('商品价格必须是大于等于0的数字！', 'warning')
                 return
@@ -2517,13 +2851,13 @@ if (nameOptions.length > 1) {
                 showAlert('佣金必须是大于等于0的数字！', 'warning')
                 return
             }
-            
+
             isSubmitting = true
             const submitBtn = document.querySelector('#manageTab .btn-submit')
             const originalBtnText = submitBtn.innerHTML
             submitBtn.innerHTML = '<span class="loading"></span>提交中...'
             submitBtn.disabled = true
-            
+
             try {
                 const { data: existingData, error: queryError } = await supabaseClient
                     .from(TABLE_NAME)
@@ -2531,11 +2865,11 @@ if (nameOptions.length > 1) {
                     .eq('达人名称', talentName)
                     .eq('商品规格', productSpec)
                     .eq('商品价格', productPrice)
-                
+
                 if (queryError) throw queryError
-                
+
                 const currentTime = getCurrentLocalTime()
-                
+
                 if (existingData && existingData.length > 0) {
                     const existing = existingData[0]
                     const { error: updateError } = await supabaseClient
@@ -2546,7 +2880,7 @@ if (nameOptions.length > 1) {
                             录入时间: currentTime
                         })
                         .eq('id', existing.id)
-                    
+
                     if (updateError) throw updateError
                     showAlert(`检测到重复数据，已更新！`, 'warning')
                 } else {
@@ -2557,9 +2891,9 @@ if (nameOptions.length > 1) {
                         .eq('商品规格', productSpec)
                         .eq('商品价格', productPrice)
                         .limit(1)
-                    
+
                     if (checkError) throw checkError
-                    
+
                     if (doubleCheck && doubleCheck.length > 0) {
                         const existing = doubleCheck[0]
                         const { error: updateError } = await supabaseClient
@@ -2570,7 +2904,7 @@ if (nameOptions.length > 1) {
                                 录入时间: currentTime
                             })
                             .eq('id', existing.id)
-                        
+
                         if (updateError) throw updateError
                         showAlert(`检测到重复数据，已更新！`, 'warning')
                     } else {
@@ -2579,10 +2913,10 @@ if (nameOptions.length > 1) {
                             .select('序号')
                             .order('序号', { ascending: false })
                             .limit(1)
-                        
+
                         let nextSerial = 1
                         if (maxData && maxData.length > 0) nextSerial = maxData[0].序号 + 1
-                        
+
                         const { error: insertError } = await supabaseClient
                             .from(TABLE_NAME)
                             .insert([{
@@ -2594,12 +2928,12 @@ if (nameOptions.length > 1) {
                                 佣金: commission,
                                 录入时间: currentTime
                             }])
-                        
+
                         if (insertError) throw insertError
                         showAlert(`数据提交成功！`, 'success')
                     }
                 }
-                
+
                 await loadDataToTable()
                 resetForm()
             } catch (error) {
@@ -2611,7 +2945,7 @@ if (nameOptions.length > 1) {
                 submitBtn.disabled = false
             }
         }
-        
+
         async function deleteSelectedRows() {
             const selected = document.querySelectorAll('#manageTab .row-checkbox:checked')
             if (selected.length === 0) { showAlert('请先选择要删除的记录！', 'warning'); return }
@@ -2625,7 +2959,7 @@ if (nameOptions.length > 1) {
                 showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
             } catch (error) { console.error('删除失败:', error); showAlert('删除失败：' + error.message, 'danger') }
         }
-        
+
         function searchData() {
             const searchTalent = document.getElementById('searchTalent').value.trim().toLowerCase()
             const searchSpec = document.getElementById('searchSpec').value.trim().toLowerCase()
@@ -2640,7 +2974,7 @@ if (nameOptions.length > 1) {
             currentPage = 1
             renderTableData(filteredData)
         }
-        
+
         function resetSearch() {
             document.getElementById('searchTalent').value = ''
             document.getElementById('searchSpec').value = ''
@@ -2649,7 +2983,7 @@ if (nameOptions.length > 1) {
             showAlert('查找条件已重置！', 'success')
             document.getElementById('selectAll').checked = false
         }
-        
+
         async function exportData() {
             try {
                 const { data, error } = await supabaseClient.from(TABLE_NAME).select('*').order('序号')
@@ -2667,14 +3001,14 @@ if (nameOptions.length > 1) {
                 showAlert('导出成功！', 'success')
             } catch (error) { console.error('导出失败:', error); showAlert('导出失败：' + error.message, 'danger') }
         }
-        
+
         async function importCSVFile(e) {
             const file = e.target.files[0]
             if (!file) return
             if (!file.name.endsWith('.csv')) { showAlert('请导入 CSV 格式的表格文件！', 'danger'); return }
             showAlert('正在导入数据，请稍候...', 'warning')
             const reader = new FileReader()
-            reader.onload = async function(event) {
+            reader.onload = async function (event) {
                 try {
                     let csv = event.target.result
                     if (csv.charCodeAt(0) === 0xFEFF) csv = csv.substr(1)
@@ -2742,15 +3076,24 @@ if (nameOptions.length > 1) {
             }
             reader.readAsText(file, 'UTF-8')
         }
-        
+
         function handleEnterKey(event) { if (event.keyCode === 13 || event.key === 'Enter') { event.preventDefault(); searchData() } }
         function toggleSelectAll() { const isChecked = document.getElementById('selectAll').checked; document.querySelectorAll('#manageTab .row-checkbox').forEach(cb => cb.checked = isChecked) }
-        
-        window.onload = function() {
+
+        window.onload = function () {
             loadDataToTable()
             document.getElementById('importFile').addEventListener('change', importCSVFile)
-            syncCalcData()
+            setTimeout(() => {
+                syncCalcData()
+            }, 500)
+
+            // 添加监听器，自动匹配货款
+            const specInput = document.getElementById('newSpec')
+            const priceInput = document.getElementById('newPrice')
+            if (specInput) specInput.addEventListener('blur', autoMatchCost)
+            if (priceInput) priceInput.addEventListener('blur', autoMatchCost)
         }
     </script>
 </body>
+
 </html>
