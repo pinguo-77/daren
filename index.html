@@ -960,6 +960,9 @@
     <!-- ===== 佣金测算界面 ===== -->
     <div id="calculateTab" class="tab-content">
         <div class="calculate-container">
+            <!-- 佣金测算界面独立提示框 -->
+            <div id="calcAlertBox" class="alert" style="margin-bottom: 20px;"></div>
+
             <div class="new-product-section">
                 <h3>可测算与添加新品</h3>
 
@@ -1244,7 +1247,16 @@
 
         let specOptions = []
         let priceOptions = []
-        let allProductNames = []  // 存储所有产品名称，用于模糊匹配
+        let allProductNames = []
+
+        // ========== 佣金测算界面独立提示函数 ==========
+        function showCalcAlert(message, type) {
+            const box = document.getElementById('calcAlertBox')
+            if (!box) return
+            box.textContent = message
+            box.className = `alert alert-${type}`
+            setTimeout(() => box.className = 'alert', 5000)
+        }
 
         // ========== 工具函数 ==========
         function formatDate(date) {
@@ -1277,9 +1289,8 @@
         }
 
         // ========== 产品名称模糊匹配 ==========
-        let allProductNamesList = []  // 存储所有产品名称
+        let allProductNamesList = []
 
-        // 加载所有产品名称
         async function loadAllProductNames() {
             try {
                 const { data, error } = await supabaseClient
@@ -1296,13 +1307,11 @@
             }
         }
 
-        // 显示产品名称建议（模糊匹配）
         function showProductSuggestions(keyword) {
             const suggestionsDiv = document.getElementById('productSuggestions')
             if (!suggestionsDiv) return
 
             if (!keyword || keyword.trim() === '') {
-                // 没有输入时，显示前10条常用产品
                 const topNames = allProductNamesList.slice(0, 10)
                 if (topNames.length === 0) {
                     suggestionsDiv.style.display = 'none'
@@ -1315,11 +1324,10 @@
                 return
             }
 
-            // 模糊匹配：包含关键词
             const keywordLower = keyword.toLowerCase()
             const matched = allProductNamesList.filter(name =>
                 name.toLowerCase().includes(keywordLower)
-            ).slice(0, 15)  // 最多显示15条
+            ).slice(0, 15)
 
             if (matched.length === 0) {
                 suggestionsDiv.style.display = 'none'
@@ -1332,15 +1340,12 @@
             suggestionsDiv.style.display = 'block'
         }
 
-        // 选择产品名称
         function selectProductName(name) {
             document.getElementById('newFinalName').value = name
             document.getElementById('productSuggestions').style.display = 'none'
-            // 可选：自动触发货款匹配
             autoMatchCost()
         }
 
-        // 自动匹配货款
         async function autoMatchCost() {
             const finalName = document.getElementById('newFinalName').value.trim()
             const spec = document.getElementById('newSpec').value.trim()
@@ -1348,7 +1353,6 @@
 
             if (!finalName || !spec || !price) return
 
-            // 查找匹配的产品
             const { data, error } = await supabaseClient
                 .from(CALC_TABLE_NAME)
                 .select('货款')
@@ -1360,18 +1364,16 @@
             if (!error && data && data.length > 0) {
                 const cost = data[0].货款
                 document.getElementById('newCost').value = cost
-                showAlert(`已自动匹配货款：${cost}元`, 'success')
+                showCalcAlert(`已自动匹配货款：${cost}元`, 'success')
             }
         }
 
-        // HTML转义函数
         function escapeHtml(text) {
             const div = document.createElement('div')
             div.textContent = text
             return div.innerHTML
         }
 
-        // 点击其他地方关闭下拉框
         document.addEventListener('click', function (e) {
             const wrapper = document.querySelector('.input-wrapper')
             const suggestions = document.getElementById('productSuggestions')
@@ -1379,30 +1381,6 @@
                 suggestions.style.display = 'none'
             }
         })
-
-        // ========== 模糊匹配筛选产品名称（实时过滤） ==========
-        function filterProductNames(keyword) {
-            const input = document.getElementById('newFinalName')
-            if (!keyword || keyword.trim() === '') {
-                // 如果清空输入，重新加载所有选项
-                loadAllProductNames()
-                return
-            }
-
-            const filtered = allProductNames.filter(name =>
-                name.toLowerCase().includes(keyword.toLowerCase())
-            )
-
-            const datalist = document.getElementById('productNameDatalist')
-            if (datalist) {
-                datalist.innerHTML = ''
-                filtered.slice(0, 20).forEach(name => {
-                    const option = document.createElement('option')
-                    option.value = name
-                    datalist.appendChild(option)
-                })
-            }
-        }
 
         // ========== 加载下拉框选项 ==========
         async function loadFilterOptions() {
@@ -1517,7 +1495,7 @@
             let cost = parseFloat(document.getElementById('newCost').value)
 
             if (!price || !finalName || !spec) {
-                showAlert('请填写单价、最终品名和规格', 'warning')
+                showCalcAlert('请填写单价、最终品名和规格', 'warning')
                 return
             }
 
@@ -1533,23 +1511,23 @@
                 if (data && data.length > 0) {
                     cost = data[0].货款
                     document.getElementById('newCost').value = cost
-                    showAlert(`已自动匹配货款：${cost}元`, 'success')
+                    showCalcAlert(`已自动匹配货款：${cost}元`, 'success')
                 } else {
                     const userInput = prompt(`未找到"${finalName} ${spec}"的货款信息\n请输入该产品的货款金额（元）：`)
                     if (userInput === null) return
                     const userCost = parseFloat(userInput)
                     if (isNaN(userCost) || userCost <= 0) {
-                        showAlert('请输入有效的货款金额', 'warning')
+                        showCalcAlert('请输入有效的货款金额', 'warning')
                         return
                     }
                     cost = userCost
                     document.getElementById('newCost').value = cost
-                    showAlert(`已使用您输入的货款：${cost}元`, 'success')
+                    showCalcAlert(`已使用您输入的货款：${cost}元`, 'success')
                 }
             }
 
             if (!cost || cost <= 0) {
-                showAlert('货款必须大于0', 'warning')
+                showCalcAlert('货款必须大于0', 'warning')
                 return
             }
 
@@ -1568,7 +1546,7 @@
 
                 if (existingRangeName === currentRangeName) {
                     displayCalculatedResult(existingProduct)
-                    showAlert('该产品已存在，可直接使用', 'success')
+                    showCalcAlert('⚠️ 该产品已存在，无需重复添加', 'warning')
                     document.getElementById('btnAddToDatabase').disabled = true
                     document.getElementById('btnAddToCommission').disabled = false
                     currentCalculatedData = existingProduct
@@ -1578,7 +1556,7 @@
                         recalculateWithCurrentRange(price, finalName, spec, cost)
                     } else {
                         displayCalculatedResult(existingProduct)
-                        showAlert('该产品已存在，可直接使用', 'success')
+                        showCalcAlert('该产品已存在，可直接使用', 'warning')
                         document.getElementById('btnAddToDatabase').disabled = true
                         document.getElementById('btnAddToCommission').disabled = false
                         currentCalculatedData = existingProduct
@@ -1657,7 +1635,7 @@
             };
 
             displayCalculatedResult(calculatedData);
-            showAlert(`已用${getRangeDisplaySimple(currentRange.name)}重新测算`, 'success');
+            showCalcAlert(`已用${getRangeDisplaySimple(currentRange.name)}重新测算`, 'success');
             document.getElementById('btnAddToDatabase').disabled = false;
             document.getElementById('btnAddToCommission').disabled = true;
             currentCalculatedData = calculatedData;
@@ -1730,16 +1708,21 @@
             };
 
             displayCalculatedResult(calculatedData);
-            showAlert('测算完成，可添加至数据库', 'success');
+            showCalcAlert('测算完成，可添加至数据库', 'success');
             document.getElementById('btnAddToDatabase').disabled = false;
             document.getElementById('btnAddToCommission').disabled = true;
             currentCalculatedData = calculatedData;
         }
 
         function displayCalculatedResult(data) {
-            document.getElementById('calcResultCommission').textContent = (data.佣金比例 * 100).toFixed(2) + '%'
-            document.getElementById('calcResultOnlinePercent').textContent = ((data.线上百分比 || 0) * 100).toFixed(2) + '%'
-            document.getElementById('calcResultOnlineProfit').textContent = (data.线上利润 || 0).toFixed(2) + '元'
+            // 负数红色样式
+            function redIfNegative(value) {
+                return value < 0 ? 'style="color:#e53e3e;font-weight:600"' : '';
+            }
+
+            document.getElementById('calcResultCommission').innerHTML = `<span ${redIfNegative(data.佣金比例)}>${(data.佣金比例 * 100).toFixed(2)}%</span>`
+            document.getElementById('calcResultOnlinePercent').innerHTML = `<span ${redIfNegative(data.线上百分比 || 0)}>${((data.线上百分比 || 0) * 100).toFixed(2)}%</span>`
+            document.getElementById('calcResultOnlineProfit').innerHTML = `<span ${redIfNegative(data.线上利润 || 0)}>${(data.线上利润 || 0).toFixed(2)}元</span>`
 
             let finalProfit = data.尾款利润
             if (!finalProfit && finalProfit !== 0) {
@@ -1748,15 +1731,14 @@
                 const totalCost = data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)
                 finalProfit = price * 0.85 - price * commission * 0.7 - price * commission * 0.15 * 0.3 - totalCost
             }
-            document.getElementById('calcResultFinalProfit').textContent = (finalProfit || 0).toFixed(2) + '元'
+            document.getElementById('calcResultFinalProfit').innerHTML = `<span ${redIfNegative(finalProfit || 0)}>${(finalProfit || 0).toFixed(2)}元</span>`
 
-            document.getElementById('calcResultCost').textContent = (data.货款 || 0).toFixed(2) + '元'
-            document.getElementById('calcResultInsurance').textContent = '1.50元'
-            document.getElementById('calcResultPlatformFee').textContent = (data.抖店手续费 || data.单价 * 0.03).toFixed(2) + '元'
-            document.getElementById('calcResultReturnFee').textContent = '0.53元'
-
-            document.getElementById('calcResultTotalCost').textContent = (data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)).toFixed(2) + '元'
-            document.getElementById('calcResultCostRatio').textContent = ((data.成本比 || 0) * 100).toFixed(2) + '%'
+            document.getElementById('calcResultCost').innerHTML = `<span ${redIfNegative(data.货款 || 0)}>${(data.货款 || 0).toFixed(2)}元</span>`
+            document.getElementById('calcResultInsurance').innerHTML = '1.50元'
+            document.getElementById('calcResultPlatformFee').innerHTML = `<span ${redIfNegative(data.抖店手续费 || data.单价 * 0.03)}>${(data.抖店手续费 || data.单价 * 0.03).toFixed(2)}元</span>`
+            document.getElementById('calcResultReturnFee').innerHTML = '0.53元'
+            document.getElementById('calcResultTotalCost').innerHTML = `<span ${redIfNegative(data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53))}>${(data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)).toFixed(2)}元</span>`
+            document.getElementById('calcResultCostRatio').innerHTML = `<span ${redIfNegative(data.成本比 || 0)}>${((data.成本比 || 0) * 100).toFixed(2)}%</span>`
 
             document.getElementById('calcResultArea').style.display = 'block'
 
@@ -1769,6 +1751,40 @@
 
         async function addToDatabase() {
             if (!currentCalculatedData) return
+
+            // 检查是否已存在相同产品
+            const { data: existing } = await supabaseClient
+                .from(CALC_TABLE_NAME)
+                .select('*')
+                .eq('单价', currentCalculatedData.单价)
+                .eq('最终品名', currentCalculatedData.最终品名)
+                .eq('规格', currentCalculatedData.规格)
+                .eq('货款', currentCalculatedData.货款)
+
+            if (existing && existing.length > 0) {
+                const existingProduct = existing[0]
+                const existingRangeName = existingProduct.利润率档位 || '档位二'
+                const currentRangeName = currentRange.name
+
+                if (existingRangeName === currentRangeName) {
+                    showCalcAlert('⚠️ 该产品已在佣金测算表中，无需重复添加', 'warning')
+                    document.getElementById('btnAddToDatabase').disabled = true
+                    document.getElementById('btnAddToCommission').disabled = false
+                    currentCalculatedData = existingProduct
+                    displayCalculatedResult(existingProduct)
+                    return
+                } else {
+                    const useNewRange = confirm(
+                        `该产品已存在（原档位：${getRangeDisplaySimple(existingRangeName)}），\n` +
+                        `是否使用当前档位（${getRangeDisplaySimple(currentRangeName)}）重新测算并更新？`
+                    )
+                    if (!useNewRange) {
+                        showCalcAlert('已取消添加', 'warning')
+                        return
+                    }
+                    // 继续执行，更新现有记录
+                }
+            }
 
             const onlinePercent = currentCalculatedData.线上百分比 || 0
 
@@ -1825,15 +1841,26 @@
                 insertData.自定义最大利润率 = customMax !== null ? customMax : currentRange.max
             }
 
-            const { data, error } = await supabaseClient
-                .from(CALC_TABLE_NAME)
-                .insert([insertData])
-                .select()
+            let result
+            if (existing && existing.length > 0 && existing[0].利润率档位 !== currentRange.name) {
+                result = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .update(insertData)
+                    .eq('id', existing[0].id)
+                    .select()
+            } else {
+                result = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .insert([insertData])
+                    .select()
+            }
+
+            const { data, error } = result
 
             if (error) {
-                showAlert('添加失败：' + error.message, 'danger')
+                showCalcAlert('添加失败：' + error.message, 'danger')
             } else {
-                showAlert('添加成功，数据库已自动计算', 'success')
+                showCalcAlert('✅ 添加成功！', 'success')
                 document.getElementById('btnAddToDatabase').disabled = true
                 document.getElementById('btnAddToCommission').disabled = false
                 if (data && data.length > 0) {
@@ -1862,8 +1889,7 @@
             syncBtn.disabled = true
 
             try {
-                await loadAllProductNames()  // 添加这一行
-                await loadAllProductNames()  // 加载产品名称用于模糊匹配
+                await loadAllProductNames()
                 await loadDataPool(1, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
                 await loadFilterOptions()
                 calcLastSyncTime = new Date()
@@ -1875,9 +1901,9 @@
                 console.error('同步失败:', error)
                 let errorMsg = error.message || '同步失败'
                 if (errorMsg.includes('Failed to fetch')) {
-                    showAlert('网络连接失败，请检查网络后重试', 'danger')
+                    showCalcAlert('网络连接失败，请检查网络后重试', 'danger')
                 } else {
-                    showAlert('同步失败：' + errorMsg, 'danger')
+                    showCalcAlert('同步失败：' + errorMsg, 'danger')
                 }
             } finally {
                 syncBtn.innerHTML = originalText
@@ -2006,20 +2032,20 @@
 
         async function deleteSelectedPoolRows() {
             const selected = document.querySelectorAll('.pool-row-checkbox:checked')
-            if (selected.length === 0) { showAlert('请先选择要删除的记录！', 'warning'); return }
+            if (selected.length === 0) { showCalcAlert('请先选择要删除的记录！', 'warning'); return }
             if (!confirm(`确定删除 ${selected.length} 条记录？`)) return
 
             const ids = Array.from(selected).map(cb => parseInt(cb.value))
             try {
                 const { error } = await supabaseClient.from(CALC_TABLE_NAME).delete().in('id', ids)
                 if (error) throw error
-                showAlert(`成功删除 ${selected.length} 条记录！`, 'success')
+                showCalcAlert(`成功删除 ${selected.length} 条记录！`, 'success')
                 document.getElementById('selectAllPool').checked = false
                 await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
                 updateBatchButtonsVisibility()
             } catch (error) {
                 console.error('删除失败:', error)
-                showAlert('删除失败：' + error.message, 'danger')
+                showCalcAlert('删除失败：' + error.message, 'danger')
             }
         }
 
@@ -2045,7 +2071,7 @@
         function openBatchCostModal() {
             const selectedIds = getSelectedIds()
             if (selectedIds.length === 0) {
-                showAlert('请先勾选要修改的记录', 'warning')
+                showCalcAlert('请先勾选要修改的记录', 'warning')
                 return
             }
 
@@ -2062,7 +2088,7 @@
 
             let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>品名</th><th>规格</th><th>原货款</th><th>新货款</th></tr></thead><tbody>'
             selectedRows.forEach(product => {
-                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td>${product.货款}元</td><td class="preview-cost">-</td></tr>`
+                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td>${product.货款}元</td><td class="preview-cost">-<\/td><\/tr>`
             })
             previewHtml += '</tbody></table></div>'
 
@@ -2106,7 +2132,7 @@
         function openBatchNameModal() {
             const selectedIds = getSelectedIds()
             if (selectedIds.length === 0) {
-                showAlert('请先勾选要修改的记录', 'warning')
+                showCalcAlert('请先勾选要修改的记录', 'warning')
                 return
             }
 
@@ -2123,7 +2149,7 @@
 
             let previewHtml = '<div style="max-height: 200px; overflow-y: auto; margin-top: 10px;"><table style="width: 100%; font-size: 13px;"><thead><tr><th>原品名</th><th>规格</th><th>新品名</th></tr></thead><tbody>'
             selectedRows.forEach(product => {
-                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td class="preview-name">-</td></tr>`
+                previewHtml += `<tr><td>${product.最终品名}</td><td>${product.规格}</td><td class="preview-name">-<\/td><\/tr>`
             })
             previewHtml += '</tbody></table></div>'
 
@@ -2172,41 +2198,181 @@
         async function confirmBatchModifyCost() {
             const newCost = parseFloat(document.getElementById('batchNewCost').value)
             if (isNaN(newCost) || newCost <= 0) {
-                showAlert('请输入有效的货款金额', 'warning')
+                showCalcAlert('请输入有效的货款金额', 'warning')
                 return
             }
 
             const selectedIds = getSelectedIds()
             if (selectedIds.length === 0) {
-                showAlert('没有选中的记录', 'warning')
+                showCalcAlert('没有选中的记录', 'warning')
                 closeBatchModal()
                 return
             }
 
             closeBatchModal()
-            showAlert(`正在批量修改 ${selectedIds.length} 条记录的货款...`, 'warning')
+            showCalcAlert(`正在验证 ${selectedIds.length} 条记录...`, 'warning')
+
+            // 获取所有选中产品的完整数据
+            const products = []
+            for (const id of selectedIds) {
+                const { data, error } = await supabaseClient
+                    .from(CALC_TABLE_NAME)
+                    .select('*')
+                    .eq('id', id)
+                    .single()
+
+                if (!error && data) {
+                    products.push(data)
+                }
+            }
+
+            // 检查每条记录修改后是否在档位范围内，并计算更新后的值
+            const outOfRangeItems = []      // 超出范围的记录（用于警告）
+            const validProducts = []        // 在范围内的记录（可以更新）
+
+            for (const product of products) {
+                const currentPrice = product.单价
+                const currentCost = newCost
+
+                // 获取该产品的档位信息
+                const rangeName = product.利润率档位 || '档位一'
+                let targetMin, targetMax, rangeDisplay
+
+                if (rangeName === '档位一') {
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
+                } else if (rangeName === '档位二') {
+                    targetMin = 0.088
+                    targetMax = 0.10
+                    rangeDisplay = '档位二（8.8% - 10%）'
+                } else if (rangeName === '自定义') {
+                    targetMin = product.自定义最小利润率 || 0.088
+                    targetMax = product.自定义最大利润率 || 0.10
+                    rangeDisplay = `自定义档位（${(targetMin * 100).toFixed(1)}% - ${(targetMax * 100).toFixed(1)}%）`
+                } else {
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
+                }
+
+                // 重新计算成本相关
+                const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
+                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
+                const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
+
+                // 根据档位范围寻找最佳佣金比例
+                let bestCommission = null
+                let bestOnlinePercent = null
+
+                for (let i = 0; i <= 100; i++) {
+                    const commission = i / 100
+                    const onlinePercent = 1 - costRatio - commission
+                    if (onlinePercent >= targetMin && onlinePercent <= targetMax) {
+                        bestCommission = commission
+                        bestOnlinePercent = onlinePercent
+                        break
+                    }
+                }
+
+                if (bestCommission === null) {
+                    let minDiff = Infinity
+                    for (let i = 0; i <= 100; i++) {
+                        const commission = i / 100
+                        const onlinePercent = 1 - costRatio - commission
+                        const diff = Math.abs(onlinePercent - targetMin)
+                        if (diff < minDiff) {
+                            minDiff = diff
+                            bestCommission = commission
+                            bestOnlinePercent = onlinePercent
+                        }
+                    }
+                }
+
+                bestCommission = Math.round(bestCommission * 100) / 100
+                bestOnlinePercent = Math.round(bestOnlinePercent * 10000) / 10000
+
+                // 检查是否在档位范围内（与单条编辑保持一致的精度）
+                const epsilon = 0.001
+                const isInRange = bestOnlinePercent >= targetMin - epsilon && bestOnlinePercent <= targetMax + epsilon
+
+                if (!isInRange) {
+                    // 记录超出范围的记录
+                    outOfRangeItems.push({
+                        品名: product.最终品名,
+                        规格: product.规格,
+                        原线上百分比: ((product.线上百分比 || 0) * 100).toFixed(2),
+                        新线上百分比: (bestOnlinePercent * 100).toFixed(2),
+                        档位范围: rangeDisplay,
+                        原货款: product.货款,
+                        新货款: newCost
+                    })
+                } else {
+                    // 在范围内，可以更新
+                    validProducts.push({
+                        id: product.id,
+                        货款: newCost,
+                        佣金比例: bestCommission,
+                        线上百分比: bestOnlinePercent
+                    })
+                }
+            }
+
+            // 如果有超出范围的记录，弹出警告并取消整个批量操作（与单条编辑保持一致）
+            if (outOfRangeItems.length > 0) {
+                let warningMsg = `⚠️ 档位范围警告\n\n`
+                warningMsg += `以下 ${outOfRangeItems.length} 条记录修改货款后，线上百分比将不在原档位范围内：\n\n`
+
+                outOfRangeItems.forEach((item, index) => {
+                    warningMsg += `${index + 1}. ${item.品名} ${item.规格}\n`
+                    warningMsg += `   原货款: ${item.原货款}元 → 新货款: ${item.新货款}元\n`
+                    warningMsg += `   原线上: ${item.原线上百分比}% → 新线上: ${item.新线上百分比}%\n`
+                    warningMsg += `   档位要求: ${item.档位范围}\n\n`
+                })
+
+                warningMsg += `💡 操作建议：\n`
+                warningMsg += `   • 本次批量修改不会保存，所有数据保持不变\n`
+                warningMsg += `   • 请分别调整每条记录的货款或佣金比例\n`
+                warningMsg += `   • 或前往【佣金测算】界面重新测算添加`
+
+                alert(warningMsg)
+                showCalcAlert('批量修改已取消，部分记录的线上百分比不在档位范围内', 'warning')
+                return
+            }
+
+            // 所有记录都在范围内，执行批量更新
+            if (validProducts.length === 0) {
+                showCalcAlert('没有需要更新的记录', 'warning')
+                return
+            }
+
+            showCalcAlert(`正在更新 ${validProducts.length} 条记录...`, 'warning')
 
             let successCount = 0
             let failCount = 0
 
-            for (const id of selectedIds) {
+            for (const product of validProducts) {
                 const { error } = await supabaseClient
                     .from(CALC_TABLE_NAME)
-                    .update({ 货款: newCost })
-                    .eq('id', id)
+                    .update({
+                        货款: product.货款,
+                        佣金比例: product.佣金比例,
+                        线上百分比: product.线上百分比
+                    })
+                    .eq('id', product.id)
 
                 if (error) {
                     failCount++
-                    console.error(`更新ID ${id} 失败:`, error)
+                    console.error(`更新ID ${product.id} 失败:`, error)
                 } else {
                     successCount++
                 }
             }
 
             if (failCount > 0) {
-                showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+                showCalcAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
             } else {
-                showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+                showCalcAlert(`✅ 批量修改成功！共修改 ${successCount} 条记录，已自动调整佣金比例和线上百分比`, 'success')
             }
 
             await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
@@ -2215,19 +2381,19 @@
         async function confirmBatchModifyName() {
             const newName = document.getElementById('batchNewName').value.trim()
             if (!newName) {
-                showAlert('请输入新的最终品名', 'warning')
+                showCalcAlert('请输入新的最终品名', 'warning')
                 return
             }
 
             const selectedIds = getSelectedIds()
             if (selectedIds.length === 0) {
-                showAlert('没有选中的记录', 'warning')
+                showCalcAlert('没有选中的记录', 'warning')
                 closeBatchModal()
                 return
             }
 
             closeBatchModal()
-            showAlert(`正在批量修改 ${selectedIds.length} 条记录的品名...`, 'warning')
+            showCalcAlert(`正在批量修改 ${selectedIds.length} 条记录的品名...`, 'warning')
 
             let successCount = 0
             let failCount = 0
@@ -2247,9 +2413,9 @@
             }
 
             if (failCount > 0) {
-                showAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
+                showCalcAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
             } else {
-                showAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
+                showCalcAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
             }
 
             await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
@@ -2290,41 +2456,62 @@
 
             inputs.forEach(input => {
                 const field = input.dataset.field
-                let value = input.value.trim()
-                if (field === '单价' || field === '货款') {
-                    value = parseFloat(value)
-                    if (isNaN(value)) hasError = true
-                    updates[field] = value
+                let newValue = input.value.trim()
+
+                let originalValue = product[field]
+
+                if (field === '佣金比例') {
+                    originalValue = (product.佣金比例 * 100).toFixed(2)
+                    newValue = parseFloat(newValue).toFixed(2)
+                } else if (field === '单价' || field === '货款') {
+                    originalValue = product[field].toString()
                 }
-                else if (field === '佣金比例') {
-                    value = parseFloat(value) / 100
-                    if (isNaN(value)) hasError = true
-                    updates[field] = value
-                }
-                else {
-                    updates[field] = value
+
+                if (newValue !== originalValue) {
+                    console.log(`字段 ${field} 被修改: ${originalValue} -> ${newValue}`)
+                    let value = newValue
+                    if (field === '单价' || field === '货款') {
+                        value = parseFloat(value)
+                        if (isNaN(value)) hasError = true
+                        updates[field] = value
+                    }
+                    else if (field === '佣金比例') {
+                        value = parseFloat(value) / 100
+                        if (isNaN(value)) hasError = true
+                        updates[field] = value
+                    }
+                    else {
+                        updates[field] = value
+                    }
+                } else {
+                    console.log(`字段 ${field} 未修改，保持原值: ${originalValue}`)
                 }
             })
 
             if (hasError) {
-                showAlert('请输入有效的数字', 'danger')
+                showCalcAlert('请输入有效的数字', 'danger')
                 return
             }
 
             if (Object.keys(updates).length === 0) {
                 cancelEditRow()
-                showAlert('未做任何修改', 'warning')
+                showCalcAlert('未做任何修改', 'warning')
                 return
             }
 
-            const affectsProfitPercent = updates.货款 !== undefined || updates.单价 !== undefined || updates.佣金比例 !== undefined
+            console.log('最终要更新的字段:', Object.keys(updates))
 
-            if (affectsProfitPercent) {
+            const hasPriceOrCostChange = updates.货款 !== undefined || updates.单价 !== undefined
+            const hasCommissionChange = updates.佣金比例 !== undefined
+
+            console.log('修改判断:', { hasPriceOrCostChange, hasCommissionChange })
+
+            if (hasPriceOrCostChange) {
+                console.log('进入【修改货款/单价】分支')
                 const currentPrice = updates.单价 !== undefined ? updates.单价 : product.单价
                 const currentCost = updates.货款 !== undefined ? updates.货款 : product.货款
-                const currentCommission = updates.佣金比例 !== undefined ? updates.佣金比例 : product.佣金比例
 
-                const originalRangeName = product.利润率档位 || '档位二'
+                const originalRangeName = product.利润率档位 || '档位一'
                 let targetMin, targetMax, rangeDisplay
 
                 if (originalRangeName === '档位一') {
@@ -2340,44 +2527,59 @@
                     targetMax = product.自定义最大利润率 || 0.10
                     rangeDisplay = `自定义档位（${(targetMin * 100).toFixed(1)}% - ${(targetMax * 100).toFixed(1)}%）`
                 } else {
-                    targetMin = 0.088
-                    targetMax = 0.10
-                    rangeDisplay = '默认档位（8.8% - 10%）'
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
                 }
 
                 const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
                 const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
                 const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
 
-                let newOnlinePercent
-                if (updates.佣金比例 !== undefined) {
-                    newOnlinePercent = Math.round((1 - costRatio - currentCommission) * 10000) / 10000
-                } else {
-                    let bestCommission = currentCommission
+                let bestCommission = null
+                let bestOnlinePercent = null
+
+                for (let i = 0; i <= 100; i++) {
+                    const commission = i / 100
+                    const onlinePercent = 1 - costRatio - commission
+                    if (onlinePercent >= targetMin && onlinePercent <= targetMax) {
+                        bestCommission = commission
+                        bestOnlinePercent = onlinePercent
+                        break
+                    }
+                }
+
+                if (bestCommission === null) {
                     let minDiff = Infinity
                     for (let i = 0; i <= 100; i++) {
                         const commission = i / 100
-                        const q = 1 - costRatio - commission
-                        if (q >= targetMin && q <= targetMax) {
-                            bestCommission = commission
-                            break
-                        }
-                        const diff = Math.abs(q - targetMin)
+                        const onlinePercent = 1 - costRatio - commission
+                        const diff = Math.abs(onlinePercent - targetMin)
                         if (diff < minDiff) {
                             minDiff = diff
                             bestCommission = commission
+                            bestOnlinePercent = onlinePercent
                         }
                     }
-                    bestCommission = Math.round(bestCommission * 100) / 100
-                    newOnlinePercent = Math.round((1 - costRatio - bestCommission) * 10000) / 10000
                 }
 
-                const isInRange = newOnlinePercent >= targetMin - 0.0001 && newOnlinePercent <= targetMax + 0.0001
+                bestCommission = Math.round(bestCommission * 100) / 100
+                bestOnlinePercent = Math.round(bestOnlinePercent * 10000) / 10000
+
+                console.log('修改货款/单价 - 重新计算佣金比例:', {
+                    原佣金比例: `${(product.佣金比例 * 100).toFixed(2)}%`,
+                    新佣金比例: `${(bestCommission * 100).toFixed(2)}%`,
+                    新线上百分比: `${(bestOnlinePercent * 100).toFixed(2)}%`,
+                    档位范围: `${(targetMin * 100).toFixed(1)}%-${(targetMax * 100).toFixed(1)}%`
+                })
+
+                const epsilon = 0.001
+                const isInRange = bestOnlinePercent >= targetMin - epsilon && bestOnlinePercent <= targetMax + epsilon
 
                 if (!isInRange) {
                     const warningMessage =
                         `⚠️ 档位范围警告\n\n` +
-                        `修改后的"线上百分比"不在原档位：${rangeDisplay} 范围内！\n\n` +
+                        `修改货款/单价后，计算出的线上百分比 ${(bestOnlinePercent * 100).toFixed(2)}% 不在原档位：${rangeDisplay} 范围内！\n\n` +
                         `💡 操作建议：\n` +
                         `   • 本次修改不会保存，原数据保持不变\n` +
                         `   • 请前往【佣金测算】界面，重新选择档位后点击【测算】\n` +
@@ -2385,18 +2587,75 @@
 
                     alert(warningMessage)
                     cancelEditRow()
-                    showAlert('修改已取消，原数据保持不变。请前往佣金测算界面重新测算添加。', 'warning')
+                    showCalcAlert('修改已取消，原数据保持不变。请前往佣金测算界面重新测算添加。', 'warning')
                     return
                 }
+
+                updates.佣金比例 = bestCommission
+                updates.线上百分比 = bestOnlinePercent
+            }
+            else if (hasCommissionChange) {
+                console.log('========== 进入佣金比例修改分支 ==========')
+
+                const currentPrice = product.单价
+                const currentCost = product.货款
+                const newCommission = updates.佣金比例
+
+                const originalRangeName = product.利润率档位 || '档位一'
+                let targetMin, targetMax, rangeDisplay
+
+                if (originalRangeName === '档位一') {
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
+                } else if (originalRangeName === '档位二') {
+                    targetMin = 0.088
+                    targetMax = 0.10
+                    rangeDisplay = '档位二（8.8% - 10%）'
+                } else if (originalRangeName === '自定义') {
+                    targetMin = product.自定义最小利润率 || 0.088
+                    targetMax = product.自定义最大利润率 || 0.10
+                    rangeDisplay = `自定义档位（${(targetMin * 100).toFixed(1)}% - ${(targetMax * 100).toFixed(1)}%）`
+                } else {
+                    targetMin = 0.068
+                    targetMax = 0.08
+                    rangeDisplay = '档位一（6.8% - 8%）'
+                }
+
+                const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
+                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
+                const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
+
+                const newOnlinePercent = Math.round((1 - costRatio - newCommission) * 10000) / 10000
+
+                const epsilon = 0.001
+                const isInRange = newOnlinePercent >= targetMin - epsilon && newOnlinePercent <= targetMax + epsilon
+
+                if (!isInRange) {
+                    console.log('❌ 不在范围内，弹出警告')
+                    const warningMessage =
+                        `⚠️ 档位范围警告\n\n` +
+                        `修改后的佣金比例 ${(newCommission * 100).toFixed(2)}% 计算出的线上百分比 ${(newOnlinePercent * 100).toFixed(2)}% 不在原档位：${rangeDisplay} 范围内！\n\n` +
+                        `💡 操作建议：\n` +
+                        `   • 本次修改不会保存，原数据保持不变\n` +
+                        `   • 请调整佣金比例或前往【佣金测算】界面重新测算`
+
+                    alert(warningMessage)
+                    cancelEditRow()
+                    return
+                }
+
+                console.log('✅ 在范围内，准备保存')
+                updates.线上百分比 = newOnlinePercent
             }
 
             const { error } = await supabaseClient.from(CALC_TABLE_NAME).update(updates).eq('id', editingRowId)
             if (error) {
-                showAlert('更新失败：' + error.message, 'danger')
+                showCalcAlert('更新失败：' + error.message, 'danger')
                 return
             }
 
-            showAlert('更新成功！', 'success')
+            showCalcAlert('更新成功！', 'success')
             cancelEditRow()
             await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
         }
@@ -2408,7 +2667,7 @@
 
         async function exportPoolData() {
             try {
-                showAlert('正在准备导出数据，请稍候...', 'warning')
+                showCalcAlert('正在准备导出数据，请稍候...', 'warning')
 
                 let query = supabaseClient
                     .from(CALC_TABLE_NAME)
@@ -2437,7 +2696,7 @@
                 const { data, error } = await query
                 if (error) throw error
                 if (!data || data.length === 0) {
-                    showAlert('暂无数据可导出！', 'warning')
+                    showCalcAlert('暂无数据可导出！', 'warning')
                     return
                 }
 
@@ -2500,10 +2759,10 @@
                 document.body.removeChild(a)
                 URL.revokeObjectURL(url)
 
-                showAlert(`导出成功！共 ${data.length} 条数据`, 'success')
+                showCalcAlert(`导出成功！共 ${data.length} 条数据`, 'success')
             } catch (error) {
                 console.error('导出失败:', error)
-                showAlert('导出失败：' + error.message, 'danger')
+                showCalcAlert('导出失败：' + error.message, 'danger')
             }
         }
 
@@ -2659,15 +2918,15 @@
             const currentSpec = currentCalculatedData.规格 || ''
 
             if (!talentName) {
-                showAlert('请输入达人名称', 'warning');
+                showCalcAlert('请输入达人名称', 'warning');
                 return
             }
             if (!selectedName) {
-                showAlert('请输入最终品名', 'warning');
+                showCalcAlert('请输入最终品名', 'warning');
                 return
             }
             if (!currentCalculatedData) {
-                showAlert('产品数据不存在，请重新勾选产品', 'danger');
+                showCalcAlert('产品数据不存在，请重新勾选产品', 'danger');
                 return
             }
 
@@ -2703,13 +2962,13 @@
 
             if (error) {
                 console.error('添加失败:', error)
-                showAlert('添加失败：' + error.message, 'danger')
+                showCalcAlert('添加失败：' + error.message, 'danger')
             } else {
                 let successMsg = `已添加达人"${talentName}"的佣金数据\n商品规格：${productSpec}`
                 if (finalOriginalSpec) {
                     successMsg += `\n初始商品规格：${finalOriginalSpec}`
                 }
-                showAlert(successMsg, 'success')
+                showCalcAlert(successMsg, 'success')
                 closeTalentModal()
                 await loadDataToTable()
             }
@@ -2736,8 +2995,9 @@
 
         function closeNegativeModal() { document.getElementById('negativeDataModal').style.display = 'none' }
         function closeEditCostModal() { document.getElementById('editCostModal').style.display = 'none' }
-        function saveNewCost() { document.getElementById('editCostModal').style.display = 'none'; showAlert('货款已更新', 'success') }
+        function saveNewCost() { document.getElementById('editCostModal').style.display = 'none'; showCalcAlert('货款已更新', 'success') }
 
+        // ========== 佣金管理界面原有函数 ==========
         async function syncData() {
             const syncBtn = document.querySelector('#manageTab .btn-sync')
             const originalText = syncBtn.innerHTML
@@ -2762,7 +3022,7 @@
             tableBody.innerHTML = ''
             if (!dataList || dataList.length === 0) {
                 const tr = document.createElement('tr')
-                tr.innerHTML = '<td colspan="8" style="text-align:center; padding:20px;">暂无数据<\/td><\/tr>'
+                tr.innerHTML = '<td colspan="9" style="text-align:center; padding:20px;">暂无数据<\/td><\/tr>'
                 tableBody.appendChild(tr)
                 document.getElementById('totalRecords').textContent = '0'
                 document.getElementById('totalPages').textContent = '1'
@@ -3087,7 +3347,6 @@
                 syncCalcData()
             }, 500)
 
-            // 添加监听器，自动匹配货款
             const specInput = document.getElementById('newSpec')
             const priceInput = document.getElementById('newPrice')
             if (specInput) specInput.addEventListener('blur', autoMatchCost)
