@@ -1570,7 +1570,7 @@
 
         function recalculateWithCurrentRange(price, finalName, spec, cost) {
             const platformFee = Math.round(price * 0.03 * 10000) / 10000;
-            const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
+            const totalCost = Math.round((cost + 1.5 + platformFee + 0.525) * 10000) / 10000;
             const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
 
             let targetMin, targetMax;
@@ -1643,7 +1643,7 @@
 
         function calculateNewProduct(price, finalName, spec, cost) {
             const platformFee = Math.round(price * 0.03 * 10000) / 10000;
-            const totalCost = Math.round((cost + 1.5 + platformFee + 0.53) * 10000) / 10000;
+            const totalCost = Math.round((cost + 1.5 + platformFee + 0.525) * 10000) / 10000;
             const costRatio = Math.round((totalCost / price) * 1000000) / 1000000;
 
             let targetMin, targetMax;
@@ -1715,37 +1715,62 @@
         }
 
         function displayCalculatedResult(data) {
-            // 负数红色样式
+            // 负数红色样式辅助函数
             function redIfNegative(value) {
                 return value < 0 ? 'style="color:#e53e3e;font-weight:600"' : '';
             }
 
-            document.getElementById('calcResultCommission').innerHTML = `<span ${redIfNegative(data.佣金比例)}>${(data.佣金比例 * 100).toFixed(2)}%</span>`
-            document.getElementById('calcResultOnlinePercent').innerHTML = `<span ${redIfNegative(data.线上百分比 || 0)}>${((data.线上百分比 || 0) * 100).toFixed(2)}%</span>`
-            document.getElementById('calcResultOnlineProfit').innerHTML = `<span ${redIfNegative(data.线上利润 || 0)}>${(data.线上利润 || 0).toFixed(2)}元</span>`
+            // 佣金比例
+            const commissionValue = data.佣金比例;
+            document.getElementById('calcResultCommission').innerHTML = `<span ${redIfNegative(commissionValue)}>${(commissionValue * 100).toFixed(2)}%</span>`;
 
-            let finalProfit = data.尾款利润
-            if (!finalProfit && finalProfit !== 0) {
-                const price = data.单价
-                const commission = data.佣金比例
-                const totalCost = data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)
-                finalProfit = price * 0.85 - price * commission * 0.7 - price * commission * 0.15 * 0.3 - totalCost
+            // 线上百分比
+            const onlinePercentValue = data.线上百分比 || 0;
+            document.getElementById('calcResultOnlinePercent').innerHTML = `<span ${redIfNegative(onlinePercentValue)}>${(onlinePercentValue * 100).toFixed(2)}%</span>`;
+
+            // 线上利润额
+            const onlineProfitValue = data.线上利润 || 0;
+            document.getElementById('calcResultOnlineProfit').innerHTML = `<span ${redIfNegative(onlineProfitValue)}>${onlineProfitValue.toFixed(2)}元</span>`;
+
+            // 尾款利润额
+            let finalProfitValue = data.尾款利润;
+            if (!finalProfitValue && finalProfitValue !== 0) {
+                const price = data.单价;
+                const commission = data.佣金比例;
+                const totalCost = data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.525);
+                finalProfitValue = price * 0.85 - price * commission * 0.7 - price * commission * 0.15 * 0.3 - totalCost;
             }
-            document.getElementById('calcResultFinalProfit').innerHTML = `<span ${redIfNegative(finalProfit || 0)}>${(finalProfit || 0).toFixed(2)}元</span>`
+            document.getElementById('calcResultFinalProfit').innerHTML = `<span ${redIfNegative(finalProfitValue)}>${(finalProfitValue || 0).toFixed(2)}元</span>`;
 
-            document.getElementById('calcResultCost').innerHTML = `<span ${redIfNegative(data.货款 || 0)}>${(data.货款 || 0).toFixed(2)}元</span>`
-            document.getElementById('calcResultInsurance').innerHTML = '1.50元'
-            document.getElementById('calcResultPlatformFee').innerHTML = `<span ${redIfNegative(data.抖店手续费 || data.单价 * 0.03)}>${(data.抖店手续费 || data.单价 * 0.03).toFixed(2)}元</span>`
-            document.getElementById('calcResultReturnFee').innerHTML = '0.53元'
-            document.getElementById('calcResultTotalCost').innerHTML = `<span ${redIfNegative(data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53))}>${(data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.53)).toFixed(2)}元</span>`
-            document.getElementById('calcResultCostRatio').innerHTML = `<span ${redIfNegative(data.成本比 || 0)}>${((data.成本比 || 0) * 100).toFixed(2)}%</span>`
+            // 货款
+            const costValue = data.货款 || 0;
+            document.getElementById('calcResultCost').innerHTML = `<span ${redIfNegative(costValue)}>${costValue.toFixed(2)}元</span>`;
 
-            document.getElementById('calcResultArea').style.display = 'block'
+            // 运费险（固定正数）
+            document.getElementById('calcResultInsurance').innerHTML = '1.50元';
 
-            if ((data.线上利润 || 0) < 0 || ((data.线上百分比 || 0) < 0)) {
-                const negativeInfo = `产品：${data.最终品名} ${data.规格}\n单价：${data.单价}元\n货款：${data.货款}元\n佣金比例：${(data.佣金比例 * 100).toFixed(2)}%\n线上利润：${(data.线上利润 || 0).toFixed(2)}元\n线上百分比：${((data.线上百分比 || 0) * 100).toFixed(2)}%\n成本比：${((data.成本比 || 0) * 100).toFixed(2)}%`
-                document.getElementById('negativeDataContent').textContent = negativeInfo
-                document.getElementById('negativeDataModal').style.display = 'flex'
+            // 抖店手续费
+            const platformFeeValue = data.抖店手续费 || data.单价 * 0.03;
+            document.getElementById('calcResultPlatformFee').innerHTML = `<span ${redIfNegative(platformFeeValue)}>${platformFeeValue.toFixed(2)}元</span>`;
+
+            // 退货费用
+            document.getElementById('calcResultReturnFee').innerHTML = '0.53元';
+
+            // 总成本
+            const totalCostValue = data.总成本 || (data.货款 + 1.5 + data.单价 * 0.03 + 0.525);
+            document.getElementById('calcResultTotalCost').innerHTML = `<span ${redIfNegative(totalCostValue)}>${totalCostValue.toFixed(2)}元</span>`;
+
+            // 成本比（小数显示，不乘100，不加%）
+            const costRatioValue = data.成本比 || 0;
+            document.getElementById('calcResultCostRatio').innerHTML = `<span ${redIfNegative(costRatioValue)}>${costRatioValue.toFixed(4)}</span>`;
+
+            document.getElementById('calcResultArea').style.display = 'block';
+
+            // 负数弹窗（检查线上利润、线上百分比、成本比）
+            if ((data.线上利润 || 0) < 0 || ((data.线上百分比 || 0) < 0) || (data.成本比 || 0) < 0) {
+                const negativeInfo = `产品：${data.最终品名} ${data.规格}\n单价：${data.单价}元\n货款：${data.货款}元\n佣金比例：${(data.佣金比例 * 100).toFixed(2)}%\n线上利润：${(data.线上利润 || 0).toFixed(2)}元\n线上百分比：${((data.线上百分比 || 0) * 100).toFixed(2)}%\n成本比：${(data.成本比 || 0).toFixed(4)}`;
+                document.getElementById('negativeDataContent').textContent = negativeInfo;
+                document.getElementById('negativeDataModal').style.display = 'flex';
             }
         }
 
@@ -2210,160 +2235,20 @@
             }
 
             closeBatchModal()
-            showCalcAlert(`正在验证 ${selectedIds.length} 条记录...`, 'warning')
-
-            // 获取所有选中产品的完整数据
-            const products = []
-            for (const id of selectedIds) {
-                const { data, error } = await supabaseClient
-                    .from(CALC_TABLE_NAME)
-                    .select('*')
-                    .eq('id', id)
-                    .single()
-
-                if (!error && data) {
-                    products.push(data)
-                }
-            }
-
-            // 检查每条记录修改后是否在档位范围内，并计算更新后的值
-            const outOfRangeItems = []      // 超出范围的记录（用于警告）
-            const validProducts = []        // 在范围内的记录（可以更新）
-
-            for (const product of products) {
-                const currentPrice = product.单价
-                const currentCost = newCost
-
-                // 获取该产品的档位信息
-                const rangeName = product.利润率档位 || '档位一'
-                let targetMin, targetMax, rangeDisplay
-
-                if (rangeName === '档位一') {
-                    targetMin = 0.068
-                    targetMax = 0.08
-                    rangeDisplay = '档位一（6.8% - 8%）'
-                } else if (rangeName === '档位二') {
-                    targetMin = 0.088
-                    targetMax = 0.10
-                    rangeDisplay = '档位二（8.8% - 10%）'
-                } else if (rangeName === '自定义') {
-                    targetMin = product.自定义最小利润率 || 0.088
-                    targetMax = product.自定义最大利润率 || 0.10
-                    rangeDisplay = `自定义档位（${(targetMin * 100).toFixed(1)}% - ${(targetMax * 100).toFixed(1)}%）`
-                } else {
-                    targetMin = 0.068
-                    targetMax = 0.08
-                    rangeDisplay = '档位一（6.8% - 8%）'
-                }
-
-                // 重新计算成本相关
-                const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
-                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
-                const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
-
-                // 根据档位范围寻找最佳佣金比例
-                let bestCommission = null
-                let bestOnlinePercent = null
-
-                for (let i = 0; i <= 100; i++) {
-                    const commission = i / 100
-                    const onlinePercent = 1 - costRatio - commission
-                    if (onlinePercent >= targetMin && onlinePercent <= targetMax) {
-                        bestCommission = commission
-                        bestOnlinePercent = onlinePercent
-                        break
-                    }
-                }
-
-                if (bestCommission === null) {
-                    let minDiff = Infinity
-                    for (let i = 0; i <= 100; i++) {
-                        const commission = i / 100
-                        const onlinePercent = 1 - costRatio - commission
-                        const diff = Math.abs(onlinePercent - targetMin)
-                        if (diff < minDiff) {
-                            minDiff = diff
-                            bestCommission = commission
-                            bestOnlinePercent = onlinePercent
-                        }
-                    }
-                }
-
-                bestCommission = Math.round(bestCommission * 100) / 100
-                bestOnlinePercent = Math.round(bestOnlinePercent * 10000) / 10000
-
-                // 检查是否在档位范围内（与单条编辑保持一致的精度）
-                const epsilon = 0.001
-                const isInRange = bestOnlinePercent >= targetMin - epsilon && bestOnlinePercent <= targetMax + epsilon
-
-                if (!isInRange) {
-                    // 记录超出范围的记录
-                    outOfRangeItems.push({
-                        品名: product.最终品名,
-                        规格: product.规格,
-                        原线上百分比: ((product.线上百分比 || 0) * 100).toFixed(2),
-                        新线上百分比: (bestOnlinePercent * 100).toFixed(2),
-                        档位范围: rangeDisplay,
-                        原货款: product.货款,
-                        新货款: newCost
-                    })
-                } else {
-                    // 在范围内，可以更新
-                    validProducts.push({
-                        id: product.id,
-                        货款: newCost,
-                        佣金比例: bestCommission,
-                        线上百分比: bestOnlinePercent
-                    })
-                }
-            }
-
-            // 如果有超出范围的记录，弹出警告并取消整个批量操作（与单条编辑保持一致）
-            if (outOfRangeItems.length > 0) {
-                let warningMsg = `⚠️ 档位范围警告\n\n`
-                warningMsg += `以下 ${outOfRangeItems.length} 条记录修改货款后，线上百分比将不在原档位范围内：\n\n`
-
-                outOfRangeItems.forEach((item, index) => {
-                    warningMsg += `${index + 1}. ${item.品名} ${item.规格}\n`
-                    warningMsg += `   原货款: ${item.原货款}元 → 新货款: ${item.新货款}元\n`
-                    warningMsg += `   原线上: ${item.原线上百分比}% → 新线上: ${item.新线上百分比}%\n`
-                    warningMsg += `   档位要求: ${item.档位范围}\n\n`
-                })
-
-                warningMsg += `💡 操作建议：\n`
-                warningMsg += `   • 本次批量修改不会保存，所有数据保持不变\n`
-                warningMsg += `   • 请分别调整每条记录的货款或佣金比例\n`
-                warningMsg += `   • 或前往【佣金测算】界面重新测算添加`
-
-                alert(warningMsg)
-                showCalcAlert('批量修改已取消，部分记录的线上百分比不在档位范围内', 'warning')
-                return
-            }
-
-            // 所有记录都在范围内，执行批量更新
-            if (validProducts.length === 0) {
-                showCalcAlert('没有需要更新的记录', 'warning')
-                return
-            }
-
-            showCalcAlert(`正在更新 ${validProducts.length} 条记录...`, 'warning')
+            showCalcAlert(`正在批量修改 ${selectedIds.length} 条记录的货款...`, 'warning')
 
             let successCount = 0
             let failCount = 0
 
-            for (const product of validProducts) {
+            for (const id of selectedIds) {
                 const { error } = await supabaseClient
                     .from(CALC_TABLE_NAME)
-                    .update({
-                        货款: product.货款,
-                        佣金比例: product.佣金比例,
-                        线上百分比: product.线上百分比
-                    })
-                    .eq('id', product.id)
+                    .update({ 货款: newCost })
+                    .eq('id', id)
 
                 if (error) {
                     failCount++
-                    console.error(`更新ID ${product.id} 失败:`, error)
+                    console.error(`更新ID ${id} 失败:`, error)
                 } else {
                     successCount++
                 }
@@ -2372,7 +2257,7 @@
             if (failCount > 0) {
                 showCalcAlert(`批量修改完成：成功 ${successCount} 条，失败 ${failCount} 条`, 'warning')
             } else {
-                showCalcAlert(`✅ 批量修改成功！共修改 ${successCount} 条记录，已自动调整佣金比例和线上百分比`, 'success')
+                showCalcAlert(`批量修改成功！共修改 ${successCount} 条记录`, 'success')
             }
 
             await loadDataPool(currentPoolPage, poolSearchKeyword, poolSearchSpec, poolSearchPrice, currentRangeFilter)
@@ -2533,7 +2418,7 @@
                 }
 
                 const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
-                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
+                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.525) * 10000) / 10000
                 const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
 
                 let bestCommission = null
@@ -2623,7 +2508,7 @@
                 }
 
                 const platformFee = Math.round(currentPrice * 0.03 * 10000) / 10000
-                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.53) * 10000) / 10000
+                const totalCost = Math.round((currentCost + 1.5 + platformFee + 0.525) * 10000) / 10000
                 const costRatio = Math.round((totalCost / currentPrice) * 1000000) / 1000000
 
                 const newOnlinePercent = Math.round((1 - costRatio - newCommission) * 10000) / 10000
@@ -2700,31 +2585,63 @@
                     return
                 }
 
+                // 辅助函数：正负数都使用四舍五入
+                function roundTo(value, decimals) {
+                    if (value === null || value === undefined) return '';
+                    const factor = Math.pow(10, decimals);
+                    // 正负数都使用四舍五入（添加极小值修正浮点数精度问题）
+                    return Math.round((value + 1e-10) * factor) / factor;
+                }
+
+                function roundToPercent(value, decimals) {
+                    if (value === null || value === undefined) return '';
+                    // 小数转百分比，保留指定小数位数
+                    return roundTo(value * 100, decimals) + '%';
+                }
+
                 const columns = [
                     { key: 'id', name: 'ID' },
                     { key: '编号', name: '编号' },
                     { key: '品名', name: '品名' },
-                    { key: '佣金比例', name: '佣金比例', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-                    { key: '单价', name: '单价', formatter: (v) => v ? v.toFixed(2) : '' },
+                    // 佣金比例：小数转百分比，保留2位小数
+                    { key: '佣金比例', name: '佣金比例', formatter: (v) => roundToPercent(v, 2) },
+                    // 单价：保留2位小数
+                    { key: '单价', name: '单价', formatter: (v) => roundTo(v, 2) },
                     { key: '最终品名', name: '最终品名' },
                     { key: '规格', name: '规格' },
-                    { key: '货款', name: '货款', formatter: (v) => v ? v.toFixed(2) : '' },
+                    // 货款：保留2位小数
+                    { key: '货款', name: '货款', formatter: (v) => roundTo(v, 2) },
                     { key: '运费', name: '运费' },
-                    { key: '运费险', name: '运费险', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '抖店手续费', name: '抖店手续费', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '退货费用', name: '退货费用', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '总成本', name: '总成本', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '成本比', name: '成本比', formatter: (v) => v ? (v * 100).toFixed(4) + '%' : '' },
-                    { key: '线上利润', name: '线上利润', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '尾款利润', name: '尾款利润', formatter: (v) => v ? v.toFixed(2) : '' },
-                    { key: '尾款利润百分比', name: '尾款利润百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-                    { key: '线上百分比', name: '线上百分比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-                    { key: '发货总润比', name: '发货总润比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-                    { key: 'GMV毛利比', name: 'GMV毛利比', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    // 运费险：保留2位小数
+                    { key: '运费险', name: '运费险', formatter: (v) => roundTo(v, 2) },
+                    // 抖店手续费：保留2位小数
+                    { key: '抖店手续费', name: '抖店手续费', formatter: (v) => roundTo(v, 2) },
+                    // 退货费用：保留2位小数
+                    { key: '退货费用', name: '退货费用', formatter: (v) => roundTo(v, 2) },
+                    // 总成本：保留2位小数
+                    { key: '总成本', name: '总成本', formatter: (v) => roundTo(v, 2) },
+                    // 成本比：保留2位小数（小数，不是百分比）
+                    { key: '成本比', name: '成本比', formatter: (v) => roundTo(v, 2) },
+                    // 线上利润：保留2位小数
+                    { key: '线上利润', name: '线上利润', formatter: (v) => roundTo(v, 2) },
+                    // 尾款利润：保留2位小数
+                    { key: '尾款利润', name: '尾款利润', formatter: (v) => roundTo(v, 2) },
+                    // 尾款利润百分比：小数转百分比，保留2位小数
+                    { key: '尾款利润百分比', name: '尾款利润百分比', formatter: (v) => roundToPercent(v, 2) },
+                    // 线上百分比：小数转百分比，保留2位小数
+                    { key: '线上百分比', name: '线上百分比', formatter: (v) => roundToPercent(v, 2) },
+                    // 发货总润比：小数转百分比，保留2位小数
+                    { key: '发货总润比', name: '发货总润比', formatter: (v) => roundToPercent(v, 2) },
+                    // GMV毛利比：小数转百分比，保留2位小数
+                    { key: 'GMV毛利比', name: 'GMV毛利比', formatter: (v) => roundToPercent(v, 2) },
                     { key: '利润率档位', name: '利润率档位' },
-                    { key: '自定义最小利润率', name: '自定义最小利润率', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
-                    { key: '自定义最大利润率', name: '自定义最大利润率', formatter: (v) => v ? (v * 100).toFixed(2) + '%' : '' },
+                    // 自定义最小利润率：小数转百分比，保留2位小数
+                    { key: '自定义最小利润率', name: '自定义最小利润率', formatter: (v) => roundToPercent(v, 2) },
+                    // 自定义最大利润率：小数转百分比，保留2位小数
+                    { key: '自定义最大利润率', name: '自定义最大利润率', formatter: (v) => roundToPercent(v, 2) },
+                    // 创建时间：格式化时间
                     { key: '创建时间', name: '创建时间', formatter: (v) => v ? formatTime(v) : '' },
+                    // 更新时间：格式化时间
                     { key: '更新时间', name: '更新时间', formatter: (v) => v ? formatTime(v) : '' }
                 ]
 
